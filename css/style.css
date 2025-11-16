@@ -7,6 +7,26 @@
     box-sizing: border-box;
 }
 
+/* ========================================
+   カスタマイズ設定（編集推奨）
+   ======================================== */
+:root {
+    /* サムズアップ画像の位置とサイズ */
+    --thumbs-up-size: 30px;
+    --thumbs-up-top: 0px;
+    --thumbs-up-left: 0px;
+    
+    /* カウント数字のデザイン */
+    --count-font-size: 20px;
+    --count-bg-color: rgba(255, 193, 7, 0.9);
+    --count-text-color: white;
+    --count-border-radius: 50%; /* 丸型: 50%, 四角: 5px など */
+    --count-show-circle: block; /* 背景を表示: block, 非表示: none */
+    --count-top: 5px;
+    --count-right: 5px;
+    --count-padding: 3px 8px;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -24,12 +44,107 @@ body {
 }
 
 /* ========================================
+   ハンバーガーメニュー
+   ======================================== */
+.hamburger-menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 10000;
+    width: 40px;
+    height: 40px;
+    background: #667eea;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+}
+
+.hamburger-menu:hover {
+    background: #764ba2;
+}
+
+.hamburger-line {
+    width: 24px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    background: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    transition: left 0.3s;
+    overflow-y: auto;
+}
+
+.side-menu.open {
+    left: 0;
+}
+
+.side-menu-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.side-menu-list {
+    list-style: none;
+    padding: 0;
+}
+
+.side-menu-list li {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.side-menu-list a {
+    display: block;
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.side-menu-list a:hover {
+    background: #f0f0f0;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+}
+
+.menu-overlay.active {
+    display: block;
+}
+
+/* ========================================
    ヘッダー
    ======================================== */
 header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 20px 30px;
+    padding: 20px 30px 20px 80px; /* 左側にハンバーガーメニュー分の余白 */
 }
 
 header h1 {
@@ -94,17 +209,142 @@ header h1 {
     color: white;
 }
 
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+/* ========================================
+   モーダル
+   ======================================== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    border-radius: 10px;
+    max-width: 800px;
+    max-height: 80vh;
+    width: 90%;
+    overflow-y: auto;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    padding: 30px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    border: none;
+    background: #f44336;
+    color: white;
+    font-size: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    line-height: 1;
+    padding: 0;
+}
+
+.modal-close:hover {
+    background: #d32f2f;
+    transform: rotate(90deg);
+}
+
+.modal-content h2 {
+    font-size: 28px;
+    color: #667eea;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #667eea;
+}
+
+.modal-content h3 {
+    font-size: 20px;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.modal-body {
+    color: #333;
+    line-height: 1.8;
+}
+
+.modal-body p {
+    margin-bottom: 15px;
+}
+
+.modal-body strong {
+    color: #667eea;
+}
+
+.modal-body ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-body li {
+    margin-bottom: 8px;
+}
+
+/* スクロールバーのスタイル（Webkit系ブラウザ） */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #764ba2;
+}
+
 /* ========================================
    メインコンテンツ
    ======================================== */
 .main-content {
-    display: flex;
-    gap: 20px;
     padding: 20px;
 }
 
 .characters-area {
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -118,64 +358,180 @@ header h1 {
     border-radius: 10px;
     padding: 20px;
     background: #f9f9f9;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
 }
 
 .character-header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #667eea;
+    gap: 10px;
+    flex-shrink: 0;
 }
 
-.character-header h2 {
-    font-size: 20px;
-    color: #667eea;
+.character-label {
+    height: auto;
+    width: 150px;
 }
 
-.character-select {
-    padding: 10px 15px;
-    font-size: 14px;
-    border: 2px solid #667eea;
-    border-radius: 5px;
+.character-label img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* キャラクター選択（カスタムドロップダウン） */
+.character-select-wrapper {
+    position: relative;
+}
+
+.character-select-button {
+    width: 125px;
+    height: 125px;
+    border: 3px solid #667eea;
+    border-radius: 10px;
     background: white;
     cursor: pointer;
-    min-width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.3s;
 }
 
-.character-select:focus {
-    outline: none;
+.character-select-button:hover {
     border-color: #764ba2;
-    box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
+    transform: scale(1.05);
+}
+
+.character-select-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 7px;
+}
+
+.select-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #667eea;
+    text-align: center;
+    padding: 10px;
+}
+
+.character-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: auto;
+    min-width: 400px;
+    max-height: 500px;
+    overflow-y: auto;
+    background: white;
+    border: 3px solid #667eea;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    display: none;
+    z-index: 1000;
+    padding: 10px;
+}
+
+.character-dropdown.open {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.character-option {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    transition: all 0.3s;
+    position: relative;
+    background: white;
+}
+
+.character-option:hover:not(.disabled) {
+    border-color: #667eea;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.character-option.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: #f9f9f9;
+}
+
+.character-option-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* ツールチップ（名前表示） */
+.character-option-name {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 1001;
+}
+
+.character-option:hover .character-option-name {
+    opacity: 1;
+}
+
+/* 隠しselect（互換性のため） */
+.character-select {
+    display: none;
 }
 
 /* ========================================
    素質コンテナ
    ======================================== */
 .potentials-container {
-    display: grid;
-    gap: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    flex: 1;
+    align-items: flex-start;
 }
 
 .potential-group {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex-direction: row;
+    gap: 10px;
+    flex-shrink: 0;
 }
 
 .potential-group-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #ddd;
+    display: none; /* コア素質・サブ素質の文字を非表示 */
 }
 
 .potentials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
 }
 
 /* ========================================
@@ -204,15 +560,15 @@ header h1 {
 
 .potential-image-wrapper {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 101px;
+    height: 128px;
     cursor: pointer;
 }
 
 .potential-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 8px;
     border: 2px solid #ddd;
     transition: all 0.3s;
@@ -244,34 +600,34 @@ header h1 {
 /* カウント表示 */
 .potential-count {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    background: rgba(255, 193, 7, 0.9);
-    color: white;
+    top: var(--count-top);
+    right: var(--count-right);
+    background: var(--count-bg-color);
+    color: var(--count-text-color);
     font-weight: bold;
-    font-size: 16px;
-    padding: 3px 8px;
-    border-radius: 50%;
+    font-size: var(--count-font-size);
+    padding: var(--count-padding);
+    border-radius: var(--count-border-radius);
     min-width: 28px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    display: var(--count-show-circle);
 }
 
-/* レベル6のサムズアップ */
+/* レベル6のサムズアップ（画像版） */
 .thumbs-up {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 30px;
-    height: 30px;
-    background: #4CAF50;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 18px;
+    top: var(--thumbs-up-top);
+    left: var(--thumbs-up-left);
+    width: var(--thumbs-up-size);
+    height: var(--thumbs-up-size);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.thumbs-up img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .potential-name {
@@ -293,8 +649,10 @@ header h1 {
     padding: 10px;
     border-radius: 5px;
     font-size: 12px;
-    white-space: normal;
+    white-space: pre-wrap;
+    word-wrap: break-word;
     max-width: 250px;
+    min-width: 150px;
     z-index: 1000;
     margin-bottom: 10px;
     opacity: 0;
@@ -352,29 +710,53 @@ header h1 {
     border-color: #f44336;
 }
 
-/* サブ素質のステータス選択 */
-.status-select {
+/* サブ素質のステータスボタン（レベル別色分け） */
+.sub-status-btn {
     padding: 6px 10px;
     font-size: 12px;
+    font-weight: bold;
     border: 2px solid #ddd;
     border-radius: 5px;
     cursor: pointer;
-    background: white;
+    transition: all 0.3s;
+    color: white;
 }
 
-.status-select:focus {
-    outline: none;
-    border-color: #667eea;
+.sub-status-btn.none {
+    background: #999999;
+    border-color: #999999;
+}
+
+.sub-status-btn.level1 {
+    background: #00ff00;
+    border-color: #00ff00;
+    color: #333;
+}
+
+.sub-status-btn.level2-5 {
+    background: #ffff00;
+    border-color: #ffff00;
+    color: #333;
+}
+
+.sub-status-btn.level6 {
+    background: #ff9900;
+    border-color: #ff9900;
+}
+
+.sub-status-btn:hover {
+    opacity: 0.8;
 }
 
 /* ========================================
-   プリセットエリア
+   プリセットエリア（下段配置）
    ======================================== */
 .presets-area {
-    width: 300px;
+    width: 100%;
     background: #f9f9f9;
-    border-left: 2px solid #e0e0e0;
+    border-top: 2px solid #e0e0e0;
     padding: 20px;
+    margin-top: 30px;
 }
 
 .presets-area h3 {
@@ -386,8 +768,8 @@ header h1 {
 }
 
 .presets-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 15px;
 }
 
@@ -411,6 +793,7 @@ header h1 {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .preset-icon {

@@ -7,6 +7,26 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- ハンバーガーメニュー -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+    </div>
+
+    <!-- サイドメニュー -->
+    <nav class="side-menu" id="sideMenu">
+        <div class="side-menu-header">メニュー</div>
+        <ul class="side-menu-list">
+            <li><a href="index.html">トップページ</a></li>
+            <li><a href="simu_potential.html">素質シミュレーター</a></li>
+            <!-- 今後追加されるツールのリンクをここに -->
+        </ul>
+    </nav>
+
+    <!-- メニューオーバーレイ -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
     <div class="container">
         <header>
             <h1>素質シミュレーター</h1>
@@ -17,19 +37,32 @@
                 <button id="resetCount" class="btn">カウントリセット</button>
                 <button id="resetAll" class="btn btn-danger">初期化</button>
                 <button id="screenshot" class="btn btn-primary">スクリーンショット</button>
+                <button id="showUsage" class="btn btn-info">使い方</button>
+                <button id="showChangelog" class="btn btn-info">変更履歴</button>
             </div>
         </header>
 
         <div class="main-content">
-            <!-- 左側：キャラクター選択＋素質表示エリア -->
+            <!-- キャラクター選択＋素質表示エリア -->
             <div class="characters-area">
                 <!-- キャラクター1（主力） -->
                 <div class="character-section" data-slot="main">
                     <div class="character-header">
-                        <h2>主力キャラクター</h2>
-                        <select class="character-select" data-slot="main">
-                            <option value="">キャラクターを選択してください</option>
-                        </select>
+                        <div class="character-label">
+                            <img src="images/others/label_main.png" alt="主力">
+                        </div>
+                        <div class="character-select-wrapper">
+                            <button class="character-select-button" data-slot="main">
+                                <span class="select-text">キャラクター<br>選択</span>
+                            </button>
+                            <div class="character-dropdown" data-slot="main">
+                                <!-- オプションはJavaScriptで動的に生成 -->
+                            </div>
+                            <!-- 互換性のため隠しselect -->
+                            <select class="character-select" data-slot="main">
+                                <option value="">キャラクターを選択してください</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="potentials-container" id="main-potentials">
                         <!-- 素質はJavaScriptで動的に生成 -->
@@ -39,10 +72,20 @@
                 <!-- キャラクター2（支援1） -->
                 <div class="character-section" data-slot="support1">
                     <div class="character-header">
-                        <h2>支援キャラクター1</h2>
-                        <select class="character-select" data-slot="support1">
-                            <option value="">キャラクターを選択してください</option>
-                        </select>
+                        <div class="character-label">
+                            <img src="images/others/label_support.png" alt="支援">
+                        </div>
+                        <div class="character-select-wrapper">
+                            <button class="character-select-button" data-slot="support1">
+                                <span class="select-text">キャラクター<br>選択</span>
+                            </button>
+                            <div class="character-dropdown" data-slot="support1">
+                                <!-- オプションはJavaScriptで動的に生成 -->
+                            </div>
+                            <select class="character-select" data-slot="support1">
+                                <option value="">キャラクターを選択してください</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="potentials-container" id="support1-potentials">
                         <!-- 素質はJavaScriptで動的に生成 -->
@@ -52,10 +95,20 @@
                 <!-- キャラクター3（支援2） -->
                 <div class="character-section" data-slot="support2">
                     <div class="character-header">
-                        <h2>支援キャラクター2</h2>
-                        <select class="character-select" data-slot="support2">
-                            <option value="">キャラクターを選択してください</option>
-                        </select>
+                        <div class="character-label">
+                            <img src="images/others/label_support.png" alt="支援">
+                        </div>
+                        <div class="character-select-wrapper">
+                            <button class="character-select-button" data-slot="support2">
+                                <span class="select-text">キャラクター<br>選択</span>
+                            </button>
+                            <div class="character-dropdown" data-slot="support2">
+                                <!-- オプションはJavaScriptで動的に生成 -->
+                            </div>
+                            <select class="character-select" data-slot="support2">
+                                <option value="">キャラクターを選択してください</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="potentials-container" id="support2-potentials">
                         <!-- 素質はJavaScriptで動的に生成 -->
@@ -63,14 +116,14 @@
                 </div>
             </div>
 
-            <!-- 右側：プリセット管理エリア -->
+            <!-- プリセット管理エリア（下段配置） -->
             <aside class="presets-area">
                 <h3>プリセット</h3>
                 <div class="presets-list">
                     <!-- プリセット1～10 -->
                     <div class="preset-item" data-preset="1">
                         <div class="preset-thumbnail">
-                            <img src="" alt="プリセット1" class="preset-icon">
+                            <img src="" alt="プリセット1" class="preset-icon" style="display: none;">
                             <span class="preset-number">1</span>
                         </div>
                         <div class="preset-actions">
@@ -80,7 +133,7 @@
                     </div>
                     <div class="preset-item" data-preset="2">
                         <div class="preset-thumbnail">
-                            <img src="" alt="プリセット2" class="preset-icon">
+                            <img src="" alt="プリセット2" class="preset-icon" style="display: none;">
                             <span class="preset-number">2</span>
                         </div>
                         <div class="preset-actions">
@@ -90,7 +143,7 @@
                     </div>
                     <div class="preset-item" data-preset="3">
                         <div class="preset-thumbnail">
-                            <img src="" alt="プリセット3" class="preset-icon">
+                            <img src="" alt="プリセット3" class="preset-icon" style="display: none;">
                             <span class="preset-number">3</span>
                         </div>
                         <div class="preset-actions">
@@ -100,7 +153,7 @@
                     </div>
                     <div class="preset-item" data-preset="4">
                         <div class="preset-thumbnail">
-                            <img src="" alt="プリセット4" class="preset-icon">
+                            <img src="" alt="プリセット4" class="preset-icon" style="display: none;">
                             <span class="preset-number">4</span>
                         </div>
                         <div class="preset-actions">
@@ -110,7 +163,7 @@
                     </div>
                     <div class="preset-item" data-preset="5">
                         <div class="preset-thumbnail">
-                            <img src="" alt="プリセット5" class="preset-icon">
+                            <img src="" alt="プリセット5" class="preset-icon" style="display: none;">
                             <span class="preset-number">5</span>
                         </div>
                         <div class="preset-actions">
@@ -120,7 +173,7 @@
                     </div>
                     <div class="preset-item" data-preset="6">
                         <div class="preset-thumbnail">
-                            <img src="" alt="プリセット6" class="preset-icon">
+                            <img src="" alt="プリセット6" class="preset-icon" style="display: none;">
                             <span class="preset-number">6</span>
                         </div>
                         <div class="preset-actions">
@@ -130,7 +183,7 @@
                     </div>
                     <div class="preset-item" data-preset="7">
                         <div class="preset-thumbnail">
-                            <img src="" alt="プリセット7" class="preset-icon">
+                            <img src="" alt="プリセット7" class="preset-icon" style="display: none;">
                             <span class="preset-number">7</span>
                         </div>
                         <div class="preset-actions">
@@ -140,7 +193,7 @@
                     </div>
                     <div class="preset-item" data-preset="8">
                         <div class="preset-thumbnail">
-                            <img src="" alt="プリセット8" class="preset-icon">
+                            <img src="" alt="プリセット8" class="preset-icon" style="display: none;">
                             <span class="preset-number">8</span>
                         </div>
                         <div class="preset-actions">
@@ -150,7 +203,7 @@
                     </div>
                     <div class="preset-item" data-preset="9">
                         <div class="preset-thumbnail">
-                            <img src="" alt="プリセット9" class="preset-icon">
+                            <img src="" alt="プリセット9" class="preset-icon" style="display: none;">
                             <span class="preset-number">9</span>
                         </div>
                         <div class="preset-actions">
@@ -160,7 +213,7 @@
                     </div>
                     <div class="preset-item" data-preset="10">
                         <div class="preset-thumbnail">
-                            <img src="" alt="プリセット10" class="preset-icon">
+                            <img src="" alt="プリセット10" class="preset-icon" style="display: none;">
                             <span class="preset-number">10</span>
                         </div>
                         <div class="preset-actions">
@@ -174,6 +227,85 @@
 
         <!-- エラーメッセージ表示エリア -->
         <div id="errorMessage" class="error-message hidden"></div>
+    </div>
+
+    <!-- 使い方モーダル -->
+    <div id="usageModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2>使い方</h2>
+            <div class="modal-body">
+                <h3>基本操作</h3>
+                <p><strong>1. キャラクターを選択</strong><br>
+                ラベル下のアイコンボタンをクリックして、キャラクターを選択します。</p>
+                
+                <p><strong>2. コア素質の設定</strong><br>
+                「取得する/取得しない」ボタンで切り替えます。取得するコア素質は最大2つまで選択できます。</p>
+                
+                <p><strong>3. サブ素質の設定</strong><br>
+                ボタンをクリックするたびに「取得しない」→「レベル1」→「レベル2～5」→「レベル6」の順に切り替わります。</p>
+                
+                <p><strong>4. カウント管理</strong><br>
+                素質画像をクリックすると、取得数をカウントできます（0～6）。</p>
+                
+                <h3>便利機能</h3>
+                <p><strong>取得しない素質を非表示</strong><br>
+                チェックを入れると、取得予定のない素質を非表示にできます。</p>
+                
+                <p><strong>プリセット保存・読み込み</strong><br>
+                よく使う設定を10個まで保存できます。カウント数は保存されません。</p>
+                
+                <p><strong>カウントリセット</strong><br>
+                すべてのカウント数を0に戻します。</p>
+                
+                <p><strong>初期化</strong><br>
+                すべての設定を初期状態に戻します。</p>
+                
+                <p><strong>スクリーンショット</strong><br>
+                現在の画面を画像として保存できます。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 変更履歴モーダル -->
+    <div id="changelogModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2>変更履歴</h2>
+            <div class="modal-body">
+                <h3>v1.1.0 (2025-11-16)</h3>
+                <ul>
+                    <li>使い方モーダル追加</li>
+                    <li>変更履歴モーダル追加</li>
+                    <li>横一列レイアウトに変更</li>
+                    <li>チェック状態の維持機能追加</li>
+                    <li>カスタマイズ変数追加（サムズアップ・カウント数字）</li>
+                </ul>
+                
+                <h3>v1.0.0 (2025-11-16)</h3>
+                <ul>
+                    <li>初回リリース</li>
+                    <li>素質シミュレーター機能実装</li>
+                    <li>プリセット保存機能追加</li>
+                    <li>スクリーンショット機能追加</li>
+                    <li>キャラクター選択（グリッド形式）</li>
+                    <li>コア素質・サブ素質の管理機能</li>
+                </ul>
+                
+                <!-- ここに今後の変更履歴を追記していってください -->
+                <!--
+                例:
+                <h3>v1.2.0 (YYYY-MM-DD)</h3>
+                <ul>
+                    <li>新機能の追加</li>
+                    <li>バグ修正</li>
+                    <li>UI改善</li>
+                </ul>
+                -->
+            </div>
+        </div>
     </div>
 
     <!-- html2canvasライブラリ（スクリーンショット用） -->

@@ -4,19 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ステラソラ ラクラクツール略してラール(仮)</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>ラクラクツール略してラール(仮)</h1>
-    <p>ステラソラの色々だる～い管理を楽にするツールを作る予定！</p>
-    
-    <h2>ツール一覧</h2>
-    <ul>
-        <li><a href="iraishiken.html">素質シミュレーター（準備中）</a> <p>取りたい素質・レベル6にしたい素質・レベル1だけでいい素質をブックマーク～登りながら取得管理できるようにする予定だよ</p></li>
-    </ul>
-    
-    <footer>
-        <p>©Yostar<br>
-        ※本サイトはステラソラの非公式ファンサイトです！</p>
-    </footer>
+    <!-- ハンバーガーメニュー -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+    </div>
+
+    <!-- サイドメニュー -->
+    <nav class="side-menu" id="sideMenu">
+        <div class="side-menu-header">メニュー</div>
+        <ul class="side-menu-list">
+            <li><a href="index.html">トップページ</a></li>
+            <li><a href="simu_potential.html">素質シミュレーター</a></li>
+            <!-- 今後追加されるツールのリンクをここに -->
+        </ul>
+    </nav>
+
+    <!-- メニューオーバーレイ -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <div class="container">
+        <header>
+            <h1>ラクラクツール略してラール(仮)</h1>
+        </header>
+
+        <div class="main-content" style="padding: 40px;">
+            <p style="font-size: 18px; margin-bottom: 30px;">ステラソラの色々だる～い管理を楽にするツールを作る予定！</p>
+            
+            <h2 style="font-size: 24px; color: #667eea; margin-bottom: 20px; border-bottom: 2px solid #667eea; padding-bottom: 10px;">ツール一覧</h2>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 20px; padding: 20px; background: #f9f9f9; border-radius: 8px; border: 2px solid #e0e0e0;">
+                    <a href="simu_potential.html" style="font-size: 20px; color: #667eea; text-decoration: none; font-weight: bold; display: block; margin-bottom: 10px;">素質シミュレーター</a>
+                    <p style="color: #666; margin: 0;">取りたい素質・レベル6にしたい素質・レベル1だけでいい素質をブックマーク～登りながら取得管理できます</p>
+                </li>
+            </ul>
+            
+            <footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #e0e0e0; text-align: center; color: #666;">
+                <p>©Yostar<br>
+                ※本サイトはステラソラの非公式ファンサイトです！</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // ハンバーガーメニューの動作
+        const hamburger = document.getElementById('hamburgerMenu');
+        const sideMenu = document.getElementById('sideMenu');
+        const overlay = document.getElementById('menuOverlay');
+        
+        hamburger.addEventListener('click', () => {
+            sideMenu.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+        
+        overlay.addEventListener('click', () => {
+            sideMenu.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+    </script>
 </body>
 </html>
