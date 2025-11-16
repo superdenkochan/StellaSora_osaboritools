@@ -198,20 +198,7 @@ function populateCharacterSelects() {
             icon.src = char.icon;
             icon.alt = char.name;
             
-            // ツールチップ（名前）
-            const tooltip = document.createElement('div');
-            tooltip.className = 'character-option-name';
-            tooltip.textContent = char.name;
-            
             option.appendChild(icon);
-            option.appendChild(tooltip);
-            
-            // マウスホバー時にツールチップの位置を計算
-            option.addEventListener('mouseenter', (e) => {
-                const rect = option.getBoundingClientRect();
-                tooltip.style.top = `${rect.bottom + 5}px`; // オプションの下5px
-                tooltip.style.left = `${rect.left + rect.width / 2}px`; // 中央揃え
-            });
             
             option.addEventListener('click', () => {
                 if (!option.classList.contains('disabled')) {
