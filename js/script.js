@@ -1004,16 +1004,55 @@ async function handleScreenshot() {
             el.classList.remove('grayed-out', 'grayed-out-unobtained');
         });
         
-        // キャラクターエリアのみをキャプチャ（1920x1080に固定）
+        // コア素質の取得済みマーク（obtained）を一時的に解除
+        const obtainedElements = document.querySelectorAll('.potential-image-wrapper.obtained');
+        obtainedElements.forEach(el => {
+            el.classList.remove('obtained');
+        });
+        
+        // レンダリングが完了するのを待つ
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        // キャラクターエリアをまずフルサイズでキャプチャ
         const targetElement = document.querySelector('.characters-area');
-        const canvas = await html2canvas(targetElement, {
-            width: 1920,
-            height: 1080,
-            scale: 1,
+        const originalCanvas = await html2canvas(targetElement, {
             backgroundColor: '#ffffff',
             logging: false,
-            useCORS: true
+            useCORS: true,
+            scrollY: -window.scrollY,
+            scrollX: -window.scrollX
         });
+        
+        console.log('元のキャンバスサイズ:', originalCanvas.width, 'x', originalCanvas.height);
+        
+        // 最大サイズ（1920x1080）
+        const maxWidth = 1920;
+        const maxHeight = 1080;
+        
+        let finalCanvas = originalCanvas;
+        
+        // サイズが1920x1080を超える場合は縮小
+        if (originalCanvas.width > maxWidth || originalCanvas.height > maxHeight) {
+            // 縮小比率を計算
+            const widthScale = maxWidth / originalCanvas.width;
+            const heightScale = maxHeight / originalCanvas.height;
+            const scale = Math.min(widthScale, heightScale);
+            
+            const newWidth = Math.floor(originalCanvas.width * scale);
+            const newHeight = Math.floor(originalCanvas.height * scale);
+            
+            console.log('縮小比率:', scale, '新しいサイズ:', newWidth, 'x', newHeight);
+            
+            // 新しいキャンバスを作成して縮小描画
+            finalCanvas = document.createElement('canvas');
+            finalCanvas.width = newWidth;
+            finalCanvas.height = newHeight;
+            
+            const ctx = finalCanvas.getContext('2d');
+            ctx.drawImage(originalCanvas, 0, 0, newWidth, newHeight);
+        }
+        
+        console.log('最終キャンバスサイズ:', finalCanvas.width, 'x', finalCanvas.height);
         
         // グレーアウトを元に戻す
         grayedOutClasses.forEach(item => {
@@ -1025,6 +1064,11 @@ async function handleScreenshot() {
             }
         });
         
+        // コア素質の取得済みマークを元に戻す
+        obtainedElements.forEach(el => {
+            el.classList.add('obtained');
+        });
+        
         // プリセット名エリアを元に戻す
         presetNameContainer.style.display = originalPresetDisplay;
         
@@ -1032,7 +1076,7 @@ async function handleScreenshot() {
         footer.style.display = 'none';
         
         // Canvasを画像に変換してダウンロード
-        canvas.toBlob((blob) => {
+        finalCanvas.toBlob((blob) => {
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
