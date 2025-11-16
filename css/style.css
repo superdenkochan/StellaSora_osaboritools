@@ -166,7 +166,7 @@ header {
     padding: 20px 30px 20px 80px; /* 左側にハンバーガーメニュー分の余白 */
     position: sticky; /* 固定位置 */
     top: 0; /* 画面上部に固定 */
-    z-index: 1000; /* 他の要素より前面に */
+    z-index: 999; /* ツールチップより下 */
 }
 
 header h1 {
@@ -515,8 +515,8 @@ header h1 {
 
 /* ツールチップ（名前表示） */
 .character-option-name {
-    position: absolute;
-    bottom: -30px;
+    position: fixed; /* absoluteからfixedに変更 */
+    bottom: auto; /* bottomの代わりにtopで制御 */
     left: 50%;
     transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.9);
@@ -528,7 +528,7 @@ header h1 {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
-    z-index: 99999; /* 最前面に表示したい */
+    z-index: 99999; /* 最前面に表示 */
 }
 
 .character-option:hover .character-option-name {
@@ -546,16 +546,13 @@ header h1 {
 .potentials-container {
     display: flex;
     gap: 10px;
-    flex-wrap: none; /* 改行を許可せず横並び */
+    flex-wrap: wrap; /* 改行を許可 */
     flex: 1;
     align-items: flex-start;
 }
 
 .potential-group {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    flex-shrink: 0;
+    display: contents; /* レイアウトフローに影響しないようにする */
 }
 
 .potential-group-title {
@@ -563,10 +560,7 @@ header h1 {
 }
 
 .potentials-grid {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap; /* 改行を許可 */
-    flex-shrink: 0;
+    display: contents; /* レイアウトフローに影響しないようにする */
 }
 
 /* ========================================
@@ -614,7 +608,7 @@ header h1 {
     border: 0px solid #red;
 }
 
-/* グレーアウト状態 */
+/* グレーアウト状態（取得済み用：オーバーレイのみ） */
 .potential-image-wrapper.grayed-out::before {
     content: '';
     position: absolute;
@@ -626,6 +620,24 @@ header h1 {
     z-index: 1; /* 画像の上、カウント・サムズアップの下 */
     pointer-events: none;
     border-radius: 0px;
+}
+
+/* グレーアウト状態（取得しない用：オーバーレイ + グレースケール） */
+.potential-image-wrapper.grayed-out-unobtained::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(128, 128, 128, 0.6); /* グレーのオーバーレイ */
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 0px;
+}
+
+.potential-image-wrapper.grayed-out-unobtained .potential-image {
+    filter: grayscale(100%); /* グレースケールを追加 */
 }
 
 /* カウント表示のz-index調整 */

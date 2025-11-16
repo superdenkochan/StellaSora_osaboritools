@@ -57,6 +57,17 @@
         <div class="main-content">
             <!-- キャラクター選択＋素質表示エリア -->
             <div class="characters-area">
+                <!-- プリセット名表示・編集エリア -->
+                <div id="preset-name-container" style="text-align: center; margin-bottom: 15px; padding: 10px; background: #f0f0ff; border-radius: 5px;">
+                    <div id="preset-name-display-area" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <span style="font-size: 14px; color: #667eea; font-weight: bold;">プリセット名:</span>
+                        <input type="text" id="preset-name-input-inline" maxlength="20" placeholder="（未設定）" 
+                               style="font-size: 16px; color: #667eea; font-weight: bold; border: 2px solid transparent; background: transparent; padding: 5px; width: 300px; text-align: center; outline: none;"
+                               readonly>
+                        <button id="preset-name-edit-btn" class="btn" style="padding: 5px 15px; font-size: 14px;">✎ 編集</button>
+                    </div>
+                </div>
+                
                 <!-- スクリーンショット用フッター（通常は非表示） -->
                 <div id="screenshot-footer" style="display: none; text-align: center; padding: 10px; background: #f9f9f9; border-top: 2px solid #667eea; margin-top: 20px;">
                     <p style="margin: 0; font-size: 14px; color: #666;">
@@ -67,7 +78,6 @@
                 <!-- キャラクター1（主力） -->
                 <div class="character-section" data-slot="main">
                     <div class="character-header">
-                        <div id="preset-name-display" style="font-size: 14px; color: #667eea; font-weight: bold; margin-bottom: 5px; min-height: 20px; text-align: center;"></div>
                         <div class="character-label">
                             <img src="images/others/label_main.png" alt="主力">
                         </div>

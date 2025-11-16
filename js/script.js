@@ -8,6 +8,7 @@ const TOOLTIP_MAX_CHARS = 40; // ツールチップの1行あたりの最大文�
 
 // プリセット名入力用の一時変数
 let pendingPresetNumber = null;
+let currentPresetNumber = null; // 現在読み込み中のプリセット番号
 
 // 素質の定義（全キャラ共通）
 const POTENTIAL_DEFINITIONS = {
@@ -205,6 +206,13 @@ function populateCharacterSelects() {
             option.appendChild(icon);
             option.appendChild(tooltip);
             
+            // マウスホバー時にツールチップの位置を計算
+            option.addEventListener('mouseenter', (e) => {
+                const rect = option.getBoundingClientRect();
+                tooltip.style.top = `${rect.bottom + 5}px`; // オプションの下5px
+                tooltip.style.left = `${rect.left + rect.width / 2}px`; // 中央揃え
+            });
+            
             option.addEventListener('click', () => {
                 if (!option.classList.contains('disabled')) {
                     handleCharacterSelectFromDropdown(slot, char.id);
@@ -333,21 +341,65 @@ function setupEventListeners() {
         });
     });
     
-    // プリセット名モーダルのイベントリスナー
-    document.getElementById('preset-name-cancel').addEventListener('click', () => {
-        closeModal('presetNameModal');
-    });
+    // プリセット名のインライン編集
+    const presetNameInput = document.getElementById('preset-name-input-inline');
+    const editBtn = document.getElementById('preset-name-edit-btn');
     
-    document.getElementById('preset-name-save').addEventListener('click', () => {
-        savePresetWithName();
-    });
-    
-    // Enterキーでも保存
-    document.getElementById('preset-name-input').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            savePresetWithName();
+    editBtn.addEventListener('click', () => {
+        if (presetNameInput.readOnly) {
+            // 編集モードに切り替え
+            presetNameInput.readOnly = false;
+            presetNameInput.style.borderColor = '#667eea';
+            presetNameInput.style.background = 'white';
+            presetNameInput.focus();
+            presetNameInput.select();
+            // ボタンをグレーアウト（テキストは変更しない）
+            editBtn.disabled = true;
+            editBtn.style.opacity = '0.5';
+            editBtn.style.cursor = 'not-allowed';
         }
     });
+    
+    presetNameInput.addEventListener('blur', () => {
+        // フォーカスアウト時に確定
+        if (!presetNameInput.readOnly) {
+            savePresetNameInline();
+        }
+    });
+    
+    presetNameInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            presetNameInput.blur(); // フォーカスアウトすることで自動保存
+        }
+    });
+}
+
+// プリセット名をインラインで保存
+function savePresetNameInline() {
+    const presetNameInput = document.getElementById('preset-name-input-inline');
+    const editBtn = document.getElementById('preset-name-edit-btn');
+    let presetName = presetNameInput.value.trim();
+    
+    // 空欄の場合は「未設定」にする
+    if (presetName === '') {
+        presetName = '未設定';
+        presetNameInput.value = presetName;
+    }
+    
+    // ローカルストレージに保存（現在読み込み中のプリセット用）
+    if (currentPresetNumber) {
+        localStorage.setItem(`preset_${currentPresetNumber}_name`, presetName);
+    }
+    
+    // 編集モードを終了
+    presetNameInput.readOnly = true;
+    presetNameInput.style.borderColor = 'transparent';
+    presetNameInput.style.background = 'transparent';
+    
+    // ボタンを元に戻す
+    editBtn.disabled = false;
+    editBtn.style.opacity = '1';
+    editBtn.style.cursor = 'pointer';
 }
 
 // ========================================
@@ -478,7 +530,7 @@ function createPotentialCard(character, potentialId, slot, type) {
         }
         const state = currentState[slot].corePotentials[potentialId];
         if (!state.obtained) {
-            imageWrapper.classList.add('grayed-out');
+            imageWrapper.classList.add('grayed-out-unobtained'); // 取得しない場合はグレースケール付き
         }
         if (state.acquired) {
             imageWrapper.classList.add('obtained');
@@ -493,10 +545,13 @@ function createPotentialCard(character, potentialId, slot, type) {
         }
         const state = currentState[slot].subPotentials[potentialId];
         
-        // グレーアウトの条件:
-        // 1. status が 'none' の場合
-        // 2. status が 'level1', 'level2', 'level6' で count > 0 の場合
-        if (state.status === 'none' || (state.status !== 'none' && state.count > 0)) {
+        // グレーアウトの条件（修正版）:
+        // 1. status が 'none' の場合: grayed-out-unobtained（グレーアウト + グレースケール）
+        // 2. status が 'level1', 'level2', 'level6' で count > 0 の場合: grayed-out（グレーアウトのみ）
+        // 3. status が 'level1', 'level2', 'level6' で count === 0 の場合: クラスなし（元画像）
+        if (state.status === 'none') {
+            imageWrapper.classList.add('grayed-out-unobtained');
+        } else if (state.count > 0) {
             imageWrapper.classList.add('grayed-out');
         }
         
@@ -765,25 +820,6 @@ function initializePresets() {
 }
 
 function handleSavePreset(presetNum) {
-    // プリセット名モーダルを開く
-    pendingPresetNumber = presetNum;
-    const existingPreset = loadPreset(presetNum);
-    const existingName = localStorage.getItem(`preset_${presetNum}_name`) || '';
-    
-    document.getElementById('preset-number-display').textContent = presetNum;
-    document.getElementById('preset-name-input').value = existingName;
-    openModal('presetNameModal');
-    
-    // フォーカスを入力欄に
-    setTimeout(() => {
-        document.getElementById('preset-name-input').focus();
-    }, 100);
-}
-
-function savePresetWithName() {
-    const presetNum = pendingPresetNumber;
-    const presetName = document.getElementById('preset-name-input').value.trim();
-    
     // カウントをリセットした状態でコピー
     const stateToSave = JSON.parse(JSON.stringify(currentState));
     Object.values(stateToSave).forEach(slotState => {
@@ -794,6 +830,13 @@ function savePresetWithName() {
             state.count = 0;
         });
     });
+    
+    // プリセット名を保存（現在インライン入力欄にある名前を使用）
+    const presetNameInput = document.getElementById('preset-name-input-inline');
+    let presetName = presetNameInput.value.trim();
+    if (presetName === '' || presetName === '（未設定）') {
+        presetName = '未設定';
+    }
     
     // 保存
     localStorage.setItem(`preset_${presetNum}`, JSON.stringify(stateToSave));
@@ -806,10 +849,11 @@ function savePresetWithName() {
         loadBtn.disabled = false;
     }
     
-    // モーダルを閉じる
-    closeModal('presetNameModal');
-    pendingPresetNumber = null;
+    // 現在のプリセット番号を設定
+    currentPresetNumber = presetNum;
 }
+
+// savePresetWithName関数は削除（不要）
 
 function handleLoadPreset(presetNum) {
     const preset = loadPreset(presetNum);
@@ -851,15 +895,17 @@ function handleLoadPreset(presetNum) {
     
     // プリセット名を表示
     const presetName = localStorage.getItem(`preset_${presetNum}_name`) || '';
+    currentPresetNumber = presetNum; // 現在のプリセット番号を保存
     displayPresetName(presetName);
     
     saveCurrentState();
 }
 
 function displayPresetName(name) {
-    const display = document.getElementById('preset-name-display');
-    if (display) {
-        display.textContent = name ? `【${name}】` : '';
+    const input = document.getElementById('preset-name-input-inline');
+    if (input) {
+        input.value = name || '';
+        input.placeholder = name ? '' : '（未設定）';
     }
 }
 
@@ -941,14 +987,46 @@ async function handleScreenshot() {
         const footer = document.getElementById('screenshot-footer');
         footer.style.display = 'block';
         
-        // キャラクターエリアのみをキャプチャ
+        // プリセット名エリアを一時的に非表示
+        const presetNameContainer = document.getElementById('preset-name-container');
+        const originalPresetDisplay = presetNameContainer.style.display;
+        presetNameContainer.style.display = 'none';
+        
+        // グレーアウトを一時的に解除
+        const grayedOutElements = document.querySelectorAll('.grayed-out, .grayed-out-unobtained');
+        const grayedOutClasses = [];
+        grayedOutElements.forEach((el, index) => {
+            grayedOutClasses[index] = {
+                element: el,
+                hasGrayedOut: el.classList.contains('grayed-out'),
+                hasGrayedOutUnobtained: el.classList.contains('grayed-out-unobtained')
+            };
+            el.classList.remove('grayed-out', 'grayed-out-unobtained');
+        });
+        
+        // キャラクターエリアのみをキャプチャ（1920x1080に固定）
         const targetElement = document.querySelector('.characters-area');
         const canvas = await html2canvas(targetElement, {
-            scale: 2,
+            width: 1920,
+            height: 1080,
+            scale: 1,
             backgroundColor: '#ffffff',
             logging: false,
             useCORS: true
         });
+        
+        // グレーアウトを元に戻す
+        grayedOutClasses.forEach(item => {
+            if (item.hasGrayedOut) {
+                item.element.classList.add('grayed-out');
+            }
+            if (item.hasGrayedOutUnobtained) {
+                item.element.classList.add('grayed-out-unobtained');
+            }
+        });
+        
+        // プリセット名エリアを元に戻す
+        presetNameContainer.style.display = originalPresetDisplay;
         
         // フッターを非表示に戻す
         footer.style.display = 'none';
@@ -966,8 +1044,11 @@ async function handleScreenshot() {
         console.error('スクリーンショットエラー:', error);
         showError('スクリーンショットの生成に失敗しました');
         
-        // エラー時もフッターを非表示に
-        document.getElementById('screenshot-footer').style.display = 'none';
+        // エラー時も要素を元に戻す
+        const footer = document.getElementById('screenshot-footer');
+        const presetNameContainer = document.getElementById('preset-name-container');
+        if (footer) footer.style.display = 'none';
+        if (presetNameContainer) presetNameContainer.style.display = '';
     }
 }
 
