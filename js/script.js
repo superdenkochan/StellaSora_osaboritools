@@ -367,15 +367,24 @@ function savePresetNameInline() {
     const editBtn = document.getElementById('preset-name-edit-btn');
     let presetName = presetNameInput.value.trim();
     
-    // 空欄の場合は「未設定」にする
+    console.log('プリセット名保存処理開始:', { 
+        currentPresetNumber, 
+        inputValue: presetNameInput.value,
+        trimmedValue: presetName 
+    });
+    
+    // 空欄の場合は「（未設定）」にする
     if (presetName === '') {
-        presetName = '未設定';
-        presetNameInput.value = presetName;
+        presetName = '';
+        presetNameInput.placeholder = '（未設定）';
     }
     
     // ローカルストレージに保存（現在読み込み中のプリセット用）
     if (currentPresetNumber) {
         localStorage.setItem(`preset_${currentPresetNumber}_name`, presetName);
+        console.log(`プリセット${currentPresetNumber}の名前を保存しました:`, presetName);
+    } else {
+        console.warn('currentPresetNumberがnullのため、プリセット名を保存できませんでした');
     }
     
     // 編集モードを終了
@@ -782,6 +791,12 @@ function handleResetAll() {
     // チェックボックスをリセット
     document.getElementById('hideUnobtained').checked = false;
     
+    // 現在のプリセット番号をリセット
+    currentPresetNumber = null;
+    
+    // プリセット名を空に
+    displayPresetName('');
+    
     // ドロップダウンを更新
     updateAllDropdowns();
     
@@ -821,13 +836,17 @@ function handleSavePreset(presetNum) {
     // プリセット名を保存（現在インライン入力欄にある名前を使用）
     const presetNameInput = document.getElementById('preset-name-input-inline');
     let presetName = presetNameInput.value.trim();
+    console.log(`プリセット${presetNum}保存時のプリセット名:`, presetName);
+    
+    // 空欄の場合は空文字列として保存（placeholderで「（未設定）」と表示される）
     if (presetName === '' || presetName === '（未設定）') {
-        presetName = '未設定';
+        presetName = '';
     }
     
     // 保存
     localStorage.setItem(`preset_${presetNum}`, JSON.stringify(stateToSave));
     localStorage.setItem(`preset_${presetNum}_name`, presetName);
+    console.log(`プリセット${presetNum}を保存しました（名前: "${presetName}"）`);
     updatePresetDisplay(presetNum, stateToSave);
     
     // 読み込みボタンを有効化
@@ -838,6 +857,7 @@ function handleSavePreset(presetNum) {
     
     // 現在のプリセット番号を設定
     currentPresetNumber = presetNum;
+    console.log('currentPresetNumberを設定:', currentPresetNumber);
 }
 
 // savePresetWithName関数は削除（不要）
@@ -883,6 +903,8 @@ function handleLoadPreset(presetNum) {
     // プリセット名を表示
     const presetName = localStorage.getItem(`preset_${presetNum}_name`) || '';
     currentPresetNumber = presetNum; // 現在のプリセット番号を保存
+    console.log(`プリセット${presetNum}を読み込みました（名前: "${presetName}"）`);
+    console.log('currentPresetNumberを設定:', currentPresetNumber);
     displayPresetName(presetName);
     
     saveCurrentState();
@@ -924,9 +946,11 @@ function saveCurrentState() {
     const hideUnobtained = document.getElementById('hideUnobtained').checked;
     const stateToSave = {
         ...currentState,
-        hideUnobtained: hideUnobtained
+        hideUnobtained: hideUnobtained,
+        currentPresetNumber: currentPresetNumber  // 現在のプリセット番号も保存
     };
     localStorage.setItem('currentState', JSON.stringify(stateToSave));
+    console.log('現在の状態を保存しました（プリセット番号:', currentPresetNumber, '）');
 }
 
 function loadCurrentState() {
@@ -955,6 +979,19 @@ function loadCurrentState() {
         // チェックボックスの状態を復元
         if (savedState.hideUnobtained !== undefined) {
             document.getElementById('hideUnobtained').checked = savedState.hideUnobtained;
+        }
+        
+        // 現在のプリセット番号を復元
+        if (savedState.currentPresetNumber !== undefined) {
+            currentPresetNumber = savedState.currentPresetNumber;
+            console.log('現在のプリセット番号を復元:', currentPresetNumber);
+            
+            // プリセット名を表示
+            if (currentPresetNumber) {
+                const presetName = localStorage.getItem(`preset_${currentPresetNumber}_name`) || '';
+                displayPresetName(presetName);
+                console.log('プリセット名を復元:', presetName);
+            }
         }
         
         // ドロップダウンを更新
