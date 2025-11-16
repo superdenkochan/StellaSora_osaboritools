@@ -6,6 +6,9 @@ const MAX_SUB_LEVEL = 6; // サブ素質の最大レベル（アップデート�
 const MAX_CORE_POTENTIALS = 2; // コア素質の最大取得数
 const TOOLTIP_MAX_CHARS = 40; // ツールチップの1行あたりの最大文字数（調整可能）
 
+// プリセット名入力用の一時変数
+let pendingPresetNumber = null;
+
 // 素質の定義（全キャラ共通）
 const POTENTIAL_DEFINITIONS = {
     main: {
@@ -219,6 +222,7 @@ function populateCharacterSelects() {
             closeAllDropdowns();
             if (!isOpen) {
                 updateDropdownAvailability(slot);
+                adjustDropdownDirection(button, dropdown); // 展開方向を自動調整
                 dropdown.classList.add('open');
             }
         });
@@ -228,6 +232,31 @@ function populateCharacterSelects() {
     document.addEventListener('click', () => {
         closeAllDropdowns();
     });
+}
+
+// ドロップダウンの展開方向を自動調整
+function adjustDropdownDirection(button, dropdown) {
+    const buttonRect = button.getBoundingClientRect();
+    const dropdownHeight = 500; // max-height の値
+    const windowHeight = window.innerHeight;
+    const spaceBelow = windowHeight - buttonRect.bottom;
+    const spaceAbove = buttonRect.top;
+    
+    // 下側のスペースが足りない場合は上に展開
+    if (spaceBelow < dropdownHeight && spaceAbove > spaceBelow) {
+        dropdown.style.top = 'auto';
+        dropdown.style.bottom = '100%';
+        dropdown.style.borderTop = '3px solid #667eea';
+        dropdown.style.borderBottom = 'none';
+        dropdown.style.borderRadius = '10px 10px 0 0';
+    } else {
+        // デフォルトは下に展開
+        dropdown.style.top = '100%';
+        dropdown.style.bottom = 'auto';
+        dropdown.style.borderTop = 'none';
+        dropdown.style.borderBottom = '3px solid #667eea';
+        dropdown.style.borderRadius = '0 0 10px 10px';
+    }
 }
 
 // ドロップダウンの選択可能状態を更新
@@ -302,6 +331,22 @@ function setupEventListeners() {
         overlay.addEventListener('click', (e) => {
             closeModal(e.target.closest('.modal').id);
         });
+    });
+    
+    // プリセット名モーダルのイベントリスナー
+    document.getElementById('preset-name-cancel').addEventListener('click', () => {
+        closeModal('presetNameModal');
+    });
+    
+    document.getElementById('preset-name-save').addEventListener('click', () => {
+        savePresetWithName();
+    });
+    
+    // Enterキーでも保存
+    document.getElementById('preset-name-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            savePresetWithName();
+        }
     });
 }
 
@@ -447,7 +492,11 @@ function createPotentialCard(character, potentialId, slot, type) {
             };
         }
         const state = currentState[slot].subPotentials[potentialId];
-        if (state.status === 'none') {
+        
+        // グレーアウトの条件:
+        // 1. status が 'none' の場合
+        // 2. status が 'level1', 'level2', 'level6' で count > 0 の場合
+        if (state.status === 'none' || (state.status !== 'none' && state.count > 0)) {
             imageWrapper.classList.add('grayed-out');
         }
         
@@ -716,7 +765,24 @@ function initializePresets() {
 }
 
 function handleSavePreset(presetNum) {
+    // プリセット名モーダルを開く
+    pendingPresetNumber = presetNum;
     const existingPreset = loadPreset(presetNum);
+    const existingName = localStorage.getItem(`preset_${presetNum}_name`) || '';
+    
+    document.getElementById('preset-number-display').textContent = presetNum;
+    document.getElementById('preset-name-input').value = existingName;
+    openModal('presetNameModal');
+    
+    // フォーカスを入力欄に
+    setTimeout(() => {
+        document.getElementById('preset-name-input').focus();
+    }, 100);
+}
+
+function savePresetWithName() {
+    const presetNum = pendingPresetNumber;
+    const presetName = document.getElementById('preset-name-input').value.trim();
     
     // カウントをリセットした状態でコピー
     const stateToSave = JSON.parse(JSON.stringify(currentState));
@@ -729,15 +795,9 @@ function handleSavePreset(presetNum) {
         });
     });
     
-    // 既存プリセットと異なる場合は確認
-    if (existingPreset && JSON.stringify(existingPreset) !== JSON.stringify(stateToSave)) {
-        if (!confirm(`プリセット${presetNum}を上書きしますか？`)) {
-            return;
-        }
-    }
-    
     // 保存
     localStorage.setItem(`preset_${presetNum}`, JSON.stringify(stateToSave));
+    localStorage.setItem(`preset_${presetNum}_name`, presetName);
     updatePresetDisplay(presetNum, stateToSave);
     
     // 読み込みボタンを有効化
@@ -745,6 +805,10 @@ function handleSavePreset(presetNum) {
     if (loadBtn) {
         loadBtn.disabled = false;
     }
+    
+    // モーダルを閉じる
+    closeModal('presetNameModal');
+    pendingPresetNumber = null;
 }
 
 function handleLoadPreset(presetNum) {
@@ -785,7 +849,18 @@ function handleLoadPreset(presetNum) {
     // フィルターを適用
     applyHideUnobtainedFilter();
     
+    // プリセット名を表示
+    const presetName = localStorage.getItem(`preset_${presetNum}_name`) || '';
+    displayPresetName(presetName);
+    
     saveCurrentState();
+}
+
+function displayPresetName(name) {
+    const display = document.getElementById('preset-name-display');
+    if (display) {
+        display.textContent = name ? `【${name}】` : '';
+    }
 }
 
 function loadPreset(presetNum) {
@@ -862,26 +937,37 @@ function loadCurrentState() {
 // ========================================
 async function handleScreenshot() {
     try {
-        // html2canvasを使用してページをキャプチャ
-        const canvas = await html2canvas(document.querySelector('.container'), {
-            width: 1920,
-            height: 1080,
-            scale: 1,
-            backgroundColor: '#ffffff'
+        // スクリーンショット用フッターを一時的に表示
+        const footer = document.getElementById('screenshot-footer');
+        footer.style.display = 'block';
+        
+        // キャラクターエリアのみをキャプチャ
+        const targetElement = document.querySelector('.characters-area');
+        const canvas = await html2canvas(targetElement, {
+            scale: 2,
+            backgroundColor: '#ffffff',
+            logging: false,
+            useCORS: true
         });
+        
+        // フッターを非表示に戻す
+        footer.style.display = 'none';
         
         // Canvasを画像に変換してダウンロード
         canvas.toBlob((blob) => {
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `potential_simulator_${new Date().getTime()}.png`;
+            a.download = `osaboritools_potential_${new Date().getTime()}.png`;
             a.click();
             URL.revokeObjectURL(url);
         });
     } catch (error) {
         console.error('スクリーンショットエラー:', error);
         showError('スクリーンショットの生成に失敗しました');
+        
+        // エラー時もフッターを非表示に
+        document.getElementById('screenshot-footer').style.display = 'none';
     }
 }
 

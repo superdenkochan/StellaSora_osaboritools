@@ -1,4 +1,14 @@
 /* ========================================
+   カスタムフォント
+   ======================================== */
+@font-face {
+    font-family: 'CustomFont';
+    src: url('fonts/keifont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ========================================
    基本設定
    ======================================== */
 * {
@@ -97,7 +107,7 @@ body {
 .side-menu-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 20px;
+    padding: 20px 20px 20px 70px; /* 左側にハンバーガーメニュー分の余白を追加 */
     font-size: 20px;
     font-weight: bold;
 }
@@ -123,6 +133,15 @@ body {
     background: #f0f0f0;
 }
 
+.side-menu-list .menu-item-disabled {
+    display: block;
+    padding: 15px 20px;
+    color: #999; /* グレー表示 */
+    text-decoration: none;
+    cursor: default; /* ホバー時にカーソル変化なし */
+    pointer-events: none; /* クリック無効 */
+}
+
 .menu-overlay {
     position: fixed;
     top: 0;
@@ -145,6 +164,9 @@ header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 20px 30px 20px 80px; /* 左側にハンバーガーメニュー分の余白 */
+    position: sticky; /* 固定位置 */
+    top: 0; /* 画面上部に固定 */
+    z-index: 1000; /* 他の要素より前面に */
 }
 
 header h1 {
@@ -250,15 +272,24 @@ header h1 {
     max-width: 800px;
     max-height: 80vh;
     width: 90%;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
     z-index: 1;
-    padding: 30px;
+}
+
+.modal-header {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+    padding: 30px 30px 0 30px;
+    border-radius: 10px 10px 0 0;
 }
 
 .modal-close {
-    position: absolute;
-    top: 15px;
+    position: sticky; /* 固定位置 */
+    top: 15px; /* ヘッダー内で固定 */
     right: 15px;
     width: 35px;
     height: 35px;
@@ -274,6 +305,8 @@ header h1 {
     transition: all 0.3s;
     line-height: 1;
     padding: 0;
+    float: right; /* 右寄せ */
+    z-index: 11;
 }
 
 .modal-close:hover {
@@ -287,6 +320,7 @@ header h1 {
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 3px solid #667eea;
+    clear: both; /* floatをクリア */
 }
 
 .modal-content h3 {
@@ -299,6 +333,9 @@ header h1 {
 .modal-body {
     color: #333;
     line-height: 1.8;
+    padding: 0 30px 30px 30px;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .modal-body p {
@@ -341,7 +378,7 @@ header h1 {
    メインコンテンツ
    ======================================== */
 .main-content {
-    padding: 20px;
+    padding: 5px;
 }
 
 .characters-area {
@@ -378,8 +415,7 @@ header h1 {
 
 .character-label img {
     width: 100%;
-    height: auto;
-    object-fit: contain;
+    height: 100%;
 }
 
 /* キャラクター選択（カスタムドロップダウン） */
@@ -492,7 +528,7 @@ header h1 {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
-    z-index: 1001;
+    z-index: 99999; /* 最前面に表示したい */
 }
 
 .character-option:hover .character-option-name {
@@ -510,8 +546,7 @@ header h1 {
 .potentials-container {
     display: flex;
     gap: 10px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    flex-wrap: none; /* 改行を許可せず横並び */
     flex: 1;
     align-items: flex-start;
 }
@@ -530,7 +565,7 @@ header h1 {
 .potentials-grid {
     display: flex;
     gap: 10px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap; /* 改行を許可 */
     flex-shrink: 0;
 }
 
@@ -546,13 +581,7 @@ header h1 {
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    transition: all 0.3s;
-}
-
-.potential-card:hover {
-    transform: translateY(0px);
-    transform: scale(1.05);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    /* カード全体のホバーアニメーションを削除 */
 }
 
 .potential-card.hidden {
@@ -564,6 +593,17 @@ header h1 {
     width: 101px;
     height: 128px;
     cursor: pointer;
+    transition: all 0.3s; /* ホバー用トランジション追加 */
+}
+
+/* 素質画像のホバーアニメーション */
+.potential-image-wrapper:hover {
+    transform: scale(1.05);
+}
+
+/* 素質画像のクリックアニメーション */
+.potential-image-wrapper:active {
+    transform: scale(0.95);
 }
 
 .potential-image {
@@ -572,33 +612,23 @@ header h1 {
     object-fit: contain;
     border-radius: 0px;
     border: 0px solid #red;
-    transition: all 0.3s;
 }
 
 /* グレーアウト状態 */
-.potential-image-wrapper.grayed-out .potential-image {
-    filter: grayscale(100%) brightness(0.7);
-    opacity: 0.5;
-}
-
-/* 取得済み状態 */
-.potential-image-wrapper.obtained::after {
-    content: '✓';
+.potential-image-wrapper.grayed-out::before {
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 40px;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(128, 128, 128, 0.6); /* グレーのオーバーレイ */
+    z-index: 1; /* 画像の上、カウント・サムズアップの下 */
     pointer-events: none;
+    border-radius: 0px;
 }
 
-.potential-image-wrapper.obtained .potential-image {
-    filter: brightness(0.5);
-}
-
-/* カウント表示 */
+/* カウント表示のz-index調整 */
 .potential-count {
     position: absolute;
     top: var(--count-top);
@@ -613,9 +643,10 @@ header h1 {
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     display: var(--count-show-circle);
+    z-index: 2; /* グレーアウトの上 */
 }
 
-/* レベル6のサムズアップ（画像版） */
+/* レベル6のサムズアップ（画像版）のz-index調整 */
 .thumbs-up {
     position: absolute;
     top: var(--thumbs-up-top);
@@ -623,6 +654,7 @@ header h1 {
     width: var(--thumbs-up-size);
     height: var(--thumbs-up-size);
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+    z-index: 2; /* グレーアウトの上 */
 }
 
 .thumbs-up img {
@@ -637,6 +669,33 @@ header h1 {
     text-align: center;
     color: #333;
     word-break: break-word;
+}
+
+/* 取得済み状態（コア素質） */
+.potential-image-wrapper.obtained::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+    pointer-events: none;
+    z-index: 3; /* グレーアウトとカウントの上 */
+}
+
+.potential-image-wrapper.obtained::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 暗くする */
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 0px;
 }
 
 /* ツールチップ（説明文） */
@@ -654,7 +713,7 @@ header h1 {
     word-wrap: break-word;
     max-width: 250px;
     min-width: 150px;
-    z-index: 1000;
+    z-index: 10003; /* 最前面に表示 */
     margin-bottom: 10px;
     opacity: 0;
     pointer-events: none;
@@ -696,6 +755,11 @@ header h1 {
 
 .status-btn:hover {
     background: #f0f0f0;
+    transform: scale(1.05); /* ホバー時にスケール変更 */
+}
+
+.status-btn:active {
+    transform: scale(0.95); /* クリック時にスケール変更 */
 }
 
 /* コア素質のステータスボタン */
@@ -747,6 +811,11 @@ header h1 {
 
 .sub-status-btn:hover {
     opacity: 0.8;
+    transform: scale(1.05); /* ホバー時にスケール変更 */
+}
+
+.sub-status-btn:active {
+    transform: scale(0.95); /* クリック時にスケール変更 */
 }
 
 /* ========================================
