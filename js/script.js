@@ -21,11 +21,11 @@ const POTENTIAL_DEFINITIONS = {
 };
 
 // サブ素質のステータス順序
-const SUB_STATUS_ORDER = ['none', 'level1', 'level2-5', 'level6'];
+const SUB_STATUS_ORDER = ['none', 'level1', 'level2', 'level6'];
 const SUB_STATUS_LABELS = {
     'none': '取得しない',
     'level1': 'レベル1',
-    'level2-5': 'レベル2～5',
+    'level2': 'レベル1～',
     'level6': 'レベル6'
 };
 
@@ -34,7 +34,7 @@ const currentState = {
     main: {
         characterId: null,
         corePotentials: {}, // { potentialId: { obtained: bool, acquired: bool } }
-        subPotentials: {}   // { potentialId: { status: 'level6'|'level2-5'|'level1'|'none', count: number } }
+        subPotentials: {}   // { potentialId: { status: 'level6'|'level2'|'level1'|'none', count: number } }
     },
     support1: {
         characterId: null,
@@ -543,7 +543,7 @@ function handleCoreToggle(slot, potentialId) {
         .filter(s => s.obtained).length;
     
     if (obtainedCount >= MAX_CORE_POTENTIALS) {
-        showError(`コア素質は${MAX_CORE_POTENTIALS}つまでしか取得できません`);
+        showError(`コア素質は${MAX_CORE_POTENTIALS}つまでしか取れないよ！`);
         return;
     }
     

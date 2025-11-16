@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>素質シミュレータ - ステラソラ楽々ツール</title>
+    <title>素質シミュレーター - おサボりツール</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -18,9 +18,8 @@
     <nav class="side-menu" id="sideMenu">
         <div class="side-menu-header">メニュー</div>
         <ul class="side-menu-list">
-            <li><a href="index.html">トップページ</a></li>
-            <li><a href="simu_potential.html">素質シミュレーター</a></li>
-            <!-- 今後追加されるツールのリンクをここに -->
+            <li><a href="index.html">TOP</a></li>
+            <li><a href="simu_potential.html">素質シミュレーター(今ここ)</a></li>
         </ul>
     </nav>
 
@@ -36,7 +35,7 @@
                 </label>
                 <button id="resetCount" class="btn">カウントリセット</button>
                 <button id="resetAll" class="btn btn-danger">初期化</button>
-                <button id="screenshot" class="btn btn-primary">スクリーンショット</button>
+                <button id="screenshot" class="btn btn-primary">スクショ</button>
                 <button id="showUsage" class="btn btn-info">使い方</button>
                 <button id="showChangelog" class="btn btn-info">変更履歴</button>
             </div>
@@ -53,14 +52,14 @@
                         </div>
                         <div class="character-select-wrapper">
                             <button class="character-select-button" data-slot="main">
-                                <span class="select-text">キャラクター<br>選択</span>
+                                <span class="select-text">巡遊者を<br>選択してね</span>
                             </button>
                             <div class="character-dropdown" data-slot="main">
                                 <!-- オプションはJavaScriptで動的に生成 -->
                             </div>
                             <!-- 互換性のため隠しselect -->
                             <select class="character-select" data-slot="main">
-                                <option value="">キャラクターを選択してください</option>
+                                <option value="">巡遊者を選択してね</option>
                             </select>
                         </div>
                     </div>
@@ -77,13 +76,13 @@
                         </div>
                         <div class="character-select-wrapper">
                             <button class="character-select-button" data-slot="support1">
-                                <span class="select-text">キャラクター<br>選択</span>
+                                <span class="select-text">巡遊者を<br>選択してね</span>
                             </button>
                             <div class="character-dropdown" data-slot="support1">
                                 <!-- オプションはJavaScriptで動的に生成 -->
                             </div>
                             <select class="character-select" data-slot="support1">
-                                <option value="">キャラクターを選択してください</option>
+                                <option value="">巡遊者を選択してね</option>
                             </select>
                         </div>
                     </div>
@@ -100,13 +99,13 @@
                         </div>
                         <div class="character-select-wrapper">
                             <button class="character-select-button" data-slot="support2">
-                                <span class="select-text">キャラクター<br>選択</span>
+                                <span class="select-text">巡遊者を<br>選択してね</span>
                             </button>
                             <div class="character-dropdown" data-slot="support2">
                                 <!-- オプションはJavaScriptで動的に生成 -->
                             </div>
                             <select class="character-select" data-slot="support2">
-                                <option value="">キャラクターを選択してください</option>
+                                <option value="">巡遊者を選択してね</option>
                             </select>
                         </div>
                     </div>
@@ -237,33 +236,46 @@
             <h2>使い方</h2>
             <div class="modal-body">
                 <h3>基本操作</h3>
-                <p><strong>1. キャラクターを選択</strong><br>
-                ラベル下のアイコンボタンをクリックして、キャラクターを選択します。</p>
+                <p><strong>1. 巡遊者を選択！</strong><br>
+                アイコンをクリックして選んでね。<br>
+                素質カードは主力と支援で自動で切り替わるから気にしなくていいよ～</p>
                 
-                <p><strong>2. コア素質の設定</strong><br>
-                「取得する/取得しない」ボタンで切り替えます。取得するコア素質は最大2つまで選択できます。</p>
+                <p><strong>2. コア素質</strong><br>
+                「取得する/取得しない」ボタンをクリックして、取りたい素質を選ぼう！<br>
+                ゲームの仕様と同じで2つまでしか選べないようにしてるよ</p>
                 
-                <p><strong>3. サブ素質の設定</strong><br>
-                ボタンをクリックするたびに「取得しない」→「レベル1」→「レベル2～5」→「レベル6」の順に切り替わります。</p>
+                <p><strong>3. サブ素質</strong><br>
+                ボタンをクリックすると<br>
+                [取得しない]→[レベル1]→[レベル1～]→[レベル6]の順に切り替わるよ<br>
+                絶対レベル6にしたい素質だとか、レベル1止めでいい素質とか<br>
+                優先度低いけど可能な限り上げたい素質とかを分けられて便利だね！<br>
+                これやりたいがためにこのツールを作ったし！</p>
                 
-                <p><strong>4. カウント管理</strong><br>
-                素質画像をクリックすると、取得数をカウントできます（0～6）。</p>
+                <p><strong>4. 素質レベルカウント</strong><br>
+                素質カードの画像部分をクリックするとレベルが上がっていくよ<br>
+                2窓して登りながらポチポチすると、いちいちゲーム側で確認しなくて便利だね<br>
+                コア素質をクリックするとチェックマークが付くよ</p>
                 
-                <h3>便利機能</h3>
+                <h3>その他色々</h3>
                 <p><strong>取得しない素質を非表示</strong><br>
-                チェックを入れると、取得予定のない素質を非表示にできます。</p>
+                チェックを入れると、「取得しない」素質が非表示になるよ<br>
+                見やすいね！</p>
                 
                 <p><strong>プリセット保存・読み込み</strong><br>
-                よく使う設定を10個まで保存できます。カウント数は保存されません。</p>
+                巡遊者と素質のラベル設定を10個まで保存できるよ。<br>
+                ポチポチしたレベルは保存されないようにしてるけど別にそれでいいよね？</p>
                 
                 <p><strong>カウントリセット</strong><br>
-                すべてのカウント数を0に戻します。</p>
+                3キャラ分のレベルカウントとコア素質のチェックをデフォに戻すよ。<br>
+                塔を登り直す時はコレ！</p>
                 
                 <p><strong>初期化</strong><br>
-                すべての設定を初期状態に戻します。</p>
+                すべての設定を初期状態に戻すよ<br>
+                具体的に言うと巡遊者スロットが空になって、非表示チェックもなしになるね</p>
                 
-                <p><strong>スクリーンショット</strong><br>
-                現在の画面を画像として保存できます。</p>
+                <p><strong>スクショ</strong><br>
+                現在の画面を画像として保存できるよ。<br>
+                理想のビルド共有する時とかに使ってね</p>
             </div>
         </div>
     </div>
@@ -275,33 +287,15 @@
             <button class="modal-close">&times;</button>
             <h2>変更履歴</h2>
             <div class="modal-body">
-                <h3>v1.1.0 (2025-11-16)</h3>
+                <h3>v1.0.0 2025.11.16</h3>
                 <ul>
-                    <li>使い方モーダル追加</li>
-                    <li>変更履歴モーダル追加</li>
-                    <li>横一列レイアウトに変更</li>
-                    <li>チェック状態の維持機能追加</li>
-                    <li>カスタマイズ変数追加（サムズアップ・カウント数字）</li>
+                    <li>お試しリリース！</li>
                 </ul>
-                
-                <h3>v1.0.0 (2025-11-16)</h3>
-                <ul>
-                    <li>初回リリース</li>
-                    <li>素質シミュレーター機能実装</li>
-                    <li>プリセット保存機能追加</li>
-                    <li>スクリーンショット機能追加</li>
-                    <li>キャラクター選択（グリッド形式）</li>
-                    <li>コア素質・サブ素質の管理機能</li>
-                </ul>
-                
-                <!-- ここに今後の変更履歴を追記していってください -->
+                <!-- テンプレ -->
                 <!--
-                例:
-                <h3>v1.2.0 (YYYY-MM-DD)</h3>
+                <h3>v1.0.0 YYYY.MM.DD</h3>
                 <ul>
-                    <li>新機能の追加</li>
-                    <li>バグ修正</li>
-                    <li>UI改善</li>
+                    <li>○○の追加</li>
                 </ul>
                 -->
             </div>

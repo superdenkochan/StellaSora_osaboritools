@@ -13,18 +13,18 @@
 :root {
     /* サムズアップ画像の位置とサイズ */
     --thumbs-up-size: 30px;
-    --thumbs-up-top: 0px;
+    --thumbs-up-top: 70px;
     --thumbs-up-left: 0px;
     
     /* カウント数字のデザイン */
-    --count-font-size: 20px;
-    --count-bg-color: rgba(255, 193, 7, 0.9);
-    --count-text-color: white;
-    --count-border-radius: 50%; /* 丸型: 50%, 四角: 5px など */
+    --count-font-size: 16px;
+    --count-bg-color: rgba(255,255,255,1);
+    --count-text-color: black;
+    --count-border-radius: 2px; /* 丸型: 50%, 四角: 5px など */
     --count-show-circle: block; /* 背景を表示: block, 非表示: none */
-    --count-top: 5px;
-    --count-right: 5px;
-    --count-padding: 3px 8px;
+    --count-top: 4px;
+    --count-right: 65px;
+    --count-padding: 0px 12px;
 }
 
 body {
@@ -39,7 +39,7 @@ body {
     margin: 0 auto;
     background: white;
     border-radius: 10px;
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
     overflow: hidden;
 }
 
@@ -61,7 +61,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 6px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     transition: all 0.3s;
 }
 
@@ -84,7 +84,7 @@ body {
     width: 300px;
     height: 100vh;
     background: white;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
     z-index: 9999;
     transition: left 0.3s;
     overflow-y: auto;
@@ -187,7 +187,7 @@ header h1 {
 
 .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .btn:active {
@@ -278,7 +278,7 @@ header h1 {
 
 .modal-close:hover {
     background: #d32f2f;
-    transform: rotate(90deg);
+    transform: none;
 }
 
 .modal-content h2 {
@@ -461,7 +461,7 @@ header h1 {
 .character-option:hover:not(.disabled) {
     border-color: #667eea;
     transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
 }
 
 .character-option.disabled {
@@ -542,16 +542,17 @@ header h1 {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    padding: 10px;
+    padding: 5px;
     background: white;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
     transition: all 0.3s;
 }
 
 .potential-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(0px);
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
 .potential-card.hidden {
@@ -569,8 +570,8 @@ header h1 {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 8px;
-    border: 2px solid #ddd;
+    border-radius: 0px;
+    border: 0px solid #red;
     transition: all 0.3s;
 }
 
@@ -589,12 +590,12 @@ header h1 {
     transform: translate(-50%, -50%);
     font-size: 40px;
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
     pointer-events: none;
 }
 
 .potential-image-wrapper.obtained .potential-image {
-    filter: brightness(0.7);
+    filter: brightness(0.5);
 }
 
 /* カウント表示 */
@@ -610,7 +611,7 @@ header h1 {
     border-radius: var(--count-border-radius);
     min-width: 28px;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     display: var(--count-show-circle);
 }
 
@@ -621,7 +622,7 @@ header h1 {
     left: var(--thumbs-up-left);
     width: var(--thumbs-up-size);
     height: var(--thumbs-up-size);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
 }
 
 .thumbs-up img {
@@ -684,7 +685,7 @@ header h1 {
 
 .status-btn {
     padding: 6px 10px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     border: 2px solid #ddd;
     border-radius: 5px;
@@ -713,7 +714,7 @@ header h1 {
 /* サブ素質のステータスボタン（レベル別色分け） */
 .sub-status-btn {
     padding: 6px 10px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     border: 2px solid #ddd;
     border-radius: 5px;
@@ -733,7 +734,7 @@ header h1 {
     color: #333;
 }
 
-.sub-status-btn.level2-5 {
+.sub-status-btn.level2 {
     background: #ffff00;
     border-color: #ffff00;
     color: #333;
@@ -785,8 +786,8 @@ header h1 {
 
 .preset-thumbnail {
     position: relative;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     background: #e0e0e0;
     border-radius: 5px;
     display: flex;
@@ -806,7 +807,7 @@ header h1 {
     position: absolute;
     bottom: 3px;
     right: 3px;
-    background: rgba(102, 126, 234, 0.9);
+    background: rgba(64, 64, 64, 0.9);
     color: white;
     font-size: 12px;
     font-weight: bold;
@@ -827,7 +828,7 @@ header h1 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     transition: all 0.3s;
 }
