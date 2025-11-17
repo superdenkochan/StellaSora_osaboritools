@@ -1,12 +1,23 @@
 {
   "events": [
     {
+      "eventId": 1101,
+      "name": "私たちのギルド-新章追加記念イベント",
+      "startDate": "2025-11-18T05:00:00",
+      "endDate": "2025-12-02T04:59:00",
+      "bannerImage": "images/events/banner_00001.jpg",
+      "backgroundImage": "images/events/bg_00001.jpg",
+      "pointId": 1101,
+      "staminaCost": 30,
+      "pointsPerRun": 400
+    },
+    {
       "eventId": 1001,
-      "name": "サンプルイベント（夕涼み編）",
-      "startDate": "2025-11-10T05:00:00",
-      "endDate": "2025-11-20T04:59:00",
-      "bannerImage": "images/events/event_1001_banner.png",
-      "backgroundImage": "images/events/event_1001_bg.png",
+      "name": "【終了】キケン？冒険？蒼海の幽霊船伝説！",
+      "startDate": "2025-11-17T19:00:00",
+      "endDate": "2025-12-01T04:59:00",
+      "bannerImage": "images/events/banner_00001.jpg",
+      "backgroundImage": "images/events/bg_00001.jpg",
       "pointId": 1001,
       "staminaCost": 30,
       "pointsPerRun": 400
@@ -14,157 +25,739 @@
   ],
   "eventPoints": [
     {
+      "id": 1101,
+      "name": "深緑のガラス玉",
+      "icon": "images/events/item_1101.png",
+      "eventId": 1101
+    },
+    {
       "id": 1001,
-      "name": "夕涼みポイント",
-      "icon": "images/points/point_1001.png",
+      "name": "イカせんべい",
+      "icon": "images/events/item_1001.png",
       "eventId": 1001
     }
   ],
   "exchangeRewards": [
     {
-      "id": 10011,
-      "name": "夕涼み",
+      "id": 1001,
+      "name": "★5ロスレコ",
       "stock": 1,
       "price": 8000,
-      "icon": "images/rewards/reward_10011.png",
+      "icon": "images/exchange/exchange_1001_s.jpg",
       "eventId": 1001,
       "category": "限定"
     },
     {
-      "id": 10012,
-      "name": "夕涼みの調べ",
-      "stock": 1,
+      "id": 1002,
+      "name": "★5ロスレコ凸素材",
+      "stock": 5,
       "price": 8000,
-      "icon": "images/rewards/reward_10012.png",
+      "icon": "images/exchange/exchange_1002_s.jpg",
       "eventId": 1001,
       "category": "限定"
     },
     {
-      "id": 10013,
-      "name": "ギタシン目録×若言の扇×夕涼みの調べ",
+      "id": 1003,
+      "name": "イベント称号",
       "stock": 1,
       "price": 5000,
-      "icon": "images/rewards/reward_10013.png",
+      "icon": "images/exchange/exchange_1003_s.jpg",
       "eventId": 1001,
       "category": "限定"
     },
     {
-      "id": 10014,
+      "id": 1004,
       "name": "青空旅券",
-      "stock": 1,
+      "stock": 5,
       "price": 500,
-      "icon": "images/rewards/reward_10014.png",
+      "icon": "images/exchange/exchange_1004_s.jpg",
       "eventId": 1001,
       "category": "限定"
     },
     {
-      "id": 10015,
+      "id": 1005,
       "name": "オアシス旅券",
       "stock": 5,
       "price": 500,
-      "icon": "images/rewards/reward_10015.png",
+      "icon": "images/exchange/exchange_1005_s.jpg",
       "eventId": 1001,
       "category": "限定"
     },
     {
-      "id": 10016,
-      "name": "翠緑羽の髪飾り",
+      "id": 1006,
+      "name": "首領素材",
       "stock": 12,
       "price": 1600,
-      "icon": "images/rewards/reward_10016.png",
+      "icon": "images/exchange/exchange_1006_s.jpg",
       "eventId": 1001,
       "category": "素材"
     },
     {
-      "id": 10017,
-      "name": "徴章研磨剤",
+      "id": 1007,
+      "name": "徴章研磨剤×2",
       "stock": 5,
       "price": 1600,
-      "icon": "images/rewards/reward_10017.png",
+      "icon": "images/exchange/exchange_1007_s.jpg",
       "eventId": 1001,
       "category": "素材"
     },
     {
-      "id": 10018,
-      "name": "頭髪乾燥機・改",
+      "id": 1008,
+      "name": "ギフト（金）×5",
       "stock": 2,
       "price": 250,
-      "icon": "images/rewards/reward_10018.png",
+      "icon": "images/exchange/exchange_1008_s.jpg",
       "eventId": 1001,
       "category": "素材"
     },
     {
-      "id": 10019,
-      "name": "金貨",
+      "id": 1009,
+      "name": "ギフト（金）×5",
       "stock": 2,
-      "price": 8000,
-      "icon": "images/rewards/reward_10019.png",
+      "price": 250,
+      "icon": "images/exchange/exchange_1009_s.jpg",
       "eventId": 1001,
       "category": "その他"
     },
     {
-      "id": 10020,
-      "name": "銀貨",
+      "id": 1010,
+      "name": "ギフト（金）×5",
       "stock": 2,
-      "price": 4000,
-      "icon": "images/rewards/reward_10020.png",
+      "price": 250,
+      "icon": "images/exchange/exchange_1010_s.jpg",
       "eventId": 1001,
       "category": "その他"
     },
     {
-      "id": 10021,
-      "name": "星の欠片",
+      "id": 1011,
+      "name": "巡遊者昇格（金）×5",
       "stock": 6,
-      "price": 2000,
-      "icon": "images/rewards/reward_10021.png",
+      "price": 250,
+      "icon": "images/exchange/exchange_1011_s.jpg",
       "eventId": 1001,
       "category": "その他"
     },
     {
-      "id": 10022,
-      "name": "経験値アイテム",
+      "id": 1012,
+      "name": "スキル素材（金）×5",
       "stock": 10,
-      "price": 800,
-      "icon": "images/rewards/reward_10022.png",
+      "price": 250,
+      "icon": "images/exchange/exchange_1012_s.jpg",
       "eventId": 1001,
+      "category": "その他"
+    },
+    {
+      "id": 1013,
+      "name": "ロスレコ昇格（金）×5",
+      "stock": 10,
+      "price": 250,
+      "icon": "images/exchange/exchange_1013_s.jpg",
+      "eventId": 1001,
+      "category": "その他"
+    },
+    {
+      "id": 1014,
+      "name": "期間限定高速チケット×2",
+      "stock": 10,
+      "price": 200,
+      "icon": "images/exchange/exchange_1014_s.jpg",
+      "eventId": 1001,
+      "category": "その他"
+    },
+    {
+      "id": 1015,
+      "name": "巡遊者経験値×5",
+      "stock": 30,
+      "price": 150,
+      "icon": "images/exchange/exchange_1015_s.jpg",
+      "eventId": 1001,
+      "category": "その他"
+    },
+    {
+      "id": 1016,
+      "name": "ロスレコ経験値×5",
+      "stock": 40,
+      "price": 150,
+      "icon": "images/exchange/exchange_1016_s.jpg",
+      "eventId": 1001,
+      "category": "その他"
+    },
+    {
+      "id": 1017,
+      "name": "巡遊者昇格（青）×5",
+      "stock": 40,
+      "price": 80,
+      "icon": "images/exchange/exchange_1017_s.jpg",
+      "eventId": 1001,
+      "category": "その他"
+    },
+    {
+      "id": 1018,
+      "name": "スキル素材（青）×5",
+      "stock": 90,
+      "price": 80,
+      "icon": "images/exchange/exchange_1018_s.jpg",
+      "eventId": 1001,
+      "category": "その他"
+    },
+    {
+      "id": 1019,
+      "name": "ロスレコ昇格（青）×5",
+      "stock": 90,
+      "price": 80,
+      "icon": "images/exchange/exchange_1019_s.jpg",
+      "eventId": 1001,
+      "category": "その他"
+    },
+    {
+      "id": 1020,
+      "name": "3000ドーラ",
+      "stock": 1000,
+      "price": 10,
+      "icon": "images/exchange/exchange_1020_s.jpg",
+      "eventId": 1001,
+      "category": "その他"
+    },
+    {
+      "id": 1101,
+      "name": "★5ロスレコ",
+      "stock": 1,
+      "price": 8000,
+      "icon": "images/exchange/exchange_1101_s.jpg",
+      "eventId": 1101,
+      "category": "限定"
+    },
+    {
+      "id": 1102,
+      "name": "★5ロスレコ凸素材",
+      "stock": 5,
+      "price": 8000,
+      "icon": "images/exchange/exchange_1102_s.jpg",
+      "eventId": 1101,
+      "category": "限定"
+    },
+    {
+      "id": 1103,
+      "name": "イベント称号",
+      "stock": 1,
+      "price": 5000,
+      "icon": "images/exchange/exchange_1103_s.jpg",
+      "eventId": 1101,
+      "category": "限定"
+    },
+    {
+      "id": 1104,
+      "name": "青空旅券",
+      "stock": 5,
+      "price": 500,
+      "icon": "images/exchange/exchange_1104_s.jpg",
+      "eventId": 1101,
+      "category": "限定"
+    },
+    {
+      "id": 1105,
+      "name": "オアシス旅券",
+      "stock": 5,
+      "price": 500,
+      "icon": "images/exchange/exchange_1105_s.jpg",
+      "eventId": 1101,
+      "category": "限定"
+    },
+    {
+      "id": 1106,
+      "name": "首領素材",
+      "stock": 12,
+      "price": 1600,
+      "icon": "images/exchange/exchange_1106_s.jpg",
+      "eventId": 1101,
+      "category": "素材"
+    },
+    {
+      "id": 1107,
+      "name": "徴章研磨剤×2",
+      "stock": 5,
+      "price": 1600,
+      "icon": "images/exchange/exchange_1107_s.jpg",
+      "eventId": 1101,
+      "category": "素材"
+    },
+    {
+      "id": 1108,
+      "name": "ギフト（金）×5",
+      "stock": 2,
+      "price": 250,
+      "icon": "images/exchange/exchange_1108_s.jpg",
+      "eventId": 1101,
+      "category": "素材"
+    },
+    {
+      "id": 1109,
+      "name": "ギフト（金）×5",
+      "stock": 2,
+      "price": 250,
+      "icon": "images/exchange/exchange_1109_s.jpg",
+      "eventId": 1101,
+      "category": "その他"
+    },
+    {
+      "id": 1110,
+      "name": "ギフト（金）×5",
+      "stock": 2,
+      "price": 250,
+      "icon": "images/exchange/exchange_1110_s.jpg",
+      "eventId": 1101,
+      "category": "その他"
+    },
+    {
+      "id": 1111,
+      "name": "巡遊者昇格（金）×5",
+      "stock": 6,
+      "price": 250,
+      "icon": "images/exchange/exchange_1111_s.jpg",
+      "eventId": 1101,
+      "category": "その他"
+    },
+    {
+      "id": 1112,
+      "name": "スキル素材（金）×5",
+      "stock": 10,
+      "price": 250,
+      "icon": "images/exchange/exchange_1112_s.jpg",
+      "eventId": 1101,
+      "category": "その他"
+    },
+    {
+      "id": 1113,
+      "name": "ロスレコ昇格（金）×5",
+      "stock": 10,
+      "price": 250,
+      "icon": "images/exchange/exchange_1113_s.jpg",
+      "eventId": 1101,
+      "category": "その他"
+    },
+    {
+      "id": 1114,
+      "name": "期間限定高速チケット×2",
+      "stock": 10,
+      "price": 200,
+      "icon": "images/exchange/exchange_1114_s.jpg",
+      "eventId": 1101,
+      "category": "その他"
+    },
+    {
+      "id": 1115,
+      "name": "巡遊者経験値×5",
+      "stock": 30,
+      "price": 150,
+      "icon": "images/exchange/exchange_1115_s.jpg",
+      "eventId": 1101,
+      "category": "その他"
+    },
+    {
+      "id": 1116,
+      "name": "ロスレコ経験値×5",
+      "stock": 40,
+      "price": 150,
+      "icon": "images/exchange/exchange_1116_s.jpg",
+      "eventId": 1101,
+      "category": "その他"
+    },
+    {
+      "id": 1117,
+      "name": "巡遊者昇格（青）×5",
+      "stock": 40,
+      "price": 80,
+      "icon": "images/exchange/exchange_1117_s.jpg",
+      "eventId": 1101,
+      "category": "その他"
+    },
+    {
+      "id": 1118,
+      "name": "スキル素材（青）×5",
+      "stock": 90,
+      "price": 80,
+      "icon": "images/exchange/exchange_1118_s.jpg",
+      "eventId": 1101,
+      "category": "その他"
+    },
+    {
+      "id": 1119,
+      "name": "ロスレコ昇格（青）×5",
+      "stock": 90,
+      "price": 80,
+      "icon": "images/exchange/exchange_1119_s.jpg",
+      "eventId": 1101,
+      "category": "その他"
+    },
+    {
+      "id": 1120,
+      "name": "3000ドーラ",
+      "stock": 1000,
+      "price": 10,
+      "icon": "images/exchange/exchange_1120_s.jpg",
+      "eventId": 1101,
       "category": "その他"
     }
   ],
   "missionRewards": [
     {
-      "id": 100101,
-      "name": "イベントクエスト初回クリア",
-      "points": 200,
-      "eventId": 1001
-    },
-    {
-      "id": 100102,
-      "name": "イベントボス撃破",
-      "points": 500,
-      "eventId": 1001
-    },
-    {
-      "id": 100103,
-      "name": "イベントポイント5000達成",
+      "id": 10001,
+      "name": "ノーマル1",
       "points": 300,
       "eventId": 1001
     },
     {
-      "id": 100104,
-      "name": "イベントポイント10000達成",
+      "id": 10002,
+      "name": "ノーマル2",
+      "points": 350,
+      "eventId": 1001
+    },
+    {
+      "id": 10003,
+      "name": "ノーマル3",
+      "points": 400,
+      "eventId": 1001
+    },
+    {
+      "id": 10004,
+      "name": "ノーマル4",
+      "points": 450,
+      "eventId": 1001
+    },
+    {
+      "id": 10005,
+      "name": "ノーマル5",
       "points": 500,
       "eventId": 1001
     },
     {
-      "id": 100105,
-      "name": "イベントポイント20000達成",
+      "id": 10006,
+      "name": "ノーマル6",
+      "points": 550,
+      "eventId": 1001
+    },
+    {
+      "id": 10007,
+      "name": "ノーマル7",
+      "points": 600,
+      "eventId": 1001
+    },
+    {
+      "id": 10008,
+      "name": "ノーマル8",
+      "points": 650,
+      "eventId": 1001
+    },
+    {
+      "id": 10011,
+      "name": "ハード1",
+      "points": 650,
+      "eventId": 1001
+    },
+    {
+      "id": 10012,
+      "name": "ハード2",
+      "points": 650,
+      "eventId": 1001
+    },
+    {
+      "id": 10013,
+      "name": "ハード3",
+      "points": 650,
+      "eventId": 1001
+    },
+    {
+      "id": 10014,
+      "name": "ハード4",
+      "points": 650,
+      "eventId": 1001
+    },
+    {
+      "id": 10101,
+      "name": "通常任務1",
       "points": 1000,
       "eventId": 1001
     },
     {
-      "id": 100106,
-      "name": "デイリーミッション達成",
-      "points": 100,
+      "id": 10102,
+      "name": "通常任務2",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10103,
+      "name": "通常任務3",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10104,
+      "name": "通常任務4",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10105,
+      "name": "通常任務5",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10106,
+      "name": "通常任務6",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10107,
+      "name": "通常任務7",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10108,
+      "name": "通常任務8",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10109,
+      "name": "通常任務9",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10110,
+      "name": "通常任務10",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10111,
+      "name": "通常任務11",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10112,
+      "name": "通常任務12",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10201,
+      "name": "挑戦任務1",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10202,
+      "name": "挑戦任務2",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10203,
+      "name": "挑戦任務3",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10204,
+      "name": "挑戦任務4",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10205,
+      "name": "挑戦任務5",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10206,
+      "name": "挑戦任務6",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10207,
+      "name": "挑戦任務7",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10208,
+      "name": "挑戦任務8",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10209,
+      "name": "挑戦任務9",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10210,
+      "name": "挑戦任務10",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10211,
+      "name": "挑戦任務11",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10212,
+      "name": "挑戦任務12",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10301,
+      "name": "冒険任務1",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10302,
+      "name": "冒険任務2",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10303,
+      "name": "冒険任務3",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10304,
+      "name": "冒険任務4",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10305,
+      "name": "冒険任務5",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10306,
+      "name": "冒険任務6",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10307,
+      "name": "冒険任務7",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10308,
+      "name": "冒険任務8",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10309,
+      "name": "冒険任務9",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10310,
+      "name": "冒険任務10",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10311,
+      "name": "冒険任務11",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10312,
+      "name": "冒険任務12",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10401,
+      "name": "ミニゲーム1",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10402,
+      "name": "ミニゲーム2",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10403,
+      "name": "ミニゲーム3",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10404,
+      "name": "ミニゲーム4",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10405,
+      "name": "ミニゲーム5",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10406,
+      "name": "ミニゲーム6",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10407,
+      "name": "ミニゲーム7",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10408,
+      "name": "ミニゲーム8",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10409,
+      "name": "ミニゲーム9",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10410,
+      "name": "ミニゲーム10",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10411,
+      "name": "ミニゲーム11",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 10412,
+      "name": "ミニゲーム12",
+      "points": 1000,
       "eventId": 1001
     }
   ]

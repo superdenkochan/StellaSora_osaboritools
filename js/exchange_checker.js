@@ -215,22 +215,41 @@ function createRewardItem(reward) {
         </div>
         <div class="reward-name">${reward.name}</div>
         <div class="reward-price">${reward.price.toLocaleString()}pt</div>
-        <button class="reward-toggle wanted">いる</button>
+        <div class="reward-status">いる</div>
+        <div class="reward-controls">
+            <button class="reward-btn reward-btn-decrease">－1</button>
+            <button class="reward-btn reward-btn-increase">＋1</button>
+        </div>
     `;
     
-    // アイコンクリック
-    const iconWrapper = div.querySelector('.reward-icon-wrapper');
-    iconWrapper.addEventListener('click', () => decreaseStock(reward.id));
+    // カード全体クリックでトグル
+    div.addEventListener('click', (e) => {
+        // ボタンクリックの場合は除外
+        if (e.target.classList.contains('reward-btn')) {
+            return;
+        }
+        toggleRewardWanted(reward.id);
+    });
     
-    // トグルボタン
-    const toggleBtn = div.querySelector('.reward-toggle');
-    toggleBtn.addEventListener('click', () => toggleRewardWanted(reward.id));
+    // 在庫-1ボタン
+    const decreaseBtn = div.querySelector('.reward-btn-decrease');
+    decreaseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        decreaseStock(reward.id);
+    });
+    
+    // 在庫+1ボタン
+    const increaseBtn = div.querySelector('.reward-btn-increase');
+    increaseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        increaseStock(reward.id);
+    });
     
     return div;
 }
 
 // ========================================
-// 報酬「いる/いらない」トグル
+// 報酬「交換する/交換しない」トグル
 // ========================================
 function toggleRewardWanted(rewardId) {
     const state = rewardStates[rewardId];
@@ -250,29 +269,45 @@ function toggleRewardWanted(rewardId) {
 // 報酬UI更新
 // ========================================
 function updateRewardUI(rewardId) {
+    const reward = gameData.exchangeRewards.find(r => r.id === rewardId);
     const state = rewardStates[rewardId];
     const item = document.querySelector(`[data-reward-id="${rewardId}"]`);
     
     if (!item) return;
     
-    const toggleBtn = item.querySelector('.reward-toggle');
+    const statusText = item.querySelector('.reward-status');
     const stockBadge = item.querySelector('.reward-stock-badge');
+    const decreaseBtn = item.querySelector('.reward-btn-decrease');
+    const increaseBtn = item.querySelector('.reward-btn-increase');
     
+    // wanted/unwantedの切り替え
     if (state.wanted) {
         item.classList.remove('unwanted');
         item.classList.add('wanted');
-        toggleBtn.classList.remove('unwanted');
-        toggleBtn.classList.add('wanted');
-        toggleBtn.textContent = 'いる';
+        statusText.textContent = '交換する';
     } else {
         item.classList.remove('wanted');
         item.classList.add('unwanted');
-        toggleBtn.classList.remove('wanted');
-        toggleBtn.classList.add('unwanted');
-        toggleBtn.textContent = 'いらない';
+        statusText.textContent = '交換しない';
     }
     
+    // 在庫表示更新
     stockBadge.textContent = `×${state.remaining}`;
+    
+    // ボタンの有効/無効
+    // 在庫-1ボタン：在庫が0以下の場合は無効
+    if (state.remaining <= 0) {
+        decreaseBtn.disabled = true;
+    } else {
+        decreaseBtn.disabled = false;
+    }
+    
+    // 在庫+1ボタン：在庫が最大値以上の場合は無効
+    if (state.remaining >= reward.stock) {
+        increaseBtn.disabled = true;
+    } else {
+        increaseBtn.disabled = false;
+    }
 }
 
 // ========================================
@@ -281,12 +316,31 @@ function updateRewardUI(rewardId) {
 function decreaseStock(rewardId) {
     const state = rewardStates[rewardId];
     
-    // 「いらない」設定の場合は何もしない
-    if (!state.wanted) return;
-    
     // 在庫がある場合のみ減らす
     if (state.remaining > 0) {
         state.remaining--;
+        
+        // UI更新
+        updateRewardUI(rewardId);
+        
+        // 計算更新
+        updateCalculations();
+        
+        // 保存
+        saveToLocalStorage();
+    }
+}
+
+// ========================================
+// 在庫増加
+// ========================================
+function increaseStock(rewardId) {
+    const reward = gameData.exchangeRewards.find(r => r.id === rewardId);
+    const state = rewardStates[rewardId];
+    
+    // 最大値未満の場合のみ増やす
+    if (state.remaining < reward.stock) {
+        state.remaining++;
         
         // UI更新
         updateRewardUI(rewardId);

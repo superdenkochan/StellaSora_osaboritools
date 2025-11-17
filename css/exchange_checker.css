@@ -7,7 +7,7 @@
     padding: 20px;
     background: #f5f5f5;
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -63,43 +63,78 @@
 
 /* イベントバナー */
 .event-banner {
-    margin-bottom: 20px;
-    border-radius: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .event-banner img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
+}
+
+/* 3カラムレイアウト */
+.three-column-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.column {
+    flex: 1;
+    min-width: 0;
+}
+
+.column h2 {
+    font-size: 20px;
+    color: #667eea;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #667eea;
+}
+
+/* 左カラム */
+.column-left {
+    flex: 0 0 200px;
+}
+
+/* 中央カラム */
+.column-center {
+    flex: 1;
+}
+
+/* 右カラム */
+.column-right {
+    flex: 0 0 320px;
 }
 
 /* 現在のポイント入力セクション */
 .current-points-section {
-    padding: 20px;
+    padding: 15px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 8px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    margin-bottom: 15px;
     color: white;
 }
 
 .current-points-section label {
+    display: block;
     font-weight: bold;
     font-size: 16px;
+    margin-bottom: 8px;
 }
 
 .points-input {
-    width: 200px;
+    width: 100%;
     padding: 10px 15px;
     font-size: 18px;
     font-weight: bold;
     border: none;
     border-radius: 5px;
     text-align: right;
+    margin-bottom: 5px;
 }
 
 .points-input:focus {
@@ -110,38 +145,38 @@
 .point-name {
     font-size: 14px;
     opacity: 0.9;
+    display: block;
+    text-align: right;
 }
 
 /* サマリーセクション */
 .summary-section {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
-    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .summary-card {
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
-    padding: 15px;
-    text-align: center;
+    padding: 10px;
     transition: all 0.3s;
 }
 
 .summary-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateX(0px);
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 1);
 }
 
 .summary-label {
-    font-size: 14px;
+    font-size: 16px;
     color: #666;
-    margin-bottom: 8px;
+    margin-bottom: 0px;
 }
 
 .summary-value {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     color: #333;
 }
@@ -150,23 +185,11 @@
     color: #667eea;
 }
 
-/* 報酬セクション */
-.rewards-section {
-    margin-bottom: 30px;
-}
-
-.rewards-section h2 {
-    font-size: 22px;
-    color: #667eea;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #667eea;
-}
-
+/* 報酬グリッド */
 .rewards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
 }
 
 /* 報酬アイテムカード */
@@ -174,32 +197,34 @@
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
-    padding: 10px;
+    padding: 12px;
     text-align: center;
     transition: all 0.3s;
-    cursor: pointer;
 }
 
 .reward-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transform: scale(105%);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
 }
 
 .reward-item.wanted {
     border-color: #667eea;
     background: #f0f4ff;
+    cursor: pointer;
 }
 
 .reward-item.unwanted {
     border-color: #ddd;
     background: #f5f5f5;
+    cursor: pointer;
 }
 
 .reward-icon-wrapper {
     position: relative;
     width: 100%;
     aspect-ratio: 1;
-    margin-bottom: 8px;
+    margin-bottom: 0px;
+    pointer-events: none;
 }
 
 .reward-icon {
@@ -211,30 +236,18 @@
 }
 
 .reward-item.unwanted .reward-icon {
-    filter: grayscale(100%) opacity(0.5);
-}
-
-.reward-item.unwanted .reward-icon-wrapper {
-    cursor: not-allowed;
-}
-
-.reward-item.wanted .reward-icon-wrapper {
-    cursor: pointer;
-}
-
-.reward-item.wanted .reward-icon-wrapper:hover .reward-icon {
-    filter: brightness(1.1);
+    filter: grayscale(100%) opacity(0.7);
 }
 
 .reward-stock-badge {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    background: rgba(102, 126, 234, 0.9);
+    top: -10px;
+    right: -10px;
+    background: rgba(255, 128, 0, 0.9);
     color: white;
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -243,13 +256,15 @@
 }
 
 .reward-name {
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: bold;
     color: #333;
-    margin-bottom: 5px;
-    min-height: 36px;
+    margin-bottom: 4px;
+    min-height: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    line-height: 1.2;
 }
 
 .reward-item.unwanted .reward-name {
@@ -257,62 +272,85 @@
 }
 
 .reward-price {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: #667eea;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .reward-item.unwanted .reward-price {
     color: #999;
 }
 
-.reward-toggle {
-    width: 100%;
-    padding: 6px 12px;
-    font-size: 13px;
+.reward-status {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px 0;
+    margin-bottom: 6px;
+    border-radius: 3px;
+}
+
+.reward-item.wanted .reward-status {
+    color: #667eea;
+    background: rgba(102, 126, 234, 0);
+}
+
+.reward-item.unwanted .reward-status {
+    color: #999;
+    background: rgba(150, 150, 150, 0);
+}
+
+.reward-controls {
+    display: flex;
+    gap: 4px;
+    margin-top: 6px;
+}
+
+.reward-btn {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 16px;
     font-weight: bold;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s;
 }
 
-.reward-toggle.wanted {
-    background: #667eea;
+.reward-btn-decrease {
+    background: #4caf50;
     color: white;
 }
 
-.reward-toggle.wanted:hover {
-    background: #5568d3;
+.reward-btn-decrease:hover {
+    background: #45a049;
 }
 
-.reward-toggle.unwanted {
-    background: #ddd;
-    color: #666;
-}
-
-.reward-toggle.unwanted:hover {
+.reward-btn-decrease:disabled {
     background: #ccc;
+    cursor: not-allowed;
+}
+
+.reward-btn-increase {
+    background: #f44336;
+    color: white;
+}
+
+.reward-btn-increase:hover {
+    background: #da190b;
+}
+
+.reward-btn-increase:disabled {
+    background: #ccc;
+    cursor: not-allowed;
 }
 
 /* ミッションセクション */
-.missions-section {
-    margin-bottom: 30px;
-}
-
-.missions-section h2 {
-    font-size: 22px;
-    color: #667eea;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #667eea;
-}
-
 .mission-summary {
     display: flex;
-    gap: 20px;
-    padding: 15px;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 8px;
     margin-bottom: 15px;
@@ -320,7 +358,6 @@
 }
 
 .mission-summary > div {
-    flex: 1;
     text-align: center;
 }
 
@@ -328,19 +365,19 @@
     display: block;
     font-size: 14px;
     opacity: 0.9;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .mission-summary span:last-child {
     display: block;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
 .missions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 /* ミッションアイテム */
@@ -348,10 +385,10 @@
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
-    padding: 12px 15px;
+    padding: 10px 12px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     cursor: pointer;
     transition: all 0.3s;
 }
@@ -367,8 +404,8 @@
 }
 
 .mission-checkbox {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border: 2px solid #ddd;
     border-radius: 4px;
     display: flex;
@@ -385,7 +422,7 @@
 
 .mission-checkbox::after {
     content: '✓';
-    font-size: 16px;
+    font-size: 14px;
     color: white;
     display: none;
 }
@@ -399,9 +436,9 @@
 }
 
 .mission-name {
-    font-size: 14px;
+    font-size: 13px;
     color: #333;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
 }
 
 .mission-item.completed .mission-name {
@@ -410,7 +447,7 @@
 }
 
 .mission-points {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
     color: #667eea;
 }
@@ -419,7 +456,7 @@
     color: #4caf50;
 }
 
-/* モーダル共通スタイル（既存のstyle.cssから継承） */
+/* モーダル共通スタイル */
 .modal {
     position: fixed;
     top: 0;
@@ -508,31 +545,30 @@
 }
 
 /* レスポンシブ対応 */
+@media (max-width: 1200px) {
+    .three-column-layout {
+        flex-direction: column;
+    }
+    
+    .column-left,
+    .column-right {
+        flex: 1;
+    }
+    
+    .summary-section {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+}
+
 @media (max-width: 768px) {
     .summary-section {
         grid-template-columns: repeat(2, 1fr);
     }
     
     .rewards-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    }
-    
-    .missions-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .mission-summary {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .current-points-section {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .points-input {
-        width: 100%;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
     }
 }
 

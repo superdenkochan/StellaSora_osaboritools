@@ -56,7 +56,7 @@
             <div class="event-selector">
                 <label for="eventSelect">イベントを選択：</label>
                 <select id="eventSelect" class="event-select">
-                    <option value="">イベントを選択してください</option>
+                    <option value=""><--イベントを選択--></option>
                 </select>
             </div>
 
@@ -66,68 +66,75 @@
                     <img id="eventBanner" src="" alt="イベントバナー">
                 </div>
                 
-                <!-- 現在のポイント入力 -->
-                <div class="current-points-section">
-                    <label for="currentPoints">現在のポイント数：</label>
-                    <input type="number" id="currentPoints" min="0" max="999999" value="0" class="points-input">
-                    <span id="pointName" class="point-name"></span>
-                </div>
-
-                <!-- 計算結果サマリー -->
-                <div class="summary-section">
-                    <div class="summary-card">
-                        <div class="summary-label">残り日数</div>
-                        <div class="summary-value" id="remainingDays">-</div>
-                    </div>
-                    <div class="summary-card">
-                        <div class="summary-label">合計必要ポイント</div>
-                        <div class="summary-value" id="totalNeeded">0</div>
-                    </div>
-                    <div class="summary-card">
-                        <div class="summary-label">残り必要ポイント</div>
-                        <div class="summary-value highlight" id="remainingNeeded">0</div>
-                    </div>
-                    <div class="summary-card">
-                        <div class="summary-label">あと何周</div>
-                        <div class="summary-value highlight" id="runsNeeded">0</div>
-                    </div>
-                    <div class="summary-card">
-                        <div class="summary-label">1日あたりのノルマ</div>
-                        <div class="summary-value highlight" id="dailyQuota">0周</div>
-                    </div>
-                    <div class="summary-card">
-                        <div class="summary-label">1日あたりのやる気</div>
-                        <div class="summary-value highlight" id="dailyStamina">0</div>
-                    </div>
-                </div>
-
-                <!-- 交換所報酬エリア -->
-                <div class="rewards-section">
-                    <h2>交換所報酬</h2>
-                    <div id="rewardsGrid" class="rewards-grid">
-                        <!-- 報酬アイテムはJavaScriptで動的に生成 -->
-                    </div>
-                </div>
-
-                <!-- ミッション報酬エリア -->
-                <div class="missions-section">
-                    <h2>ミッション・初回クリア報酬</h2>
-                    <div class="mission-summary">
-                        <div class="mission-total">
-                            <span>合計ポイント：</span>
-                            <span id="totalMissionPoints">0</span>
+                <!-- 3カラムレイアウト -->
+                <div class="three-column-layout">
+                    <!-- 左カラム：計算結果サマリー -->
+                    <div class="column column-left">
+                        <h2>計算結果</h2>
+                        
+                        <!-- 現在のポイント入力 -->
+                        <div class="current-points-section">
+                            <label for="currentPoints">所持ポイント数</label>
+                            <input type="number" id="currentPoints" min="0" max="999999" value="0" class="points-input">
+                            <span id="pointName" class="point-name"></span>
                         </div>
-                        <div class="mission-remaining">
-                            <span>残り獲得可能：</span>
-                            <span id="remainingMissionPoints">0</span>
-                        </div>
-                        <div class="mission-earned">
-                            <span>獲得済み：</span>
-                            <span id="earnedMissionPoints">0</span>
+
+                        <div class="summary-section">
+                            <div class="summary-card">
+                                <div class="summary-label">残り日数</div>
+                                <div class="summary-value" id="remainingDays">-</div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-label">残り必要ポイント</div>
+                                <div class="summary-value highlight" id="remainingNeeded">0</div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-label">1日あたりのノルマ</div>
+                                <div class="summary-value highlight" id="dailyQuota">0周</div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-label">1日あたりのやる気</div>
+                                <div class="summary-value highlight" id="dailyStamina">0</div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-label">あと何周</div>
+                                <div class="summary-value highlight" id="runsNeeded">0</div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-label">交換ノルマ</div>
+                                <div class="summary-value" id="totalNeeded">0</div>
+                            </div>
                         </div>
                     </div>
-                    <div id="missionsGrid" class="missions-grid">
-                        <!-- ミッション報酬はJavaScriptで動的に生成 -->
+
+                    <!-- 中央カラム：交換所報酬 -->
+                    <div class="column column-center">
+                        <h2>交換所報酬</h2>
+                        <div id="rewardsGrid" class="rewards-grid">
+                            <!-- 報酬アイテムはJavaScriptで動的に生成 -->
+                        </div>
+                    </div>
+
+                    <!-- 右カラム：ミッション報酬 -->
+                    <div class="column column-right">
+                        <h2>クリア報酬</h2>
+                        <div class="mission-summary">
+                            <div class="mission-total">
+                                <span>合計ポイント：</span>
+                                <span id="totalMissionPoints">0</span>
+                            </div>
+                            <div class="mission-remaining">
+                                <span>残り獲得可能：</span>
+                                <span id="remainingMissionPoints">0</span>
+                            </div>
+                            <div class="mission-earned">
+                                <span>獲得済み：</span>
+                                <span id="earnedMissionPoints">0</span>
+                            </div>
+                        </div>
+                        <div id="missionsGrid" class="missions-grid">
+                            <!-- ミッション報酬はJavaScriptで動的に生成 -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -151,12 +158,12 @@
                 今持っているイベントポイント数を入力しよう！</p>
                 
                 <p><strong>3. 欲しい報酬を選ぶ</strong><br>
-                各報酬アイテムの「いる/いらない」ボタンをクリックして、欲しいものを選ぼう！<br>
+                各報酬アイテムのカードをクリックして、「いる/いらない」を切り替えよう！<br>
                 「いらない」にするとアイコンがグレーになるよ</p>
                 
-                <p><strong>4. 交換した分をクリック</strong><br>
-                交換所で交換したら、アイテムアイコンをクリックして在庫を減らしていこう！<br>
-                「いらない」設定のアイテムはクリックできないよ</p>
+                <p><strong>4. 交換した分を記録</strong><br>
+                交換所で交換したら、<strong>「在庫-1」ボタン（緑）</strong>をクリックして在庫を減らしていこう！<br>
+                間違えて減らしすぎた時は<strong>「在庫+1」ボタン（赤）</strong>で戻せるよ</p>
                 
                 <p><strong>5. ミッション達成状況を記録</strong><br>
                 達成したミッションをクリックしてチェックマークを付けよう！<br>
