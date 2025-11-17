@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-adsense-account" content="ca-pub-2384775227983330">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イベント交換所チェッカー - おサボりツール</title>
+    
+    <!-- ファビコン -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/others/favicon32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/others/favicon16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/others/favicon180.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/exchange_checker.css">
+</head>
+<body>
+    <!-- ハンバーガーメニュー -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+    </div>
+
+    <!-- サイドメニュー -->
+    <nav class="side-menu" id="sideMenu">
+        <div class="side-menu-header">メニュー</div>
+        <ul class="side-menu-list">
+            <li><a href="index.html">TOP</a></li>
+            <li><a href="simu_potential.html">素質シミュレーター</a></li>
+            <li><a href="exchange_checker.html">イベント交換所チェッカー(今ここ)</a></li>
+            <li><span class="menu-item-disabled">（予定）上級依頼シミュレーター</span></li>
+            <li><span class="menu-item-disabled">（予定）昇格に必要な素材数計算機</span></li>
+            <li><span class="menu-item-disabled">（予定）素材逆引き</span></li>
+            <li><span class="menu-item-disabled">（予定）星ノ塔クイズのカンペ</span></li>
+            <li><span class="menu-item-disabled">（予定）無限リングのバフ早見表</span></li>
+            <li><span class="menu-item-disabled">（予定）未実装キャラメモ</span></li>
+            <li><span class="menu-item-disabled">（予定）ココチャまとめ</span></li>
+        </ul>
+    </nav>
+
+    <!-- メニューオーバーレイ -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <div class="container">
+        <header>
+            <h1>イベント交換所チェッカー</h1>
+            <div class="controls">
+                <button id="resetProgress" class="btn">進捗リセット</button>
+                <button id="resetAll" class="btn btn-danger">完全初期化</button>
+                <button id="showUsage" class="btn btn-info">使い方</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- イベント選択エリア -->
+            <div class="event-selector">
+                <label for="eventSelect">イベントを選択：</label>
+                <select id="eventSelect" class="event-select">
+                    <option value="">イベントを選択してください</option>
+                </select>
+            </div>
+
+            <!-- イベント情報表示エリア -->
+            <div id="eventInfo" class="event-info hidden">
+                <div class="event-banner">
+                    <img id="eventBanner" src="" alt="イベントバナー">
+                </div>
+                
+                <!-- 現在のポイント入力 -->
+                <div class="current-points-section">
+                    <label for="currentPoints">現在のポイント数：</label>
+                    <input type="number" id="currentPoints" min="0" max="999999" value="0" class="points-input">
+                    <span id="pointName" class="point-name"></span>
+                </div>
+
+                <!-- 計算結果サマリー -->
+                <div class="summary-section">
+                    <div class="summary-card">
+                        <div class="summary-label">残り日数</div>
+                        <div class="summary-value" id="remainingDays">-</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">合計必要ポイント</div>
+                        <div class="summary-value" id="totalNeeded">0</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">残り必要ポイント</div>
+                        <div class="summary-value highlight" id="remainingNeeded">0</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">あと何周</div>
+                        <div class="summary-value highlight" id="runsNeeded">0</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">1日あたりのノルマ</div>
+                        <div class="summary-value highlight" id="dailyQuota">0周</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">1日あたりのやる気</div>
+                        <div class="summary-value highlight" id="dailyStamina">0</div>
+                    </div>
+                </div>
+
+                <!-- 交換所報酬エリア -->
+                <div class="rewards-section">
+                    <h2>交換所報酬</h2>
+                    <div id="rewardsGrid" class="rewards-grid">
+                        <!-- 報酬アイテムはJavaScriptで動的に生成 -->
+                    </div>
+                </div>
+
+                <!-- ミッション報酬エリア -->
+                <div class="missions-section">
+                    <h2>ミッション・初回クリア報酬</h2>
+                    <div class="mission-summary">
+                        <div class="mission-total">
+                            <span>合計ポイント：</span>
+                            <span id="totalMissionPoints">0</span>
+                        </div>
+                        <div class="mission-remaining">
+                            <span>残り獲得可能：</span>
+                            <span id="remainingMissionPoints">0</span>
+                        </div>
+                        <div class="mission-earned">
+                            <span>獲得済み：</span>
+                            <span id="earnedMissionPoints">0</span>
+                        </div>
+                    </div>
+                    <div id="missionsGrid" class="missions-grid">
+                        <!-- ミッション報酬はJavaScriptで動的に生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 使い方モーダル -->
+    <div id="usageModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close">&times;</button>
+                <h2>使い方</h2>
+            </div>
+            <div class="modal-body">
+                <h3>基本操作</h3>
+                <p><strong>1. イベントを選択</strong><br>
+                上部のドロップダウンメニューから管理したいイベントを選択してね！</p>
+                
+                <p><strong>2. 現在のポイント数を入力</strong><br>
+                今持っているイベントポイント数を入力しよう！</p>
+                
+                <p><strong>3. 欲しい報酬を選ぶ</strong><br>
+                各報酬アイテムの「いる/いらない」ボタンをクリックして、欲しいものを選ぼう！<br>
+                「いらない」にするとアイコンがグレーになるよ</p>
+                
+                <p><strong>4. 交換した分をクリック</strong><br>
+                交換所で交換したら、アイテムアイコンをクリックして在庫を減らしていこう！<br>
+                「いらない」設定のアイテムはクリックできないよ</p>
+                
+                <p><strong>5. ミッション達成状況を記録</strong><br>
+                達成したミッションをクリックしてチェックマークを付けよう！<br>
+                残りの獲得可能ポイントが自動で計算されるよ</p>
+                
+                <h3>計算結果の見方</h3>
+                <p><strong>残り日数</strong><br>
+                イベント終了まであと何日あるかを表示。ゲーム内の1日は4:59で終わるから注意！</p>
+                
+                <p><strong>あと何周</strong><br>
+                必要なポイントを集めるために、あと何回イベントクエストを周回すればいいかを表示</p>
+                
+                <p><strong>1日あたりのノルマ</strong><br>
+                残り日数で割った1日あたりの周回数！これを目安に毎日プレイしよう</p>
+                
+                <p><strong>1日あたりのやる気</strong><br>
+                1日に必要なやる気（スタミナ）の量！やる気が足りない時は...頑張れ！</p>
+                
+                <h3>その他の機能</h3>
+                <p><strong>進捗リセット</strong><br>
+                交換済みの在庫数と達成済みミッションをリセットするよ<br>
+                「いる/いらない」の設定は保持されるから安心！</p>
+                
+                <p><strong>完全初期化</strong><br>
+                すべての設定とデータを初期状態に戻すよ<br>
+                イベントが切り替わった時に使ってね！</p>
+                
+                <p style="margin-top: 20px; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107;">
+                <strong>💡 ヒント</strong><br>
+                データはブラウザに自動保存されるから、ページを閉じても大丈夫！<br>
+                ただしブラウザのキャッシュを削除すると消えちゃうから注意してね～</p>
+            </div>
+        </div>
+    </div>
+
+    <footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #ffffff; text-align: center; color: #666;">
+        <p style="color: white; margin-bottom: 10px;">
+            <a href="https://x.com/denko_gaminggal" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">@denko_gaminggal</a> |
+            <a href="https://marshmallow-qa.com/2vagoau6ezqonbq?t=zH1owd&utm_medium=url_text&utm_source=promotion" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">マシュマロ（感想・要望など）</a> |
+            <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">プライバシーポリシー</a>
+        </p>
+        <p style="color: white">©Yostar<br>
+        ※本サイトはステラソラの非公式ファンサイトです！</p>
+    </footer>
+
+    <script src="js/exchange_checker.js"></script>
+    <script>
+        // ハンバーガーメニューの動作
+        const hamburger = document.getElementById('hamburgerMenu');
+        const sideMenu = document.getElementById('sideMenu');
+        const overlay = document.getElementById('menuOverlay');
+        
+        hamburger.addEventListener('click', () => {
+            sideMenu.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+        
+        overlay.addEventListener('click', () => {
+            sideMenu.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

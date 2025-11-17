@@ -1,0 +1,171 @@
+{
+  "events": [
+    {
+      "eventId": 1001,
+      "name": "サンプルイベント（夕涼み編）",
+      "startDate": "2025-11-10T05:00:00",
+      "endDate": "2025-11-20T04:59:00",
+      "bannerImage": "images/events/event_1001_banner.png",
+      "backgroundImage": "images/events/event_1001_bg.png",
+      "pointId": 1001,
+      "staminaCost": 30,
+      "pointsPerRun": 400
+    }
+  ],
+  "eventPoints": [
+    {
+      "id": 1001,
+      "name": "夕涼みポイント",
+      "icon": "images/points/point_1001.png",
+      "eventId": 1001
+    }
+  ],
+  "exchangeRewards": [
+    {
+      "id": 10011,
+      "name": "夕涼み",
+      "stock": 1,
+      "price": 8000,
+      "icon": "images/rewards/reward_10011.png",
+      "eventId": 1001,
+      "category": "限定"
+    },
+    {
+      "id": 10012,
+      "name": "夕涼みの調べ",
+      "stock": 1,
+      "price": 8000,
+      "icon": "images/rewards/reward_10012.png",
+      "eventId": 1001,
+      "category": "限定"
+    },
+    {
+      "id": 10013,
+      "name": "ギタシン目録×若言の扇×夕涼みの調べ",
+      "stock": 1,
+      "price": 5000,
+      "icon": "images/rewards/reward_10013.png",
+      "eventId": 1001,
+      "category": "限定"
+    },
+    {
+      "id": 10014,
+      "name": "青空旅券",
+      "stock": 1,
+      "price": 500,
+      "icon": "images/rewards/reward_10014.png",
+      "eventId": 1001,
+      "category": "限定"
+    },
+    {
+      "id": 10015,
+      "name": "オアシス旅券",
+      "stock": 5,
+      "price": 500,
+      "icon": "images/rewards/reward_10015.png",
+      "eventId": 1001,
+      "category": "限定"
+    },
+    {
+      "id": 10016,
+      "name": "翠緑羽の髪飾り",
+      "stock": 12,
+      "price": 1600,
+      "icon": "images/rewards/reward_10016.png",
+      "eventId": 1001,
+      "category": "素材"
+    },
+    {
+      "id": 10017,
+      "name": "徴章研磨剤",
+      "stock": 5,
+      "price": 1600,
+      "icon": "images/rewards/reward_10017.png",
+      "eventId": 1001,
+      "category": "素材"
+    },
+    {
+      "id": 10018,
+      "name": "頭髪乾燥機・改",
+      "stock": 2,
+      "price": 250,
+      "icon": "images/rewards/reward_10018.png",
+      "eventId": 1001,
+      "category": "素材"
+    },
+    {
+      "id": 10019,
+      "name": "金貨",
+      "stock": 2,
+      "price": 8000,
+      "icon": "images/rewards/reward_10019.png",
+      "eventId": 1001,
+      "category": "その他"
+    },
+    {
+      "id": 10020,
+      "name": "銀貨",
+      "stock": 2,
+      "price": 4000,
+      "icon": "images/rewards/reward_10020.png",
+      "eventId": 1001,
+      "category": "その他"
+    },
+    {
+      "id": 10021,
+      "name": "星の欠片",
+      "stock": 6,
+      "price": 2000,
+      "icon": "images/rewards/reward_10021.png",
+      "eventId": 1001,
+      "category": "その他"
+    },
+    {
+      "id": 10022,
+      "name": "経験値アイテム",
+      "stock": 10,
+      "price": 800,
+      "icon": "images/rewards/reward_10022.png",
+      "eventId": 1001,
+      "category": "その他"
+    }
+  ],
+  "missionRewards": [
+    {
+      "id": 100101,
+      "name": "イベントクエスト初回クリア",
+      "points": 200,
+      "eventId": 1001
+    },
+    {
+      "id": 100102,
+      "name": "イベントボス撃破",
+      "points": 500,
+      "eventId": 1001
+    },
+    {
+      "id": 100103,
+      "name": "イベントポイント5000達成",
+      "points": 300,
+      "eventId": 1001
+    },
+    {
+      "id": 100104,
+      "name": "イベントポイント10000達成",
+      "points": 500,
+      "eventId": 1001
+    },
+    {
+      "id": 100105,
+      "name": "イベントポイント20000達成",
+      "points": 1000,
+      "eventId": 1001
+    },
+    {
+      "id": 100106,
+      "name": "デイリーミッション達成",
+      "points": 100,
+      "eventId": 1001
+    }
+  ]
+}
