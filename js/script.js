@@ -14,7 +14,7 @@ let currentPresetNumber = null; // 現在読み込み中のプリセット番号
 const POTENTIAL_DEFINITIONS = {
     main: {
         core: ['mc1', 'mc2', 'mc3', 'mc4'],
-        sub: ['ms1', 'ms2', 'ms3', 'ms4', 'ms5', 'ms6', 
+        sub: ['ms1', 'ms2', 'ms3', 'ms4', 'ms5', 'ms6',
               'ms7', 'ms8', 'ms9', 'ms10', 'ms11', 'ms12']
     },
     support: {
@@ -70,23 +70,23 @@ function getDescription(character, potentialId) {
 // ツールチップテキストのフォーマット（指定文字数で改行）
 function formatTooltipText(text, maxChars) {
     if (text.length <= maxChars) return text;
-    
+
     let result = '';
     let currentLine = '';
-    
+
     for (let i = 0; i < text.length; i++) {
         currentLine += text[i];
-        
+
         if (currentLine.length >= maxChars) {
             result += currentLine + '\n';
             currentLine = '';
         }
     }
-    
+
     if (currentLine.length > 0) {
         result += currentLine;
     }
-    
+
     return result;
 }
 
@@ -105,19 +105,28 @@ function getSelectedCharacterIds() {
 document.addEventListener('DOMContentLoaded', async () => {
     // JSONデータの読み込み
     await loadCharacterData();
-    
+
     // キャラクター選択ドロップダウンの生成
     populateCharacterSelects();
-    
+
     // イベントリスナーの設定
     setupEventListeners();
-    
+
+    // URL から現在の状態を読み出し
+    const urlstate = await decodeStateFromURL();
+    if(urlstate) {
+        console.log("URLから状態読み出し")
+        localStorage.setItem('currentState', JSON.stringify(urlstate));
+    } else {
+        console.log("URLの状態読み出し無し")
+    }
+
     // ローカルストレージから現在の状態を復元
     loadCurrentState();
-    
+
     // プリセットの初期化
     initializePresets();
-    
+
     // ハンバーガーメニューの初期化
     setupHamburgerMenu();
 });
@@ -129,12 +138,12 @@ function setupHamburgerMenu() {
     const hamburger = document.getElementById('hamburgerMenu');
     const sideMenu = document.getElementById('sideMenu');
     const overlay = document.getElementById('menuOverlay');
-    
+
     hamburger.addEventListener('click', () => {
         sideMenu.classList.toggle('open');
         overlay.classList.toggle('active');
     });
-    
+
     overlay.addEventListener('click', () => {
         sideMenu.classList.remove('open');
         overlay.classList.remove('active');
@@ -163,15 +172,15 @@ async function loadCharacterData() {
 // ========================================
 function populateCharacterSelects() {
     const wrappers = document.querySelectorAll('.character-select-wrapper');
-    
+
     wrappers.forEach(wrapper => {
         const slot = wrapper.querySelector('.character-select-button').dataset.slot;
         const dropdown = wrapper.querySelector('.character-dropdown');
         const button = wrapper.querySelector('.character-select-button');
-        
+
         // ドロップダウンを初期化
         dropdown.innerHTML = '';
-        
+
         // 選択解除オプション
         const clearOption = document.createElement('div');
         clearOption.className = 'character-option';
@@ -186,30 +195,30 @@ function populateCharacterSelects() {
             closeAllDropdowns();
         });
         dropdown.appendChild(clearOption);
-        
+
         // キャラクターオプション
         charactersData.characters.forEach(char => {
             const option = document.createElement('div');
             option.className = 'character-option';
             option.dataset.value = char.id;
-            
+
             const icon = document.createElement('img');
             icon.className = 'character-option-icon';
             icon.src = char.icon;
             icon.alt = char.name;
-            
+
             option.appendChild(icon);
-            
+
             option.addEventListener('click', () => {
                 if (!option.classList.contains('disabled')) {
                     handleCharacterSelectFromDropdown(slot, char.id);
                     closeAllDropdowns();
                 }
             });
-            
+
             dropdown.appendChild(option);
         });
-        
+
         // ボタンクリックでドロップダウン開閉
         button.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -222,7 +231,7 @@ function populateCharacterSelects() {
             }
         });
     });
-    
+
     // ドロップダウン外クリックで閉じる
     document.addEventListener('click', () => {
         closeAllDropdowns();
@@ -236,7 +245,7 @@ function adjustDropdownDirection(button, dropdown) {
     const windowHeight = window.innerHeight;
     const spaceBelow = windowHeight - buttonRect.bottom;
     const spaceAbove = buttonRect.top;
-    
+
     // 下側のスペースが足りない場合は上に展開
     if (spaceBelow < dropdownHeight && spaceAbove > spaceBelow) {
         dropdown.style.top = 'auto';
@@ -258,7 +267,7 @@ function adjustDropdownDirection(button, dropdown) {
 function updateDropdownAvailability(currentSlot) {
     const selectedIds = getSelectedCharacterIds();
     const dropdown = document.querySelector(`.character-dropdown[data-slot="${currentSlot}"]`);
-    
+
     dropdown.querySelectorAll('.character-option').forEach(option => {
         const charId = option.dataset.value;
         if (charId && selectedIds.includes(charId) && currentState[currentSlot].characterId !== charId) {
@@ -282,22 +291,22 @@ function closeAllDropdowns() {
 function setupEventListeners() {
     // 取得しない素質を非表示
     document.getElementById('hideUnobtained').addEventListener('change', handleHideUnobtained);
-    
+
     // カウントリセット
     document.getElementById('resetCount').addEventListener('click', handleResetCount);
-    
+
     // 初期化
     document.getElementById('resetAll').addEventListener('click', handleResetAll);
-    
+
     // スクリーンショット
     document.getElementById('screenshot').addEventListener('click', handleScreenshot);
-    
+
     // 使い方モーダル
     document.getElementById('showUsage').addEventListener('click', () => openModal('usageModal'));
-    
+
     // 変更履歴モーダル
     document.getElementById('showChangelog').addEventListener('click', () => openModal('changelogModal'));
-    
+
     // プリセット保存
     document.querySelectorAll('.btn-save').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -305,7 +314,7 @@ function setupEventListeners() {
             handleSavePreset(presetNum);
         });
     });
-    
+
     // プリセット読み込み
     document.querySelectorAll('.btn-load').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -313,25 +322,25 @@ function setupEventListeners() {
             handleLoadPreset(presetNum);
         });
     });
-    
+
     // モーダル閉じるボタン
     document.querySelectorAll('.modal-close').forEach(btn => {
         btn.addEventListener('click', (e) => {
             closeModal(e.target.closest('.modal').id);
         });
     });
-    
+
     // モーダルオーバーレイクリックで閉じる
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
         overlay.addEventListener('click', (e) => {
             closeModal(e.target.closest('.modal').id);
         });
     });
-    
+
     // プリセット名のインライン編集
     const presetNameInput = document.getElementById('preset-name-input-inline');
     const editBtn = document.getElementById('preset-name-edit-btn');
-    
+
     editBtn.addEventListener('click', () => {
         if (presetNameInput.readOnly) {
             // 編集モードに切り替え
@@ -346,14 +355,14 @@ function setupEventListeners() {
             editBtn.style.cursor = 'not-allowed';
         }
     });
-    
+
     presetNameInput.addEventListener('blur', () => {
         // フォーカスアウト時に確定
         if (!presetNameInput.readOnly) {
             savePresetNameInline();
         }
     });
-    
+
     presetNameInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             presetNameInput.blur(); // フォーカスアウトすることで自動保存
@@ -366,19 +375,19 @@ function savePresetNameInline() {
     const presetNameInput = document.getElementById('preset-name-input-inline');
     const editBtn = document.getElementById('preset-name-edit-btn');
     let presetName = presetNameInput.value.trim();
-    
-    console.log('プリセット名保存処理開始:', { 
-        currentPresetNumber, 
+
+    console.log('プリセット名保存処理開始:', {
+        currentPresetNumber,
         inputValue: presetNameInput.value,
-        trimmedValue: presetName 
+        trimmedValue: presetName
     });
-    
+
     // 空欄の場合は「（未設定）」にする
     if (presetName === '') {
         presetName = '';
         presetNameInput.placeholder = '（未設定）';
     }
-    
+
     // ローカルストレージに保存（現在読み込み中のプリセット用）
     if (currentPresetNumber) {
         localStorage.setItem(`preset_${currentPresetNumber}_name`, presetName);
@@ -386,12 +395,12 @@ function savePresetNameInline() {
     } else {
         console.warn('currentPresetNumberがnullのため、プリセット名を保存できませんでした');
     }
-    
+
     // 編集モードを終了
     presetNameInput.readOnly = true;
     presetNameInput.style.borderColor = 'transparent';
     presetNameInput.style.background = 'transparent';
-    
+
     // ボタンを元に戻す
     editBtn.disabled = false;
     editBtn.style.opacity = '1';
@@ -411,24 +420,24 @@ function handleCharacterSelectFromDropdown(slot, charId) {
         saveCurrentState();
         return;
     }
-    
+
     const character = charactersData.characters.find(c => c.id === charId);
     if (!character) return;
-    
+
     // 状態を更新
     currentState[slot].characterId = charId;
     currentState[slot].corePotentials = {};
     currentState[slot].subPotentials = {};
-    
+
     // ボタン表示を更新
     updateCharacterSelectButton(slot, character);
-    
+
     // 素質を表示
     displayPotentials(slot, character);
-    
+
     // 他のドロップダウンを更新
     updateAllDropdowns();
-    
+
     // 状態を保存
     saveCurrentState();
 }
@@ -436,7 +445,7 @@ function handleCharacterSelectFromDropdown(slot, charId) {
 // キャラクター選択ボタンの表示を更新
 function updateCharacterSelectButton(slot, character) {
     const button = document.querySelector(`.character-select-button[data-slot="${slot}"]`);
-    
+
     if (character) {
         button.innerHTML = `
             <img src="${character.icon}" alt="${character.name}" class="character-select-icon">
@@ -459,19 +468,19 @@ function updateAllDropdowns() {
 function displayPotentials(slot, character) {
     const container = document.getElementById(`${slot}-potentials`);
     container.innerHTML = '';
-    
+
     // 主力 or 支援を判定
     const role = slot === 'main' ? 'main' : 'support';
     const potentialDef = POTENTIAL_DEFINITIONS[role];
-    
+
     // コア素質セクション
     const coreSection = createPotentialSection('コア素質', potentialDef.core, character, slot, 'core');
     container.appendChild(coreSection);
-    
+
     // サブ素質セクション
     const subSection = createPotentialSection('サブ素質', potentialDef.sub, character, slot, 'sub');
     container.appendChild(subSection);
-    
+
     // フィルターを適用
     applyHideUnobtainedFilter();
 }
@@ -482,21 +491,21 @@ function displayPotentials(slot, character) {
 function createPotentialSection(title, potentialIds, character, slot, type) {
     const section = document.createElement('div');
     section.className = 'potential-group';
-    
+
     // タイトルは非表示（CSSで制御）
     const titleElem = document.createElement('div');
     titleElem.className = 'potential-group-title';
     titleElem.textContent = title;
     section.appendChild(titleElem);
-    
+
     const grid = document.createElement('div');
     grid.className = 'potentials-grid';
-    
+
     potentialIds.forEach(potentialId => {
         const card = createPotentialCard(character, potentialId, slot, type);
         grid.appendChild(card);
     });
-    
+
     section.appendChild(grid);
     return section;
 }
@@ -510,11 +519,11 @@ function createPotentialCard(character, potentialId, slot, type) {
     card.dataset.slot = slot;
     card.dataset.potentialId = potentialId;
     card.dataset.type = type;
-    
+
     // 画像ラッパー
     const imageWrapper = document.createElement('div');
     imageWrapper.className = 'potential-image-wrapper';
-    
+
     // 初期状態の設定
     if (type === 'core') {
         // コア素質の初期状態: 取得しない（グレーアウト）
@@ -540,7 +549,7 @@ function createPotentialCard(character, potentialId, slot, type) {
             };
         }
         const state = currentState[slot].subPotentials[potentialId];
-        
+
         // グレーアウトの条件（修正版）:
         // 1. status が 'none' の場合: grayed-out-unobtained（グレーアウト + グレースケール）
         // 2. status が 'level1', 'level2', 'level6' で count > 0 の場合: grayed-out（グレーアウトのみ）
@@ -550,7 +559,7 @@ function createPotentialCard(character, potentialId, slot, type) {
         } else if (state.count > 0) {
             imageWrapper.classList.add('grayed-out');
         }
-        
+
         // レベル6の場合、サムズアップ表示（画像版）
         if (state.status === 'level6') {
             const thumbsUp = document.createElement('div');
@@ -561,7 +570,7 @@ function createPotentialCard(character, potentialId, slot, type) {
             thumbsUp.appendChild(thumbImg);
             imageWrapper.appendChild(thumbsUp);
         }
-        
+
         // カウント表示
         if (state.count > 0) {
             const countElem = document.createElement('div');
@@ -570,7 +579,7 @@ function createPotentialCard(character, potentialId, slot, type) {
             imageWrapper.appendChild(countElem);
         }
     }
-    
+
     // 画像
     const img = document.createElement('img');
     img.className = 'potential-image';
@@ -579,24 +588,24 @@ function createPotentialCard(character, potentialId, slot, type) {
     img.onerror = () => {
         img.src = 'https://placehold.co/202x256?text=' + potentialId;
     };
-    
+
     // 画像クリックイベント
     img.addEventListener('click', () => handlePotentialImageClick(slot, potentialId, type));
-    
+
     imageWrapper.appendChild(img);
-    
+
     // ツールチップ（説明文）
     const tooltip = document.createElement('div');
     tooltip.className = 'potential-tooltip';
     tooltip.textContent = getDescription(character, potentialId);
     imageWrapper.appendChild(tooltip);
-    
+
     card.appendChild(imageWrapper);
-    
+
     // ステータスボタン
     const statusDiv = document.createElement('div');
     statusDiv.className = 'potential-status';
-    
+
     if (type === 'core') {
         // コア素質: トグルボタン
         const toggleBtn = document.createElement('button');
@@ -616,9 +625,9 @@ function createPotentialCard(character, potentialId, slot, type) {
         btn.addEventListener('click', () => handleSubStatusClick(slot, potentialId));
         statusDiv.appendChild(btn);
     }
-    
+
     card.appendChild(statusDiv);
-    
+
     return card;
 }
 
@@ -628,7 +637,7 @@ function createPotentialCard(character, potentialId, slot, type) {
 function handleCoreToggle(slot, potentialId) {
     const state = currentState[slot].corePotentials[potentialId];
     const newObtained = !state.obtained;
-    
+
     // 取得する→取得しないへの変更は常にOK
     if (!newObtained) {
         state.obtained = false;
@@ -637,16 +646,16 @@ function handleCoreToggle(slot, potentialId) {
         saveCurrentState();
         return;
     }
-    
+
     // 取得しない→取得するへの変更は、2つまでの制限をチェック
     const obtainedCount = Object.values(currentState[slot].corePotentials)
         .filter(s => s.obtained).length;
-    
+
     if (obtainedCount >= MAX_CORE_POTENTIALS) {
         showError(`コア素質は${MAX_CORE_POTENTIALS}つまでしか取れないよ！`);
         return;
     }
-    
+
     state.obtained = true;
     refreshPotentialDisplay(slot);
     saveCurrentState();
@@ -660,16 +669,16 @@ function handlePotentialImageClick(slot, potentialId, type) {
         // コア素質: 取得する状態の時のみカウント切り替え
         const state = currentState[slot].corePotentials[potentialId];
         if (!state.obtained) return;
-        
+
         state.acquired = !state.acquired;
     } else {
         // サブ素質: レベル1以上の時のみカウント増加
         const state = currentState[slot].subPotentials[potentialId];
         if (state.status === 'none') return;
-        
+
         state.count = (state.count + 1) % (MAX_SUB_LEVEL + 1);
     }
-    
+
     refreshPotentialDisplay(slot);
     saveCurrentState();
 }
@@ -683,7 +692,7 @@ function handleSubStatusClick(slot, potentialId) {
     const nextIndex = (currentIndex + 1) % SUB_STATUS_ORDER.length;
     state.status = SUB_STATUS_ORDER[nextIndex];
     state.count = 0; // ステータス変更時はカウントをリセット
-    
+
     refreshPotentialDisplay(slot);
     saveCurrentState();
 }
@@ -694,12 +703,12 @@ function handleSubStatusClick(slot, potentialId) {
 function refreshPotentialDisplay(slot) {
     const charId = currentState[slot].characterId;
     if (!charId) return;
-    
+
     const character = charactersData.characters.find(c => c.id === charId);
     if (!character) return;
-    
+
     displayPotentials(slot, character);
-    
+
     // チェック状態を再適用
     applyHideUnobtainedFilter();
 }
@@ -709,14 +718,14 @@ function refreshPotentialDisplay(slot) {
 // ========================================
 function applyHideUnobtainedFilter() {
     const hideUnobtained = document.getElementById('hideUnobtained').checked;
-    
+
     document.querySelectorAll('.potential-card').forEach(card => {
         const slot = card.dataset.slot;
         const potentialId = card.dataset.potentialId;
         const type = card.dataset.type;
-        
+
         let shouldHide = false;
-        
+
         if (type === 'core') {
             const state = currentState[slot].corePotentials[potentialId];
             shouldHide = state && !state.obtained;
@@ -724,7 +733,7 @@ function applyHideUnobtainedFilter() {
             const state = currentState[slot].subPotentials[potentialId];
             shouldHide = state && state.status === 'none';
         }
-        
+
         if (hideUnobtained && shouldHide) {
             card.classList.add('hidden');
         } else {
@@ -748,19 +757,19 @@ function handleResetCount() {
             state.acquired = false;
         });
     });
-    
+
     // サブ素質のcountをすべて0に
     Object.values(currentState).forEach(slotState => {
         Object.values(slotState.subPotentials).forEach(state => {
             state.count = 0;
         });
     });
-    
+
     // 表示を更新
     ['main', 'support1', 'support2'].forEach(slot => {
         refreshPotentialDisplay(slot);
     });
-    
+
     saveCurrentState();
 }
 
@@ -771,35 +780,35 @@ function handleResetAll() {
     if (!confirm('すべての設定を初期化しますか？')) {
         return;
     }
-    
+
     // 状態をクリア
     ['main', 'support1', 'support2'].forEach(slot => {
         currentState[slot].characterId = null;
         currentState[slot].corePotentials = {};
         currentState[slot].subPotentials = {};
-        
+
         // キャラクター選択をリセット
         updateCharacterSelectButton(slot, null);
-        
+
         // 素質表示をクリア
         const container = document.getElementById(`${slot}-potentials`);
         if (container) {
             container.innerHTML = '';
         }
     });
-    
+
     // チェックボックスをリセット
     document.getElementById('hideUnobtained').checked = false;
-    
+
     // 現在のプリセット番号をリセット
     currentPresetNumber = null;
-    
+
     // プリセット名を空に
     displayPresetName('');
-    
+
     // ドロップダウンを更新
     updateAllDropdowns();
-    
+
     // 状態を保存
     saveCurrentState();
 }
@@ -832,29 +841,29 @@ function handleSavePreset(presetNum) {
             state.count = 0;
         });
     });
-    
+
     // プリセット名を保存（現在インライン入力欄にある名前を使用）
     const presetNameInput = document.getElementById('preset-name-input-inline');
     let presetName = presetNameInput.value.trim();
     console.log(`プリセット${presetNum}保存時のプリセット名:`, presetName);
-    
+
     // 空欄の場合は空文字列として保存（placeholderで「（未設定）」と表示される）
     if (presetName === '' || presetName === '（未設定）') {
         presetName = '';
     }
-    
+
     // 保存
     localStorage.setItem(`preset_${presetNum}`, JSON.stringify(stateToSave));
     localStorage.setItem(`preset_${presetNum}_name`, presetName);
     console.log(`プリセット${presetNum}を保存しました（名前: "${presetName}"）`);
     updatePresetDisplay(presetNum, stateToSave);
-    
+
     // 読み込みボタンを有効化
     const loadBtn = document.querySelector(`.btn-load[data-preset="${presetNum}"]`);
     if (loadBtn) {
         loadBtn.disabled = false;
     }
-    
+
     // 現在のプリセット番号を設定
     currentPresetNumber = presetNum;
     console.log('currentPresetNumberを設定:', currentPresetNumber);
@@ -865,21 +874,21 @@ function handleSavePreset(presetNum) {
 function handleLoadPreset(presetNum) {
     const preset = loadPreset(presetNum);
     if (!preset) return;
-    
+
     // 現在の状態が初期状態でない場合は確認
-    const isInitialState = !currentState.main.characterId && 
-                          !currentState.support1.characterId && 
+    const isInitialState = !currentState.main.characterId &&
+                          !currentState.support1.characterId &&
                           !currentState.support2.characterId;
-    
+
     if (!isInitialState && JSON.stringify(currentState) !== JSON.stringify(preset)) {
         if (!confirm('現在表示中の情報は失われますが、よろしいですか？')) {
             return;
         }
     }
-    
+
     // プリセットを読み込み
     Object.assign(currentState, JSON.parse(JSON.stringify(preset)));
-    
+
     // UIを更新
     ['main', 'support1', 'support2'].forEach(slot => {
         if (currentState[slot].characterId) {
@@ -893,20 +902,20 @@ function handleLoadPreset(presetNum) {
             document.getElementById(`${slot}-potentials`).innerHTML = '';
         }
     });
-    
+
     // ドロップダウンを更新
     updateAllDropdowns();
-    
+
     // フィルターを適用
     applyHideUnobtainedFilter();
-    
+
     // プリセット名を表示
     const presetName = localStorage.getItem(`preset_${presetNum}_name`) || '';
     currentPresetNumber = presetNum; // 現在のプリセット番号を保存
     console.log(`プリセット${presetNum}を読み込みました（名前: "${presetName}"）`);
     console.log('currentPresetNumberを設定:', currentPresetNumber);
     displayPresetName(presetName);
-    
+
     saveCurrentState();
 }
 
@@ -926,7 +935,7 @@ function loadPreset(presetNum) {
 function updatePresetDisplay(presetNum, preset) {
     const presetItem = document.querySelector(`.preset-item[data-preset="${presetNum}"]`);
     if (!presetItem) return;
-    
+
     const iconImg = presetItem.querySelector('.preset-icon');
     if (preset.main.characterId) {
         const character = charactersData.characters.find(c => c.id === preset.main.characterId);
@@ -940,6 +949,59 @@ function updatePresetDisplay(presetNum, preset) {
 }
 
 // ========================================
+// URL エンコーディング
+// ========================================
+
+async function encodeStateToURL(state) {
+    const json = JSON.stringify(state);
+
+    // ブラウザ内蔵のdeflate-rawで圧縮
+    const compressed = await new Response(
+        new Blob([json]).stream()
+        .pipeThrough(new CompressionStream('deflate-raw'))
+    ).arrayBuffer();
+
+    // URL安全な base64 生成
+    const base64 = btoa(String.fromCharCode(...new Uint8Array(compressed)))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '');
+
+    return base64;
+}
+
+function updateURL(state) {
+    encodeStateToURL(state).then(encoded => {
+        const newURL = new URL(location);
+        newURL.searchParams.set('s', encoded);
+        history.replaceState(state, '', newURL);
+    })
+    .catch(err => {
+        console.error("Failed to encode state for URL:", err);
+    });
+}
+
+async function decodeStateFromURL() {
+    const params = new URLSearchParams(location.search);
+    let encoded = params.get('s');
+    if (!encoded) return null;
+
+    encoded = encoded.replace(/-/g, '+').replace(/_/g, '/');
+    while (encoded.length % 4) encoded += '=';
+
+    const binary = atob(encoded);
+    const buffer = Uint8Array.from(binary, c => c.charCodeAt(0));
+
+    const decompressedStream = new Blob([buffer]).stream()   // ← Blob → ReadableStream
+        .pipeThrough(new DecompressionStream('deflate-raw'));
+
+    const decompressedResponse = new Response(decompressedStream);
+    const json = await decompressedResponse.text();
+
+    return JSON.parse(json);
+}
+
+// ========================================
 // ローカルストレージ
 // ========================================
 function saveCurrentState() {
@@ -950,6 +1012,7 @@ function saveCurrentState() {
         currentPresetNumber: currentPresetNumber  // 現在のプリセット番号も保存
     };
     localStorage.setItem('currentState', JSON.stringify(stateToSave));
+    updateURL(stateToSave);
     console.log('現在の状態を保存しました（プリセット番号:', currentPresetNumber, '）');
 }
 
@@ -957,14 +1020,14 @@ function loadCurrentState() {
     const data = localStorage.getItem('currentState');
     if (data) {
         const savedState = JSON.parse(data);
-        
+
         // キャラクターと素質の状態を復元
         Object.assign(currentState, {
             main: savedState.main,
             support1: savedState.support1,
             support2: savedState.support2
         });
-        
+
         // UIに反映
         ['main', 'support1', 'support2'].forEach(slot => {
             if (currentState[slot].characterId) {
@@ -975,17 +1038,17 @@ function loadCurrentState() {
                 }
             }
         });
-        
+
         // チェックボックスの状態を復元
         if (savedState.hideUnobtained !== undefined) {
             document.getElementById('hideUnobtained').checked = savedState.hideUnobtained;
         }
-        
+
         // 現在のプリセット番号を復元
         if (savedState.currentPresetNumber !== undefined) {
             currentPresetNumber = savedState.currentPresetNumber;
             console.log('現在のプリセット番号を復元:', currentPresetNumber);
-            
+
             // プリセット名を表示
             if (currentPresetNumber) {
                 const presetName = localStorage.getItem(`preset_${currentPresetNumber}_name`) || '';
@@ -993,10 +1056,10 @@ function loadCurrentState() {
                 console.log('プリセット名を復元:', presetName);
             }
         }
-        
+
         // ドロップダウンを更新
         updateAllDropdowns();
-        
+
         // フィルターを適用
         applyHideUnobtainedFilter();
     }
@@ -1010,12 +1073,12 @@ async function handleScreenshot() {
         // スクリーンショット用フッターを一時的に表示
         const footer = document.getElementById('screenshot-footer');
         footer.style.display = 'block';
-        
+
         // プリセット名エリアを一時的に非表示
         const presetNameContainer = document.getElementById('preset-name-container');
         const originalPresetDisplay = presetNameContainer.style.display;
         presetNameContainer.style.display = 'none';
-        
+
         // グレーアウトを一時的に解除
         const grayedOutElements = document.querySelectorAll('.grayed-out, .grayed-out-unobtained');
         const grayedOutClasses = [];
@@ -1027,16 +1090,16 @@ async function handleScreenshot() {
             };
             el.classList.remove('grayed-out', 'grayed-out-unobtained');
         });
-        
+
         // コア素質の取得済みマーク（obtained）を一時的に解除
         const obtainedElements = document.querySelectorAll('.potential-image-wrapper.obtained');
         obtainedElements.forEach(el => {
             el.classList.remove('obtained');
         });
-        
+
         // レンダリングが完了するのを待つ
         await new Promise(resolve => setTimeout(resolve, 100));
-        
+
         // キャラクターエリアをまずフルサイズでキャプチャ
         const targetElement = document.querySelector('.characters-area');
         const originalCanvas = await html2canvas(targetElement, {
@@ -1046,38 +1109,38 @@ async function handleScreenshot() {
             scrollY: -window.scrollY,
             scrollX: -window.scrollX
         });
-        
+
         console.log('元のキャンバスサイズ:', originalCanvas.width, 'x', originalCanvas.height);
-        
+
         // 最大サイズ（1920x1080）
         const maxWidth = 1920;
         const maxHeight = 1080;
-        
+
         let finalCanvas = originalCanvas;
-        
+
         // サイズが1920x1080を超える場合は縮小
         if (originalCanvas.width > maxWidth || originalCanvas.height > maxHeight) {
             // 縮小比率を計算
             const widthScale = maxWidth / originalCanvas.width;
             const heightScale = maxHeight / originalCanvas.height;
             const scale = Math.min(widthScale, heightScale);
-            
+
             const newWidth = Math.floor(originalCanvas.width * scale);
             const newHeight = Math.floor(originalCanvas.height * scale);
-            
+
             console.log('縮小比率:', scale, '新しいサイズ:', newWidth, 'x', newHeight);
-            
+
             // 新しいキャンバスを作成して縮小描画
             finalCanvas = document.createElement('canvas');
             finalCanvas.width = newWidth;
             finalCanvas.height = newHeight;
-            
+
             const ctx = finalCanvas.getContext('2d');
             ctx.drawImage(originalCanvas, 0, 0, newWidth, newHeight);
         }
-        
+
         console.log('最終キャンバスサイズ:', finalCanvas.width, 'x', finalCanvas.height);
-        
+
         // グレーアウトを元に戻す
         grayedOutClasses.forEach(item => {
             if (item.hasGrayedOut) {
@@ -1087,18 +1150,18 @@ async function handleScreenshot() {
                 item.element.classList.add('grayed-out-unobtained');
             }
         });
-        
+
         // コア素質の取得済みマークを元に戻す
         obtainedElements.forEach(el => {
             el.classList.add('obtained');
         });
-        
+
         // プリセット名エリアを元に戻す
         presetNameContainer.style.display = originalPresetDisplay;
-        
+
         // フッターを非表示に戻す
         footer.style.display = 'none';
-        
+
         // Canvasを画像に変換してダウンロード
         finalCanvas.toBlob((blob) => {
             const url = URL.createObjectURL(blob);
@@ -1111,7 +1174,7 @@ async function handleScreenshot() {
     } catch (error) {
         console.error('スクリーンショットエラー:', error);
         showError('スクリーンショットの生成に失敗しました');
-        
+
         // エラー時も要素を元に戻す
         const footer = document.getElementById('screenshot-footer');
         const presetNameContainer = document.getElementById('preset-name-container');
@@ -1127,7 +1190,7 @@ function showError(message) {
     const errorDiv = document.getElementById('errorMessage');
     errorDiv.textContent = message;
     errorDiv.classList.remove('hidden');
-    
+
     // 3秒後に自動で消す
     setTimeout(() => {
         errorDiv.classList.add('hidden');
