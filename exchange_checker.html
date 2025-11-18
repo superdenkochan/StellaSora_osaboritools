@@ -76,6 +76,10 @@
                         <div class="current-points-section">
                             <label for="currentPoints">所持ポイント数</label>
                             <input type="number" id="currentPoints" min="0" max="999999" value="0" class="points-input">
+                            <div class="points-buttons">
+                                <button id="pointsDecrease" class="points-btn points-btn-minus">-<span id="pointsDecreaseAmount">400</span></button>
+                                <button id="pointsIncrease" class="points-btn points-btn-plus">+<span id="pointsIncreaseAmount">400</span></button>
+                            </div>
                             <span id="pointName" class="point-name"></span>
                         </div>
 
@@ -115,9 +119,15 @@
                         </div>
                     </div>
 
-                    <!-- 右カラム：ミッション報酬 -->
+                    <!-- 右カラム:ミッション報酬 -->
                     <div class="column column-right">
-                        <h2>クリア報酬</h2>
+                        <div class="mission-header">
+                            <h2>クリア報酬</h2>
+                            <label class="mission-filter">
+                                <input type="checkbox" id="hideCompletedMissions">
+                                <span>クリア済を非表示</span>
+                            </label>
+                        </div>
                         <div class="mission-summary">
                             <div class="mission-total">
                                 <span>合計ポイント：</span>
@@ -134,6 +144,9 @@
                         </div>
                         <div id="missionsGrid" class="missions-grid">
                             <!-- ミッション報酬はJavaScriptで動的に生成 -->
+                        </div>
+                        <div id="compMissionsGrid" class="missions-grid" style="margin-top: 15px;">
+                            <!-- コンプリートミッション報酬はJavaScriptで動的に生成 -->
                         </div>
                     </div>
                 </div>

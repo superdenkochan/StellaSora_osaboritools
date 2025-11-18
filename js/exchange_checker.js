@@ -5,6 +5,7 @@ let gameData = null;
 let currentEvent = null;
 let rewardStates = {};
 let missionStates = {};
+let missionCompStates = {};
 let currentPoints = 0;
 
 // ========================================
@@ -43,15 +44,26 @@ async function loadGameData() {
 // ========================================
 function setupEventListeners() {
     // イベント選択
-    document.getElementById('eventSelect').addEventListener('change', onEventChange);
-    
-    // 現在のポイント数
-    document.getElementById('currentPoints').addEventListener('input', onPointsChange);
+    const eventSelect = document.getElementById('eventSelect');
+    if (eventSelect) {
+        eventSelect.addEventListener('change', onEventChange);
+    }
     
     // ボタン
-    document.getElementById('resetProgress').addEventListener('click', resetProgress);
-    document.getElementById('resetAll').addEventListener('click', resetAll);
-    document.getElementById('showUsage').addEventListener('click', showUsageModal);
+    const resetProgressBtn = document.getElementById('resetProgress');
+    if (resetProgressBtn) {
+        resetProgressBtn.addEventListener('click', resetProgress);
+    }
+    
+    const resetAllBtn = document.getElementById('resetAll');
+    if (resetAllBtn) {
+        resetAllBtn.addEventListener('click', resetAll);
+    }
+    
+    const showUsageBtn = document.getElementById('showUsage');
+    if (showUsageBtn) {
+        showUsageBtn.addEventListener('click', showUsageModal);
+    }
     
     // モーダル閉じる
     document.querySelectorAll('.modal-close, .modal-overlay').forEach(element => {
@@ -102,6 +114,9 @@ function onEventChange(e) {
     // ミッション初期化
     initializeMissions();
     
+    // コンプリートミッション初期化
+    initializeCompMissions();
+    
     // LocalStorageから復元
     loadEventStateFromLocalStorage(eventId);
     
@@ -110,6 +125,42 @@ function onEventChange(e) {
     
     // 表示
     document.getElementById('eventInfo').classList.remove('hidden');
+    
+    // イベント情報内の要素にイベントリスナーを設定（初回のみ）
+    setupEventInfoListeners();
+}
+
+// ========================================
+// イベント情報内の要素のイベントリスナー設定（初回のみ実行）
+// ========================================
+let eventInfoListenersSetup = false;
+function setupEventInfoListeners() {
+    if (eventInfoListenersSetup) return;
+    
+    // 現在のポイント数
+    const currentPointsInput = document.getElementById('currentPoints');
+    if (currentPointsInput) {
+        currentPointsInput.addEventListener('input', onPointsChange);
+    }
+    
+    // ポイント操作ボタン
+    const pointsDecrease = document.getElementById('pointsDecrease');
+    if (pointsDecrease) {
+        pointsDecrease.addEventListener('click', decreasePoints);
+    }
+    
+    const pointsIncrease = document.getElementById('pointsIncrease');
+    if (pointsIncrease) {
+        pointsIncrease.addEventListener('click', increasePoints);
+    }
+    
+    // ミッション非表示チェックボックス
+    const hideCompletedMissions = document.getElementById('hideCompletedMissions');
+    if (hideCompletedMissions) {
+        hideCompletedMissions.addEventListener('change', toggleHideCompletedMissions);
+    }
+    
+    eventInfoListenersSetup = true;
 }
 
 // ========================================
@@ -126,6 +177,10 @@ function displayEventInfo() {
     if (pointData) {
         document.getElementById('pointName').textContent = pointData.name;
     }
+    
+    // ポイントボタンの表示を更新
+    document.getElementById('pointsDecreaseAmount').textContent = currentEvent.pointsPerRun;
+    document.getElementById('pointsIncreaseAmount').textContent = currentEvent.pointsPerRun;
     
     // 残り日数計算
     updateRemainingDays();
@@ -291,22 +346,35 @@ function updateRewardUI(rewardId) {
         statusText.textContent = '交換しない';
     }
     
+    // 在庫0の売り切れ表示
+    if (state.remaining === 0) {
+        item.classList.add('sold-out');
+    } else {
+        item.classList.remove('sold-out');
+    }
+    
     // 在庫表示更新
     stockBadge.textContent = `×${state.remaining}`;
     
     // ボタンの有効/無効
-    // 在庫-1ボタン：在庫が0以下の場合は無効
-    if (state.remaining <= 0) {
+    // unwantedの時は両方のボタンを無効化
+    if (!state.wanted) {
         decreaseBtn.disabled = true;
-    } else {
-        decreaseBtn.disabled = false;
-    }
-    
-    // 在庫+1ボタン：在庫が最大値以上の場合は無効
-    if (state.remaining >= reward.stock) {
         increaseBtn.disabled = true;
     } else {
-        increaseBtn.disabled = false;
+        // 在庫-1ボタン：在庫が0以下の場合は無効
+        if (state.remaining <= 0) {
+            decreaseBtn.disabled = true;
+        } else {
+            decreaseBtn.disabled = false;
+        }
+        
+        // 在庫+1ボタン：在庫が最大値以上の場合は無効
+        if (state.remaining >= reward.stock) {
+            increaseBtn.disabled = true;
+        } else {
+            increaseBtn.disabled = false;
+        }
     }
 }
 
@@ -418,8 +486,14 @@ function toggleMissionCompleted(missionId) {
     // UI更新
     updateMissionUI(missionId);
     
-    // サマリー更新
+    // コンプリートミッションの状態確認（サマリー更新より先に実行）
+    checkAndUpdateCompMissions();
+    
+    // サマリー更新（compMissionの状態を反映）
     updateMissionSummary();
+    
+    // 非表示フィルター適用
+    toggleHideCompletedMissions();
     
     // 計算更新
     updateCalculations();
@@ -462,6 +536,21 @@ function updateMissionSummary() {
             earnedPoints += mission.points;
         }
     });
+    
+    // コンプリートミッションのポイントも含める
+    if (gameData.missionCompRewards) {
+        const compMissions = gameData.missionCompRewards.filter(
+            mission => mission.eventId === currentEvent.eventId
+        );
+        
+        compMissions.forEach(mission => {
+            totalPoints += mission.points;
+            const state = missionCompStates[mission.id];
+            if (state && state.completed) {
+                earnedPoints += mission.points;
+            }
+        });
+    }
     
     const remainingPoints = totalPoints - earnedPoints;
     
@@ -590,6 +679,21 @@ function resetProgress() {
         }
     });
     
+    // コンプリートミッションリセット
+    if (gameData.missionCompRewards) {
+        const compMissions = gameData.missionCompRewards.filter(
+            mission => mission.eventId === currentEvent.eventId
+        );
+        
+        compMissions.forEach(mission => {
+            if (missionCompStates[mission.id]) {
+                missionCompStates[mission.id].completed = false;
+            }
+        });
+        
+        checkAndUpdateCompMissions();
+    }
+    
     // 現在のポイントリセット
     currentPoints = 0;
     document.getElementById('currentPoints').value = 0;
@@ -620,6 +724,7 @@ function resetAll() {
     currentEvent = null;
     rewardStates = {};
     missionStates = {};
+    missionCompStates = {};
     currentPoints = 0;
     
     // UI リセット
@@ -659,6 +764,7 @@ function saveToLocalStorage() {
     eventStates[currentEvent.eventId] = {
         rewardStates: rewardStates,
         missionStates: missionStates,
+        missionCompStates: missionCompStates,
         currentPoints: currentPoints
     };
     
@@ -707,6 +813,18 @@ function loadEventStateFromLocalStorage(eventId) {
                 updateMissionUI(parseInt(missionId));
             }
         });
+        
+        // コンプリートミッション状態復元
+        if (state.missionCompStates) {
+            Object.keys(state.missionCompStates).forEach(compMissionId => {
+                if (missionCompStates[compMissionId]) {
+                    missionCompStates[compMissionId] = state.missionCompStates[compMissionId];
+                }
+            });
+        }
+        
+        // コンプリートミッションの状態確認
+        checkAndUpdateCompMissions();
         updateMissionSummary();
     }
     
@@ -716,3 +834,141 @@ function loadEventStateFromLocalStorage(eventId) {
         document.getElementById('currentPoints').value = currentPoints;
     }
 }
+
+// ========================================
+// コンプリートミッション初期化
+// ========================================
+function initializeCompMissions() {
+    if (!gameData.missionCompRewards) return;
+    
+    const compMissions = gameData.missionCompRewards.filter(
+        mission => mission.eventId === currentEvent.eventId
+    );
+    
+    // 状態初期化
+    missionCompStates = {};
+    compMissions.forEach(mission => {
+        missionCompStates[mission.id] = {
+            completed: false
+        };
+    });
+    
+    // UI生成
+    renderCompMissions(compMissions);
+}
+
+// ========================================
+// コンプリートミッションUI生成
+// ========================================
+function renderCompMissions(compMissions) {
+    const grid = document.getElementById('compMissionsGrid');
+    grid.innerHTML = '';
+    
+    compMissions.forEach(mission => {
+        const item = createCompMissionItem(mission);
+        grid.appendChild(item);
+    });
+}
+
+// ========================================
+// コンプリートミッションアイテム要素作成
+// ========================================
+function createCompMissionItem(mission) {
+    const div = document.createElement('div');
+    div.className = 'mission-item auto-completed';
+    div.dataset.compMissionId = mission.id;
+    
+    div.innerHTML = `
+        <div class="mission-checkbox"></div>
+        <div class="mission-info">
+            <div class="mission-name">${mission.name}</div>
+            <div class="mission-points">+${mission.points.toLocaleString()}pt</div>
+        </div>
+    `;
+    
+    return div;
+}
+
+// ========================================
+// コンプリートミッションの状態確認と更新
+// ========================================
+function checkAndUpdateCompMissions() {
+    if (!gameData.missionCompRewards) return;
+    
+    const compMissions = gameData.missionCompRewards.filter(
+        mission => mission.eventId === currentEvent.eventId
+    );
+    
+    compMissions.forEach(compMission => {
+        const allCompleted = compMission.requiredMissions.every(reqId => {
+            return missionStates[reqId] && missionStates[reqId].completed;
+        });
+        
+        missionCompStates[compMission.id].completed = allCompleted;
+        
+        // UI更新
+        const item = document.querySelector(`[data-comp-mission-id="${compMission.id}"]`);
+        if (item) {
+            if (allCompleted) {
+                item.classList.add('completed');
+            } else {
+                item.classList.remove('completed');
+            }
+        }
+    });
+}
+
+// ========================================
+// ミッション非表示トグル
+// ========================================
+function toggleHideCompletedMissions() {
+    const checkbox = document.getElementById('hideCompletedMissions');
+    if (!checkbox) return; // チェックボックスが存在しない場合は何もしない
+    
+    const missionItems = document.querySelectorAll('.mission-item');
+    
+    missionItems.forEach(item => {
+        if (item.classList.contains('completed') && !item.classList.contains('auto-completed')) {
+            if (checkbox.checked) {
+                item.classList.add('hidden-completed');
+            } else {
+                item.classList.remove('hidden-completed');
+            }
+        }
+    });
+}
+
+// ========================================
+// ポイント減少
+// ========================================
+function decreasePoints() {
+    if (!currentEvent) return; // イベントが選択されていない場合は何もしない
+    
+    const amount = currentEvent.pointsPerRun;
+    currentPoints = Math.max(0, currentPoints - amount);
+    document.getElementById('currentPoints').value = currentPoints;
+    
+    // 計算更新
+    updateCalculations();
+    
+    // 保存
+    saveToLocalStorage();
+}
+
+// ========================================
+// ポイント増加
+// ========================================
+function increasePoints() {
+    if (!currentEvent) return; // イベントが選択されていない場合は何もしない
+    
+    const amount = currentEvent.pointsPerRun;
+    currentPoints = Math.min(999999, currentPoints + amount);
+    document.getElementById('currentPoints').value = currentPoints;
+    
+    // 計算更新
+    updateCalculations();
+    
+    // 保存
+    saveToLocalStorage();
+}
+
