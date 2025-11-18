@@ -275,6 +275,7 @@ function createRewardItem(reward) {
             <button class="reward-btn reward-btn-decrease">－1</button>
             <button class="reward-btn reward-btn-increase">＋1</button>
         </div>
+        <div class="sold-out-badge" style="display: none;">売り切れ</div>
     `;
     
     // カード全体クリックでトグル
@@ -334,6 +335,7 @@ function updateRewardUI(rewardId) {
     const stockBadge = item.querySelector('.reward-stock-badge');
     const decreaseBtn = item.querySelector('.reward-btn-decrease');
     const increaseBtn = item.querySelector('.reward-btn-increase');
+    const soldOutBadge = item.querySelector('.sold-out-badge');
     
     // wanted/unwantedの切り替え
     if (state.wanted) {
@@ -349,8 +351,14 @@ function updateRewardUI(rewardId) {
     // 在庫0の売り切れ表示
     if (state.remaining === 0) {
         item.classList.add('sold-out');
+        if (soldOutBadge) {
+            soldOutBadge.style.display = 'block';
+        }
     } else {
         item.classList.remove('sold-out');
+        if (soldOutBadge) {
+            soldOutBadge.style.display = 'none';
+        }
     }
     
     // 在庫表示更新
@@ -480,8 +488,24 @@ function createMissionItem(mission) {
 // ミッション完了トグル
 // ========================================
 function toggleMissionCompleted(missionId) {
+    const mission = gameData.missionRewards.find(m => m.id === missionId);
     const state = missionStates[missionId];
+    
+    // 状態を反転
+    const wasCompleted = state.completed;
     state.completed = !state.completed;
+    
+    // ポイントを加算/減算
+    if (state.completed) {
+        // 達成した場合、ポイントを加算
+        currentPoints += mission.points;
+    } else {
+        // 未達成にした場合、ポイントを減算
+        currentPoints = Math.max(0, currentPoints - mission.points);
+    }
+    
+    // 所持ポイント入力欄を更新
+    document.getElementById('currentPoints').value = currentPoints;
     
     // UI更新
     updateMissionUI(missionId);
@@ -591,7 +615,7 @@ function updateCalculations() {
     );
     
     let totalNeeded = 0;
-    let remainingNeeded = 0;
+    let remainingRewardsCost = 0;
     
     rewards.forEach(reward => {
         const state = rewardStates[reward.id];
@@ -599,7 +623,7 @@ function updateCalculations() {
             const totalCost = reward.price * reward.stock;
             const remainingCost = reward.price * state.remaining;
             totalNeeded += totalCost;
-            remainingNeeded += remainingCost;
+            remainingRewardsCost += remainingCost;
         }
     });
     
@@ -616,9 +640,25 @@ function updateCalculations() {
         }
     });
     
+    // コンプリートミッション残りポイント
+    if (gameData.missionCompRewards) {
+        const compMissions = gameData.missionCompRewards.filter(
+            mission => mission.eventId === currentEvent.eventId
+        );
+        
+        compMissions.forEach(mission => {
+            const state = missionCompStates[mission.id];
+            if (state && !state.completed) {
+                remainingMissionPoints += mission.points;
+            }
+        });
+    }
+    
+    // 実際に周回で稼ぐ必要があるポイント（現在のポイントとミッションポイントを引く）
+    const remainingNeeded = Math.max(0, remainingRewardsCost - currentPoints - remainingMissionPoints);
+    
     // あと何周必要か
-    const pointsToFarm = Math.max(0, remainingNeeded - currentPoints - remainingMissionPoints);
-    const runsNeeded = Math.floor(pointsToFarm / currentEvent.pointsPerRun * 10) / 10; // 小数点第2位で切り捨て
+    const runsNeeded = Math.floor(remainingNeeded / currentEvent.pointsPerRun * 10) / 10; // 小数点第2位で切り捨て
     
     // 残り日数
     const now = new Date();
@@ -904,7 +944,23 @@ function checkAndUpdateCompMissions() {
             return missionStates[reqId] && missionStates[reqId].completed;
         });
         
-        missionCompStates[compMission.id].completed = allCompleted;
+        const state = missionCompStates[compMission.id];
+        const wasCompleted = state.completed;
+        state.completed = allCompleted;
+        
+        // 状態が変化した場合、ポイントを加算/減算
+        if (wasCompleted !== allCompleted) {
+            if (allCompleted) {
+                // 達成した場合、ポイントを加算
+                currentPoints += compMission.points;
+            } else {
+                // 未達成になった場合、ポイントを減算
+                currentPoints = Math.max(0, currentPoints - compMission.points);
+            }
+            
+            // 所持ポイント入力欄を更新
+            document.getElementById('currentPoints').value = currentPoints;
+        }
         
         // UI更新
         const item = document.querySelector(`[data-comp-mission-id="${compMission.id}"]`);

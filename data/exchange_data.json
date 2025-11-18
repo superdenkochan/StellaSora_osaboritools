@@ -451,25 +451,25 @@
     {
       "id": 10011,
       "name": "ハード1",
-      "points": 650,
+      "points": 600,
       "eventId": 1001
     },
     {
       "id": 10012,
       "name": "ハード2",
-      "points": 650,
+      "points": 800,
       "eventId": 1001
     },
     {
       "id": 10013,
       "name": "ハード3",
-      "points": 650,
+      "points": 1000,
       "eventId": 1001
     },
     {
       "id": 10014,
       "name": "ハード4",
-      "points": 650,
+      "points": 1200,
       "eventId": 1001
     },
     {

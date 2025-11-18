@@ -206,6 +206,7 @@
 
 /* 報酬アイテムカード */
 .reward-item {
+    position: relative; /* 売り切れ表示の基準位置として必要 */
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
@@ -235,8 +236,8 @@
     opacity: 0.6;
 }
 
-.reward-item.sold-out::after {
-    content: '売り切れ';
+/* 売り切れバッジ（JavaScriptで動的に生成） */
+.sold-out-badge {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -247,8 +248,9 @@
     border-radius: 5px;
     font-size: 16px;
     font-weight: bold;
-    z-index: 10;
+    z-index: 100;
     pointer-events: none;
+    white-space: nowrap;
 }
 
 .reward-icon-wrapper {
