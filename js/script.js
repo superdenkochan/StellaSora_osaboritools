@@ -159,18 +159,19 @@ async function loadCharacterData() {
 }
 
 // ========================================
-// キャラクター選択ドロップダウンの生成
+// キャラクター選択モーダルの生成
 // ========================================
 function populateCharacterSelects() {
-    const wrappers = document.querySelectorAll('.character-select-wrapper');
-    
-    wrappers.forEach(wrapper => {
-        const slot = wrapper.querySelector('.character-select-button').dataset.slot;
-        const dropdown = wrapper.querySelector('.character-dropdown');
-        const button = wrapper.querySelector('.character-select-button');
+    // 各スロット用のモーダルを生成
+    ['main', 'support1', 'support2'].forEach(slot => {
+        const modal = document.getElementById(`character-modal-${slot}`);
+        const grid = modal.querySelector('.character-modal-grid');
+        const button = document.querySelector(`.character-select-button[data-slot="${slot}"]`);
+        const closeBtn = modal.querySelector('.character-modal-close');
+        const overlay = modal.querySelector('.character-modal-overlay');
         
-        // ドロップダウンを初期化
-        dropdown.innerHTML = '';
+        // グリッドを初期化
+        grid.innerHTML = '';
         
         // 選択解除オプション
         const clearOption = document.createElement('div');
@@ -183,9 +184,9 @@ function populateCharacterSelects() {
         `;
         clearOption.addEventListener('click', () => {
             handleCharacterSelectFromDropdown(slot, '');
-            closeAllDropdowns();
+            closeAllModals();
         });
-        dropdown.appendChild(clearOption);
+        grid.appendChild(clearOption);
         
         // キャラクターオプション
         charactersData.characters.forEach(char => {
@@ -198,68 +199,51 @@ function populateCharacterSelects() {
             icon.src = char.icon;
             icon.alt = char.name;
             
+            // 名前のツールチップ
+            const nameTooltip = document.createElement('div');
+            nameTooltip.className = 'character-option-name';
+            nameTooltip.textContent = char.name;
+            
             option.appendChild(icon);
+            option.appendChild(nameTooltip);
             
             option.addEventListener('click', () => {
                 if (!option.classList.contains('disabled')) {
                     handleCharacterSelectFromDropdown(slot, char.id);
-                    closeAllDropdowns();
+                    closeAllModals();
                 }
             });
             
-            dropdown.appendChild(option);
+            grid.appendChild(option);
         });
         
-        // ボタンクリックでドロップダウン開閉
+        // ボタンクリックでモーダルを開く
         button.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isOpen = dropdown.classList.contains('open');
-            closeAllDropdowns();
-            if (!isOpen) {
-                updateDropdownAvailability(slot);
-                adjustDropdownDirection(button, dropdown); // 展開方向を自動調整
-                dropdown.classList.add('open');
-            }
+            closeAllModals(); // 他のモーダルを閉じる
+            updateModalAvailability(slot);
+            modal.classList.add('open');
+        });
+        
+        // 閉じるボタン
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('open');
+        });
+        
+        // オーバーレイクリックで閉じる
+        overlay.addEventListener('click', () => {
+            modal.classList.remove('open');
         });
     });
-    
-    // ドロップダウン外クリックで閉じる
-    document.addEventListener('click', () => {
-        closeAllDropdowns();
-    });
 }
 
-// ドロップダウンの展開方向を自動調整
-function adjustDropdownDirection(button, dropdown) {
-    const buttonRect = button.getBoundingClientRect();
-    const dropdownHeight = 500; // max-height の値
-    const windowHeight = window.innerHeight;
-    const spaceBelow = windowHeight - buttonRect.bottom;
-    const spaceAbove = buttonRect.top;
-    
-    // 下側のスペースが足りない場合は上に展開
-    if (spaceBelow < dropdownHeight && spaceAbove > spaceBelow) {
-        dropdown.style.top = 'auto';
-        dropdown.style.bottom = '100%';
-        dropdown.style.borderTop = '3px solid #667eea';
-        dropdown.style.borderBottom = 'none';
-        dropdown.style.borderRadius = '10px 10px 0 0';
-    } else {
-        // デフォルトは下に展開
-        dropdown.style.top = '100%';
-        dropdown.style.bottom = 'auto';
-        dropdown.style.borderTop = 'none';
-        dropdown.style.borderBottom = '3px solid #667eea';
-        dropdown.style.borderRadius = '0 0 10px 10px';
-    }
-}
-
-// ドロップダウンの選択可能状態を更新
-function updateDropdownAvailability(currentSlot) {
+// モーダルの選択可能状態を更新
+function updateModalAvailability(currentSlot) {
     const selectedIds = getSelectedCharacterIds();
-    const dropdown = document.querySelector(`.character-dropdown[data-slot="${currentSlot}"]`);
+    const modal = document.getElementById(`character-modal-${currentSlot}`);
+    const grid = modal.querySelector('.character-modal-grid');
     
-    dropdown.querySelectorAll('.character-option').forEach(option => {
+    grid.querySelectorAll('.character-option').forEach(option => {
         const charId = option.dataset.value;
         if (charId && selectedIds.includes(charId) && currentState[currentSlot].characterId !== charId) {
             option.classList.add('disabled');
@@ -269,10 +253,10 @@ function updateDropdownAvailability(currentSlot) {
     });
 }
 
-// すべてのドロップダウンを閉じる
-function closeAllDropdowns() {
-    document.querySelectorAll('.character-dropdown').forEach(dropdown => {
-        dropdown.classList.remove('open');
+// すべてのモーダルを閉じる
+function closeAllModals() {
+    document.querySelectorAll('.character-modal').forEach(modal => {
+        modal.classList.remove('open');
     });
 }
 
@@ -407,7 +391,7 @@ function handleCharacterSelectFromDropdown(slot, charId) {
         currentState[slot].characterId = null;
         document.getElementById(`${slot}-potentials`).innerHTML = '';
         updateCharacterSelectButton(slot, null);
-        updateAllDropdowns();
+        updateAllModals();
         saveCurrentState();
         return;
     }
@@ -427,7 +411,7 @@ function handleCharacterSelectFromDropdown(slot, charId) {
     displayPotentials(slot, character);
     
     // 他のドロップダウンを更新
-    updateAllDropdowns();
+    updateAllModals();
     
     // 状態を保存
     saveCurrentState();
@@ -446,10 +430,10 @@ function updateCharacterSelectButton(slot, character) {
     }
 }
 
-// すべてのドロップダウンの選択可能状態を更新
-function updateAllDropdowns() {
+// すべてのモーダルの選択可能状態を更新
+function updateAllModals() {
     ['main', 'support1', 'support2'].forEach(slot => {
-        updateDropdownAvailability(slot);
+        updateModalAvailability(slot);
     });
 }
 
@@ -806,7 +790,7 @@ function handleResetAll() {
     displayPresetName('');
     
     // ドロップダウンを更新
-    updateAllDropdowns();
+    updateAllModals();
     
     // 状態を保存
     saveCurrentState();
@@ -903,7 +887,7 @@ function handleLoadPreset(presetNum) {
     });
     
     // ドロップダウンを更新
-    updateAllDropdowns();
+    updateAllModals();
     
     // フィルターを適用
     applyHideUnobtainedFilter();
@@ -1003,7 +987,7 @@ function loadCurrentState() {
         }
         
         // ドロップダウンを更新
-        updateAllDropdowns();
+        updateAllModals();
         
         // フィルターを適用
         applyHideUnobtainedFilter();

@@ -374,27 +374,6 @@ header h1 {
     background: #764ba2;
 }
 
-/* キャラクタードロップダウンのスクロールバー */
-.character-dropdown::-webkit-scrollbar {
-    width: 12px; /* スクロールバーを太くする（8px→12px） */
-}
-
-.character-dropdown::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 5px;
-    margin: 5px 0; /* 上下に余白を追加 */
-}
-
-.character-dropdown::-webkit-scrollbar-thumb {
-    background: #667eea;
-    border-radius: 5px;
-    border: 2px solid #f1f1f1; /* 枠を追加して見やすく */
-}
-
-.character-dropdown::-webkit-scrollbar-thumb:hover {
-    background: #764ba2;
-}
-
 /* ========================================
    メインコンテンツ
    ======================================== */
@@ -439,7 +418,7 @@ header h1 {
     height: 100%;
 }
 
-/* キャラクター選択（カスタムドロップダウン） */
+/* キャラクター選択（モーダル形式） */
 .character-select-wrapper {
     position: relative;
 }
@@ -478,72 +457,106 @@ header h1 {
     padding: 10px;
 }
 
-.character-dropdown {
-    position: absolute;
-    top: 100%;
+/* モーダル形式のキャラクター選択 */
+.character-modal {
+    position: fixed;
+    top: 0;
     left: 0;
-    width: auto;
-    min-width: 350px; /* 125pxアイコンを2列表示できるように調整 */
-    max-width: min(calc(100vw - 40px), 900px); /* 画面幅 or 900pxの小さい方（最大6列） */
-    max-height: 400px; /* 固定値に変更（常にスクロールバー表示） */
-    overflow-y: auto;
-    overflow-x: hidden; /* 横スクロールを防ぐ */
+    width: 100%;
+    height: 100%;
+    z-index: 10001;
+    display: none; /* 初期状態は非表示 */
+    align-items: center;
+    justify-content: center;
+}
+
+.character-modal.open {
+    display: flex;
+}
+
+.character-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+
+.character-modal-content {
+    position: relative;
     background: white;
-    border: 3px solid #667eea;
-    border-top: none;
-    border-radius: 0 0 10px 10px;
-    display: none;
-    z-index: 1002;
-    padding: 10px 18px 10px 10px; /* 右側にスクロールバー用のスペースを確保 */
-    box-sizing: border-box; /* パディングを幅に含める */
+    border-radius: 10px;
+    max-width: 950px; /* 6列が収まる幅 */
+    max-height: 80vh;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
-.character-dropdown.open {
+.character-modal-header {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+    padding: 20px 20px 10px 20px;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 2px solid #667eea;
+}
+
+.character-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    border: none;
+    background: #f44336;
+    color: white;
+    font-size: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    line-height: 1;
+    padding: 0;
+    z-index: 11;
+}
+
+.character-modal-close:hover {
+    background: #d32f2f;
+    transform: scale(1.1);
+}
+
+.character-modal-title {
+    font-size: 20px;
+    color: #667eea;
+    font-weight: bold;
+    margin: 0;
+    padding-right: 50px; /* 閉じるボタンのスペース */
+}
+
+.character-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.character-modal-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(125px, 1fr)); /* 125pxのアイコンに対応 */
-    gap: 15px; /* アイコン間隔を広げる（10px→15px） */
+    grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+    gap: 15px;
+    justify-items: center;
 }
 
-/* 小さい画面用の調整 */
-@media (max-width: 768px) {
-    .character-dropdown {
-        min-width: 280px; /* さらに小さい画面でも対応 */
-        max-height: 350px; /* タブレットでは少し低く */
-        padding: 10px 16px 10px 10px; /* スクロールバースペース */
-    }
-    
-    .character-dropdown.open {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* 100pxに縮小 */
-        gap: 12px; /* タブレット用の間隔 */
-    }
-    
-    .character-option {
-        width: 100px; /* タブレットでは100px */
-        height: 100px;
-    }
-}
-
-/* とても小さい画面用の調整 */
-@media (max-width: 480px) {
-    .character-dropdown {
-        min-width: 240px;
-        max-height: 300px; /* スマホではさらに低く */
-        padding: 8px 14px 8px 8px; /* スクロールバースペース */
-    }
-    
-    .character-dropdown.open {
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* 80pxに縮小 */
-        gap: 10px; /* スマホ用の間隔 */
-    }
-    
-    .character-option {
-        width: 80px; /* スマホでは80px */
-        height: 80px;
-    }
-}
-
+/* モーダル内のキャラクターオプション */
 .character-option {
-    width: 125px; /* デフォルトは125px */
+    width: 125px;
     height: 125px;
     cursor: pointer;
     display: flex;
@@ -577,10 +590,11 @@ header h1 {
 
 /* ツールチップ（名前表示） */
 .character-option-name {
-    position: fixed; /* absoluteからfixedに変更 */
-    bottom: auto; /* bottomの代わりにtopで制御 */
-    left: 50%;
-    transform: translateX(-50%);
+    position: fixed;
+    bottom: auto;
+    left: 0%;
+    transform: translateX(50%);
+    transform: translateY(-115%);
     background: rgba(0, 0, 0, 0.9);
     color: white;
     padding: 5px 10px;
@@ -590,11 +604,79 @@ header h1 {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
-    z-index: 99999; /* 最前面に表示 */
+    z-index: 99999;
 }
 
 .character-option:hover .character-option-name {
     opacity: 1;
+}
+
+/* モーダルボディのスクロールバー */
+.character-modal-body::-webkit-scrollbar {
+    width: 12px;
+}
+
+.character-modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.character-modal-body::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 5px;
+    border: 2px solid #f1f1f1;
+}
+
+.character-modal-body::-webkit-scrollbar-thumb:hover {
+    background: #764ba2;
+}
+
+/* 小さい画面用の調整 */
+@media (max-width: 768px) {
+    .character-modal-content {
+        max-width: 95%;
+        max-height: 85vh;
+    }
+    
+    .character-modal-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 12px;
+    }
+    
+    .character-option {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .character-modal-content {
+        max-width: 95%;
+        max-height: 90vh;
+    }
+    
+    .character-modal-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 10px;
+    }
+    
+    .character-option {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .character-modal-header {
+        padding: 15px 15px 10px 15px;
+    }
+    
+    .character-modal-body {
+        padding: 15px;
+    }
+    
+    .character-modal-title {
+        font-size: 16px;
+    }
 }
 
 /* 隠しselect（互換性のため） */

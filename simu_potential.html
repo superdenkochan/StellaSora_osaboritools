@@ -86,9 +86,6 @@
                             <button class="character-select-button" data-slot="main">
                                 <span class="select-text">巡遊者を<br>選択してね</span>
                             </button>
-                            <div class="character-dropdown" data-slot="main">
-                                <!-- オプションはJavaScriptで動的に生成 -->
-                            </div>
                             <!-- 互換性のため隠しselect -->
                             <select class="character-select" data-slot="main">
                                 <option value="">巡遊者を選択してね</option>
@@ -110,9 +107,6 @@
                             <button class="character-select-button" data-slot="support1">
                                 <span class="select-text">巡遊者を<br>選択してね</span>
                             </button>
-                            <div class="character-dropdown" data-slot="support1">
-                                <!-- オプションはJavaScriptで動的に生成 -->
-                            </div>
                             <select class="character-select" data-slot="support1">
                                 <option value="">巡遊者を選択してね</option>
                             </select>
@@ -133,9 +127,6 @@
                             <button class="character-select-button" data-slot="support2">
                                 <span class="select-text">巡遊者を<br>選択してね</span>
                             </button>
-                            <div class="character-dropdown" data-slot="support2">
-                                <!-- オプションはJavaScriptで動的に生成 -->
-                            </div>
                             <select class="character-select" data-slot="support2">
                                 <option value="">巡遊者を選択してね</option>
                             </select>
@@ -327,7 +318,7 @@
             <div class="modal-body">
                 <h3>v1.0.1 2025.11.18</h3>
                 <ul>
-                    <li>フユカに対応。キャラクター選択時のドロップダウンリストのサイズを自動で変形するように修正</li>
+                    <li>フユカに対応。キャラクター選択画面をモーダル形式に変更</li>
                 </ul>
                 <h3>v1.0.0 2025.11.16</h3>
                 <ul>
@@ -359,6 +350,52 @@
                     <button id="preset-name-cancel" class="btn btn-danger">キャンセル</button>
                     <button id="preset-name-save" class="btn">保存</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         キャラクター選択モーダル
+         ======================================== -->
+    
+    <!-- 主力キャラクター選択モーダル -->
+    <div class="character-modal" id="character-modal-main">
+        <div class="character-modal-overlay"></div>
+        <div class="character-modal-content">
+            <div class="character-modal-header">
+                <button class="character-modal-close">&times;</button>
+                <h3 class="character-modal-title">主力キャラクター選択</h3>
+            </div>
+            <div class="character-modal-body">
+                <div class="character-modal-grid" data-slot="main"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 支援キャラクター1選択モーダル -->
+    <div class="character-modal" id="character-modal-support1">
+        <div class="character-modal-overlay"></div>
+        <div class="character-modal-content">
+            <div class="character-modal-header">
+                <button class="character-modal-close">&times;</button>
+                <h3 class="character-modal-title">支援キャラクター1選択</h3>
+            </div>
+            <div class="character-modal-body">
+                <div class="character-modal-grid" data-slot="support1"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 支援キャラクター2選択モーダル -->
+    <div class="character-modal" id="character-modal-support2">
+        <div class="character-modal-overlay"></div>
+        <div class="character-modal-content">
+            <div class="character-modal-header">
+                <button class="character-modal-close">&times;</button>
+                <h3 class="character-modal-title">支援キャラクター2選択</h3>
+            </div>
+            <div class="character-modal-body">
+                <div class="character-modal-grid" data-slot="support2"></div>
             </div>
         </div>
     </div>
