@@ -4,7 +4,7 @@
 let charactersData = null; // JSONから読み込んだデータ
 const MAX_SUB_LEVEL = 6; // サブ素質の最大レベル（アップデートで変更可能）
 const MAX_CORE_POTENTIALS = 2; // コア素質の最大取得数
-const TOOLTIP_MAX_CHARS = 40; // ツールチップの1行あたりの最大文字数（調整可能）
+const TOOLTIP_MAX_CHARS = 320; // ツールチップの1行あたりの最大文字数（調整可能）
 
 // プリセット名入力用の一時変数
 let pendingPresetNumber = null;
@@ -585,13 +585,21 @@ function createPotentialCard(character, potentialId, slot, type) {
     
     imageWrapper.appendChild(img);
     
-    // ツールチップ（説明文）
+    card.appendChild(imageWrapper);
+    
+    // ツールチップ（説明文）- カードの直接の子要素として配置
     const tooltip = document.createElement('div');
     tooltip.className = 'potential-tooltip';
-    tooltip.textContent = getDescription(character, potentialId);
-    imageWrapper.appendChild(tooltip);
+    tooltip.innerHTML = getDescription(character, potentialId); // HTMLタグ対応のためinnerHTMLに変更
+    card.appendChild(tooltip);
     
-    card.appendChild(imageWrapper);
+    // ツールチップの表示制御
+    imageWrapper.addEventListener('mouseenter', () => {
+        tooltip.style.opacity = '1';
+    });
+    imageWrapper.addEventListener('mouseleave', () => {
+        tooltip.style.opacity = '0';
+    });
     
     // ステータスボタン
     const statusDiv = document.createElement('div');

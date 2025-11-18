@@ -374,6 +374,27 @@ header h1 {
     background: #764ba2;
 }
 
+/* キャラクタードロップダウンのスクロールバー */
+.character-dropdown::-webkit-scrollbar {
+    width: 12px; /* スクロールバーを太くする（8px→12px） */
+}
+
+.character-dropdown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+    margin: 5px 0; /* 上下に余白を追加 */
+}
+
+.character-dropdown::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 5px;
+    border: 2px solid #f1f1f1; /* 枠を追加して見やすく */
+}
+
+.character-dropdown::-webkit-scrollbar-thumb:hover {
+    background: #764ba2;
+}
+
 /* ========================================
    メインコンテンツ
    ======================================== */
@@ -462,27 +483,68 @@ header h1 {
     top: 100%;
     left: 0;
     width: auto;
-    min-width: 400px;
-    max-height: 500px;
+    min-width: 350px; /* 125pxアイコンを2列表示できるように調整 */
+    max-width: min(calc(100vw - 40px), 900px); /* 画面幅 or 900pxの小さい方（最大6列） */
+    max-height: 400px; /* 固定値に変更（常にスクロールバー表示） */
     overflow-y: auto;
+    overflow-x: hidden; /* 横スクロールを防ぐ */
     background: white;
     border: 3px solid #667eea;
     border-top: none;
     border-radius: 0 0 10px 10px;
     display: none;
-    z-index: 1000;
-    padding: 10px;
+    z-index: 1002;
+    padding: 10px 18px 10px 10px; /* 右側にスクロールバー用のスペースを確保 */
+    box-sizing: border-box; /* パディングを幅に含める */
 }
 
 .character-dropdown.open {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(125px, 1fr)); /* 125pxのアイコンに対応 */
+    gap: 15px; /* アイコン間隔を広げる（10px→15px） */
+}
+
+/* 小さい画面用の調整 */
+@media (max-width: 768px) {
+    .character-dropdown {
+        min-width: 280px; /* さらに小さい画面でも対応 */
+        max-height: 350px; /* タブレットでは少し低く */
+        padding: 10px 16px 10px 10px; /* スクロールバースペース */
+    }
+    
+    .character-dropdown.open {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* 100pxに縮小 */
+        gap: 12px; /* タブレット用の間隔 */
+    }
+    
+    .character-option {
+        width: 100px; /* タブレットでは100px */
+        height: 100px;
+    }
+}
+
+/* とても小さい画面用の調整 */
+@media (max-width: 480px) {
+    .character-dropdown {
+        min-width: 240px;
+        max-height: 300px; /* スマホではさらに低く */
+        padding: 8px 14px 8px 8px; /* スクロールバースペース */
+    }
+    
+    .character-dropdown.open {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* 80pxに縮小 */
+        gap: 10px; /* スマホ用の間隔 */
+    }
+    
+    .character-option {
+        width: 80px; /* スマホでは80px */
+        height: 80px;
+    }
 }
 
 .character-option {
-    width: 100px;
-    height: 100px;
+    width: 125px; /* デフォルトは125px */
+    height: 125px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -575,6 +637,7 @@ header h1 {
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    position: relative; /* ツールチップの基準位置として追加 */
     /* カード全体のホバーアニメーションを削除 */
 }
 
@@ -713,7 +776,7 @@ header h1 {
 /* ツールチップ（説明文） */
 .potential-tooltip {
     position: absolute;
-    bottom: 100%;
+    bottom: calc(100% + 5px); /* カード上部に表示 */
     left: 50%;
     transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.9);
@@ -723,17 +786,12 @@ header h1 {
     font-size: 12px;
     white-space: pre-wrap;
     word-wrap: break-word;
-    max-width: 250px;
-    min-width: 150px;
+    max-width: 210px; 
+    min-width: 210px; /* ツールチップ幅調整 */
     z-index: 10003; /* 最前面に表示 */
-    margin-bottom: 10px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
-}
-
-.potential-image-wrapper:hover .potential-tooltip {
-    opacity: 1;
 }
 
 .potential-tooltip::after {
