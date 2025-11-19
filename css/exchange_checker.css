@@ -197,19 +197,19 @@
 }
 
 .points-btn-minus {
-    background: #4caf50;
-}
-
-.points-btn-minus:hover {
-    background: #45a049;
-}
-
-.points-btn-plus {
     background: #f44336;
 }
 
-.points-btn-plus:hover {
+.points-btn-minus:hover {
     background: #da190b;
+}
+
+.points-btn-plus {
+    background: #4caf50;
+}
+
+.points-btn-plus:hover {
+    background: #45a049;
 }
 
 .point-icon {
