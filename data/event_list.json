@@ -1,0 +1,16 @@
+[
+  {
+    "eventId": 1101,
+    "name": "私たちのギルド-新章追加記念イベント",
+    "startDate": "2025-11-18T05:00:00",
+    "endDate": "2025-12-02T04:59:00",
+    "backgroundImage": "images/events/bg_1101.jpg",
+    "pointId": 1101,
+    "staminaCost": 30,
+    "pointsPerRun": 500
+  },
+  {
+    "eventId": 1001,
+    "name": "【終了】キケン？冒険？蒼海の幽霊船伝説！"
+  }
+]

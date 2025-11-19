@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="css/exchange_checker.css">
 </head>
 <body>
+    <!-- 背景 -->
+    <div id="backgroundLayer" class="background-layer"></div>
+
     <!-- ハンバーガーメニュー -->
     <div class="hamburger-menu" id="hamburgerMenu">
         <div class="hamburger-line"></div>
@@ -46,7 +49,7 @@
             <h1>イベント交換所チェッカー</h1>
             <div class="controls">
                 <button id="resetProgress" class="btn">進捗リセット</button>
-                <button id="resetAll" class="btn btn-danger">完全初期化</button>
+                <button id="resetAll" class="btn btn-danger">初期化</button>
                 <button id="showUsage" class="btn btn-info">使い方</button>
             </div>
         </header>
@@ -54,18 +57,14 @@
         <div class="main-content">
             <!-- イベント選択エリア -->
             <div class="event-selector">
-                <label for="eventSelect">イベントを選択：</label>
+                <label for="eventSelect">イベント：</label>
                 <select id="eventSelect" class="event-select">
-                    <option value=""><--イベントを選択--></option>
+                    <option value="">-</option>
                 </select>
             </div>
 
             <!-- イベント情報表示エリア -->
             <div id="eventInfo" class="event-info hidden">
-                <div class="event-banner">
-                    <img id="eventBanner" src="" alt="イベントバナー">
-                </div>
-                
                 <!-- 3カラムレイアウト -->
                 <div class="three-column-layout">
                     <!-- 左カラム：計算結果サマリー -->
@@ -78,9 +77,9 @@
                             <input type="number" id="currentPoints" min="0" max="999999" value="0" class="points-input">
                             <div class="points-buttons">
                                 <button id="pointsDecrease" class="points-btn points-btn-minus">-<span id="pointsDecreaseAmount">400</span></button>
+                                <img id="pointIcon" src="" alt="" class="point-icon">
                                 <button id="pointsIncrease" class="points-btn points-btn-plus">+<span id="pointsIncreaseAmount">400</span></button>
                             </div>
-                            <span id="pointName" class="point-name"></span>
                         </div>
 
                         <div class="summary-section">
@@ -89,7 +88,7 @@
                                 <div class="summary-value" id="remainingDays">-</div>
                             </div>
                             <div class="summary-card">
-                                <div class="summary-label">残り必要ポイント</div>
+                                <div class="summary-label">残り周回ポイント</div>
                                 <div class="summary-value highlight" id="remainingNeeded">0</div>
                             </div>
                             <div class="summary-card">
@@ -101,11 +100,11 @@
                                 <div class="summary-value highlight" id="dailyStamina">0</div>
                             </div>
                             <div class="summary-card">
-                                <div class="summary-label">あと何周</div>
+                                <div class="summary-label">あと何周？</div>
                                 <div class="summary-value highlight" id="runsNeeded">0</div>
                             </div>
                             <div class="summary-card">
-                                <div class="summary-label">交換ノルマ</div>
+                                <div class="summary-label">欲しいもの全交換ノルマ</div>
                                 <div class="summary-value" id="totalNeeded">0</div>
                             </div>
                         </div>
@@ -113,7 +112,7 @@
 
                     <!-- 中央カラム：交換所報酬 -->
                     <div class="column column-center">
-                        <h2>交換所報酬</h2>
+                        <h2>ラインナップ</h2>
                         <div id="rewardsGrid" class="rewards-grid">
                             <!-- 報酬アイテムはJavaScriptで動的に生成 -->
                         </div>
@@ -130,7 +129,7 @@
                         </div>
                         <div class="mission-summary">
                             <div class="mission-total">
-                                <span>合計ポイント：</span>
+                                <span>全達成の合計：</span>
                                 <span id="totalMissionPoints">0</span>
                             </div>
                             <div class="mission-remaining">
@@ -163,51 +162,26 @@
                 <h2>使い方</h2>
             </div>
             <div class="modal-body">
-                <h3>基本操作</h3>
-                <p><strong>1. イベントを選択</strong><br>
-                上部のドロップダウンメニューから管理したいイベントを選択してね！</p>
+                <p><strong>1. 欲しいアイテムを決める</strong><br>
+                各カードをクリックすると取る・取らないを切り替えられるよ！<br>
+                交換しないアイテムの分はノルマから差し引かれるよ</p>
                 
-                <p><strong>2. 現在のポイント数を入力</strong><br>
-                今持っているイベントポイント数を入力しよう！</p>
+                <p><strong>2. 右側のクリア済任務を選択</strong><br>
+                ゲーム内の状況と同じにしよう！<br>
+                左のポイントを合わせただけだと、あと何周すればいいかが正しく出ないから注意してね<br>
+                ※[全交換ノルマ]－[獲得済みクリア報酬]－[交換済みポイント]＝[周回ノルマ]</p>
                 
-                <p><strong>3. 欲しい報酬を選ぶ</strong><br>
-                各報酬アイテムのカードをクリックして、「いる/いらない」を切り替えよう！<br>
-                「いらない」にするとアイコンがグレーになるよ</p>
+                <p><strong>3. 所持ポイント数を入力</strong><br>
+                ここもゲーム内の状況と一致させてね（直接入力可）<br>
+                任務の分は自動で入るから周回した分とかを微調整</p>
                 
-                <p><strong>4. 交換した分を記録</strong><br>
-                交換所で交換したら、<strong>「在庫-1」ボタン（緑）</strong>をクリックして在庫を減らしていこう！<br>
-                間違えて減らしすぎた時は<strong>「在庫+1」ボタン（赤）</strong>で戻せるよ</p>
+                <p><strong>4. アイテムの交換状況を更新</strong><br>
+                交換所で交換したら「-1」ボタン（緑）をクリックして在庫を減らしていこう！<br>
+                間違えた時は「+1」ボタン（赤）で戻せるよ</p>
                 
-                <p><strong>5. ミッション達成状況を記録</strong><br>
-                達成したミッションをクリックしてチェックマークを付けよう！<br>
-                残りの獲得可能ポイントが自動で計算されるよ</p>
-                
-                <h3>計算結果の見方</h3>
-                <p><strong>残り日数</strong><br>
-                イベント終了まであと何日あるかを表示。ゲーム内の1日は4:59で終わるから注意！</p>
-                
-                <p><strong>あと何周</strong><br>
-                必要なポイントを集めるために、あと何回イベントクエストを周回すればいいかを表示</p>
-                
-                <p><strong>1日あたりのノルマ</strong><br>
-                残り日数で割った1日あたりの周回数！これを目安に毎日プレイしよう</p>
-                
-                <p><strong>1日あたりのやる気</strong><br>
-                1日に必要なやる気（スタミナ）の量！やる気が足りない時は...頑張れ！</p>
-                
-                <h3>その他の機能</h3>
-                <p><strong>進捗リセット</strong><br>
-                交換済みの在庫数と達成済みミッションをリセットするよ<br>
-                「いる/いらない」の設定は保持されるから安心！</p>
-                
-                <p><strong>完全初期化</strong><br>
-                すべての設定とデータを初期状態に戻すよ<br>
-                イベントが切り替わった時に使ってね！</p>
-                
-                <p style="margin-top: 20px; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107;">
-                <strong>💡 ヒント</strong><br>
-                データはブラウザに自動保存されるから、ページを閉じても大丈夫！<br>
-                ただしブラウザのキャッシュを削除すると消えちゃうから注意してね～</p>
+                <p><strong>5. 計算結果を見る</strong><br>
+                左の数字が計算結果！<br>
+                イベント終了までどれくらいのペースで周回すれば間に合うのかがわかるよ</p>
             </div>
         </div>
     </div>

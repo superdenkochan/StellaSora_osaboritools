@@ -2,6 +2,34 @@
    イベント交換所チェッカー専用スタイル
    ======================================== */
 
+/* メインコンテンツの背景画像設定 */
+.main-content {
+    min-height: 100vh;
+    position: relative;
+    --bg-image: none; /* CSS変数で背景画像を管理 */
+}
+
+/* 背景 */
+.background-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* main-content内の子要素を前面に */
+.main-content > * {
+    position: relative;
+    z-index: 1;
+}
+
 /* イベント選択エリア */
 .event-selector {
     padding: 20px;
@@ -61,20 +89,6 @@
     }
 }
 
-/* イベントバナー */
-.event-banner {
-    margin-bottom: 10px;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.event-banner img {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
 /* 3カラムレイアウト */
 .three-column-layout {
     display: flex;
@@ -89,9 +103,9 @@
 
 .column h2 {
     font-size: 20px;
-    color: #667eea;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
+    color: #000000;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
     border-bottom: 2px solid #667eea;
 }
 
@@ -159,6 +173,50 @@
     opacity: 0.9;
     display: block;
     text-align: right;
+}
+
+/* ポイント操作ボタンとアイコン */
+.points-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.points-btn {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: white;
+}
+
+.points-btn-minus {
+    background: #4caf50;
+}
+
+.points-btn-minus:hover {
+    background: #45a049;
+}
+
+.points-btn-plus {
+    background: #f44336;
+}
+
+.points-btn-plus:hover {
+    background: #da190b;
+}
+
+.point-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
 }
 
 /* サマリーセクション */
@@ -270,7 +328,7 @@
 }
 
 .reward-item.unwanted .reward-icon {
-    filter: grayscale(100%) opacity(0.7);
+    filter: grayscale(100%) opacity(0.5);
 }
 
 .reward-stock-badge {
@@ -379,6 +437,108 @@
     cursor: not-allowed;
 }
 
+/* ミッションアコーディオン */
+.mission-accordion {
+    margin-bottom: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+}
+
+.mission-accordion-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 10px 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s;
+}
+
+/* 全達成時の背景色 */
+.mission-accordion-header.all-completed {
+    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+}
+
+.accordion-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.accordion-icon {
+    font-size: 16px;
+    transition: transform 0.3s;
+}
+
+.accordion-title {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.accordion-count {
+    font-size: 16px;
+    font-weight: bold;
+    opacity: 0.9;
+}
+
+.accordion-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.accordion-check-all,
+.accordion-uncheck-all {
+    padding: 4px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: white;
+}
+
+.accordion-check-all {
+    background: rgba(76, 175, 80, 0.9);
+}
+
+.accordion-check-all:hover {
+    background: rgba(76, 175, 80, 1);
+}
+
+.accordion-uncheck-all {
+    background: rgba(244, 67, 54, 0.9);
+}
+
+.accordion-uncheck-all:hover {
+    background: rgba(244, 67, 54, 1);
+}
+
+.mission-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.mission-accordion-content.open {
+    max-height: 2000px;
+    padding: 8px;
+}
+
+.mission-section-title {
+    font-weight: bold;
+    font-size: 14px;
+    color: #667eea;
+    margin: 15px 0 8px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #667eea;
+}
+
 /* ミッションセクション */
 .mission-summary {
     display: flex;
@@ -393,17 +553,18 @@
 
 .mission-summary > div {
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px; /* テキストと数値の間に少し間隔 */
 }
 
 .mission-summary span:first-child {
-    display: block;
     font-size: 14px;
     opacity: 0.9;
-    margin-bottom: 3px;
 }
 
 .mission-summary span:last-child {
-    display: block;
     font-size: 18px;
     font-weight: bold;
 }
@@ -481,12 +642,16 @@
 
 .mission-info {
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .mission-name {
-    font-size: 13px;
+    font-size: 16px;
     color: #333;
-    margin-bottom: 2px;
+    flex: 1;
 }
 
 .mission-item.completed .mission-name {
@@ -495,9 +660,10 @@
 }
 
 .mission-points {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: bold;
     color: #667eea;
+    flex-shrink: 0;
 }
 
 .mission-item.completed .mission-points {
@@ -527,69 +693,116 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
 }
 
 .modal-content {
     position: relative;
     background: white;
     border-radius: 10px;
-    max-width: 600px;
+    max-width: 800px;
     max-height: 80vh;
     width: 90%;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
 
 .modal-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 20px;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+    padding: 30px 30px 0 30px;
     border-radius: 10px 10px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-header h2 {
-    margin: 0;
-    font-size: 22px;
 }
 
 .modal-close {
-    background: none;
+    position: sticky;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
     border: none;
+    background: #f44336;
     color: white;
-    font-size: 32px;
+    font-size: 24px;
+    border-radius: 50%;
     cursor: pointer;
-    line-height: 1;
-    padding: 0;
-    width: 32px;
-    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s;
+    line-height: 1;
+    padding: 0;
+    float: right;
+    z-index: 11;
 }
 
 .modal-close:hover {
-    opacity: 0.8;
+    background: #d32f2f;
+    transform: none;
+}
+
+.modal-content h2 {
+    font-size: 28px;
+    color: #667eea;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #667eea;
 }
 
 .modal-body {
-    padding: 20px;
+    color: #333;
+    line-height: 1.8;
+    padding: 0 30px 30px 30px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-body p {
+    margin-bottom: 15px;
+}
+
+.modal-body strong {
+    color: #667eea;
 }
 
 .modal-body h3 {
     color: #667eea;
     margin-top: 20px;
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 20px;
 }
 
-.modal-body p {
-    margin-bottom: 15px;
-    line-height: 1.6;
+.modal-body ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-body li {
+    margin-bottom: 8px;
+}
+
+/* スクロールバーのスタイル（Webkit系ブラウザ） */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #764ba2;
 }
 
 /* レスポンシブ対応 */

@@ -1,19 +1,27 @@
 // ========================================
 // グローバル変数
 // ========================================
-let gameData = null;
+let gameData = {
+    events: [],
+    eventPoints: [],
+    exchangeRewards: [],
+    missionRewards: [],
+    missionCompRewards: []
+};
 let currentEvent = null;
 let rewardStates = {};
 let missionStates = {};
 let missionCompStates = {};
 let currentPoints = 0;
+let loadedEvents = new Set(); // 読み込み済みイベントID
+let eventList = []; // イベント一覧
 
 // ========================================
 // 初期化
 // ========================================
 document.addEventListener('DOMContentLoaded', async () => {
-    // データ読み込み
-    await loadGameData();
+    // イベント一覧読み込み
+    await loadEventList();
     
     // イベントリスナー設定
     setupEventListeners();
@@ -26,16 +34,51 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 // ========================================
-// データ読み込み
+// イベント一覧読み込み
 // ========================================
-async function loadGameData() {
+async function loadEventList() {
     try {
-        const response = await fetch('data/exchange_data.json');
-        gameData = await response.json();
-        console.log('ゲームデータ読み込み完了', gameData);
+        const response = await fetch('data/event_list.json');
+        eventList = await response.json();
+        console.log('イベント一覧読み込み完了', eventList);
     } catch (error) {
-        console.error('データ読み込みエラー:', error);
-        alert('データの読み込みに失敗しました。ページをリロードしてください。');
+        console.error('イベント一覧読み込みエラー:', error);
+        alert('イベント一覧の読み込みに失敗しました。ページをリロードしてください。');
+    }
+}
+
+// ========================================
+// 個別イベントデータ読み込み
+// ========================================
+async function loadEventData(eventId) {
+    // 既に読み込み済みの場合はスキップ
+    if (loadedEvents.has(eventId)) {
+        console.log(`イベント${eventId}は既に読み込み済み`);
+        return;
+    }
+    
+    try {
+        const response = await fetch(`data/event_${eventId}.json`);
+        const eventData = await response.json();
+        
+        console.log(`イベント${eventId}のデータ:`, eventData);
+        
+        // gameDataに統合
+        gameData.events.push(eventData.event);
+        gameData.eventPoints.push(eventData.eventPoint);
+        gameData.exchangeRewards.push(...eventData.exchangeRewards);
+        gameData.missionRewards.push(...eventData.missionRewards);
+        if (eventData.missionCompRewards && eventData.missionCompRewards.length > 0) {
+            gameData.missionCompRewards.push(...eventData.missionCompRewards);
+        }
+        
+        // 読み込み済みとしてマーク
+        loadedEvents.add(eventId);
+        console.log(`イベント${eventId}のデータ読み込み完了`);
+        console.log('Background image:', eventData.event.backgroundImage);
+    } catch (error) {
+        console.error(`イベント${eventId}のデータ読み込みエラー:`, error);
+        alert(`イベントデータの読み込みに失敗しました。ページをリロードしてください。`);
     }
 }
 
@@ -77,9 +120,9 @@ function setupEventListeners() {
 function initializeEventSelect() {
     const eventSelect = document.getElementById('eventSelect');
     
-    if (!gameData || !gameData.events) return;
+    if (!eventList || eventList.length === 0) return;
     
-    gameData.events.forEach(event => {
+    eventList.forEach(event => {
         const option = document.createElement('option');
         option.value = event.eventId;
         option.textContent = event.name;
@@ -90,13 +133,16 @@ function initializeEventSelect() {
 // ========================================
 // イベント変更時の処理
 // ========================================
-function onEventChange(e) {
+async function onEventChange(e) {
     const eventId = parseInt(e.target.value);
     
     if (!eventId) {
         document.getElementById('eventInfo').classList.add('hidden');
         return;
     }
+    
+    // イベントデータを読み込み（未読み込みの場合のみ）
+    await loadEventData(eventId);
     
     currentEvent = gameData.events.find(event => event.eventId === eventId);
     
@@ -167,15 +213,23 @@ function setupEventInfoListeners() {
 // イベント情報表示
 // ========================================
 function displayEventInfo() {
-    // バナー画像
-    const banner = document.getElementById('eventBanner');
-    banner.src = currentEvent.bannerImage;
-    banner.alt = currentEvent.name;
+    console.log('displayEventInfo called', currentEvent);
     
-    // ポイント名
+    // 背景画像設定（CSS変数を使用）
+    const bgLayer = document.getElementById('backgroundLayer');
+    if (bgLayer && currentEvent.backgroundImage) {
+        bgLayer.style.backgroundImage = `url('${currentEvent.backgroundImage}')`;
+        }
+
+    // ポイント名とアイコン
     const pointData = gameData.eventPoints.find(p => p.id === currentEvent.pointId);
     if (pointData) {
-        document.getElementById('pointName').textContent = pointData.name;
+        // アイコン画像を設定
+        const pointIcon = document.getElementById('pointIcon');
+        if (pointIcon) {
+            pointIcon.src = pointData.icon;
+            pointIcon.alt = pointData.name;
+        }
     }
     
     // ポイントボタンの表示を更新
@@ -205,9 +259,9 @@ function updateRemainingDays() {
     const lastDay = new Date(endDate);
     lastDay.setHours(4, 59, 0, 0);
     
-    // 日数計算（今日を含める）
+    // 日数計算（今日を含めない＝-1する）
     const diffTime = lastDay - currentDay;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
     const remainingDaysElement = document.getElementById('remainingDays');
     if (diffDays > 0) {
@@ -309,6 +363,12 @@ function createRewardItem(reward) {
 // ========================================
 function toggleRewardWanted(rewardId) {
     const state = rewardStates[rewardId];
+    
+    // 在庫が0（売り切れ）の場合は切り替え不可
+    if (state.remaining === 0) {
+        return;
+    }
+    
     state.wanted = !state.wanted;
     
     // UI更新
@@ -337,18 +397,7 @@ function updateRewardUI(rewardId) {
     const increaseBtn = item.querySelector('.reward-btn-increase');
     const soldOutBadge = item.querySelector('.sold-out-badge');
     
-    // wanted/unwantedの切り替え
-    if (state.wanted) {
-        item.classList.remove('unwanted');
-        item.classList.add('wanted');
-        statusText.textContent = '交換する';
-    } else {
-        item.classList.remove('wanted');
-        item.classList.add('unwanted');
-        statusText.textContent = '交換しない';
-    }
-    
-    // 在庫0の売り切れ表示
+    // 在庫0の売り切れ表示（wanted状態は維持）
     if (state.remaining === 0) {
         item.classList.add('sold-out');
         if (soldOutBadge) {
@@ -359,6 +408,17 @@ function updateRewardUI(rewardId) {
         if (soldOutBadge) {
             soldOutBadge.style.display = 'none';
         }
+    }
+    
+    // wanted/unwantedの切り替え
+    if (state.wanted) {
+        item.classList.remove('unwanted');
+        item.classList.add('wanted');
+        statusText.textContent = '交換する';
+    } else {
+        item.classList.remove('wanted');
+        item.classList.add('unwanted');
+        statusText.textContent = '交換しない';
     }
     
     // 在庫表示更新
@@ -377,7 +437,7 @@ function updateRewardUI(rewardId) {
             decreaseBtn.disabled = false;
         }
         
-        // 在庫+1ボタン：在庫が最大値以上の場合は無効
+        // 在庫+1ボタン：在庫が最大値以上の場合は無効（売り切れ時は有効）
         if (state.remaining >= reward.stock) {
             increaseBtn.disabled = true;
         } else {
@@ -445,21 +505,187 @@ function initializeMissions() {
         };
     });
     
-    // UI生成
-    renderMissions(missions);
+    // アコーディオングループの定義（例）
+    // この部分を調整して、ミッションをグループ化してください
+    const accordionGroups = [
+        {
+            title: 'ノーマル',
+            missionIds: missions.filter(m => m.name.includes('ノーマル')).map(m => m.id)
+        },
+        {
+            title: 'ハード',
+            missionIds: missions.filter(m => m.name.includes('ハード')).map(m => m.id)
+        },
+        {
+            title: '通常任務',
+            missionIds: missions.filter(m => m.name.includes('通常任務')).map(m => m.id)
+        },
+        {
+            title: '挑戦任務',
+            missionIds: missions.filter(m => m.name.includes('挑戦任務')).map(m => m.id)
+        },
+        {
+            title: '冒険任務',
+            missionIds: missions.filter(m => m.name.includes('冒険任務')).map(m => m.id)
+        },
+        {
+            title: 'ミニゲーム',
+            missionIds: missions.filter(m => m.name.includes('ミニゲーム')).map(m => m.id)
+        },
+        {
+            title: 'その他',
+            missionIds: missions.filter(m => !m.name.includes('ノーマル') && !m.name.includes('ハード') && !m.name.includes('通常任務') && !m.name.includes('挑戦任務') && !m.name.includes('冒険任務') && !m.name.includes('ミニゲーム')).map(m => m.id)
+        }
+    ];
+    
+    // UI生成（アコーディオン付き）
+    renderMissionsWithAccordion(missions, accordionGroups);
     updateMissionSummary();
 }
 
 // ========================================
-// ミッションUI生成
+// ミッションUI生成（アコーディオン付き）
 // ========================================
-function renderMissions(missions) {
+function renderMissionsWithAccordion(missions, accordionGroups) {
     const grid = document.getElementById('missionsGrid');
     grid.innerHTML = '';
     
-    missions.forEach(mission => {
-        const item = createMissionItem(mission);
-        grid.appendChild(item);
+    // グループ化されていないミッションのID一覧
+    const groupedIds = new Set();
+    accordionGroups.forEach(group => {
+        group.missionIds.forEach(id => groupedIds.add(id));
+    });
+    
+    // アコーディオングループごとに生成
+    accordionGroups.forEach((group, index) => {
+        if (group.missionIds.length === 0) return; // 空のグループはスキップ
+        
+        // アコーディオンコンテナ
+        const accordionContainer = document.createElement('div');
+        accordionContainer.className = 'mission-accordion';
+        accordionContainer.dataset.accordionIndex = index;
+        
+        // アコーディオンヘッダー
+        const header = document.createElement('div');
+        header.className = 'mission-accordion-header';
+        header.innerHTML = `
+            <div class="accordion-toggle">
+                <span class="accordion-icon">▶</span>
+                <span class="accordion-title">${group.title}</span>
+                <span class="accordion-count"></span>
+            </div>
+            <div class="accordion-actions">
+                <button class="accordion-check-all" data-group-index="${index}">全てON</button>
+                <button class="accordion-uncheck-all" data-group-index="${index}">全てOFF</button>
+            </div>
+        `;
+        
+        // アコーディオンコンテンツ（デフォルトで閉じた状態）
+        const content = document.createElement('div');
+        content.className = 'mission-accordion-content';
+        
+        // グループ内のミッション生成
+        group.missionIds.forEach(missionId => {
+            const mission = missions.find(m => m.id === missionId);
+            if (mission) {
+                const item = createMissionItem(mission);
+                content.appendChild(item);
+            }
+        });
+        
+        accordionContainer.appendChild(header);
+        accordionContainer.appendChild(content);
+        grid.appendChild(accordionContainer);
+        
+        // 初期状態の更新
+        updateAccordionGroupStatus(index, group.missionIds);
+        
+        // アコーディオン開閉イベント
+        const toggle = header.querySelector('.accordion-toggle');
+        toggle.addEventListener('click', () => {
+            content.classList.toggle('open');
+            const icon = header.querySelector('.accordion-icon');
+            icon.textContent = content.classList.contains('open') ? '▼' : '▶';
+        });
+        
+        // 全てONボタン
+        const checkAllBtn = header.querySelector('.accordion-check-all');
+        checkAllBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            group.missionIds.forEach(missionId => {
+                if (missionStates[missionId] && !missionStates[missionId].completed) {
+                    toggleMissionCompleted(missionId);
+                }
+            });
+            updateAccordionGroupStatus(index, group.missionIds);
+        });
+        
+        // 全てOFFボタン
+        const uncheckAllBtn = header.querySelector('.accordion-uncheck-all');
+        uncheckAllBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            group.missionIds.forEach(missionId => {
+                if (missionStates[missionId] && missionStates[missionId].completed) {
+                    toggleMissionCompleted(missionId);
+                }
+            });
+            updateAccordionGroupStatus(index, group.missionIds);
+        });
+    });
+    
+    // グループ化されていないミッションがあれば、その他として追加
+    const ungroupedMissions = missions.filter(m => !groupedIds.has(m.id));
+    if (ungroupedMissions.length > 0) {
+        const otherHeader = document.createElement('div');
+        otherHeader.className = 'mission-section-title';
+        otherHeader.textContent = 'その他';
+        grid.appendChild(otherHeader);
+        
+        ungroupedMissions.forEach(mission => {
+            const item = createMissionItem(mission);
+            grid.appendChild(item);
+        });
+    }
+}
+
+// ========================================
+// アコーディオングループの達成状態を更新
+// ========================================
+function updateAccordionGroupStatus(groupIndex, missionIds) {
+    const container = document.querySelector(`[data-accordion-index="${groupIndex}"]`);
+    if (!container) return;
+    
+    const header = container.querySelector('.mission-accordion-header');
+    const countSpan = header.querySelector('.accordion-count');
+    
+    // 全てのミッションが完了しているかチェック
+    const allCompleted = missionIds.every(id => 
+        missionStates[id] && missionStates[id].completed
+    );
+    
+    if (allCompleted) {
+        header.classList.add('all-completed');
+        countSpan.textContent = '★';
+    } else {
+        header.classList.remove('all-completed');
+        countSpan.textContent = ``;
+    }
+}
+
+// ========================================
+// 全てのアコーディオングループの状態を更新
+// ========================================
+function updateAllAccordionGroupStatus() {
+    const accordions = document.querySelectorAll('.mission-accordion');
+    accordions.forEach((accordion, index) => {
+        const groupIndex = parseInt(accordion.dataset.accordionIndex);
+        // グループのミッションIDを取得（グローバル変数から）
+        // この関数は後でtoggleMissionCompletedから呼び出される
+        const missionItems = accordion.querySelectorAll('.mission-item');
+        const missionIds = Array.from(missionItems).map(item => 
+            parseInt(item.dataset.missionId)
+        );
+        updateAccordionGroupStatus(groupIndex, missionIds);
     });
 }
 
@@ -515,6 +741,9 @@ function toggleMissionCompleted(missionId) {
     
     // サマリー更新（compMissionの状態を反映）
     updateMissionSummary();
+    
+    // アコーディオングループの状態更新
+    updateAllAccordionGroupStatus();
     
     // 非表示フィルター適用
     toggleHideCompletedMissions();
@@ -658,7 +887,7 @@ function updateCalculations() {
     const remainingNeeded = Math.max(0, remainingRewardsCost - currentPoints - remainingMissionPoints);
     
     // あと何周必要か
-    const runsNeeded = Math.floor(remainingNeeded / currentEvent.pointsPerRun * 10) / 10; // 小数点第2位で切り捨て
+    const runsNeeded = Math.floor(remainingNeeded / currentEvent.pointsPerRun * 100) / 100; // 小数点第2位で切り捨て
     
     // 残り日数
     const now = new Date();
@@ -671,10 +900,10 @@ function updateCalculations() {
     const lastDay = new Date(endDate);
     lastDay.setHours(4, 59, 0, 0);
     const diffTime = lastDay - currentDay;
-    const remainingDays = Math.max(1, Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1);
+    const remainingDays = Math.max(1, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
     
     // 1日あたりのノルマ
-    const dailyQuota = remainingDays > 0 ? (runsNeeded / remainingDays).toFixed(1) : 0;
+    const dailyQuota = remainingDays > 0 ? (runsNeeded / remainingDays).toFixed(3) : 0;
     
     // 1日あたりのやる気
     const dailyStamina = Math.ceil(dailyQuota * currentEvent.staminaCost);
@@ -682,7 +911,7 @@ function updateCalculations() {
     // UI更新
     document.getElementById('totalNeeded').textContent = totalNeeded.toLocaleString();
     document.getElementById('remainingNeeded').textContent = remainingNeeded.toLocaleString();
-    document.getElementById('runsNeeded').textContent = runsNeeded.toFixed(1) + '周';
+    document.getElementById('runsNeeded').textContent = runsNeeded.toFixed(3) + '周';
     document.getElementById('dailyQuota').textContent = dailyQuota + '周';
     document.getElementById('dailyStamina').textContent = dailyStamina.toLocaleString();
 }
@@ -691,7 +920,7 @@ function updateCalculations() {
 // 進捗リセット
 // ========================================
 function resetProgress() {
-    if (!confirm('交換済みの在庫数と達成済みミッションをリセットしますか？\n「いる/いらない」の設定は保持されます。')) {
+    if (!confirm('在庫数と任務達成状況をリセットしますか？\n※「交換する/しない」の設定はそのまま')) {
         return;
     }
     
@@ -752,7 +981,7 @@ function resetProgress() {
 // 完全初期化
 // ========================================
 function resetAll() {
-    if (!confirm('すべての設定とデータを初期化しますか？\nこの操作は取り消せません。')) {
+    if (!confirm('「交換する/しない」を含めて全部初期化しますか？')) {
         return;
     }
     
@@ -866,6 +1095,9 @@ function loadEventStateFromLocalStorage(eventId) {
         // コンプリートミッションの状態確認
         checkAndUpdateCompMissions();
         updateMissionSummary();
+        
+        // アコーディオングループの状態更新
+        updateAllAccordionGroupStatus();
     }
     
     // 現在のポイント復元
