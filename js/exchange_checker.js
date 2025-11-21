@@ -247,27 +247,28 @@ function updateRemainingDays() {
     const now = new Date();
     const endDate = new Date(currentEvent.endDate);
     
-    // 現在の日付（4:59を1日の終わりとする）
-    const currentDay = new Date(now);
-    if (now.getHours() < 5) {
-        // 5時前なら前日扱い
-        currentDay.setDate(currentDay.getDate() - 1);
-    }
-    currentDay.setHours(4, 59, 0, 0);
-    
-    // 終了日（4:59）
-    const lastDay = new Date(endDate);
-    lastDay.setHours(4, 59, 0, 0);
-    
-    // 日数計算（今日を含めない＝-1する）
-    const diffTime = lastDay - currentDay;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    // 終了日時までの残り時間（ミリ秒）
+    const diffTime = endDate - now;
     
     const remainingDaysElement = document.getElementById('remainingDays');
-    if (diffDays > 0) {
-        remainingDaysElement.textContent = `${diffDays}日`;
-    } else if (diffDays === 0) {
-        remainingDaysElement.textContent = '今日まで！';
+    
+    if (diffTime > 0) {
+        // 日、時、分、秒を計算
+        const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+        
+        // dd:hh:mm:ss形式で表示（0埋めあり）
+        const daysStr = String(days).padStart(2, '0');
+        const hoursStr = String(hours).padStart(2, '0');
+        const minutesStr = String(minutes).padStart(2, '0');
+        const secondsStr = String(seconds).padStart(2, '0');
+        
+        remainingDaysElement.textContent = `${daysStr}日と${hoursStr}時間${minutesStr}分${secondsStr}秒`;
+        
+        // 1秒後に再度更新（タイマー表示のため）
+        setTimeout(updateRemainingDays, 1000);
     } else {
         remainingDaysElement.textContent = '終了';
     }
@@ -329,6 +330,10 @@ function createRewardItem(reward) {
             <button class="reward-btn reward-btn-decrease">－1</button>
             <button class="reward-btn reward-btn-increase">＋1</button>
         </div>
+        <div class="reward-controls" style="margin-top: 4px;">
+            <button class="reward-btn reward-btn-buy-all">一括購入</button>
+            <button class="reward-btn reward-btn-reset">リセット</button>
+        </div>
         <div class="sold-out-badge" style="display: none;">売り切れ</div>
     `;
     
@@ -353,6 +358,20 @@ function createRewardItem(reward) {
     increaseBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         increaseStock(reward.id);
+    });
+    
+    // 一括購入ボタン
+    const buyAllBtn = div.querySelector('.reward-btn-buy-all');
+    buyAllBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        buyAllStock(reward.id);
+    });
+    
+    // リセットボタン
+    const resetBtn = div.querySelector('.reward-btn-reset');
+    resetBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        resetStock(reward.id);
     });
     
     return div;
@@ -425,23 +444,46 @@ function updateRewardUI(rewardId) {
     stockBadge.textContent = `×${state.remaining}`;
     
     // ボタンの有効/無効
-    // unwantedの時は両方のボタンを無効化
+    const buyAllBtn = item.querySelector('.reward-btn-buy-all');
+    const resetBtn = item.querySelector('.reward-btn-reset');
+    
+    // unwantedの時は全てのボタンを無効化
     if (!state.wanted) {
         decreaseBtn.disabled = true;
         increaseBtn.disabled = true;
+        if (buyAllBtn) buyAllBtn.disabled = true;
+        if (resetBtn) resetBtn.disabled = true;
     } else {
-        // 在庫-1ボタン：在庫が0以下の場合は無効
+        // 在庫-1ボタン:在庫が0以下の場合は無効
         if (state.remaining <= 0) {
             decreaseBtn.disabled = true;
         } else {
             decreaseBtn.disabled = false;
         }
         
-        // 在庫+1ボタン：在庫が最大値以上の場合は無効（売り切れ時は有効）
+        // 在庫+1ボタン:在庫が最大値以上の場合は無効（売り切れ時は有効）
         if (state.remaining >= reward.stock) {
             increaseBtn.disabled = true;
         } else {
             increaseBtn.disabled = false;
+        }
+        
+        // 一括購入ボタン:在庫が0の場合は無効
+        if (buyAllBtn) {
+            if (state.remaining <= 0) {
+                buyAllBtn.disabled = true;
+            } else {
+                buyAllBtn.disabled = false;
+            }
+        }
+        
+        // リセットボタン:在庫がデフォルト値の場合は無効
+        if (resetBtn) {
+            if (state.remaining === reward.stock) {
+                resetBtn.disabled = true;
+            } else {
+                resetBtn.disabled = false;
+            }
         }
     }
 }
@@ -450,11 +492,16 @@ function updateRewardUI(rewardId) {
 // 在庫減少
 // ========================================
 function decreaseStock(rewardId) {
+    const reward = gameData.exchangeRewards.find(r => r.id === rewardId);
     const state = rewardStates[rewardId];
     
     // 在庫がある場合のみ減らす
     if (state.remaining > 0) {
         state.remaining--;
+        
+        // 所持ポイントから価格を減算（0を下限とする）
+        currentPoints = Math.max(0, currentPoints - reward.price);
+        document.getElementById('currentPoints').value = currentPoints;
         
         // UI更新
         updateRewardUI(rewardId);
@@ -478,6 +525,10 @@ function increaseStock(rewardId) {
     if (state.remaining < reward.stock) {
         state.remaining++;
         
+        // 所持ポイントに価格を加算（999999を上限とする）
+        currentPoints = Math.min(999999, currentPoints + reward.price);
+        document.getElementById('currentPoints').value = currentPoints;
+        
         // UI更新
         updateRewardUI(rewardId);
         
@@ -487,6 +538,59 @@ function increaseStock(rewardId) {
         // 保存
         saveToLocalStorage();
     }
+}
+
+// ========================================
+// 一括購入（在庫を0にする）
+// ========================================
+function buyAllStock(rewardId) {
+    const reward = gameData.exchangeRewards.find(r => r.id === rewardId);
+    const state = rewardStates[rewardId];
+    
+    // 所持ポイントから(価格×現在の在庫数)を減算（0を下限とする）
+    const totalPrice = reward.price * state.remaining;
+    currentPoints = Math.max(0, currentPoints - totalPrice);
+    document.getElementById('currentPoints').value = currentPoints;
+    
+    // 在庫を0にする
+    state.remaining = 0;
+    
+    // UI更新
+    updateRewardUI(rewardId);
+    
+    // 計算更新
+    updateCalculations();
+    
+    // 保存
+    saveToLocalStorage();
+}
+
+// ========================================
+// リセット（在庫をデフォルト値に戻す）
+// ========================================
+function resetStock(rewardId) {
+    const reward = gameData.exchangeRewards.find(r => r.id === rewardId);
+    const state = rewardStates[rewardId];
+    
+    // 在庫の差分を計算
+    const stockDiff = reward.stock - state.remaining;
+    
+    // 所持ポイントを増減（在庫が増える=ポイントが増える、在庫が減る=ポイントが減る）
+    const pointsDiff = reward.price * stockDiff;
+    currentPoints = Math.max(0, Math.min(999999, currentPoints + pointsDiff));
+    document.getElementById('currentPoints').value = currentPoints;
+    
+    // デフォルト値に戻す
+    state.remaining = reward.stock;
+    
+    // UI更新
+    updateRewardUI(rewardId);
+    
+    // 計算更新
+    updateCalculations();
+    
+    // 保存
+    saveToLocalStorage();
 }
 
 // ========================================

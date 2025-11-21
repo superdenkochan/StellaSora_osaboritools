@@ -246,13 +246,13 @@
 }
 
 .summary-value {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     color: #333;
 }
 
 .summary-value.highlight {
-    color: #667eea;
+    color: #ff7f00;
 }
 
 /* 報酬グリッド */
@@ -366,7 +366,7 @@
 .reward-price {
     font-size: 16px;
     font-weight: bold;
-    color: #667eea;
+    color: #000000;
     margin-bottom: 6px;
 }
 
@@ -377,8 +377,8 @@
 .reward-status {
     font-size: 12px;
     font-weight: bold;
-    padding: 3px 0;
-    margin-bottom: 6px;
+    padding: 0px 0;
+    margin-bottom: 2px;
     border-radius: 3px;
 }
 
@@ -394,14 +394,14 @@
 
 .reward-controls {
     display: flex;
-    gap: 4px;
-    margin-top: 6px;
+    gap: 8px;
+    margin-top: 4px;
 }
 
 .reward-btn {
     flex: 1;
-    padding: 8px 12px;
-    font-size: 16px;
+    padding: 4px 4px;
+    font-size: 12px;
     font-weight: bold;
     border: none;
     border-radius: 10px;
@@ -433,6 +433,34 @@
 }
 
 .reward-btn-increase:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.reward-btn-buy-all {
+    background: #ff9800;
+    color: white;
+}
+
+.reward-btn-buy-all:hover {
+    background: #f57c00;
+}
+
+.reward-btn-buy-all:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.reward-btn-reset {
+    background: #9c27b0;
+    color: white;
+}
+
+.reward-btn-reset:hover {
+    background: #7b1fa2;
+}
+
+.reward-btn-reset:disabled {
     background: #ccc;
     cursor: not-allowed;
 }
