@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-adsense-account" content="ca-pub-2384775227983330">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上級依頼シミュレーター - おサボりツール</title>
+    
+    <!-- ファビコン -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/others/favicon32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/others/favicon16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/others/favicon180.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/simu_commission.css">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-11QHHPQJCB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-11QHHPQJCB');
+</script>
+<body>
+    <!-- ハンバーガーメニュー -->
+    <div class="hamburger-menu" id="hamburgerMenu">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+    </div>
+
+    <!-- サイドメニュー -->
+    <nav class="side-menu" id="sideMenu">
+        <div class="side-menu-header">メニュー</div>
+        <ul class="side-menu-list">
+            <li><a href="index.html">TOP</a></li>
+            <li><a href="simu_potential.html">素質シミュレーター</a></li>
+            <li><a href="exchange_checker.html">イベント交換所チェッカー</a></li>
+            <li><a href="simu_commission.html">上級依頼シミュレーター(今ここ)</a></li>
+            <li><span class="menu-item-disabled">（予定）昇格に必要な素材数計算機</span></li>
+            <li><span class="menu-item-disabled">（予定）素材逆引き</span></li>
+            <li><span class="menu-item-disabled">（予定）星ノ塔クイズのカンペ</span></li>
+            <li><span class="menu-item-disabled">（予定）無限リングのバフ早見表</span></li>
+            <li><span class="menu-item-disabled">（予定）未実装キャラメモ</span></li>
+            <li><span class="menu-item-disabled">（予定）ココチャまとめ</span></li>
+        </ul>
+    </nav>
+
+    <!-- メニューオーバーレイ -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <div class="container">
+        <header>
+            <h1>上級依頼シミュレーター</h1>
+            <div class="controls">
+                <button id="resetAll" class="btn btn-danger">初期化</button>
+                <button id="showUsage" class="btn btn-info">使い方</button>
+                <button id="languageToggle" class="btn">English</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- 上部コントロール -->
+            <div class="top-controls">
+                <button id="manageOwned" class="btn btn-primary">所持巡遊者の設定</button>
+                <button id="autoAssign" class="btn btn-success" disabled>おまかせ</button>
+            </div>
+
+            <!-- 依頼エリア -->
+            <div class="commissions-area">
+                <!-- 依頼スロット1～4 -->
+                <div class="commission-slot" data-slot="1">
+                    <div class="commission-header">
+                        <button class="commission-select-btn" data-slot="1">
+                            <span class="commission-select-text">依頼を選択</span>
+                        </button>
+                    </div>
+                    <div class="commission-requirements">
+                        <div class="requirement-section">
+                            <h4 class="requirement-title">条件達成に必要な性格</h4>
+                            <div class="requirement-badges style-badges" data-slot="1">
+                                <!-- スタイルバッジが動的に生成 -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="character-slots-with-roles">
+                        <div class="role-character-container" data-commission="1" data-position="1">
+                            <div class="role-label"></div>
+                            <div class="character-slot-item" data-commission="1" data-position="1">
+                                <div class="character-slot-placeholder">?</div>
+                            </div>
+                        </div>
+                        <div class="role-character-container" data-commission="1" data-position="2">
+                            <div class="role-label"></div>
+                            <div class="character-slot-item" data-commission="1" data-position="2">
+                                <div class="character-slot-placeholder">?</div>
+                            </div>
+                        </div>
+                        <div class="role-character-container" data-commission="1" data-position="3">
+                            <div class="role-label"></div>
+                            <div class="character-slot-item" data-commission="1" data-position="3">
+                                <div class="character-slot-placeholder">?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commission-slot" data-slot="2">
+                    <div class="commission-header">
+                        <button class="commission-select-btn" data-slot="2">
+                            <span class="commission-select-text">依頼を選択</span>
+                        </button>
+                    </div>
+                    <div class="commission-requirements">
+                        <div class="requirement-section">
+                            <h4 class="requirement-title">条件達成に必要な性格</h4>
+                            <div class="requirement-badges style-badges" data-slot="2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="character-slots-with-roles">
+                        <div class="role-character-container" data-commission="2" data-position="1">
+                            <div class="role-label"></div>
+                            <div class="character-slot-item" data-commission="2" data-position="1">
+                                <div class="character-slot-placeholder">?</div>
+                            </div>
+                        </div>
+                        <div class="role-character-container" data-commission="2" data-position="2">
+                            <div class="role-label"></div>
+                            <div class="character-slot-item" data-commission="2" data-position="2">
+                                <div class="character-slot-placeholder">?</div>
+                            </div>
+                        </div>
+                        <div class="role-character-container" data-commission="2" data-position="3">
+                            <div class="role-label"></div>
+                            <div class="character-slot-item" data-commission="2" data-position="3">
+                                <div class="character-slot-placeholder">?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commission-slot" data-slot="3">
+                    <div class="commission-header">
+                        <button class="commission-select-btn" data-slot="3">
+                            <span class="commission-select-text">依頼を選択</span>
+                        </button>
+                    </div>
+                    <div class="commission-requirements">
+                        <div class="requirement-section">
+                            <h4 class="requirement-title">条件達成に必要な性格</h4>
+                            <div class="requirement-badges style-badges" data-slot="3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="character-slots-with-roles">
+                        <div class="role-character-container" data-commission="3" data-position="1">
+                            <div class="role-label"></div>
+                            <div class="character-slot-item" data-commission="3" data-position="1">
+                                <div class="character-slot-placeholder">?</div>
+                            </div>
+                        </div>
+                        <div class="role-character-container" data-commission="3" data-position="2">
+                            <div class="role-label"></div>
+                            <div class="character-slot-item" data-commission="3" data-position="2">
+                                <div class="character-slot-placeholder">?</div>
+                            </div>
+                        </div>
+                        <div class="role-character-container" data-commission="3" data-position="3">
+                            <div class="role-label"></div>
+                            <div class="character-slot-item" data-commission="3" data-position="3">
+                                <div class="character-slot-placeholder">?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commission-slot" data-slot="4">
+                    <div class="commission-header">
+                        <button class="commission-select-btn" data-slot="4">
+                            <span class="commission-select-text">依頼を選択</span>
+                        </button>
+                    </div>
+                    <div class="commission-requirements">
+                        <div class="requirement-section">
+                            <h4 class="requirement-title">条件達成に必要な性格</h4>
+                            <div class="requirement-badges style-badges" data-slot="4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="character-slots-with-roles">
+                        <div class="role-character-container" data-commission="4" data-position="1">
+                            <div class="role-label"></div>
+                            <div class="character-slot-item" data-commission="4" data-position="1">
+                                <div class="character-slot-placeholder">?</div>
+                            </div>
+                        </div>
+                        <div class="role-character-container" data-commission="4" data-position="2">
+                            <div class="role-label"></div>
+                            <div class="character-slot-item" data-commission="4" data-position="2">
+                                <div class="character-slot-placeholder">?</div>
+                            </div>
+                        </div>
+                        <div class="role-character-container" data-commission="4" data-position="3">
+                            <div class="role-label"></div>
+                            <div class="character-slot-item" data-commission="4" data-position="3">
+                                <div class="character-slot-placeholder">?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- プリセット管理エリア -->
+            <aside class="presets-area">
+                <h3>プリセット</h3>
+                <div class="presets-list">
+                    <!-- プリセット1～10 -->
+                    <div class="preset-item" data-preset="1">
+                        <div class="preset-thumbnail">
+                            <span class="preset-number">1</span>
+                        </div>
+                        <div class="preset-actions">
+                            <button class="btn-save" data-preset="1">保存</button>
+                            <button class="btn-load" data-preset="1" disabled>読み込み</button>
+                        </div>
+                    </div>
+                    <div class="preset-item" data-preset="2">
+                        <div class="preset-thumbnail">
+                            <span class="preset-number">2</span>
+                        </div>
+                        <div class="preset-actions">
+                            <button class="btn-save" data-preset="2">保存</button>
+                            <button class="btn-load" data-preset="2" disabled>読み込み</button>
+                        </div>
+                    </div>
+                    <div class="preset-item" data-preset="3">
+                        <div class="preset-thumbnail">
+                            <span class="preset-number">3</span>
+                        </div>
+                        <div class="preset-actions">
+                            <button class="btn-save" data-preset="3">保存</button>
+                            <button class="btn-load" data-preset="3" disabled>読み込み</button>
+                        </div>
+                    </div>
+                    <div class="preset-item" data-preset="4">
+                        <div class="preset-thumbnail">
+                            <span class="preset-number">4</span>
+                        </div>
+                        <div class="preset-actions">
+                            <button class="btn-save" data-preset="4">保存</button>
+                            <button class="btn-load" data-preset="4" disabled>読み込み</button>
+                        </div>
+                    </div>
+                    <div class="preset-item" data-preset="5">
+                        <div class="preset-thumbnail">
+                            <span class="preset-number">5</span>
+                        </div>
+                        <div class="preset-actions">
+                            <button class="btn-save" data-preset="5">保存</button>
+                            <button class="btn-load" data-preset="5" disabled>読み込み</button>
+                        </div>
+                    </div>
+                    <div class="preset-item" data-preset="6">
+                        <div class="preset-thumbnail">
+                            <span class="preset-number">6</span>
+                        </div>
+                        <div class="preset-actions">
+                            <button class="btn-save" data-preset="6">保存</button>
+                            <button class="btn-load" data-preset="6" disabled>読み込み</button>
+                        </div>
+                    </div>
+                    <div class="preset-item" data-preset="7">
+                        <div class="preset-thumbnail">
+                            <span class="preset-number">7</span>
+                        </div>
+                        <div class="preset-actions">
+                            <button class="btn-save" data-preset="7">保存</button>
+                            <button class="btn-load" data-preset="7" disabled>読み込み</button>
+                        </div>
+                    </div>
+                    <div class="preset-item" data-preset="8">
+                        <div class="preset-thumbnail">
+                            <span class="preset-number">8</span>
+                        </div>
+                        <div class="preset-actions">
+                            <button class="btn-save" data-preset="8">保存</button>
+                            <button class="btn-load" data-preset="8" disabled>読み込み</button>
+                        </div>
+                    </div>
+                    <div class="preset-item" data-preset="9">
+                        <div class="preset-thumbnail">
+                            <span class="preset-number">9</span>
+                        </div>
+                        <div class="preset-actions">
+                            <button class="btn-save" data-preset="9">保存</button>
+                            <button class="btn-load" data-preset="9" disabled>読み込み</button>
+                        </div>
+                    </div>
+                    <div class="preset-item" data-preset="10">
+                        <div class="preset-thumbnail">
+                            <span class="preset-number">10</span>
+                        </div>
+                        <div class="preset-actions">
+                            <button class="btn-save" data-preset="10">保存</button>
+                            <button class="btn-load" data-preset="10" disabled>読み込み</button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- エラーメッセージ表示エリア -->
+        <div id="errorMessage" class="error-message hidden"></div>
+    </div>
+
+    <!-- 使い方モーダル -->
+    <div class="usage-modal" id="usageModal">
+        <div class="usage-modal-overlay"></div>
+        <div class="usage-modal-content">
+            <div class="usage-modal-header">
+                <h3 class="usage-modal-title">使い方</h3>
+                <button class="usage-modal-close">&times;</button>
+            </div>
+            <div class="usage-modal-body">
+                <h3>基本操作</h3>
+                <p><strong>1. 所持巡遊者の設定</strong><br>
+                自分のデータに合わせて設定しよう！<br>
+                ここでグレーアウトさせた巡遊者は（おまかせを含めて）候補に出なくなるから、<br>
+                持ってない巡遊者と、レベル70未満の巡遊者も設定しておくのがおすすめ！</p>
+                
+                <p><strong>2. 依頼を選択</strong><br>
+                依頼を最大4つ選んでね！<br>
+                ※おまかせ機能は1～3枠だけの時でも機能するよ</p>
+                
+                <p><strong>3. 巡遊者を配置</strong><br>
+                「？」をクリックして巡遊者をあてはめていこう！<br>
+                性格の条件を満たすと、要求されてる性格の色が変わるよ<br>
+                2人設定した時点で性格の条件を両方満たすと、残り1枠が「誰でもOK」表示に変化するよ！</p>
+                
+                <p><strong>4. おまかせ機能（試験中）</strong><br>
+                「おまかせ」ボタンを押すと、自動で組み合わせを提案してくれるよ！<br>
+                出てきた候補をクリックするとそれが設定されるよ<br>
+                全部の条件を満たせなかった時は足りないキャラが出てくるから、<br>
+                設定をいじってもう1回おまかせを実行してみてね</p>
+                
+                <p><strong>5. プリセット</strong><br>
+                現在の設定を保存できるよ<br>
+                ※所持巡遊者の設定もプリセットごとに保存されます</p>
+                
+                <p><strong>6. 初期化</strong><br>
+                現在の設定と所持巡遊者をデフォの状態に戻すよ<br>
+                ※プリセット情報は残ります</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 依頼選択モーダル -->
+    <div class="commission-modal" id="commissionModal">
+        <div class="commission-modal-overlay"></div>
+        <div class="commission-modal-content">
+            <div class="commission-modal-header">
+                <h3 class="commission-modal-title">依頼を選択</h3>
+                <button class="commission-modal-close">&times;</button>
+            </div>
+            <div class="commission-modal-body">
+                <div class="commission-modal-grid">
+                    <!-- 依頼カテゴリーが動的に生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- キャラクター選択モーダル -->
+    <div class="character-modal" id="characterModal">
+        <div class="character-modal-overlay"></div>
+        <div class="character-modal-content">
+            <div class="character-modal-header">
+                <h3 class="character-modal-title">巡遊者を選択</h3>
+                <button class="character-modal-close">&times;</button>
+            </div>
+            <div class="character-modal-body">
+                <div class="character-modal-grid">
+                    <!-- キャラクターが動的に生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 所持キャラクター管理モーダル -->
+    <div class="owned-characters-modal" id="ownedCharactersModal">
+        <div class="owned-characters-modal-overlay"></div>
+        <div class="owned-characters-modal-content">
+            <div class="owned-characters-modal-header">
+                <h3 class="owned-characters-modal-title">所持巡遊者の設定</h3>
+                <button class="owned-characters-modal-close">&times;</button>
+            </div>
+            <div class="owned-characters-modal-body">
+                <div class="owned-characters-grid">
+                    <!-- キャラクターが動的に生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- おまかせ結果モーダル -->
+    <div class="auto-assign-modal" id="autoAssignModal">
+        <div class="auto-assign-modal-overlay"></div>
+        <div class="auto-assign-modal-content">
+            <div class="auto-assign-modal-header">
+                <h3 class="auto-assign-modal-title">おまかせ編成候補</h3>
+                <button class="auto-assign-modal-close">&times;</button>
+            </div>
+            <div class="auto-assign-modal-body">
+                <div id="autoAssignResults">
+                    <!-- おまかせ結果が動的に生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/simu_commission.js"></script>
+
+    <footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #ffffff; text-align: center; color: #666;">
+        <p style="color: white; margin-bottom: 10px;">
+            <a href="https://x.com/denko_gaminggal" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">@denko_gaminggal</a> |
+            <a href="https://marshmallow-qa.com/2vagoau6ezqonbq?t=zH1owd&utm_medium=url_text&utm_source=promotion" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">マシュマロ（感想・要望など）</a> |
+            <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">プライバシーポリシー</a>
+        </p>
+        <p style="color: white;">©Yostar<br>
+        ※本サイトはステラソラの非公式ファンサイトです！</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,212 @@
+{
+  "characters": [
+    {
+      "id": "10001",
+      "name": "チーシア",
+      "name_en": "Character 1",
+      "icon": "images/characters/char_10001.jpg",
+      "role": "versatile",
+      "style": "shushu"
+    },
+    {
+      "id": "10002",
+      "name": "コハク",
+      "name_en": "Character 2",
+      "icon": "images/characters/char_10002.jpg",
+      "role": "vanguard",
+      "style": "shushu"
+    },
+    {
+      "id": "10003",
+      "name": "カシミラ",
+      "name_en": "Character 3",
+      "icon": "images/characters/char_10003.jpg",
+      "role": "versatile",
+      "style": "boukenka"
+    },
+    {
+      "id": "10004",
+      "name": "フローラ",
+      "name_en": "Character 4",
+      "icon": "images/characters/char_10004.jpg",
+      "role": "support",
+      "style": "shushu"
+    },
+    {
+      "id": "10005",
+      "name": "フユカ",
+      "name_en": "Character 5",
+      "icon": "images/characters/char_10005.jpg",
+      "role": "vanguard",
+      "style": "chiteki"
+    },
+    {
+      "id": "20001",
+      "name": "フリージア",
+      "name_en": "Character 6",
+      "icon": "images/characters/char_20001.jpg",
+      "role": "versatile",
+      "style": "boukenka"
+    },
+    {
+      "id": "20002",
+      "name": "チトセ",
+      "name_en": "Character 7",
+      "icon": "images/characters/char_20002.jpg",
+      "role": "vanguard",
+      "style": "chiteki"
+    },
+    {
+      "id": "20003",
+      "name": "アヤメ",
+      "name_en": "Character 8",
+      "icon": "images/characters/char_20003.jpg",
+      "role": "versatile",
+      "style": "dokusou"
+    },
+    {
+      "id": "20004",
+      "name": "シーミャオ",
+      "name_en": "Character 9",
+      "icon": "images/characters/char_20004.jpg",
+      "role": "vanguard",
+      "style": "chiteki"
+    },
+    {
+      "id": "20005",
+      "name": "テレサ",
+      "name_en": "Character 10",
+      "icon": "images/characters/char_20005.jpg",
+      "role": "support",
+      "style": "shikkari"
+    },
+    {
+      "id": "30001",
+      "name": "ナノハ",
+      "name_en": "Character 11",
+      "icon": "images/characters/char_30001.jpg",
+      "role": "vanguard",
+      "style": "chiteki"
+    },
+    {
+      "id": "30002",
+      "name": "セイナ",
+      "name_en": "Character 12",
+      "icon": "images/characters/char_30002.jpg",
+      "role": "vanguard",
+      "style": "dokusou"
+    },
+    {
+      "id": "30003",
+      "name": "カナーチェ",
+      "name_en": "Character 13",
+      "icon": "images/characters/char_30003.jpg",
+      "role": "versatile",
+      "style": "boukenka"
+    },
+    {
+      "id": "30004",
+      "name": "アンズ",
+      "name_en": "Character 14",
+      "icon": "images/characters/char_30004.jpg",
+      "role": "support",
+      "style": "boukenka"
+    },
+    {
+      "id": "40001",
+      "name": "グレイ",
+      "name_en": "Character 15",
+      "icon": "images/characters/char_40001.jpg",
+      "role": "vanguard",
+      "style": "chiteki"
+    },
+    {
+      "id": "40002",
+      "name": "ナズナ",
+      "name_en": "Character 16",
+      "icon": "images/characters/char_40002.jpg",
+      "role": "support",
+      "style": "shushu"
+    },
+    {
+      "id": "40003",
+      "name": "レイセン",
+      "name_en": "Character 17",
+      "icon": "images/characters/char_40003.jpg",
+      "role": "versatile",
+      "style": "shushu"
+    },
+    {
+      "id": "50001",
+      "name": "ミネルバ",
+      "name_en": "Character 18",
+      "icon": "images/characters/char_50001.jpg",
+      "role": "versatile",
+      "style": "shikkari"
+    },
+    {
+      "id": "50002",
+      "name": "シア",
+      "name_en": "Character 19",
+      "icon": "images/characters/char_50002.jpg",
+      "role": "vanguard",
+      "style": "boukenka"
+    },
+    {
+      "id": "50003",
+      "name": "ティリア",
+      "name_en": "Character 20",
+      "icon": "images/characters/char_50003.jpg",
+      "role": "support",
+      "style": "shikkari"
+    },
+    {
+      "id": "50004",
+      "name": "ジンリン",
+      "name_en": "Character 21",
+      "icon": "images/characters/char_50004.jpg",
+      "role": "versatile",
+      "style": "chiteki"
+    },
+    {
+      "id": "50005",
+      "name": "ラール",
+      "name_en": "Character 22",
+      "icon": "images/characters/char_50005.jpg",
+      "role": "vanguard",
+      "style": "boukenka"
+    },
+    {
+      "id": "60001",
+      "name": "ミスティ",
+      "name_en": "Character 23",
+      "icon": "images/characters/char_60001.jpg",
+      "role": "versatile",
+      "style": "dokusou"
+    },
+    {
+      "id": "60002",
+      "name": "クルニス",
+      "name_en": "Character 24",
+      "icon": "images/characters/char_60002.jpg",
+      "role": "versatile",
+      "style": "boukenka"
+    },
+    {
+      "id": "60003",
+      "name": "コゼット",
+      "name_en": "Character 25",
+      "icon": "images/characters/char_60003.jpg",
+      "role": "support",
+      "style": "chiteki"
+    },
+    {
+      "id": "60004",
+      "name": "キャラメル",
+      "name_en": "Character 26",
+      "icon": "images/characters/char_60004.jpg",
+      "role": "vanguard",
+      "style": "dokusou"
+    }
+  ]
+}

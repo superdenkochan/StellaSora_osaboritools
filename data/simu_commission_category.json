@@ -1,0 +1,220 @@
+{
+  "categories": [
+    {
+      "id": "1001",
+      "name": "ドーラ",
+      "name_en": "Monetary",
+      "icon": "images/commission/commission_1001.png",
+      "roles": [
+        "vanguard",
+        "versatile",
+        "vanguard"
+      ],
+      "styles": [
+        "boukenka",
+        "chiteki"
+      ]
+    },
+    {
+      "id": "1002",
+      "name": "経験値_巡遊者",
+      "name_en": "Experience",
+      "icon": "images/commission/commission_1002.png",
+      "roles": [
+        "vanguard",
+        "versatile",
+        "vanguard"
+      ],
+      "styles": [
+        "boukenka",
+        "dokusou"
+      ]
+    },
+    {
+      "id": "1003",
+      "name": "経験値_ロスレコ",
+      "name_en": "Disc",
+      "icon": "images/commission/commission_1003.png",
+      "roles": [
+        "versatile",
+        "support",
+        "versatile"
+      ],
+      "styles": [
+        "shushu",
+        "boukenka"
+      ]
+    },
+    {
+      "id": "1004",
+      "name": "巡遊者昇格_帽子",
+      "name_en": "Trekker Hat",
+      "icon": "images/commission/commission_1004.png",
+      "roles": [
+        "vanguard",
+        "support",
+        "vanguard"
+      ],
+      "styles": [
+        "shikkari",
+        "chiteki"
+      ]
+    },
+    {
+      "id": "1005",
+      "name": "巡遊者昇格_壺",
+      "name_en": "Trekker Pot",
+      "icon": "images/commission/commission_1005.png",
+      "roles": [
+        "vanguard",
+        "support",
+        "vanguard"
+      ],
+      "styles": [
+        "shushu",
+        "dokusou"
+      ]
+    },
+    {
+      "id": "1006",
+      "name": "巡遊者昇格_灯",
+      "name_en": "Trekker Emberfly",
+      "icon": "images/commission/commission_1006.png",
+      "roles": [
+        "versatile",
+        "support",
+        "versatile"
+      ],
+      "styles": [
+        "shikkari",
+        "dokusou"
+      ]
+    },
+    {
+      "id": "1007",
+      "name": "ロスレコ昇格_帽子",
+      "name_en": "Disc Hat",
+      "icon": "images/commission/commission_1007.png",
+      "roles": [
+        "versatile",
+        "support",
+        "versatile"
+      ],
+      "styles": [
+        "shikkari",
+        "boukenka"
+      ]
+    },
+    {
+      "id": "1008",
+      "name": "ロスレコ昇格_壺",
+      "name_en": "Disc Pot",
+      "icon": "images/commission/commission_1008.png",
+      "roles": [
+        "vanguard",
+        "support",
+        "vanguard"
+      ],
+      "styles": [
+        "shushu",
+        "chiteki"
+      ]
+    },
+    {
+      "id": "1009",
+      "name": "ロスレコ昇格_灯",
+      "name_en": "Disc Emberfly",
+      "icon": "images/commission/commission_1009.png",
+      "roles": [
+        "vanguard",
+        "versatile",
+        "versatile"
+      ],
+      "styles": [
+        "dokusou",
+        "chiteki"
+      ]
+    },
+    {
+      "id": "1010",
+      "name": "音楽カセット",
+      "name_en": "Rhythm Cartridge",
+      "icon": "images/commission/commission_1010.png",
+      "roles": [
+        "vanguard",
+        "versatile",
+        "versatile"
+      ],
+      "styles": [
+        "chiteki",
+        "shushu"
+      ]
+    },
+    {
+      "id": "1011",
+      "name": "弾幕カセット",
+      "name_en": "Shooter Cartridge",
+      "icon": "images/commission/commission_1011.png",
+      "roles": [
+        "versatile",
+        "vanguard",
+        "versatile"
+      ],
+      "styles": [
+        "dokusou",
+        "shikkari"
+      ]
+    },
+    {
+      "id": "1012",
+      "name": "格闘カセット",
+      "name_en": " Kung-Fu Cartridge",
+      "icon": "images/commission/commission_1012.png",
+      "roles": [
+        "versatile",
+        "support",
+        "support"
+      ],
+      "styles": [
+        "shikkari",
+        "chiteki"
+      ]
+    }
+  ],
+  "roleNames": {
+    "vanguard": {
+      "ja": "アタッカー",
+      "en": "Vanguard"
+    },
+    "versatile": {
+      "ja": "バランサー",
+      "en": "Versatile"
+    },
+    "support": {
+      "ja": "サポーター",
+      "en": "Support"
+    }
+  },
+  "styleNames": {
+    "boukenka": {
+      "ja": "冒険家",
+      "en": "Adventurous"
+    },
+    "dokusou": {
+      "ja": "独創性",
+      "en": "Creative"
+    },
+    "shikkari": {
+      "ja": "しっかり者",
+      "en": "Steady"
+    },
+    "shushu": {
+      "ja": "収集家",
+      "en": "Collector"
+    },
+    "chiteki": {
+      "ja": "知的好奇心",
+      "en": "Inquisitive"
+    }
+  }
+}
