@@ -776,7 +776,7 @@ function handleAutoAssign() {
 
 function findAutoAssignSolutions() {
     const solutions = [];
-    const maxSolutions = 100; // キャラが増えてきたら探索漏れ防止で増やす
+    const maxSolutions = 20; // キャラが増えてきたら探索漏れ防止で増やす
     
     // 選択された依頼を取得
     const selectedCommissions = Object.entries(currentState.commissions)
@@ -857,12 +857,12 @@ function findCandidatesForCommission(category, availableCharacters, usedCharacte
                 
                 if (stylesSatisfied) {
                     candidates.push([char1, char2, char3]);
-                    if (candidates.length >= 25) break; // キャラが増えてきたら増やすかも
+                    if (candidates.length >= 10) break; // キャラが増えてきたら増やすかも
                 }
             }
-            if (candidates.length >= 25) break; // キャラが増えてきたら増やすかも
+            if (candidates.length >= 10) break; // キャラが増えてきたら増やすかも
         }
-        if (candidates.length >= 25) break; // キャラが増えてきたら増やすかも
+        if (candidates.length >= 10) break; // キャラが増えてきたら増やすかも
     }
     
     return candidates;
