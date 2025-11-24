@@ -776,7 +776,7 @@ function handleAutoAssign() {
 
 function findAutoAssignSolutions() {
     const solutions = [];
-    const maxSolutions = 4;
+    const maxSolutions = 100; // キャラが増えてきたら探索漏れ防止で増やす
     
     // 選択された依頼を取得
     const selectedCommissions = Object.entries(currentState.commissions)
@@ -842,27 +842,27 @@ function findCandidatesForCommission(category, availableCharacters, usedCharacte
         );
         
         for (const char2 of pos2Candidates) {
-            // スタイル要件チェック
-            const currentStyles = new Set([char1.style, char2.style]);
-            const stylesSatisfied = requiredStyles.every(style => currentStyles.has(style));
+            // ポジション3の候補を取得（スタイルチェック前）
+            const pos3Candidates = availableCharacters.filter(c => 
+                c.role === requiredRoles[2] && 
+                !usedCharacters.has(c.id) && 
+                c.id !== char1.id && 
+                c.id !== char2.id
+            );
             
-            if (stylesSatisfied) {
-                // ポジション3は任意のロール要件を満たすキャラ
-                const pos3Candidates = availableCharacters.filter(c => 
-                    c.role === requiredRoles[2] && 
-                    !usedCharacters.has(c.id) && 
-                    c.id !== char1.id && 
-                    c.id !== char2.id
-                );
+            for (const char3 of pos3Candidates) {
+                // 3人全員のスタイルでチェック
+                const currentStyles = new Set([char1.style, char2.style, char3.style]);
+                const stylesSatisfied = requiredStyles.every(style => currentStyles.has(style));
                 
-                for (const char3 of pos3Candidates) {
+                if (stylesSatisfied) {
                     candidates.push([char1, char2, char3]);
-                    if (candidates.length >= 10) break;
+                    if (candidates.length >= 25) break; // キャラが増えてきたら増やすかも
                 }
-                if (candidates.length >= 10) break;
             }
+            if (candidates.length >= 25) break; // キャラが増えてきたら増やすかも
         }
-        if (candidates.length >= 10) break;
+        if (candidates.length >= 25) break; // キャラが増えてきたら増やすかも
     }
     
     return candidates;
