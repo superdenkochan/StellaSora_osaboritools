@@ -1,6 +1,4 @@
-// ========================================
 // グローバル変数
-// ========================================
 let categoriesData = null;
 let charactersData = null;
 let currentLanguage = 'ja';
@@ -22,17 +20,17 @@ const currentState = {
 let currentCommissionSlot = null;
 let currentCharacterPosition = null;
 
-// おまかせ成功時のメッセージ設定
+// おまかせ成功時のメッセージ分岐
 const autoAssignMessages = {
     // ラールが含まれている場合
     withSpecialCharacters: {
         icon: 'images/commission/success_laru.png', 
         message: {
-            ja: 'お待たせー！…って、あたしが候補に入ってる!?ねぇ魔王っち～、あたしちょっと…外回り行ってくるね～♪',
+            ja: 'じゃ～ん♪…って、あたしが候補に入ってるんですけど!?',
             en: 'Special team composition found!'
         }
     },
-    // 通常の場合
+    // それ以外（通常）
     normal: {
         icon: 'images/commission/success_default.png', 
         message: {
@@ -40,13 +38,11 @@ const autoAssignMessages = {
             en: 'Recommended team composition!'
         }
     },
-    // チェック対象の特定キャラクターID
+    // 分岐トリガーのキャラクターID
     specialCharacterIds: ['50005']
 };
 
-// ========================================
 // 初期化
-// ========================================
 document.addEventListener('DOMContentLoaded', async () => {
     await loadData();
     setupEventListeners();
@@ -54,9 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupHamburgerMenu();
 });
 
-// ========================================
 // データ読み込み
-// ========================================
 async function loadData() {
     try {
         const [categoriesResponse, charactersResponse] = await Promise.all([
@@ -73,7 +67,7 @@ async function loadData() {
         
         console.log('データ読み込み完了');
         
-        // 所持キャラクターをデフォルトで全員有効にする
+        // デフォルトで全員有効にする処理
         charactersData.characters.forEach(char => {
             ownedCharacters.add(char.id);
         });
@@ -84,9 +78,7 @@ async function loadData() {
     }
 }
 
-// ========================================
 // ハンバーガーメニュー
-// ========================================
 function setupHamburgerMenu() {
     const hamburger = document.getElementById('hamburgerMenu');
     const sideMenu = document.getElementById('sideMenu');
@@ -105,9 +97,7 @@ function setupHamburgerMenu() {
     }
 }
 
-// ========================================
 // イベントリスナーの設定
-// ========================================
 function setupEventListeners() {
     // 所持キャラクター管理
     document.getElementById('manageOwned').addEventListener('click', openOwnedCharactersModal);
@@ -124,7 +114,7 @@ function setupEventListeners() {
     // 言語切り替え
     document.getElementById('languageToggle').addEventListener('click', toggleLanguage);
     
-    // 依頼選択ボタン
+    // 依頼選択スロット
     document.querySelectorAll('.commission-select-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const slot = e.currentTarget.dataset.slot;
@@ -148,9 +138,7 @@ function setupEventListeners() {
     setupPresetButtons();
 }
 
-// ========================================
 // モーダル関連
-// ========================================
 function closeCommissionModal() {
     document.getElementById('commissionModal').classList.remove('open');
 }
@@ -203,9 +191,7 @@ function openModal(modalId) {
     document.getElementById(modalId).classList.add('open');
 }
 
-// ========================================
 // 所持キャラクター管理
-// ========================================
 function openOwnedCharactersModal() {
     const modal = document.getElementById('ownedCharactersModal');
     const grid = modal.querySelector('.owned-characters-grid');
@@ -226,7 +212,7 @@ function openOwnedCharactersModal() {
         icon.src = char.icon;
         icon.alt = char.name;
         
-        // ツールチップを追加(ロールとスタイル)
+        // ツールチップを追加（ロール+スタイル）
         const tooltip = document.createElement('div');
         tooltip.className = 'owned-character-tooltip';
         const roleName = getRoleName(char.role);
@@ -255,7 +241,7 @@ function openOwnedCharactersModal() {
     modal.classList.add('open');
 }
 
-// 未所持キャラクターをスロットから削除
+// 未所持キャラクターをスロットの候補から削除
 function removeUnownedCharactersFromSlots() {
     let hasChanges = false;
     
@@ -283,9 +269,7 @@ function removeUnownedCharactersFromSlots() {
     }
 }
 
-// ========================================
 // 依頼選択
-// ========================================
 function openCommissionModal(slot) {
     currentCommissionSlot = slot;
     const modal = document.getElementById('commissionModal');
@@ -366,7 +350,7 @@ function clearCommission(slot) {
     const styleBadgesContainer = document.querySelector(`.style-badges[data-slot="${slot}"]`);
     styleBadgesContainer.innerHTML = '';
     
-    // ロールコンテナとキャラクタースロットをリセット
+    // ロールコンテナとキャラスロをリセット
     for (let i = 1; i <= 3; i++) {
         const container = document.querySelector(`.role-character-container[data-commission="${slot}"][data-position="${i}"]`);
         const slotElement = document.querySelector(`.character-slot-item[data-commission="${slot}"][data-position="${i}"]`);
@@ -378,11 +362,11 @@ function clearCommission(slot) {
         // ロールクラスとhas-characterクラスを削除
         container.classList.remove('role-vanguard', 'role-versatile', 'role-support', 'has-character');
         
-        // デフォルト背景色にリセット
+        // 背景色リセット
         container.style.backgroundColor = '#f0f0f0';
         label.style.color = '#666';
         
-        // キャラクタースロットをリセット＆グレーアウト
+        // キャラスロをリセット＆グレーアウト
         slotElement.classList.remove('filled', 'anything');
         slotElement.classList.add('disabled');
         slotElement.innerHTML = '<div class="character-slot-placeholder">?</div>';
@@ -397,7 +381,7 @@ function selectCommission(slot, categoryId, skipSave = false) {
     // 既存の依頼IDを取得
     const previousCategoryId = currentState.commissions[slot].categoryId;
     
-    // 依頼が変更される場合、キャラクタースロットをクリア
+    // 依頼を変更した時キャラスロを空にする
     if (previousCategoryId !== null && previousCategoryId !== categoryId) {
         currentState.commissions[slot].characters = [null, null, null];
         
@@ -433,7 +417,7 @@ function selectCommission(slot, categoryId, skipSave = false) {
     }
     badge.textContent = currentLanguage === 'ja' ? category.name : category.name_en;
     
-    // キャラクタースロットを有効化
+    // キャラスロを有効化
     for (let i = 1; i <= 3; i++) {
         const slotElement = document.querySelector(`.character-slot-item[data-commission="${slot}"][data-position="${i}"]`);
         slotElement.classList.remove('disabled');
@@ -467,7 +451,7 @@ function updateRequirementBadges(slot) {
         container.classList.remove('role-vanguard', 'role-versatile', 'role-support');
         container.classList.add(`role-${role}`);
         
-        // 薄い背景色を設定（未配置時）
+        // 未配置時の背景色
         const lightRoleColors = {
             'vanguard': '#ffd2e3',
             'versatile': '#cfd1ff',
@@ -505,16 +489,14 @@ function getStyleName(style) {
         : categoriesData.styleNames[style].en;
 }
 
-// ========================================
 // キャラクター選択
-// ========================================
 function openCharacterModal(commissionSlot, position) {
     currentCommissionSlot = commissionSlot;
     currentCharacterPosition = position;
     
     const commission = currentState.commissions[commissionSlot];
     if (!commission.categoryId) {
-        // 依頼未選択の場合は何もしない（グレーアウトで対応済み）
+        // 依頼未選択の場合は何もしない
         return;
     }
     
@@ -590,7 +572,7 @@ function openCharacterModal(commissionSlot, position) {
 function selectCharacter(commissionSlot, position, characterId, skipSave = false) {
     currentState.commissions[commissionSlot].characters[position - 1] = characterId;
     
-    // キャラクタースロットの更新
+    // キャラスロの更新
     const slotElement = document.querySelector(`.character-slot-item[data-commission="${commissionSlot}"][data-position="${position}"]`);
     const containerElement = document.querySelector(`.role-character-container[data-commission="${commissionSlot}"][data-position="${position}"]`);
     
@@ -600,11 +582,11 @@ function selectCharacter(commissionSlot, position, characterId, skipSave = false
         const character = charactersData.characters.find(c => c.id === characterId);
         slotElement.classList.add('filled');
         
-        // コンテナに配置済みクラスを追加
+        // コンテナに配置済クラスを追加
         if (containerElement) {
             containerElement.classList.add('has-character');
             
-            // 配置済み - 濃い背景色を設定
+            // 配置済の背景色
             const commission = currentState.commissions[commissionSlot];
             if (commission.categoryId) {
                 const category = categoriesData.categories.find(c => c.id === commission.categoryId);
@@ -633,19 +615,19 @@ function selectCharacter(commissionSlot, position, characterId, skipSave = false
         slotElement.classList.remove('filled');
         slotElement.classList.remove('anything');
         
-        // コンテナから配置済みクラスを削除
+        // コンテナから配置済クラスを削除
         if (containerElement) {
             containerElement.classList.remove('has-character');
             
-            // 未配置 - 薄い背景色に戻す
+            // 未配置の背景色
             const commission = currentState.commissions[commissionSlot];
             if (commission.categoryId) {
                 const category = categoriesData.categories.find(c => c.id === commission.categoryId);
                 const currentRole = category.roles[position - 1];
                 const lightRoleColors = {
-                    'vanguard': '#ffcdd2',
-                    'versatile': '#c8e6c9',
-                    'support': '#ffe0b2'
+                    'vanguard': '#ffd2e3',
+                    'versatile': '#cfd1ff',
+                    'support': '#d2fff6'
                 };
                 if (lightRoleColors[currentRole]) {
                     containerElement.style.backgroundColor = lightRoleColors[currentRole];
@@ -685,9 +667,7 @@ function getUsedCharacters(excludeCommission = null, excludePosition = null) {
     return used;
 }
 
-// ========================================
 // 条件チェック
-// ========================================
 function checkRequirements(slot) {
     const commission = currentState.commissions[slot];
     if (!commission.categoryId) return;
@@ -727,12 +707,12 @@ function checkAnythingOk(slot) {
     
     const category = categoriesData.categories.find(c => c.id === commission.categoryId);
     
-    // まず全てのスロットから「誰でもOK」をクリア
+    // 全てのスロットから「誰でもOK」をクリア
     for (let i = 1; i <= 3; i++) {
         const slotElement = document.querySelector(`.character-slot-item[data-commission="${slot}"][data-position="${i}"]`);
         slotElement.classList.remove('anything');
         
-        // キャラクターが配置されていない場合は「?」に戻す
+        // キャラクターが配置されていない場合はハテナに戻す
         if (!commission.characters[i - 1]) {
             slotElement.innerHTML = '<div class="character-slot-placeholder">?</div>';
         }
@@ -765,16 +745,14 @@ function checkAnythingOk(slot) {
                 const text = currentLanguage === 'ja' ? '誰でもOK' : 'Free';
                 emptySlotElement.innerHTML = `<div class="character-slot-placeholder">${text}</div>`;
                 
-                // 1つ見つかったら終了（複数の組み合わせでマッチすることはない）
+                // 1つ見つかったら終了
                 break;
             }
         }
     }
 }
 
-// ========================================
-// おまかせボタンの制御
-// ========================================
+// おまかせボタン
 function updateAutoAssignButton() {
     const autoAssignBtn = document.getElementById('autoAssign');
     const selectedCommissions = Object.values(currentState.commissions)
@@ -790,9 +768,7 @@ function updateAutoAssignButton() {
     }
 }
 
-// ========================================
 // おまかせ機能
-// ========================================
 function handleAutoAssign() {
     const solutions = findAutoAssignSolutions();
     displayAutoAssignResults(solutions);
@@ -902,22 +878,73 @@ function displayAutoAssignResults(solutions) {
         // 達成できない場合
         const errorDiv = document.createElement('div');
         errorDiv.className = 'auto-assign-error';
-        errorDiv.innerHTML = '<h4>巡遊者が不足してるみたい！</h4><p>今いる巡遊者じゃ全部の条件満たすのは無理っぽいね～</p>';
+        errorDiv.innerHTML = '<h4>おまかせ編成失敗！</h4><p>あっちゃ～…今の手持ちじゃ全部の条件満たすのは無理っぽいねー</p>';
         
-        // 不足しているキャラクターを提案
-        const missingChars = findMissingCharacters();
-        if (missingChars.length > 0) {
-            errorDiv.innerHTML += '<div class="missing-characters"></div><p>がいれば達成できそう！<br>所持キャラクター管理画面をいじってみて！</p>';
-            const missingContainer = errorDiv.querySelector('.missing-characters');
+        // 不足しているキャラクターの提案
+        const missingResult = findMissingCharacters({
+            maxTotalPatterns: 20,   // 合計20パターンまで表示
+            maxRequiredChars: 5     // 最大5人まで試す
+        });
+        
+        if (missingResult.tooMany) {
+            // 必要キャラが多すぎる場合
+            errorDiv.innerHTML += '<p>最低でもあと<strong>6人以上必要</strong>だから候補を表示しきれないよ！</p>';
+        } else if (missingResult.groups.length > 0) {
+            // 候補がある場合
+            errorDiv.innerHTML += '<div class="missing-characters-section"></div>';
+            const sectionContainer = errorDiv.querySelector('.missing-characters-section');
             
-            missingChars.slice(0, 5).forEach(char => {
-                const img = document.createElement('img');
-                img.className = 'missing-character-icon';
-                img.src = char.icon;
-                img.alt = char.name;
-                img.title = currentLanguage === 'ja' ? char.name : char.name_en;
-                missingContainer.appendChild(img);
+            missingResult.groups.forEach(group => {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'missing-group';
+                
+                const groupTitle = document.createElement('h5');
+                groupTitle.className = 'missing-group-title';
+                groupTitle.textContent = group.requiredCount === 1 
+                    ? 'あと1人必要なパターン' 
+                    : `あと${group.requiredCount}人必要なパターン`;
+                groupDiv.appendChild(groupTitle);
+                
+                // 候補を1つずつコンテナに格納
+                const candidatesContainer = document.createElement('div');
+                candidatesContainer.className = 'missing-candidates-container';
+                
+                // 各候補を表示
+                group.candidates.forEach((candidate, idx) => {
+                    // 1パターンごとにコンテナ作る
+                    const candidateItem = document.createElement('div');
+                    candidateItem.className = 'missing-candidate-item';
+                    
+                    // キャラクターアイコンを格納
+                    const iconsContainer = document.createElement('div');
+                    iconsContainer.className = 'missing-candidate-icons';
+                    
+                    candidate.forEach((char, charIdx) => {
+                        const img = document.createElement('img');
+                        img.className = 'missing-character-icon-box';
+                        img.src = char.icon;
+                        img.alt = char.name;
+                        img.title = currentLanguage === 'ja' ? char.name : char.name_en;
+                        iconsContainer.appendChild(img);
+                        
+                        // 複数人の場合+で繋げる
+                        if (group.requiredCount > 1 && charIdx < candidate.length - 1) {
+                            const plusSign = document.createElement('span');
+                            plusSign.className = 'candidate-plus';
+                            plusSign.textContent = '+';
+                            iconsContainer.appendChild(plusSign);
+                        }
+                    });
+                    
+                    candidateItem.appendChild(iconsContainer);
+                    candidatesContainer.appendChild(candidateItem);
+                });
+                
+                groupDiv.appendChild(candidatesContainer);
+                sectionContainer.appendChild(groupDiv);
             });
+            
+            errorDiv.innerHTML += '<p>所持巡遊者の設定を変えてもう1回試してみてね</p>';
         }
         
         resultsContainer.appendChild(errorDiv);
@@ -1012,9 +1039,109 @@ function displayAutoAssignResults(solutions) {
     modal.classList.add('open');
 }
 
-function findMissingCharacters() {
-    // 未所持のキャラクターをランダムに返す
-    return charactersData.characters.filter(c => !ownedCharacters.has(c.id));
+function findMissingCharacters(options = {}) {
+    // オプションのデフォルト値
+    const maxTotalPatterns = options.maxTotalPatterns || 20; // 合計パターン数の上限
+    const maxRequiredChars = options.maxRequiredChars || 5; // 最大何体まで試すか
+    
+    // 未所持のキャラクターを取得
+    const missingChars = charactersData.characters.filter(c => !ownedCharacters.has(c.id));
+    
+    if (missingChars.length === 0) {
+        return { groups: [], tooMany: false };
+    }
+    
+    // 結果を格納: { requiredCount: number, candidates: Array<Array<Character>> }
+    const resultGroups = [];
+    let totalPatterns = 0;
+    
+    // 既に見つかったキャラクターのIDを記録（それ以降に除外するため）
+    const alreadyFoundCharIds = new Set();
+    
+    // 1体ずつ増やしながら試す
+    for (let requiredCount = 1; requiredCount <= Math.min(maxRequiredChars, missingChars.length); requiredCount++) {
+        const candidatesForThisCount = [];
+        
+        // この体数での組み合わせを生成して試す
+        const combinations = generateCombinations(missingChars, requiredCount);
+        
+        for (const combo of combinations) {
+            // 合計パターン数が上限に達したら終了
+            if (totalPatterns >= maxTotalPatterns) break;
+            
+            // すでに見つかったキャラクターが含まれている場合はスキップ
+            // （前の体数グループで見つかったキャラクターを含む組み合わせは無視）
+            const hasAlreadyFoundChar = combo.some(char => alreadyFoundCharIds.has(char.id));
+            if (hasAlreadyFoundChar) {
+                continue;
+            }
+            
+            // この組み合わせのキャラクターを一時的に所持キャラクターに追加
+            const tempOwnedChars = new Set(ownedCharacters);
+            combo.forEach(char => tempOwnedChars.add(char.id));
+            
+            // 一時的に所持キャラクターを変更して解を探す
+            const originalOwnedChars = ownedCharacters;
+            ownedCharacters = tempOwnedChars;
+            const solutions = findAutoAssignSolutions();
+            ownedCharacters = originalOwnedChars;
+            
+            // 解が見つかった場合、この組み合わせを候補に追加
+            if (solutions.length > 0) {
+                candidatesForThisCount.push(combo);
+                totalPatterns++;
+            }
+        }
+        
+        // この体数で候補が見つかった場合、結果に追加
+        if (candidatesForThisCount.length > 0) {
+            resultGroups.push({
+                requiredCount: requiredCount,
+                candidates: candidatesForThisCount
+            });
+            
+            // この体数グループで見つかったキャラクターを記録
+            // （次の体数グループでこれらを含む組み合わせを除外するため）
+            candidatesForThisCount.forEach(candidate => {
+                candidate.forEach(char => {
+                    alreadyFoundCharIds.add(char.id);
+                });
+            });
+        }
+        
+        // 合計パターン数が上限に達したら終了
+        if (totalPatterns >= maxTotalPatterns) break;
+    }
+    
+    // 何も見つからなかった場合はmaxRequiredCharsを超える体数が必要
+    const tooMany = resultGroups.length === 0;
+    
+    return { groups: resultGroups, tooMany: tooMany };
+}
+
+// n個の要素からk個を選ぶ組み合わせを生成
+function generateCombinations(array, k, maxCombinations = 1000) {
+    const result = [];
+    
+    function backtrack(start, current) {
+        if (result.length >= maxCombinations) return; // 上限に達したら終了
+        
+        if (current.length === k) {
+            result.push([...current]);
+            return;
+        }
+        
+        for (let i = start; i < array.length; i++) {
+            current.push(array[i]);
+            backtrack(i + 1, current);
+            current.pop();
+            
+            if (result.length >= maxCombinations) return; // 上限チェック
+        }
+    }
+    
+    backtrack(0, []);
+    return result;
 }
 
 function applySolution(solution) {
@@ -1031,9 +1158,9 @@ function applySolution(solution) {
     updatePresetThumbnails();
 }
 
-// 特定キャラクターが候補に含まれているかチェック
+// ラールが候補に含まれているかチェック
 function checkForSpecialCharacters(solutions) {
-    // 特定キャラクターIDが設定されていない場合はfalse
+    // ラールが設定されていない場合はfalse
     if (!autoAssignMessages.specialCharacterIds || autoAssignMessages.specialCharacterIds.length === 0) {
         return false;
     }
@@ -1048,13 +1175,11 @@ function checkForSpecialCharacters(solutions) {
         });
     });
     
-    // 特定キャラクターが1つでも含まれているかチェック
+    // ラールのIDが1つでも含まれているかチェック
     return autoAssignMessages.specialCharacterIds.some(id => allCharacterIds.has(id));
 }
 
-// ========================================
 // プリセット機能
-// ========================================
 function setupPresetButtons() {
     document.querySelectorAll('.btn-save').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -1315,9 +1440,7 @@ function handleResetAll() {
     alert('初期化しました');
 }
 
-// ========================================
 // 言語切り替え
-// ========================================
 function toggleLanguage() {
     currentLanguage = currentLanguage === 'ja' ? 'en' : 'ja';
     const btn = document.getElementById('languageToggle');
@@ -1370,9 +1493,7 @@ function updateLanguageDisplay() {
     });
 }
 
-// ========================================
 // ローカルストレージ
-// ========================================
 function saveToLocalStorage() {
     localStorage.setItem('commission_current_state', JSON.stringify(currentState));
     localStorage.setItem('commission_owned_characters', JSON.stringify([...ownedCharacters]));
@@ -1409,9 +1530,7 @@ function loadFromLocalStorage() {
     updateAutoAssignButton();
 }
 
-// ========================================
 // エラー表示
-// ========================================
 function showError(message) {
     const errorDiv = document.getElementById('errorMessage');
     errorDiv.textContent = message;

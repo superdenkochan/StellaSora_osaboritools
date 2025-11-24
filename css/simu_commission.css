@@ -1,4 +1,4 @@
-/* 上部コントロール */
+/* 上部 */
 .top-controls {
     display: flex;
     gap: 15px;
@@ -27,7 +27,7 @@
     transform: none !important;
 }
 
-/* 依頼エリア全体 */
+/* 依頼エリア */
 .commissions-area {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -83,7 +83,7 @@
     display: none;
 }
 
-/* 依頼名表示 */
+/* 依頼名ツールチップ */
 .commission-name-badge {
     position: absolute;
     bottom: 5px;
@@ -136,7 +136,7 @@
     box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
 }
 
-/* ロール+キャラクタースロット統合スタイル */
+/* ロール+キャラスロ統合コンテナ */
 .character-slots-with-roles {
     display: flex;
     gap: 5px;
@@ -150,11 +150,11 @@
     padding: 5px;
     transition: all 0.3s;
     
-    /* デフォルト（未配置）は薄い色 */
+    /* デフォルト（未配置） */
     background: #f0f0f0;
 }
 
-/* ロール別の背景色 - 未配置（薄い色） */
+/* ロール別の背景色 - 未配置 */
 .role-character-container.role-vanguard {
     background: #ffd2e3; /* アタッカー */
 }
@@ -167,7 +167,7 @@
     background: #d2fff6; /* サポーター */
 }
 
-/* ロール別の背景色 - 配置済み（濃い色） */
+/* ロール別の背景色 - 配置済 */
 .role-character-container.role-vanguard.has-character {
     background: #db6893; 
 }
@@ -216,7 +216,7 @@
     overflow: hidden;
 }
 
-/* 統合コンテナ内のキャラクタースロット */
+/* 統合コンテナ内のキャラスロ */
 .role-character-container .character-slot-item {
     width: 100%;
 }
@@ -260,7 +260,7 @@
     font-size: 16px;
 }
 
-/* プリセットエリア */
+/* プリセット */
 .presets-area {
     padding: 16px;
     background: #f0f0ff;
@@ -583,9 +583,10 @@
     object-fit: cover;
 }
 
+/* 性格ツールチップは常時表示（opacity） */
 .character-option-name {
     position: absolute;
-    bottom: 0;
+    bottom: -30px;
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.85);
@@ -594,10 +595,11 @@
     font-size: 14px;
     text-align: center;
     font-weight: bold;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.3s;
     pointer-events: none;
     z-index: 10;
+    line-height: 1.3;
 }
 
 .character-option:hover .character-option-name {
@@ -706,6 +708,7 @@
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
+/* ホバーでロール+性格を表示させるツールチップ */
 .owned-character-tooltip {
     position: absolute;
     bottom: 0;
@@ -795,7 +798,7 @@
     height: 32px;
 }
 
-/* 成功時のメッセージヘッダー */
+/* 成功時のメッセージ（ヘッダー） */
 .auto-assign-success-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 8px;
@@ -836,6 +839,7 @@
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
+/* 候補1～4と表示させるヘッダー（やっぱいらない） */
 /* .auto-assign-result h4 {
     color: #667eea;
     margin-bottom: 10px;
@@ -913,6 +917,71 @@
     border-radius: 5px;
     object-fit: cover;
     border: 2px solid #ff6b6b;
+}
+
+/* おまかせ失敗時の不足キャラクター */
+.missing-characters-section {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.missing-group {
+    margin-bottom: 8px;
+}
+
+.missing-group-title {
+    color: #667eea;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+/* 候補コンテナ（1パターンごとにボックスで分割） */
+.missing-candidates-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 8px;
+}
+
+.missing-candidate-item {
+    background: #fff5e6;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    padding: 4px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.missing-candidate-item:hover {
+    background: #ffe4b3;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    transform: translateY(-2px);
+}
+
+.missing-candidate-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+    flex-wrap: wrap;
+}
+
+.missing-character-icon-box {
+    width: 64px;
+    height: 64px;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 2px solid #666666;
+}
+
+.candidate-plus {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ff6600;
+    padding: 0 4px;
 }
 
 /* 使い方モーダル */
@@ -1046,4 +1115,10 @@
     border-radius: 8px;
     text-align: center;
     font-weight: bold;
+}
+
+/* 言語切り替えボタン非表示（一旦オミット） */
+
+#languageToggle {
+    display: none !important;
 }
