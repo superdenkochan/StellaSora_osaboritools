@@ -825,6 +825,7 @@ function findAutoAssignSolutions() {
 
 function findCandidatesForCommission(category, availableCharacters, usedCharacters) {
     const candidates = [];
+    const seenCombinations = new Set(); // 重複チェック用（順不同）
     
     // 各ポジションのロール要件
     const requiredRoles = category.roles;
@@ -856,8 +857,15 @@ function findCandidatesForCommission(category, availableCharacters, usedCharacte
                 const stylesSatisfied = requiredStyles.every(style => currentStyles.has(style));
                 
                 if (stylesSatisfied) {
-                    candidates.push([char1, char2, char3]);
-                    if (candidates.length >= 10) break; // キャラが増えてきたら増やすかも
+                    // キャラクターIDをソートして正規化（順不同の重複を排除）
+                    const normalizedKey = [char1.id, char2.id, char3.id].sort().join(',');
+                    
+                    // 重複チェック：同じキャラの組み合わせは1回だけ
+                    if (!seenCombinations.has(normalizedKey)) {
+                        seenCombinations.add(normalizedKey);
+                        candidates.push([char1, char2, char3]);
+                        if (candidates.length >= 10) break; // キャラが増えてきたら増やすかも
+                    }
                 }
             }
             if (candidates.length >= 10) break; // キャラが増えてきたら増やすかも
