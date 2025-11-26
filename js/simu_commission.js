@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadData();
     setupEventListeners();
     loadFromLocalStorage();
-    setupHamburgerMenu();
+    // ハンバーガーメニューはcommon/menu.jsに移行
 });
 
 // データ読み込み
@@ -75,25 +75,6 @@ async function loadData() {
     } catch (error) {
         console.error('データ読み込みエラー:', error);
         showError('データの読み込みに失敗しました。JSONファイルを確認してください。');
-    }
-}
-
-// ハンバーガーメニュー
-function setupHamburgerMenu() {
-    const hamburger = document.getElementById('hamburgerMenu');
-    const sideMenu = document.getElementById('sideMenu');
-    const overlay = document.getElementById('menuOverlay');
-    
-    if (hamburger && sideMenu && overlay) {
-        hamburger.addEventListener('click', () => {
-            sideMenu.classList.toggle('open');
-            overlay.classList.toggle('active');
-        });
-        
-        overlay.addEventListener('click', () => {
-            sideMenu.classList.remove('open');
-            overlay.classList.remove('active');
-        });
     }
 }
 
@@ -906,6 +887,7 @@ function displayAutoAssignResults(solutions) {
                 const groupDiv = document.createElement('div');
                 groupDiv.className = 'missing-group';
                 
+                // 人数が足りない時の各セクションタイトル
                 const groupTitle = document.createElement('h5');
                 groupTitle.className = 'missing-group-title';
                 groupTitle.textContent = group.requiredCount === 1 
@@ -993,7 +975,7 @@ function displayAutoAssignResults(solutions) {
             const resultDiv = document.createElement('div');
             resultDiv.className = 'auto-assign-result';
             
-            // 候補1～4表記は一旦消す
+            // 「候補1～4」表記は見栄え良くないから一旦消す
             // const title = document.createElement('h4');
             // title.textContent = `候補 ${index + 1}`;
             // resultDiv.appendChild(title);
@@ -1109,7 +1091,7 @@ function findMissingCharacters(options = {}) {
             });
             
             // この体数グループで見つかったキャラクターを記録
-            // （次の体数グループでこれらを含む組み合わせを除外するため）
+            // 次の体数グループではこれらを含む組み合わせは除外（例：コハクが見つかった場合、コハク＋αを提案する意味がない）
             candidatesForThisCount.forEach(candidate => {
                 candidate.forEach(char => {
                     alreadyFoundCharIds.add(char.id);
@@ -1203,7 +1185,7 @@ function setupPresetButtons() {
         });
     });
     
-    // プリセット削除ボタンのセットアップは updatePresetThumbnails で行う
+    // プリセット削除ボタンのセットアップはupdatePresetThumbnailsに移行
 }
 
 function handleSavePreset(presetNum) {
@@ -1385,9 +1367,7 @@ function updatePresetThumbnails() {
     }
 }
 
-// ========================================
-// リセット
-// ========================================
+// 初期化
 function handleResetAll() {
     if (!confirm('現在表示中の設定を初期化しますか？\n（プリセットは削除されません）')) {
         return;

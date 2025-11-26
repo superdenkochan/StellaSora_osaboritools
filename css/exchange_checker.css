@@ -1,12 +1,10 @@
-/* ========================================
-   イベント交換所チェッカー専用スタイル
-   ======================================== */
+/* イベント交換所チェッカー */
 
-/* メインコンテンツの背景画像設定 */
+/* 背景画像設定 */
 .main-content {
     min-height: 100vh;
     position: relative;
-    --bg-image: none; /* CSS変数で背景画像を管理 */
+    --bg-image: none;
 }
 
 /* 背景 */
@@ -151,14 +149,14 @@
     margin-bottom: 5px;
 }
 
-/* Chrome, Safari, Edge, Opera の▲▼矢印を非表示 */
+/* 所持ポイント数の▲▼矢印を非表示 */
 .points-input::-webkit-inner-spin-button,
 .points-input::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-/* Firefox の▲▼矢印を非表示 */
+/* Firefoxの▲▼矢印を非表示 */
 .points-input {
     -moz-appearance: textfield;
 }
@@ -264,7 +262,7 @@
 
 /* 報酬アイテムカード */
 .reward-item {
-    position: relative; /* 売り切れ表示の基準位置として必要 */
+    position: relative; /* 売り切れ表示の基準位置 */
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
@@ -465,7 +463,7 @@
     cursor: not-allowed;
 }
 
-/* ミッションアコーディオン */
+/* ミッションのアコーディオン */
 .mission-accordion {
     margin-bottom: 12px;
     border: 2px solid #e0e0e0;
@@ -584,7 +582,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px; /* テキストと数値の間に少し間隔 */
+    gap: 5px; /* テキストと数値の間の間隔 */
 }
 
 .mission-summary span:first-child {
@@ -814,7 +812,7 @@
     margin-bottom: 8px;
 }
 
-/* スクロールバーのスタイル（Webkit系ブラウザ） */
+/* スクロールバーのスタイル */
 .modal-content::-webkit-scrollbar {
     width: 8px;
 }

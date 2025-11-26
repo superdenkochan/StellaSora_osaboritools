@@ -10,44 +10,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="images/others/favicon32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/others/favicon16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/others/favicon180.png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-11QHHPQJCB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-11QHHPQJCB');
-</script>
 <body>
-    <!-- ハンバーガーメニュー -->
-    <div class="hamburger-menu" id="hamburgerMenu">
-        <div class="hamburger-line"></div>
-        <div class="hamburger-line"></div>
-        <div class="hamburger-line"></div>
-    </div>
-
-    <!-- サイドメニュー -->
-    <nav class="side-menu" id="sideMenu">
-        <div class="side-menu-header">メニュー</div>
-        <ul class="side-menu-list">
-            <li><a href="index.html">TOP</a></li>
-            <li><a href="simu_potential.html">素質シミュレーター(今ここ)</a></li>
-            <li><a href="exchange_checker.html">イベント交換所チェッカー</a></li>
-            <li><a href="simu_commission.html">依頼シミュレーター</a></li>
-            <li><span class="menu-item-disabled">（予定）昇格に必要な素材数計算機</span></li>
-            <li><span class="menu-item-disabled">（予定）素材逆引き</span></li>
-            <li><span class="menu-item-disabled">（予定）星ノ塔クイズのカンペ</span></li>
-            <li><span class="menu-item-disabled">（予定）無限リングのバフ早見表</span></li>
-            <li><span class="menu-item-disabled">（予定）未実装キャラメモ</span></li>
-            <li><span class="menu-item-disabled">（予定）ココチャまとめ</span></li>
-        </ul>
-    </nav>
-
-    <!-- メニューオーバーレイ -->
-    <div class="menu-overlay" id="menuOverlay"></div>
+    <!-- メニューはJSで動的挿入される -->
 
     <div class="container">
         <header>
@@ -409,17 +377,28 @@
         </div>
     </div>
 
+    <!-- 共通JS -->
+    <script src="js/common/utils.js"></script>
+    <script src="js/common/menu.js"></script>
+    
     <!-- html2canvasライブラリ（スクリーンショット用） -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- ページ固有JS -->
     <script src="js/script.js"></script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-11QHHPQJCB"></script>
+    <script>initGoogleAnalytics('G-11QHHPQJCB');</script>
+
+    <footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #ffffff; text-align: center; color: #666;">
+        <p style="color: white; margin-bottom: 10px;">
+            <a href="https://x.com/denko_gaminggal" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">@denko_gaminggal</a> |
+            <a href="https://marshmallow-qa.com/2vagoau6ezqonbq?t=zH1owd&utm_medium=url_text&utm_source=promotion" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">マシュマロ（感想・要望など）</a> |
+            <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">プライバシーポリシー</a>
+        </p>
+        <p style="color: white;">©Yostar<br>
+        ※本サイトはステラソラの非公式ファンサイトです！</p>
+    </footer>
 </body>
 </html>
-            <footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #ffffff; text-align: center; color: #666;">
-                <p style="color: white" style="margin-bottom: 10px;">
-                    <a href="https://x.com/denko_gaminggal" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">@denko_gaminggal</a> |
-                    <a href="https://marshmallow-qa.com/2vagoau6ezqonbq?t=zH1owd&utm_medium=url_text&utm_source=promotion" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">マシュマロ（感想・要望など）</a> |
-                    <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">プライバシーポリシー</a>
-                </p>
-                <p style="color: white">©Yostar<br>
-                ※本サイトはステラソラの非公式ファンサイトです！</p>
-            </footer>

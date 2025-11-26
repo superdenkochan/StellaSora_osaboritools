@@ -1,6 +1,4 @@
-// ========================================
 // グローバル変数
-// ========================================
 let gameData = {
     events: [],
     eventPoints: [],
@@ -16,9 +14,7 @@ let currentPoints = 0;
 let loadedEvents = new Set(); // 読み込み済みイベントID
 let eventList = []; // イベント一覧
 
-// ========================================
 // 初期化
-// ========================================
 document.addEventListener('DOMContentLoaded', async () => {
     // イベント一覧読み込み
     await loadEventList();
@@ -29,13 +25,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     // イベントセレクト初期化
     initializeEventSelect();
     
-    // LocalStorageから復元
+    // ローカルストレージから復元
     loadFromLocalStorage();
 });
 
-// ========================================
 // イベント一覧読み込み
-// ========================================
 async function loadEventList() {
     try {
         const response = await fetch('data/event_list.json');
@@ -47,9 +41,7 @@ async function loadEventList() {
     }
 }
 
-// ========================================
 // 個別イベントデータ読み込み
-// ========================================
 async function loadEventData(eventId) {
     // 既に読み込み済みの場合はスキップ
     if (loadedEvents.has(eventId)) {
@@ -82,9 +74,7 @@ async function loadEventData(eventId) {
     }
 }
 
-// ========================================
 // イベントリスナー設定
-// ========================================
 function setupEventListeners() {
     // イベント選択
     const eventSelect = document.getElementById('eventSelect');
@@ -114,9 +104,7 @@ function setupEventListeners() {
     });
 }
 
-// ========================================
 // イベントセレクト初期化
-// ========================================
 function initializeEventSelect() {
     const eventSelect = document.getElementById('eventSelect');
     
@@ -130,9 +118,7 @@ function initializeEventSelect() {
     });
 }
 
-// ========================================
 // イベント変更時の処理
-// ========================================
 async function onEventChange(e) {
     const eventId = parseInt(e.target.value);
     
@@ -141,7 +127,7 @@ async function onEventChange(e) {
         return;
     }
     
-    // イベントデータを読み込み（未読み込みの場合のみ）
+    // イベントデータを読み込み（未読み込みの場合）
     await loadEventData(eventId);
     
     currentEvent = gameData.events.find(event => event.eventId === eventId);
@@ -163,7 +149,7 @@ async function onEventChange(e) {
     // コンプリートミッション初期化
     initializeCompMissions();
     
-    // LocalStorageから復元
+    // ローカルストレージから復元
     loadEventStateFromLocalStorage(eventId);
     
     // 計算更新
@@ -176,9 +162,7 @@ async function onEventChange(e) {
     setupEventInfoListeners();
 }
 
-// ========================================
-// イベント情報内の要素のイベントリスナー設定（初回のみ実行）
-// ========================================
+// イベント情報内の要素のイベントリスナー設定（初回のみ）
 let eventInfoListenersSetup = false;
 function setupEventInfoListeners() {
     if (eventInfoListenersSetup) return;
@@ -209,19 +193,17 @@ function setupEventInfoListeners() {
     eventInfoListenersSetup = true;
 }
 
-// ========================================
 // イベント情報表示
-// ========================================
 function displayEventInfo() {
     console.log('displayEventInfo called', currentEvent);
     
-    // 背景画像設定（CSS変数を使用）
+    // 背景画像設定
     const bgLayer = document.getElementById('backgroundLayer');
     if (bgLayer && currentEvent.backgroundImage) {
         bgLayer.style.backgroundImage = `url('${currentEvent.backgroundImage}')`;
         }
 
-    // ポイント名とアイコン
+    // ポイント名と収集アイテムのアイコン
     const pointData = gameData.eventPoints.find(p => p.id === currentEvent.pointId);
     if (pointData) {
         // アイコン画像を設定
@@ -240,9 +222,7 @@ function displayEventInfo() {
     updateRemainingDays();
 }
 
-// ========================================
 // 残り日数計算
-// ========================================
 function updateRemainingDays() {
     const now = new Date();
     const endDate = new Date(currentEvent.endDate);
@@ -253,7 +233,7 @@ function updateRemainingDays() {
     const remainingDaysElement = document.getElementById('remainingDays');
     
     if (diffTime > 0) {
-        // 日、時、分、秒を計算
+        // dd/hh/mm/ssを計算
         const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
@@ -267,16 +247,14 @@ function updateRemainingDays() {
         
         remainingDaysElement.textContent = `${daysStr}日と${hoursStr}時間${minutesStr}分${secondsStr}秒`;
         
-        // 1秒後に再度更新（タイマー表示のため）
+        // 1秒ごとに更新
         setTimeout(updateRemainingDays, 1000);
     } else {
         remainingDaysElement.textContent = '終了';
     }
 }
 
-// ========================================
 // 報酬初期化
-// ========================================
 function initializeRewards() {
     const rewards = gameData.exchangeRewards.filter(
         reward => reward.eventId === currentEvent.eventId
@@ -295,9 +273,7 @@ function initializeRewards() {
     renderRewards(rewards);
 }
 
-// ========================================
 // 報酬UI生成
-// ========================================
 function renderRewards(rewards) {
     const grid = document.getElementById('rewardsGrid');
     grid.innerHTML = '';
@@ -308,9 +284,7 @@ function renderRewards(rewards) {
     });
 }
 
-// ========================================
-// 報酬アイテム要素作成
-// ========================================
+// 報酬アイテム
 function createRewardItem(reward) {
     const div = document.createElement('div');
     div.className = 'reward-item wanted';
@@ -337,9 +311,9 @@ function createRewardItem(reward) {
         <div class="sold-out-badge" style="display: none;">売り切れ</div>
     `;
     
-    // カード全体クリックでトグル
+    // カード全体クリックでトグル切り替え（交換するしない）
     div.addEventListener('click', (e) => {
-        // ボタンクリックの場合は除外
+        // ボタンクリックの場合は別挙動
         if (e.target.classList.contains('reward-btn')) {
             return;
         }
@@ -377,13 +351,11 @@ function createRewardItem(reward) {
     return div;
 }
 
-// ========================================
-// 報酬「交換する/交換しない」トグル
-// ========================================
+// 交換するしないトグル
 function toggleRewardWanted(rewardId) {
     const state = rewardStates[rewardId];
     
-    // 在庫が0（売り切れ）の場合は切り替え不可
+    // 在庫が0の場合は切り替え不可
     if (state.remaining === 0) {
         return;
     }
@@ -400,9 +372,7 @@ function toggleRewardWanted(rewardId) {
     saveToLocalStorage();
 }
 
-// ========================================
 // 報酬UI更新
-// ========================================
 function updateRewardUI(rewardId) {
     const reward = gameData.exchangeRewards.find(r => r.id === rewardId);
     const state = rewardStates[rewardId];
@@ -416,7 +386,7 @@ function updateRewardUI(rewardId) {
     const increaseBtn = item.querySelector('.reward-btn-increase');
     const soldOutBadge = item.querySelector('.sold-out-badge');
     
-    // 在庫0の売り切れ表示（wanted状態は維持）
+    // 在庫0の売り切れ表示（交換するしないはそのまま）
     if (state.remaining === 0) {
         item.classList.add('sold-out');
         if (soldOutBadge) {
@@ -429,7 +399,7 @@ function updateRewardUI(rewardId) {
         }
     }
     
-    // wanted/unwantedの切り替え
+    // 交換するしないの切り替え
     if (state.wanted) {
         item.classList.remove('unwanted');
         item.classList.add('wanted');
@@ -447,7 +417,7 @@ function updateRewardUI(rewardId) {
     const buyAllBtn = item.querySelector('.reward-btn-buy-all');
     const resetBtn = item.querySelector('.reward-btn-reset');
     
-    // unwantedの時は全てのボタンを無効化
+    // 交換しないアイテムは全てのボタンを無効化
     if (!state.wanted) {
         decreaseBtn.disabled = true;
         increaseBtn.disabled = true;
@@ -461,7 +431,7 @@ function updateRewardUI(rewardId) {
             decreaseBtn.disabled = false;
         }
         
-        // 在庫+1ボタン:在庫が最大値以上の場合は無効（売り切れ時は有効）
+        // 在庫+1ボタン:在庫が最大値以上の場合は無効（かつ売り切れ時は有効）
         if (state.remaining >= reward.stock) {
             increaseBtn.disabled = true;
         } else {
@@ -477,7 +447,7 @@ function updateRewardUI(rewardId) {
             }
         }
         
-        // リセットボタン:在庫がデフォルト値の場合は無効
+        // リセットボタン:在庫が最大（デフォルト値）の場合は無効
         if (resetBtn) {
             if (state.remaining === reward.stock) {
                 resetBtn.disabled = true;
@@ -488,9 +458,7 @@ function updateRewardUI(rewardId) {
     }
 }
 
-// ========================================
 // 在庫減少
-// ========================================
 function decreaseStock(rewardId) {
     const reward = gameData.exchangeRewards.find(r => r.id === rewardId);
     const state = rewardStates[rewardId];
@@ -499,7 +467,7 @@ function decreaseStock(rewardId) {
     if (state.remaining > 0) {
         state.remaining--;
         
-        // 所持ポイントから価格を減算（0を下限とする）
+        // 所持ポイントから購入分を減算して連動（下限はゼロ、ボタン有効無効には干渉させない）
         currentPoints = Math.max(0, currentPoints - reward.price);
         document.getElementById('currentPoints').value = currentPoints;
         
@@ -514,9 +482,7 @@ function decreaseStock(rewardId) {
     }
 }
 
-// ========================================
 // 在庫増加
-// ========================================
 function increaseStock(rewardId) {
     const reward = gameData.exchangeRewards.find(r => r.id === rewardId);
     const state = rewardStates[rewardId];
@@ -525,7 +491,7 @@ function increaseStock(rewardId) {
     if (state.remaining < reward.stock) {
         state.remaining++;
         
-        // 所持ポイントに価格を加算（999999を上限とする）
+        // 所持ポイントに価格を加算して連動（999999を上限とする）
         currentPoints = Math.min(999999, currentPoints + reward.price);
         document.getElementById('currentPoints').value = currentPoints;
         
@@ -540,14 +506,12 @@ function increaseStock(rewardId) {
     }
 }
 
-// ========================================
-// 一括購入（在庫を0にする）
-// ========================================
+// 一括購入
 function buyAllStock(rewardId) {
     const reward = gameData.exchangeRewards.find(r => r.id === rewardId);
     const state = rewardStates[rewardId];
     
-    // 所持ポイントから(価格×現在の在庫数)を減算（0を下限とする）
+    // 所持ポイントから価格x現在の在庫数を減算（-1の流用）
     const totalPrice = reward.price * state.remaining;
     currentPoints = Math.max(0, currentPoints - totalPrice);
     document.getElementById('currentPoints').value = currentPoints;
@@ -565,9 +529,7 @@ function buyAllStock(rewardId) {
     saveToLocalStorage();
 }
 
-// ========================================
 // リセット（在庫をデフォルト値に戻す）
-// ========================================
 function resetStock(rewardId) {
     const reward = gameData.exchangeRewards.find(r => r.id === rewardId);
     const state = rewardStates[rewardId];
@@ -575,7 +537,7 @@ function resetStock(rewardId) {
     // 在庫の差分を計算
     const stockDiff = reward.stock - state.remaining;
     
-    // 所持ポイントを増減（在庫が増える=ポイントが増える、在庫が減る=ポイントが減る）
+    // 所持ポイントを増減（基本増えるだけ）
     const pointsDiff = reward.price * stockDiff;
     currentPoints = Math.max(0, Math.min(999999, currentPoints + pointsDiff));
     document.getElementById('currentPoints').value = currentPoints;
@@ -593,9 +555,7 @@ function resetStock(rewardId) {
     saveToLocalStorage();
 }
 
-// ========================================
 // ミッション初期化
-// ========================================
 function initializeMissions() {
     const missions = gameData.missionRewards.filter(
         mission => mission.eventId === currentEvent.eventId
@@ -609,8 +569,7 @@ function initializeMissions() {
         };
     });
     
-    // アコーディオングループの定義（例）
-    // この部分を調整して、ミッションをグループ化してください
+    // jsonで設定した特定の単語を含むミッション名をグループ化
     const accordionGroups = [
         {
             title: 'ノーマル',
@@ -642,19 +601,17 @@ function initializeMissions() {
         }
     ];
     
-    // UI生成（アコーディオン付き）
+    // UI生成
     renderMissionsWithAccordion(missions, accordionGroups);
     updateMissionSummary();
 }
 
-// ========================================
-// ミッションUI生成（アコーディオン付き）
-// ========================================
+// ミッションUI生成
 function renderMissionsWithAccordion(missions, accordionGroups) {
     const grid = document.getElementById('missionsGrid');
     grid.innerHTML = '';
     
-    // グループ化されていないミッションのID一覧
+    // グループ化されていないミッションのID一覧を取得
     const groupedIds = new Set();
     accordionGroups.forEach(group => {
         group.missionIds.forEach(id => groupedIds.add(id));
@@ -662,7 +619,7 @@ function renderMissionsWithAccordion(missions, accordionGroups) {
     
     // アコーディオングループごとに生成
     accordionGroups.forEach((group, index) => {
-        if (group.missionIds.length === 0) return; // 空のグループはスキップ
+        if (group.missionIds.length === 0) return;
         
         // アコーディオンコンテナ
         const accordionContainer = document.createElement('div');
@@ -679,8 +636,8 @@ function renderMissionsWithAccordion(missions, accordionGroups) {
                 <span class="accordion-count"></span>
             </div>
             <div class="accordion-actions">
-                <button class="accordion-check-all" data-group-index="${index}">全てON</button>
-                <button class="accordion-uncheck-all" data-group-index="${index}">全てOFF</button>
+                <button class="accordion-check-all" data-group-index="${index}">一括ON</button>
+                <button class="accordion-uncheck-all" data-group-index="${index}">一括OFF</button>
             </div>
         `;
         
@@ -704,7 +661,7 @@ function renderMissionsWithAccordion(missions, accordionGroups) {
         // 初期状態の更新
         updateAccordionGroupStatus(index, group.missionIds);
         
-        // アコーディオン開閉イベント
+        // アコーディオン開閉表現
         const toggle = header.querySelector('.accordion-toggle');
         toggle.addEventListener('click', () => {
             content.classList.toggle('open');
@@ -712,7 +669,7 @@ function renderMissionsWithAccordion(missions, accordionGroups) {
             icon.textContent = content.classList.contains('open') ? '▼' : '▶';
         });
         
-        // 全てONボタン
+        // 一括ONボタン
         const checkAllBtn = header.querySelector('.accordion-check-all');
         checkAllBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -724,7 +681,7 @@ function renderMissionsWithAccordion(missions, accordionGroups) {
             updateAccordionGroupStatus(index, group.missionIds);
         });
         
-        // 全てOFFボタン
+        // 一括OFFボタン
         const uncheckAllBtn = header.querySelector('.accordion-uncheck-all');
         uncheckAllBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -737,7 +694,7 @@ function renderMissionsWithAccordion(missions, accordionGroups) {
         });
     });
     
-    // グループ化されていないミッションがあれば、その他として追加
+    // グループ化されていないミッションをその他に集約
     const ungroupedMissions = missions.filter(m => !groupedIds.has(m.id));
     if (ungroupedMissions.length > 0) {
         const otherHeader = document.createElement('div');
@@ -752,9 +709,7 @@ function renderMissionsWithAccordion(missions, accordionGroups) {
     }
 }
 
-// ========================================
 // アコーディオングループの達成状態を更新
-// ========================================
 function updateAccordionGroupStatus(groupIndex, missionIds) {
     const container = document.querySelector(`[data-accordion-index="${groupIndex}"]`);
     if (!container) return;
@@ -776,15 +731,11 @@ function updateAccordionGroupStatus(groupIndex, missionIds) {
     }
 }
 
-// ========================================
 // 全てのアコーディオングループの状態を更新
-// ========================================
 function updateAllAccordionGroupStatus() {
     const accordions = document.querySelectorAll('.mission-accordion');
     accordions.forEach((accordion, index) => {
         const groupIndex = parseInt(accordion.dataset.accordionIndex);
-        // グループのミッションIDを取得（グローバル変数から）
-        // この関数は後でtoggleMissionCompletedから呼び出される
         const missionItems = accordion.querySelectorAll('.mission-item');
         const missionIds = Array.from(missionItems).map(item => 
             parseInt(item.dataset.missionId)
@@ -793,9 +744,7 @@ function updateAllAccordionGroupStatus() {
     });
 }
 
-// ========================================
 // ミッションアイテム要素作成
-// ========================================
 function createMissionItem(mission) {
     const div = document.createElement('div');
     div.className = 'mission-item';
@@ -814,33 +763,31 @@ function createMissionItem(mission) {
     return div;
 }
 
-// ========================================
-// ミッション完了トグル
-// ========================================
+// ミッション完了の個別トグル
 function toggleMissionCompleted(missionId) {
     const mission = gameData.missionRewards.find(m => m.id === missionId);
     const state = missionStates[missionId];
     
-    // 状態を反転
+    // 状態の切り替え
     const wasCompleted = state.completed;
     state.completed = !state.completed;
     
-    // ポイントを加算/減算
+    // ポイントを加算・減算
     if (state.completed) {
-        // 達成した場合、ポイントを加算
+        // 達成にしたとき加算
         currentPoints += mission.points;
     } else {
-        // 未達成にした場合、ポイントを減算
+        // 未達成にしたとき減算
         currentPoints = Math.max(0, currentPoints - mission.points);
     }
     
-    // 所持ポイント入力欄を更新
+    // 所持ポイントを更新
     document.getElementById('currentPoints').value = currentPoints;
     
     // UI更新
     updateMissionUI(missionId);
     
-    // コンプリートミッションの状態確認（サマリー更新より先に実行）
+    // コンプリートミッションの状態確認
     checkAndUpdateCompMissions();
     
     // サマリー更新（compMissionの状態を反映）
@@ -849,7 +796,7 @@ function toggleMissionCompleted(missionId) {
     // アコーディオングループの状態更新
     updateAllAccordionGroupStatus();
     
-    // 非表示フィルター適用
+    // 非表示フィルター
     toggleHideCompletedMissions();
     
     // 計算更新
@@ -859,9 +806,7 @@ function toggleMissionCompleted(missionId) {
     saveToLocalStorage();
 }
 
-// ========================================
 // ミッションUI更新
-// ========================================
 function updateMissionUI(missionId) {
     const state = missionStates[missionId];
     const item = document.querySelector(`[data-mission-id="${missionId}"]`);
@@ -875,9 +820,7 @@ function updateMissionUI(missionId) {
     }
 }
 
-// ========================================
 // ミッションサマリー更新
-// ========================================
 function updateMissionSummary() {
     const missions = gameData.missionRewards.filter(
         mission => mission.eventId === currentEvent.eventId
@@ -916,13 +859,11 @@ function updateMissionSummary() {
     document.getElementById('earnedMissionPoints').textContent = earnedPoints.toLocaleString();
 }
 
-// ========================================
 // 現在のポイント数変更
-// ========================================
 function onPointsChange(e) {
     let value = parseInt(e.target.value) || 0;
     
-    // 範囲制限
+    // 範囲指定
     if (value < 0) value = 0;
     if (value > 999999) value = 999999;
     
@@ -936,9 +877,7 @@ function onPointsChange(e) {
     saveToLocalStorage();
 }
 
-// ========================================
 // 計算更新
-// ========================================
 function updateCalculations() {
     if (!currentEvent) return;
     
@@ -1006,7 +945,7 @@ function updateCalculations() {
     const diffTime = lastDay - currentDay;
     const remainingDays = Math.max(1, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
     
-    // 1日あたりのノルマ
+    // 1日あたりのノルマ（小数点第3位まで出す）
     const dailyQuota = remainingDays > 0 ? (runsNeeded / remainingDays).toFixed(3) : 0;
     
     // 1日あたりのやる気
@@ -1020,9 +959,7 @@ function updateCalculations() {
     document.getElementById('dailyStamina').textContent = dailyStamina.toLocaleString();
 }
 
-// ========================================
 // 進捗リセット
-// ========================================
 function resetProgress() {
     if (!confirm('在庫数と任務達成状況をリセットしますか？\n※「交換する/しない」の設定はそのまま')) {
         return;
@@ -1081,15 +1018,13 @@ function resetProgress() {
     saveToLocalStorage();
 }
 
-// ========================================
 // 完全初期化
-// ========================================
 function resetAll() {
     if (!confirm('「交換する/しない」を含めて全部初期化しますか？')) {
         return;
     }
     
-    // LocalStorage削除
+    // ローカルストレージ削除
     localStorage.removeItem('exchangeChecker_currentEvent');
     localStorage.removeItem('exchangeChecker_eventStates');
     
@@ -1106,29 +1041,23 @@ function resetAll() {
     document.getElementById('eventInfo').classList.add('hidden');
 }
 
-// ========================================
 // モーダル表示
-// ========================================
 function showUsageModal() {
     document.getElementById('usageModal').classList.remove('hidden');
 }
 
-// ========================================
-// モーダル閉じる
-// ========================================
+// モーダルを閉じる
 function closeAllModals() {
     document.querySelectorAll('.modal').forEach(modal => {
         modal.classList.add('hidden');
     });
 }
 
-// ========================================
-// LocalStorage保存
-// ========================================
+// ローカルストレージ保存
 function saveToLocalStorage() {
     if (!currentEvent) return;
     
-    // 現在のイベントID保存
+    // 現在表示中のイベントID保存
     localStorage.setItem('exchangeChecker_currentEvent', currentEvent.eventId);
     
     // イベント状態保存
@@ -1144,9 +1073,7 @@ function saveToLocalStorage() {
     localStorage.setItem('exchangeChecker_eventStates', JSON.stringify(eventStates));
 }
 
-// ========================================
-// LocalStorage読み込み
-// ========================================
+// ローカルストレージ読み込み
 function loadFromLocalStorage() {
     const savedEventId = localStorage.getItem('exchangeChecker_currentEvent');
     
@@ -1159,9 +1086,7 @@ function loadFromLocalStorage() {
     }
 }
 
-// ========================================
-// イベント状態をLocalStorageから復元
-// ========================================
+// イベント状態をローカルストレージから復元
 function loadEventStateFromLocalStorage(eventId) {
     const eventStates = JSON.parse(localStorage.getItem('exchangeChecker_eventStates') || '{}');
     const state = eventStates[eventId];
@@ -1211,9 +1136,7 @@ function loadEventStateFromLocalStorage(eventId) {
     }
 }
 
-// ========================================
 // コンプリートミッション初期化
-// ========================================
 function initializeCompMissions() {
     if (!gameData.missionCompRewards) return;
     
@@ -1233,9 +1156,7 @@ function initializeCompMissions() {
     renderCompMissions(compMissions);
 }
 
-// ========================================
 // コンプリートミッションUI生成
-// ========================================
 function renderCompMissions(compMissions) {
     const grid = document.getElementById('compMissionsGrid');
     grid.innerHTML = '';
@@ -1246,9 +1167,7 @@ function renderCompMissions(compMissions) {
     });
 }
 
-// ========================================
 // コンプリートミッションアイテム要素作成
-// ========================================
 function createCompMissionItem(mission) {
     const div = document.createElement('div');
     div.className = 'mission-item auto-completed';
@@ -1265,9 +1184,7 @@ function createCompMissionItem(mission) {
     return div;
 }
 
-// ========================================
 // コンプリートミッションの状態確認と更新
-// ========================================
 function checkAndUpdateCompMissions() {
     if (!gameData.missionCompRewards) return;
     
@@ -1310,12 +1227,10 @@ function checkAndUpdateCompMissions() {
     });
 }
 
-// ========================================
 // ミッション非表示トグル
-// ========================================
 function toggleHideCompletedMissions() {
     const checkbox = document.getElementById('hideCompletedMissions');
-    if (!checkbox) return; // チェックボックスが存在しない場合は何もしない
+    if (!checkbox) return;
     
     const missionItems = document.querySelectorAll('.mission-item');
     
@@ -1330,11 +1245,9 @@ function toggleHideCompletedMissions() {
     });
 }
 
-// ========================================
 // ポイント減少
-// ========================================
 function decreasePoints() {
-    if (!currentEvent) return; // イベントが選択されていない場合は何もしない
+    if (!currentEvent) return;
     
     const amount = currentEvent.pointsPerRun;
     currentPoints = Math.max(0, currentPoints - amount);
@@ -1347,11 +1260,9 @@ function decreasePoints() {
     saveToLocalStorage();
 }
 
-// ========================================
 // ポイント増加
-// ========================================
 function increasePoints() {
-    if (!currentEvent) return; // イベントが選択されていない場合は何もしない
+    if (!currentEvent) return;
     
     const amount = currentEvent.pointsPerRun;
     currentPoints = Math.min(999999, currentPoints + amount);

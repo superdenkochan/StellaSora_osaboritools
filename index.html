@@ -4,42 +4,19 @@
     <meta charset="UTF-8">
     <meta name="google-adsense-account" content="ca-pub-2384775227983330">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ステラソラ おサボりツール</title>
+    <title>おサボりツール</title>
     
     <!-- ファビコン -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/others/favicon32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/others/favicon16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/others/favicon180.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-    <!-- ハンバーガーメニュー -->
-    <div class="hamburger-menu" id="hamburgerMenu">
-        <div class="hamburger-line"></div>
-        <div class="hamburger-line"></div>
-        <div class="hamburger-line"></div>
-    </div>
-
-    <!-- サイドメニュー -->
-    <nav class="side-menu" id="sideMenu">
-        <div class="side-menu-header">メニュー</div>
-        <ul class="side-menu-list">
-            <li><a href="index.html">TOP</a></li>
-            <li><a href="simu_potential.html">素質シミュレーター</a></li>
-            <li><a href="exchange_checker.html">イベント交換所チェッカー</a></li>
-            <li><a href="simu_commission.html">依頼シミュレーター</a></li>
-            <li><span class="menu-item-disabled">（予定）昇格に必要な素材数計算機</span></li>
-            <li><span class="menu-item-disabled">（予定）素材逆引き</span></li>
-            <li><span class="menu-item-disabled">（予定）星ノ塔クイズのカンペ</span></li>
-            <li><span class="menu-item-disabled">（予定）無限リングのバフ早見表</span></li>
-            <li><span class="menu-item-disabled">（予定）未実装キャラメモ</span></li>
-            <li><span class="menu-item-disabled">（予定）ココチャまとめ</span></li>
-        </ul>
-    </nav>
-
-    <!-- メニューオーバーレイ -->
-    <div class="menu-overlay" id="menuOverlay"></div>
+    <!-- メニューはJSで動的挿入される -->
 
     <div class="container">
         <header>
@@ -62,7 +39,7 @@
                 <li style="margin-bottom: 20px; padding: 20px; background: #f9f9f9; border-radius: 8px; border: 2px solid #e0e0e0;">
                     <a href="exchange_checker.html" style="font-size: 20px; color: #667eea; text-decoration: none; font-weight: bold; display: block; margin-bottom: 10px;">交換所チェッカー</a>
                     <p style="color: #666; margin: 0;">イベントアイテムを管理するやつ<br>
-                    1日あたりやる気いくつ消費すれば間に合うかわかると便利だよね～？</p>
+                    1日あたりやる気いくつ消費すれば間に合うかがわかるよ！</p>
                 </li>
             </ul>
             
@@ -78,17 +55,17 @@
 
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 20px; padding: 20px; background: #f9f9f9; border-radius: 8px; border: 2px solid #e0e0e0;">
-                    <span class="menu-item-disabled">（予定）昇格に必要な素材数計算機</span></a>
-                    <p style="color: #666; margin: 0;">例えば今レベル70で、90になるまで初級素材換算でいくつ必要かってわかりづらくない？<br>
-                    そーゆーのがわかるようになるツール！</p>
+                    <span class="menu-item-disabled">（予定）昇格に必要な素材数計算機</span>
+                    <p style="color: #666; margin: 0;">
+                    </p>
                 </li>
             </ul>
             
 
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 20px; padding: 20px; background: #f9f9f9; border-radius: 8px; border: 2px solid #e0e0e0;">
-                    <span class="menu-item-disabled">（予定）素材逆引き</span></a>
-                    <p style="color: #666; margin: 0;">説明不要！でも新キャラと新ロスレコ増えるたびにここ更新するのめんどいからやんないかも
+                    <span class="menu-item-disabled">（予定）素材逆引き</span>
+                    <p style="color: #666; margin: 0;">
                     </p>
                 </li>
             </ul>
@@ -97,8 +74,8 @@
 
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 20px; padding: 20px; background: #f9f9f9; border-radius: 8px; border: 2px solid #e0e0e0;">
-                    <span class="menu-item-disabled">（予定）星ノ塔クイズのカンペ</span></a>
-                    <p style="color: #666; margin: 0;">え？もう暗記しちゃった？そっかぁ…
+                    <span class="menu-item-disabled">（予定）星ノ塔クイズのカンペ</span>
+                    <p style="color: #666; margin: 0;">
                     </p>
                 </li>
             </ul>
@@ -106,27 +83,27 @@
 
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 20px; padding: 20px; background: #f9f9f9; border-radius: 8px; border: 2px solid #e0e0e0;">
-                    <span class="menu-item-disabled">（予定）無限リングのバフ早見表</span></a>
-                    <p style="color: #666; margin: 0;">シールド付いてると与ダメージアップとか、急に言われても用意できないよね～<br>
-                    結局引き寄せスキル持ってるかどうかだよって？それはそう</p>
+                    <span class="menu-item-disabled">（予定）無限リングのバフ早見表</span>
+                    <p style="color: #666; margin: 0;">
+                    </p>
                 </li>
             </ul>
             
 
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 20px; padding: 20px; background: #f9f9f9; border-radius: 8px; border: 2px solid #e0e0e0;">
-                    <span class="menu-item-disabled">（予定）未実装キャラメモ</span></a>
-                    <p style="color: #666; margin: 0;">名前だけ出てて実装されてないキャラいっぱいいるよね～<br>
-                    ウィロー・フィレン・ニュクス…全部あたしの知り合いだけど顔わかる？</p>
+                    <span class="menu-item-disabled">（予定）未実装キャラメモ</span>
+                    <p style="color: #666; margin: 0;">
+                    </p>
                 </li>
             </ul>
             
 
             <ul style="list-style: none; padding: 0;">
                 <li style="margin-bottom: 20px; padding: 20px; background: #f9f9f9; border-radius: 8px; border: 2px solid #e0e0e0;">
-                    <span class="menu-item-disabled">（予定）ココチャまとめ</span></a>
-                    <p style="color: #666; margin: 0;">特殊回想コンプする前に巡遊者コンプしなきゃいけないのヤバくない？<br>
-                    あﾞだじのﾞ年金生活がぁ～</p>
+                    <span class="menu-item-disabled">（予定）ココチャまとめ</span>
+                    <p style="color: #666; margin: 0;">
+                    </p>
                 </li>
             </ul>
             
@@ -142,21 +119,8 @@
         </div>
     </div>
 
-    <script>
-        // ハンバーガーメニューの動作
-        const hamburger = document.getElementById('hamburgerMenu');
-        const sideMenu = document.getElementById('sideMenu');
-        const overlay = document.getElementById('menuOverlay');
-        
-        hamburger.addEventListener('click', () => {
-            sideMenu.classList.toggle('open');
-            overlay.classList.toggle('active');
-        });
-        
-        overlay.addEventListener('click', () => {
-            sideMenu.classList.remove('open');
-            overlay.classList.remove('active');
-        });
-    </script>
+    <!-- 共通JS -->
+    <script src="js/common/utils.js"></script>
+    <script src="js/common/menu.js"></script>
 </body>
 </html>

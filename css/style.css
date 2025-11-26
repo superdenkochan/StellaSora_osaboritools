@@ -1,6 +1,4 @@
-/* ========================================
-   カスタムフォント
-   ======================================== */
+/* カスタムフォント（動作確認だけして実際は入れてない） */
 @font-face {
     font-family: 'CustomFont';
     src: url('fonts/keifont.ttf') format('truetype');
@@ -8,30 +6,26 @@
     font-style: normal;
 }
 
-/* ========================================
-   基本設定
-   ======================================== */
+/* 基本設定 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ========================================
-   カスタマイズ設定（編集推奨）
-   ======================================== */
+/* カスタマイズ設定 */
 :root {
-    /* サムズアップ画像の位置とサイズ */
+    /* サムズアップ画像 */
     --thumbs-up-size: 30px;
     --thumbs-up-top: 70px;
     --thumbs-up-left: 0px;
     
-    /* カウント数字のデザイン */
+    /* 素質レベルのカウント */
     --count-font-size: 16px;
     --count-bg-color: rgba(255,255,255,1);
     --count-text-color: black;
-    --count-border-radius: 2px; /* 丸型: 50%, 四角: 5px など */
-    --count-show-circle: block; /* 背景を表示: block, 非表示: none */
+    --count-border-radius: 2px;
+    --count-show-circle: block;
     --count-top: 4px;
     --count-right: 65px;
     --count-padding: 0px 12px;
@@ -53,9 +47,7 @@ body {
     overflow: hidden;
 }
 
-/* ========================================
-   ハンバーガーメニュー
-   ======================================== */
+/* ハンバーガーメニュー */
 .hamburger-menu {
     position: fixed;
     top: 20px;
@@ -107,7 +99,7 @@ body {
 .side-menu-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 20px 20px 20px 70px; /* 左側にハンバーガーメニュー分の余白を追加 */
+    padding: 20px 20px 20px 70px; /* ハンバーガーメニュー分の余白 */
     font-size: 20px;
     font-weight: bold;
 }
@@ -136,10 +128,10 @@ body {
 .side-menu-list .menu-item-disabled {
     display: block;
     padding: 15px 20px;
-    color: #999; /* グレー表示 */
+    color: #999;
     text-decoration: none;
-    cursor: default; /* ホバー時にカーソル変化なし */
-    pointer-events: none; /* クリック無効 */
+    cursor: default;
+    pointer-events: none;
 }
 
 .menu-overlay {
@@ -157,16 +149,14 @@ body {
     display: block;
 }
 
-/* ========================================
-   ヘッダー
-   ======================================== */
+/* ヘッダー */
 header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 20px 30px 20px 80px; /* 左側にハンバーガーメニュー分の余白 */
-    position: sticky; /* 固定位置 */
-    top: 0; /* 画面上部に固定 */
-    z-index: 999; /* ツールチップより下 */
+    padding: 20px 30px 20px 80px; /* ハンバーガーメニューの余白 */
+    position: sticky;
+    top: 0;
+    z-index: 999;
 }
 
 header h1 {
@@ -194,9 +184,7 @@ header h1 {
     cursor: pointer;
 }
 
-/* ========================================
-   ボタン
-   ======================================== */
+/* ボタン */
 .btn {
     padding: 10px 20px;
     border: none;
@@ -236,9 +224,7 @@ header h1 {
     color: white;
 }
 
-/* ========================================
-   モーダル
-   ======================================== */
+/* モーダル */
 .modal {
     position: fixed;
     top: 0;
@@ -288,8 +274,8 @@ header h1 {
 }
 
 .modal-close {
-    position: sticky; /* 固定位置 */
-    top: 15px; /* ヘッダー内で固定 */
+    position: sticky;
+    top: 15px;
     right: 15px;
     width: 35px;
     height: 35px;
@@ -305,7 +291,7 @@ header h1 {
     transition: all 0.3s;
     line-height: 1;
     padding: 0;
-    float: right; /* 右寄せ */
+    float: right;
     z-index: 11;
 }
 
@@ -320,7 +306,7 @@ header h1 {
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 3px solid #667eea;
-    clear: both; /* floatをクリア */
+    clear: both;
 }
 
 .modal-content h3 {
@@ -355,7 +341,7 @@ header h1 {
     margin-bottom: 8px;
 }
 
-/* スクロールバーのスタイル（Webkit系ブラウザ） */
+/* スクロールバーのスタイル */
 .modal-content::-webkit-scrollbar {
     width: 8px;
 }
@@ -374,9 +360,7 @@ header h1 {
     background: #764ba2;
 }
 
-/* ========================================
-   メインコンテンツ
-   ======================================== */
+/* 素質シミュ部分 */
 .main-content {
     padding: 5px;
 }
@@ -387,9 +371,7 @@ header h1 {
     gap: 30px;
 }
 
-/* ========================================
-   キャラクターセクション
-   ======================================== */
+/* キャラクターセクション */
 .character-section {
     border: 2px solid #e0e0e0;
     border-radius: 10px;
@@ -418,7 +400,7 @@ header h1 {
     height: 100%;
 }
 
-/* キャラクター選択（モーダル形式） */
+/* キャラクター選択（モーダル形式に変えた） */
 .character-select-wrapper {
     position: relative;
 }
@@ -457,7 +439,7 @@ header h1 {
     padding: 10px;
 }
 
-/* モーダル形式のキャラクター選択 */
+/* キャラクター選択 */
 .character-modal {
     position: fixed;
     top: 0;
@@ -465,7 +447,7 @@ header h1 {
     width: 100%;
     height: 100%;
     z-index: 10001;
-    display: none; /* 初期状態は非表示 */
+    display: none;
     align-items: center;
     justify-content: center;
 }
@@ -488,7 +470,7 @@ header h1 {
     position: relative;
     background: white;
     border-radius: 10px;
-    max-width: 950px; /* 6列が収まる幅 */
+    max-width: 950px; /* 6列分の領域を想定 */
     max-height: 80vh;
     width: 90%;
     display: flex;
@@ -538,7 +520,7 @@ header h1 {
     color: #667eea;
     font-weight: bold;
     margin: 0;
-    padding-right: 50px; /* 閉じるボタンのスペース */
+    padding-right: 50px;
 }
 
 .character-modal-body {
@@ -588,7 +570,7 @@ header h1 {
     border-radius: 6px;
 }
 
-/* ツールチップ（名前表示） */
+/* ツールチップ */
 .character-option-name {
     position: fixed;
     bottom: auto;
@@ -611,7 +593,7 @@ header h1 {
     opacity: 1;
 }
 
-/* モーダルボディのスクロールバー */
+/* モーダルのスクロールバー */
 .character-modal-body::-webkit-scrollbar {
     width: 12px;
 }
@@ -684,13 +666,11 @@ header h1 {
     display: none;
 }
 
-/* ========================================
-   素質コンテナ
-   ======================================== */
+/* 素質コンテナ */
 .potentials-container {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap; /* 改行を許可 */
+    flex-wrap: wrap;
     flex: 1;
     align-items: flex-start;
 }
@@ -700,16 +680,14 @@ header h1 {
 }
 
 .potential-group-title {
-    display: none; /* コア素質・サブ素質の文字を非表示 */
+    display: none; /* コア素質・サブ素質の文字は邪魔だったので非表示 */
 }
 
 .potentials-grid {
     display: contents; /* レイアウトフローに影響しないようにする */
 }
 
-/* ========================================
-   素質カード
-   ======================================== */
+/* 素質カード */
 .potential-card {
     display: flex;
     flex-direction: column;
@@ -719,8 +697,7 @@ header h1 {
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    position: relative; /* ツールチップの基準位置として追加 */
-    /* カード全体のホバーアニメーションを削除 */
+    position: relative; /* ツールチップの基準位置 */
 }
 
 .potential-card.hidden {
@@ -732,7 +709,7 @@ header h1 {
     width: 101px;
     height: 128px;
     cursor: pointer;
-    transition: all 0.3s; /* ホバー用トランジション追加 */
+    transition: all 0.3s;
 }
 
 /* 素質画像のホバーアニメーション */
@@ -750,10 +727,10 @@ header h1 {
     height: 100%;
     object-fit: contain;
     border-radius: 0px;
-    border: 0px solid #red;
+    border: 0px solid;
 }
 
-/* グレーアウト状態（取得済み用：オーバーレイのみ） */
+/* グレーアウト状態（取得済み用） */
 .potential-image-wrapper.grayed-out::before {
     content: '';
     position: absolute;
@@ -761,13 +738,13 @@ header h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(128, 128, 128, 0.6); /* グレーのオーバーレイ */
-    z-index: 1; /* 画像の上、カウント・サムズアップの下 */
+    background: rgba(128, 128, 128, 0.6);
+    z-index: 1; /* 画像の上～カウント・サムズアップの間に置くように調整 */
     pointer-events: none;
     border-radius: 0px;
 }
 
-/* グレーアウト状態（取得しない用：オーバーレイ + グレースケール） */
+/* グレーアウト状態（取得しない素質用） */
 .potential-image-wrapper.grayed-out-unobtained::before {
     content: '';
     position: absolute;
@@ -775,7 +752,7 @@ header h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(128, 128, 128, 0.6); /* グレーのオーバーレイ */
+    background: rgba(128, 128, 128, 0.6);
     z-index: 1;
     pointer-events: none;
     border-radius: 0px;
@@ -803,7 +780,7 @@ header h1 {
     z-index: 2; /* グレーアウトの上 */
 }
 
-/* レベル6のサムズアップ（画像版）のz-index調整 */
+/* レベル6のサムズアップのz-index調整 */
 .thumbs-up {
     position: absolute;
     top: var(--thumbs-up-top);
@@ -828,7 +805,7 @@ header h1 {
     word-break: break-word;
 }
 
-/* 取得済み状態（コア素質） */
+/* 取得済（コア素質） */
 .potential-image-wrapper.obtained::after {
     content: '✓';
     position: absolute;
@@ -849,16 +826,16 @@ header h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* 暗くする */
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
     pointer-events: none;
     border-radius: 0px;
 }
 
-/* ツールチップ（説明文） */
+/* ツールチップ */
 .potential-tooltip {
     position: absolute;
-    bottom: calc(100% + 5px); /* カード上部に表示 */
+    bottom: calc(100% + 5px);
     left: 50%;
     transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.9);
@@ -869,7 +846,7 @@ header h1 {
     white-space: pre-wrap;
     word-wrap: break-word;
     max-width: 210px; 
-    min-width: 210px; /* ツールチップ幅調整 */
+    min-width: 210px; /* ゲーム画面意識のツールチップ幅 */
     z-index: 10003; /* 最前面に表示 */
     opacity: 0;
     pointer-events: none;
@@ -907,14 +884,14 @@ header h1 {
 
 .status-btn:hover {
     background: #f0f0f0;
-    transform: scale(1.05); /* ホバー時にスケール変更 */
+    transform: scale(1.05);
 }
 
 .status-btn:active {
-    transform: scale(0.95); /* クリック時にスケール変更 */
+    transform: scale(0.95);
 }
 
-/* コア素質のステータスボタン */
+/* コア素質のステータスボタン（取得するしない） */
 .status-btn.active {
     background: #4CAF50;
     color: white;
@@ -963,16 +940,14 @@ header h1 {
 
 .sub-status-btn:hover {
     opacity: 0.8;
-    transform: scale(1.05); /* ホバー時にスケール変更 */
+    transform: scale(1.05);
 }
 
 .sub-status-btn:active {
-    transform: scale(0.95); /* クリック時にスケール変更 */
+    transform: scale(0.95);
 }
 
-/* ========================================
-   プリセットエリア（下段配置）
-   ======================================== */
+/* プリセットエリア（下段配置） */
 .presets-area {
     width: 100%;
     background: #f9f9f9;
@@ -1078,9 +1053,7 @@ header h1 {
     opacity: 0.5;
 }
 
-/* ========================================
-   エラーメッセージ
-   ======================================== */
+/* エラーメッセージ */
 .error-message {
     position: fixed;
     top: 20px;
@@ -1111,9 +1084,7 @@ header h1 {
     }
 }
 
-/* ========================================
-   レスポンシブ対応（一旦コメントアウト）
-   ======================================== */
+/* レスポンシブ対応（一旦コメントアウト） */
 /*
 @media (max-width: 1200px) {
     .main-content {

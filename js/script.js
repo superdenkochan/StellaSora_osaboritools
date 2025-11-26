@@ -1,16 +1,14 @@
-// ========================================
 // グローバル変数
-// ========================================
-let charactersData = null; // JSONから読み込んだデータ
-const MAX_SUB_LEVEL = 6; // サブ素質の最大レベル（アップデートで変更可能）
+let charactersData = null; // JSONからキャラクターデータ読み込み
+const MAX_SUB_LEVEL = 6; // サブ素質の最大レベル
 const MAX_CORE_POTENTIALS = 2; // コア素質の最大取得数
-const TOOLTIP_MAX_CHARS = 320; // ツールチップの1行あたりの最大文字数（調整可能）
+const TOOLTIP_MAX_CHARS = 320; // ツールチップの1行あたりの最大文字数（？）
 
 // プリセット名入力用の一時変数
 let pendingPresetNumber = null;
 let currentPresetNumber = null; // 現在読み込み中のプリセット番号
 
-// 素質の定義（全キャラ共通）
+// 素質データの定義（全キャラ共通）
 const POTENTIAL_DEFINITIONS = {
     main: {
         core: ['mc1', 'mc2', 'mc3', 'mc4'],
@@ -24,7 +22,7 @@ const POTENTIAL_DEFINITIONS = {
     }
 };
 
-// サブ素質のステータス順序
+// サブ素質をクリックした時のステータス順序
 const SUB_STATUS_ORDER = ['none', 'level1', 'level2', 'level6'];
 const SUB_STATUS_LABELS = {
     'none': '取得しない',
@@ -52,11 +50,9 @@ const currentState = {
     }
 };
 
-// ========================================
 // ヘルパー関数
-// ========================================
 
-// 画像パスの自動生成
+// 定義に沿った画像パスの自動生成
 function getPotentialImagePath(charId, potentialId) {
     return `images/potentials/${charId}_${potentialId}.jpg`;
 }
@@ -67,7 +63,7 @@ function getDescription(character, potentialId) {
     return formatTooltipText(desc, TOOLTIP_MAX_CHARS);
 }
 
-// ツールチップテキストのフォーマット（指定文字数で改行）
+// ツールチップテキストのフォーマット
 function formatTooltipText(text, maxChars) {
     if (text.length <= maxChars) return text;
     
@@ -99,9 +95,7 @@ function getSelectedCharacterIds() {
     ].filter(id => id !== null);
 }
 
-// ========================================
 // 初期化
-// ========================================
 document.addEventListener('DOMContentLoaded', async () => {
     // JSONデータの読み込み
     await loadCharacterData();
@@ -118,32 +112,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // プリセットの初期化
     initializePresets();
     
-    // ハンバーガーメニューの初期化
-    setupHamburgerMenu();
+    // ハンバーガーメニューはcommon/menu.jsに移行
 });
 
-// ========================================
-// ハンバーガーメニュー
-// ========================================
-function setupHamburgerMenu() {
-    const hamburger = document.getElementById('hamburgerMenu');
-    const sideMenu = document.getElementById('sideMenu');
-    const overlay = document.getElementById('menuOverlay');
-    
-    hamburger.addEventListener('click', () => {
-        sideMenu.classList.toggle('open');
-        overlay.classList.toggle('active');
-    });
-    
-    overlay.addEventListener('click', () => {
-        sideMenu.classList.remove('open');
-        overlay.classList.remove('active');
-    });
-}
-
-// ========================================
 // データ読み込み
-// ========================================
 async function loadCharacterData() {
     try {
         const response = await fetch('data/potential.json');
@@ -158,9 +130,7 @@ async function loadCharacterData() {
     }
 }
 
-// ========================================
 // キャラクター選択モーダルの生成
-// ========================================
 function populateCharacterSelects() {
     // 各スロット用のモーダルを生成
     ['main', 'support1', 'support2'].forEach(slot => {
@@ -179,7 +149,7 @@ function populateCharacterSelects() {
         clearOption.dataset.value = '';
         clearOption.innerHTML = `
             <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 12px; font-weight: bold; color: #667eea;">
-                選択<br>解除
+                解除
             </div>
         `;
         clearOption.addEventListener('click', () => {
@@ -217,10 +187,10 @@ function populateCharacterSelects() {
             grid.appendChild(option);
         });
         
-        // ボタンクリックでモーダルを開く
+        // クリックでモーダルを開く
         button.addEventListener('click', (e) => {
             e.stopPropagation();
-            closeAllModals(); // 他のモーダルを閉じる
+            closeAllModals();
             updateModalAvailability(slot);
             modal.classList.add('open');
         });
@@ -253,16 +223,14 @@ function updateModalAvailability(currentSlot) {
     });
 }
 
-// すべてのモーダルを閉じる
+// 全てのモーダルを閉じる
 function closeAllModals() {
     document.querySelectorAll('.character-modal').forEach(modal => {
         modal.classList.remove('open');
     });
 }
 
-// ========================================
 // イベントリスナーの設定
-// ========================================
 function setupEventListeners() {
     // 取得しない素質を非表示
     document.getElementById('hideUnobtained').addEventListener('change', handleHideUnobtained);
@@ -324,7 +292,7 @@ function setupEventListeners() {
             presetNameInput.style.background = 'white';
             presetNameInput.focus();
             presetNameInput.select();
-            // ボタンをグレーアウト（テキストは変更しない）
+            // 編集中はボタンをグレーアウト（確定ボタンはややこしかったからやらない）
             editBtn.disabled = true;
             editBtn.style.opacity = '0.5';
             editBtn.style.cursor = 'not-allowed';
@@ -340,7 +308,7 @@ function setupEventListeners() {
     
     presetNameInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-            presetNameInput.blur(); // フォーカスアウトすることで自動保存
+            presetNameInput.blur(); // フォーカスアウトで自動保存
         }
     });
 }
@@ -357,7 +325,7 @@ function savePresetNameInline() {
         trimmedValue: presetName 
     });
     
-    // 空欄の場合は「（未設定）」にする
+    // 空欄の場合は（未設定）にする
     if (presetName === '') {
         presetName = '';
         presetNameInput.placeholder = '（未設定）';
@@ -382,9 +350,7 @@ function savePresetNameInline() {
     editBtn.style.cursor = 'pointer';
 }
 
-// ========================================
 // キャラクター選択時の処理
-// ========================================
 function handleCharacterSelectFromDropdown(slot, charId) {
     if (!charId) {
         // 選択解除
@@ -426,7 +392,7 @@ function updateCharacterSelectButton(slot, character) {
             <img src="${character.icon}" alt="${character.name}" class="character-select-icon">
         `;
     } else {
-        button.innerHTML = '<span class="select-text">キャラクター<br>選択</span>';
+        button.innerHTML = '<span class="select-text">巡遊者を<br>選択</span>';
     }
 }
 
@@ -437,14 +403,12 @@ function updateAllModals() {
     });
 }
 
-// ========================================
 // 素質の表示
-// ========================================
 function displayPotentials(slot, character) {
     const container = document.getElementById(`${slot}-potentials`);
     container.innerHTML = '';
     
-    // 主力 or 支援を判定
+    // 主力か支援をチェックして出し分け
     const role = slot === 'main' ? 'main' : 'support';
     const potentialDef = POTENTIAL_DEFINITIONS[role];
     
@@ -460,14 +424,12 @@ function displayPotentials(slot, character) {
     applyHideUnobtainedFilter();
 }
 
-// ========================================
 // 素質セクションの作成
-// ========================================
 function createPotentialSection(title, potentialIds, character, slot, type) {
     const section = document.createElement('div');
     section.className = 'potential-group';
     
-    // タイトルは非表示（CSSで制御）
+    // タイトルは非表示
     const titleElem = document.createElement('div');
     titleElem.className = 'potential-group-title';
     titleElem.textContent = title;
@@ -485,9 +447,7 @@ function createPotentialSection(title, potentialIds, character, slot, type) {
     return section;
 }
 
-// ========================================
 // 素質カードの作成
-// ========================================
 function createPotentialCard(character, potentialId, slot, type) {
     const card = document.createElement('div');
     card.className = 'potential-card';
@@ -501,7 +461,7 @@ function createPotentialCard(character, potentialId, slot, type) {
     
     // 初期状態の設定
     if (type === 'core') {
-        // コア素質の初期状態: 取得しない（グレーアウト）
+        // コア素質の初期状態：取得しないを指定
         if (!currentState[slot].corePotentials[potentialId]) {
             currentState[slot].corePotentials[potentialId] = {
                 obtained: false,
@@ -510,13 +470,13 @@ function createPotentialCard(character, potentialId, slot, type) {
         }
         const state = currentState[slot].corePotentials[potentialId];
         if (!state.obtained) {
-            imageWrapper.classList.add('grayed-out-unobtained'); // 取得しない場合はグレースケール付き
+            imageWrapper.classList.add('grayed-out-unobtained');
         }
         if (state.acquired) {
             imageWrapper.classList.add('obtained');
         }
     } else {
-        // サブ素質の初期状態: 取得しない
+        // サブ素質の初期状態：取得しない＆レベル0
         if (!currentState[slot].subPotentials[potentialId]) {
             currentState[slot].subPotentials[potentialId] = {
                 status: 'none',
@@ -525,17 +485,17 @@ function createPotentialCard(character, potentialId, slot, type) {
         }
         const state = currentState[slot].subPotentials[potentialId];
         
-        // グレーアウトの条件（修正版）:
-        // 1. status が 'none' の場合: grayed-out-unobtained（グレーアウト + グレースケール）
-        // 2. status が 'level1', 'level2', 'level6' で count > 0 の場合: grayed-out（グレーアウトのみ）
-        // 3. status が 'level1', 'level2', 'level6' で count === 0 の場合: クラスなし（元画像）
+        // 現在レベルに応じたグレーアウトの条件分岐
+        // 取得しない：グレーアウト＋グレースケール
+        // レベル1～6ラベルで現在レベルが1以上：グレーアウト
+        // レベル1～6ラベルで現在レベルが0：元画像そのまま
         if (state.status === 'none') {
             imageWrapper.classList.add('grayed-out-unobtained');
         } else if (state.count > 0) {
             imageWrapper.classList.add('grayed-out');
         }
         
-        // レベル6の場合、サムズアップ表示（画像版）
+        // レベル6の場合サムズアップを添える（おまけ）
         if (state.status === 'level6') {
             const thumbsUp = document.createElement('div');
             thumbsUp.className = 'thumbs-up';
@@ -546,7 +506,7 @@ function createPotentialCard(character, potentialId, slot, type) {
             imageWrapper.appendChild(thumbsUp);
         }
         
-        // カウント表示
+        // 左上にカウント表示
         if (state.count > 0) {
             const countElem = document.createElement('div');
             countElem.className = 'potential-count';
@@ -555,7 +515,7 @@ function createPotentialCard(character, potentialId, slot, type) {
         }
     }
     
-    // 画像
+    // 画像（＋保険のプレースホルダー）
     const img = document.createElement('img');
     img.className = 'potential-image';
     img.src = getPotentialImagePath(character.id, potentialId);
@@ -571,10 +531,10 @@ function createPotentialCard(character, potentialId, slot, type) {
     
     card.appendChild(imageWrapper);
     
-    // ツールチップ（説明文）- カードの直接の子要素として配置
+    // ツールチップ（説明文）
     const tooltip = document.createElement('div');
     tooltip.className = 'potential-tooltip';
-    tooltip.innerHTML = getDescription(character, potentialId); // HTMLタグ対応のためinnerHTMLに変更
+    tooltip.innerHTML = getDescription(character, potentialId);
     card.appendChild(tooltip);
     
     // ツールチップの表示制御
@@ -590,7 +550,7 @@ function createPotentialCard(character, potentialId, slot, type) {
     statusDiv.className = 'potential-status';
     
     if (type === 'core') {
-        // コア素質: トグルボタン
+        // コア素質：トグル
         const toggleBtn = document.createElement('button');
         toggleBtn.className = 'status-btn';
         const state = currentState[slot].corePotentials[potentialId];
@@ -599,7 +559,7 @@ function createPotentialCard(character, potentialId, slot, type) {
         toggleBtn.addEventListener('click', () => handleCoreToggle(slot, potentialId));
         statusDiv.appendChild(toggleBtn);
     } else {
-        // サブ素質: クリックで切り替わるボタン
+        // サブ素質：クリックで切り替え
         const state = currentState[slot].subPotentials[potentialId];
         const btn = document.createElement('button');
         btn.className = 'sub-status-btn';
@@ -614,14 +574,12 @@ function createPotentialCard(character, potentialId, slot, type) {
     return card;
 }
 
-// ========================================
 // コア素質のトグル処理
-// ========================================
 function handleCoreToggle(slot, potentialId) {
     const state = currentState[slot].corePotentials[potentialId];
     const newObtained = !state.obtained;
     
-    // 取得する→取得しないへの変更は常にOK
+    // 取得する・取得しないの変更
     if (!newObtained) {
         state.obtained = false;
         state.acquired = false;
@@ -630,7 +588,7 @@ function handleCoreToggle(slot, potentialId) {
         return;
     }
     
-    // 取得しない→取得するへの変更は、2つまでの制限をチェック
+    // コア2つまでの制限チェックとエラー処理
     const obtainedCount = Object.values(currentState[slot].corePotentials)
         .filter(s => s.obtained).length;
     
@@ -644,18 +602,16 @@ function handleCoreToggle(slot, potentialId) {
     saveCurrentState();
 }
 
-// ========================================
 // 素質画像クリック処理
-// ========================================
 function handlePotentialImageClick(slot, potentialId, type) {
     if (type === 'core') {
-        // コア素質: 取得する状態の時のみカウント切り替え
+        // コア素質：取得する状態の時のみチェックマーク切り替え
         const state = currentState[slot].corePotentials[potentialId];
         if (!state.obtained) return;
         
         state.acquired = !state.acquired;
     } else {
-        // サブ素質: レベル1以上の時のみカウント増加
+        // サブ素質：レベル1以上の時のみカウント増加
         const state = currentState[slot].subPotentials[potentialId];
         if (state.status === 'none') return;
         
@@ -666,23 +622,19 @@ function handlePotentialImageClick(slot, potentialId, type) {
     saveCurrentState();
 }
 
-// ========================================
-// サブ素質のステータスクリック処理（ボタン化）
-// ========================================
+// サブ素質のステータスクリック処理
 function handleSubStatusClick(slot, potentialId) {
     const state = currentState[slot].subPotentials[potentialId];
     const currentIndex = SUB_STATUS_ORDER.indexOf(state.status);
     const nextIndex = (currentIndex + 1) % SUB_STATUS_ORDER.length;
     state.status = SUB_STATUS_ORDER[nextIndex];
-    state.count = 0; // ステータス変更時はカウントをリセット
+    state.count = 0; // ステータス変更時にカウントをリセット
     
     refreshPotentialDisplay(slot);
     saveCurrentState();
 }
 
-// ========================================
 // 素質表示の更新
-// ========================================
 function refreshPotentialDisplay(slot) {
     const charId = currentState[slot].characterId;
     if (!charId) return;
@@ -696,9 +648,7 @@ function refreshPotentialDisplay(slot) {
     applyHideUnobtainedFilter();
 }
 
-// ========================================
 // 取得しない素質を非表示
-// ========================================
 function applyHideUnobtainedFilter() {
     const hideUnobtained = document.getElementById('hideUnobtained').checked;
     
@@ -730,18 +680,16 @@ function handleHideUnobtained(e) {
     saveCurrentState();
 }
 
-// ========================================
 // カウントリセット
-// ========================================
 function handleResetCount() {
-    // コア素質のacquiredをすべてfalseに
+    // コア素質を全てfalseに
     Object.values(currentState).forEach(slotState => {
         Object.values(slotState.corePotentials).forEach(state => {
             state.acquired = false;
         });
     });
     
-    // サブ素質のcountをすべて0に
+    // サブ素質のカウントをゼロに
     Object.values(currentState).forEach(slotState => {
         Object.values(slotState.subPotentials).forEach(state => {
             state.count = 0;
@@ -756,11 +704,9 @@ function handleResetCount() {
     saveCurrentState();
 }
 
-// ========================================
 // 初期化
-// ========================================
 function handleResetAll() {
-    if (!confirm('すべての設定を初期化しますか？')) {
+    if (!confirm('全ての設定を初期化しますか？')) {
         return;
     }
     
@@ -796,15 +742,12 @@ function handleResetAll() {
     saveCurrentState();
 }
 
-// ========================================
 // プリセット管理
-// ========================================
 function initializePresets() {
     for (let i = 1; i <= 10; i++) {
         const preset = loadPreset(i);
         if (preset) {
             updatePresetDisplay(i, preset);
-            // 読み込みボタンを有効化
             const loadBtn = document.querySelector(`.btn-load[data-preset="${i}"]`);
             if (loadBtn) {
                 loadBtn.disabled = false;
@@ -814,7 +757,7 @@ function initializePresets() {
 }
 
 function handleSavePreset(presetNum) {
-    // カウントをリセットした状態でコピー
+    // カウントをリセットした状態でコピー（素質の現在レベルは保存しない）
     const stateToSave = JSON.parse(JSON.stringify(currentState));
     Object.values(stateToSave).forEach(slotState => {
         Object.values(slotState.corePotentials).forEach(state => {
@@ -825,12 +768,12 @@ function handleSavePreset(presetNum) {
         });
     });
     
-    // プリセット名を保存（現在インライン入力欄にある名前を使用）
+    // プリセット名を保存（インライン入力されている文字列を取得）
     const presetNameInput = document.getElementById('preset-name-input-inline');
     let presetName = presetNameInput.value.trim();
     console.log(`プリセット${presetNum}保存時のプリセット名:`, presetName);
     
-    // 空欄の場合は空文字列として保存（placeholderで「（未設定）」と表示される）
+    // 空欄の場合は空文字列として保存（未設定にする）
     if (presetName === '' || presetName === '（未設定）') {
         presetName = '';
     }
@@ -841,7 +784,7 @@ function handleSavePreset(presetNum) {
     console.log(`プリセット${presetNum}を保存しました（名前: "${presetName}"）`);
     updatePresetDisplay(presetNum, stateToSave);
     
-    // 読み込みボタンを有効化
+    // 中身があるプリセットは読み込みボタンを有効化
     const loadBtn = document.querySelector(`.btn-load[data-preset="${presetNum}"]`);
     if (loadBtn) {
         loadBtn.disabled = false;
@@ -851,8 +794,6 @@ function handleSavePreset(presetNum) {
     currentPresetNumber = presetNum;
     console.log('currentPresetNumberを設定:', currentPresetNumber);
 }
-
-// savePresetWithName関数は削除（不要）
 
 function handleLoadPreset(presetNum) {
     const preset = loadPreset(presetNum);
@@ -931,15 +872,13 @@ function updatePresetDisplay(presetNum, preset) {
     }
 }
 
-// ========================================
 // ローカルストレージ
-// ========================================
 function saveCurrentState() {
     const hideUnobtained = document.getElementById('hideUnobtained').checked;
     const stateToSave = {
         ...currentState,
         hideUnobtained: hideUnobtained,
-        currentPresetNumber: currentPresetNumber  // 現在のプリセット番号も保存
+        currentPresetNumber: currentPresetNumber
     };
     localStorage.setItem('currentState', JSON.stringify(stateToSave));
     console.log('現在の状態を保存しました（プリセット番号:', currentPresetNumber, '）');
@@ -994,9 +933,7 @@ function loadCurrentState() {
     }
 }
 
-// ========================================
-// スクリーンショット
-// ========================================
+// スクリーンショット機能
 async function handleScreenshot() {
     try {
         // スクリーンショット用フッターを一時的に表示
@@ -1020,7 +957,7 @@ async function handleScreenshot() {
             el.classList.remove('grayed-out', 'grayed-out-unobtained');
         });
         
-        // コア素質の取得済みマーク（obtained）を一時的に解除
+        // コア素質の取得済みマーク（チェックマーク）を一時的に解除
         const obtainedElements = document.querySelectorAll('.potential-image-wrapper.obtained');
         obtainedElements.forEach(el => {
             el.classList.remove('obtained');
@@ -1070,7 +1007,7 @@ async function handleScreenshot() {
         
         console.log('最終キャンバスサイズ:', finalCanvas.width, 'x', finalCanvas.height);
         
-        // グレーアウトを元に戻す
+        // スクショ用にグレーアウトしたのを元に戻す
         grayedOutClasses.forEach(item => {
             if (item.hasGrayedOut) {
                 item.element.classList.add('grayed-out');
@@ -1112,9 +1049,7 @@ async function handleScreenshot() {
     }
 }
 
-// ========================================
 // エラーメッセージ表示
-// ========================================
 function showError(message) {
     const errorDiv = document.getElementById('errorMessage');
     errorDiv.textContent = message;
@@ -1126,9 +1061,7 @@ function showError(message) {
     }, 3000);
 }
 
-// ========================================
 // モーダル管理
-// ========================================
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
