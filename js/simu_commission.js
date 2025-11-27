@@ -44,10 +44,22 @@ const autoAssignMessages = {
 
 // 初期化
 document.addEventListener('DOMContentLoaded', async () => {
+    // i18n初期化
+    await initI18n('commission');
+    
+    // 言語設定をi18nから取得
+    currentLanguage = i18n.getLanguage();
+    
     await loadData();
     setupEventListeners();
     loadFromLocalStorage();
-    // ハンバーガーメニューはcommon/menu.jsに移行
+    
+    // 言語変更イベントをリッスン
+    document.addEventListener('languageChanged', (e) => {
+        currentLanguage = e.detail.language;
+        updateLanguageDisplay();
+        saveToLocalStorage();
+    });
 });
 
 // データ読み込み
@@ -91,9 +103,6 @@ function setupEventListeners() {
     
     // 使い方
     document.getElementById('showUsage').addEventListener('click', () => openModal('usageModal'));
-    
-    // 言語切り替え
-    document.getElementById('languageToggle').addEventListener('click', toggleLanguage);
     
     // 依頼選択スロット
     document.querySelectorAll('.commission-select-btn').forEach(btn => {
@@ -191,7 +200,7 @@ function openOwnedCharactersModal() {
         const icon = document.createElement('img');
         icon.className = 'character-option-icon';
         icon.src = char.icon;
-        icon.alt = char.name;
+        icon.alt = char.name[currentLanguage];
         
         // ツールチップを追加（ロール+スタイル）
         const tooltip = document.createElement('div');
@@ -291,11 +300,11 @@ function openCommissionModal(slot) {
         const img = document.createElement('img');
         img.className = 'commission-option-image';
         img.src = category.icon;
-        img.alt = category.name;
+        img.alt = category.name[currentLanguage];
         
         const name = document.createElement('div');
         name.className = 'commission-option-name';
-        name.textContent = currentLanguage === 'ja' ? category.name : category.name_en;
+        name.textContent = category.name[currentLanguage];
         
         option.appendChild(img);
         option.appendChild(name);
@@ -396,7 +405,7 @@ function selectCommission(slot, categoryId, skipSave = false) {
         badge.className = 'commission-name-badge';
         btn.appendChild(badge);
     }
-    badge.textContent = currentLanguage === 'ja' ? category.name : category.name_en;
+    badge.textContent = category.name[currentLanguage];
     
     // キャラスロを有効化
     for (let i = 1; i <= 3; i++) {
@@ -527,7 +536,7 @@ function openCharacterModal(commissionSlot, position) {
         const icon = document.createElement('img');
         icon.className = 'character-option-icon';
         icon.src = char.icon;
-        icon.alt = char.name;
+        icon.alt = char.name[currentLanguage];
         
         const styleName = document.createElement('div');
         styleName.className = 'character-option-name';
@@ -913,8 +922,8 @@ function displayAutoAssignResults(solutions) {
                         const img = document.createElement('img');
                         img.className = 'missing-character-icon-box';
                         img.src = char.icon;
-                        img.alt = char.name;
-                        img.title = currentLanguage === 'ja' ? char.name : char.name_en;
+                        img.alt = char.name[currentLanguage];
+                        img.title = char.name[currentLanguage];
                         iconsContainer.appendChild(img);
                         
                         // 複数人の場合+で繋げる
@@ -994,8 +1003,8 @@ function displayAutoAssignResults(solutions) {
                 const iconImg = document.createElement('img');
                 iconImg.className = 'auto-assign-commission-icon';
                 iconImg.src = category.icon;
-                iconImg.alt = currentLanguage === 'ja' ? category.name : category.name_en;
-                iconImg.title = currentLanguage === 'ja' ? category.name : category.name_en;
+                iconImg.alt = category.name[currentLanguage];
+                iconImg.title = category.name[currentLanguage];
                 commissionDiv.appendChild(iconImg);
                 
                 const charsDiv = document.createElement('div');
@@ -1005,8 +1014,8 @@ function displayAutoAssignResults(solutions) {
                     const img = document.createElement('img');
                     img.className = 'auto-assign-character-icon';
                     img.src = char.icon;
-                    img.alt = char.name;
-                    img.title = currentLanguage === 'ja' ? char.name : char.name_en;
+                    img.alt = char.name[currentLanguage];
+                    img.title = char.name[currentLanguage];
                     charsDiv.appendChild(img);
                 });
                 
@@ -1336,7 +1345,7 @@ function updatePresetThumbnails() {
                     const img = document.createElement('img');
                     img.className = 'preset-commission-icon';
                     img.src = category.icon;
-                    img.alt = category.name;
+                    img.alt = category.name[currentLanguage];
                     thumbnail.appendChild(img);
                 } else {
                     // 空の場合は番号を表示
@@ -1369,7 +1378,8 @@ function updatePresetThumbnails() {
 
 // 初期化
 function handleResetAll() {
-    if (!confirm('現在表示中の設定を初期化しますか？\n（プリセットは削除されません）')) {
+    const confirmMsg = i18n.getText('messages.confirmReset', 'commission');
+    if (!confirm(confirmMsg)) {
         return;
     }
     
@@ -1425,19 +1435,7 @@ function handleResetAll() {
     updatePresetThumbnails();
     
     saveToLocalStorage();
-    alert('初期化しました');
-}
-
-// 言語切り替え
-function toggleLanguage() {
-    currentLanguage = currentLanguage === 'ja' ? 'en' : 'ja';
-    const btn = document.getElementById('languageToggle');
-    btn.textContent = currentLanguage === 'ja' ? 'English' : '日本語';
-    
-    // UIテキストの更新のみ（依頼名、バッジ、キャラクター名など）
-    updateLanguageDisplay();
-    
-    saveToLocalStorage();
+    alert(i18n.getText('messages.resetComplete', 'commission'));
 }
 
 function updateLanguageDisplay() {
@@ -1448,7 +1446,7 @@ function updateLanguageDisplay() {
             const badge = btn.querySelector('.commission-name-badge');
             if (badge) {
                 const category = categoriesData.categories.find(c => c.id === commission.categoryId);
-                badge.textContent = currentLanguage === 'ja' ? category.name : category.name_en;
+                badge.textContent = category.name[currentLanguage];
             }
             
             const category = categoriesData.categories.find(c => c.id === commission.categoryId);
@@ -1506,12 +1504,8 @@ function loadFromLocalStorage() {
         ownedCharacters = new Set(JSON.parse(savedOwned));
     }
     
-    const savedLanguage = localStorage.getItem('commission_language');
-    if (savedLanguage) {
-        currentLanguage = savedLanguage;
-        const btn = document.getElementById('languageToggle');
-        btn.textContent = currentLanguage === 'ja' ? 'English' : '日本語';
-    }
+    // 言語設定はi18nシステムが管理するため削除
+    // currentLanguageはi18n初期化時に設定済み
     
     updatePresetButtons();
     updatePresetThumbnails();

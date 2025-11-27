@@ -1116,9 +1116,3 @@
     text-align: center;
     font-weight: bold;
 }
-
-/* 言語切り替えボタン非表示（一旦オミット） */
-
-#languageToggle {
-    display: none !important;
-}

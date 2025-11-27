@@ -1,4 +1,4 @@
-/* 共通ユーティリティ関数 */
+/* 共通ユーティリティ */
 
 /* Google Analytics初期化 */
 function initGoogleAnalytics(trackingId) {

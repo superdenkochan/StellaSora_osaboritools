@@ -1,0 +1,226 @@
+{
+  "buttons": {
+    "reset": {
+      "ja": "初期化",
+      "en": "Reset All"
+    },
+    "resetCount": {
+      "ja": "カウントリセット",
+      "en": "Reset Count"
+    },
+    "screenshot": {
+      "ja": "スクショ",
+      "en": "Screenshot"
+    },
+    "edit": {
+      "ja": "✎ 編集",
+      "en": "✎ Edit"
+    },
+    "hideUnobtained": {
+      "ja": "取得しない素質を非表示",
+      "en": "Hide Unobtained"
+    },
+    "changelog": {
+      "ja": "変更履歴",
+      "en": "Changelog"
+    },
+    "usage": {
+      "ja": "使い方",
+      "en": "How to Use"
+    }
+  },
+  "characterSelect": {
+    "mainTitle": {
+      "ja": "主力キャラクター選択",
+      "en": "Select Main Character"
+    },
+    "support1Title": {
+      "ja": "支援キャラクター1選択",
+      "en": "Select Support Character 1"
+    },
+    "support2Title": {
+      "ja": "支援キャラクター2選択",
+      "en": "Select Support Character 2"
+    }
+  },
+  "messages": {
+    "noDescription": {
+      "ja": "説明文が設定されていません",
+      "en": "No description available"
+    },
+    "screenshotError": {
+      "ja": "スクリーンショットの生成に失敗しました",
+      "en": "Failed to generate screenshot"
+    },
+    "dataLoadError": {
+      "ja": "データの読み込みに失敗しました。data/potential.jsonを確認してください。",
+      "en": "Failed to load data. Please check data/potential.json."
+    },
+    "confirmReset": {
+      "ja": "すべての設定を初期化しますか？",
+      "en": "Reset all settings?"
+    }
+  },
+  "page": {
+    "htmlTitle": {
+      "ja": "素質シミュレーター - おサボりツール",
+      "en": "Potential Simulator - Laru's Lazy Tools"
+    },
+    "title": {
+      "ja": "素質シミュレーター",
+      "en": "Potential Simulator"
+    }
+  },
+  "subStatus": {
+    "none": {
+      "ja": "取得しない",
+      "en": "Don't Get"
+    },
+    "level1": {
+      "ja": "レベル1",
+      "en": "Level 1"
+    },
+    "level2": {
+      "ja": "レベル1～",
+      "en": "Level 1+"
+    },
+    "level6": {
+      "ja": "レベル6",
+      "en": "Level 6"
+    }
+  },
+  "labels": {
+    "corePotential": {
+      "ja": "コア素質",
+      "en": "Core Potentials"
+    },
+    "subPotential": {
+      "ja": "サブ素質",
+      "en": "Sub Potentials"
+    },
+    "presetName": {
+      "ja": "プリセット名:",
+      "en": "Preset Name:"
+    },
+    "clear": {
+      "ja": "解除",
+      "en": "Clear"
+    },
+    "selectCharacter": {
+      "ja": "巡遊者を<br>選択してね",
+      "en": "Select<br>Trekker"
+    },
+    "screenshotFooter": {
+      "ja": "ステラソラ おサボりツール - 素質シミュレーター",
+      "en": "StellaSora Laru's Lazy Tools - Potential Simulator"
+    },
+    "presetNamePlaceholder": {
+      "ja": "（未設定）",
+      "en": "(Not set)"
+    }
+  },
+  "modal": {
+    "presetName": {
+      "description": {
+        "ja": "プリセット{number}の名前を入力してください（最大20文字）",
+        "en": "Enter name for Preset {number} (max 20 characters)"
+      },
+      "title": {
+        "ja": "プリセット名を入力",
+        "en": "Enter Preset Name"
+      }
+    },
+    "changelog": {
+      "title": {
+        "ja": "変更履歴",
+        "en": "Changelog"
+      }
+    },
+    "usage": {
+      "title": {
+        "ja": "使い方",
+        "en": "How to Use"
+      },
+      "basic": {
+        "ja": "基本操作",
+        "en": "Basic Operations"
+      },
+      "step1Title": {
+        "ja": "1. 巡遊者を選択！",
+        "en": "1. Select Character!"
+      },
+      "step1Text": {
+        "ja": "アイコンをクリックして選んでね。<br>素質カードは主力と支援で自動で切り替わるから気にしなくていいよ～",
+        "en": "Click the icon to select.<br>Potential cards automatically switch between Main and Support~"
+      },
+      "step2Title": {
+        "ja": "2. コア素質",
+        "en": "2. Core Potentials"
+      },
+      "step2Text": {
+        "ja": "「取得する/取得しない」ボタンをクリックして、取りたい素質を選ぼう！<br>ゲームの仕様と同じで2つまでしか選べないようにしてるよ",
+        "en": "Click 'Obtain/Don't Obtain' to select desired potentials!<br>Like the game, you can only select up to 2"
+      },
+      "step3Title": {
+        "ja": "3. サブ素質",
+        "en": "3. Sub Potentials"
+      },
+      "step3Text": {
+        "ja": "ボタンをクリックすると<br>[取得しない]→[レベル1]→[レベル1～]→[レベル6]の順に切り替わるよ<br>絶対レベル6にしたい素質だとか、レベル1止めでいい素質とか<br>優先度低いけど可能な限り上げたい素質とかを分けられて便利だね！<br>これやりたいがためにこのツールを作ったし！",
+        "en": "Clicking cycles through:<br>[Don't Get]→[Level 1]→[Level 1+]→[Level 6]<br>Great for distinguishing must-max potentials, level-1-only potentials,<br>and lower priority ones you'd like to raise if possible!<br>This feature is why I made this tool!"
+      },
+      "step4Title": {
+        "ja": "4. 素質レベルカウント",
+        "en": "4. Potential Level Count"
+      },
+      "step4Text": {
+        "ja": "素質カードの画像部分をクリックするとレベルが上がっていくよ<br>2窓して登りながらポチポチすると、いちいちゲーム側で確認しなくて便利だね<br>コア素質をクリックするとチェックマークが付くよ",
+        "en": "Click the potential card image to increase the level<br>Handy for dual-screening while climbing without checking the game<br>Clicking core potentials adds a checkmark"
+      },
+      "others": {
+        "ja": "その他色々",
+        "en": "Other Features"
+      },
+      "hideTitle": {
+        "ja": "取得しない素質を非表示",
+        "en": "Hide Unobtained Potentials"
+      },
+      "hideText": {
+        "ja": "チェックを入れると、「取得しない」素質が非表示になるよ<br>見やすいね！",
+        "en": "Check to hide 'Don't Get' potentials<br>Much cleaner!"
+      },
+      "presetTitle": {
+        "ja": "プリセット保存・読み込み",
+        "en": "Save/Load Presets"
+      },
+      "presetText": {
+        "ja": "巡遊者と素質のラベル設定を10個まで保存できるよ。<br>ポチポチしたレベルは保存されないようにしてるけど別にそれでいいよね？<br>※更新によりプリセットが呼び出せなくなる可能性があるかもしれません。<br>　どうしても忘れたくないプリセットは、スクリーンショットで保管しておくことを推奨します。",
+        "en": "Save up to 10 character and potential label settings.<br>Level counts aren't saved, but that's probably fine right?<br>*Updates may make presets unloadable.<br> Consider using screenshots to preserve important presets."
+      },
+      "resetCountTitle": {
+        "ja": "カウントリセット",
+        "en": "Reset Count"
+      },
+      "resetCountText": {
+        "ja": "3キャラ分のレベルカウントとコア素質のチェックをデフォに戻すよ。<br>塔を登り直す時はコレ！",
+        "en": "Reset level counts and core potential checks for all 3 characters.<br>Use this when re-climbing the tower!"
+      },
+      "resetAllTitle": {
+        "ja": "初期化",
+        "en": "Reset All"
+      },
+      "resetAllText": {
+        "ja": "すべての設定を初期状態に戻すよ<br>具体的に言うと巡遊者スロットが空になって、非表示チェックもなしになるね",
+        "en": "Reset all settings to initial state<br>Character slots become empty and hide checkbox unchecked"
+      },
+      "screenshotTitle": {
+        "ja": "スクショ",
+        "en": "Screenshot"
+      },
+      "screenshotText": {
+        "ja": "現在の画面を画像として保存できるよ。<br>理想のビルド共有する時とかに使ってね",
+        "en": "Save current screen as image.<br>Use for sharing ideal builds!"
+      }
+    }
+  }
+}

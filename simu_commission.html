@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="google-adsense-account" content="ca-pub-2384775227983330">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>依頼シミュレーター - おサボりツール</title>
+    <title data-i18n="page.htmlTitle" data-i18n-source="commission">依頼シミュレーター - おサボりツール</title>
     
     <!-- ファビコン -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/others/favicon32.png">
@@ -20,10 +20,10 @@
 
     <div class="container">
         <header>
-            <h1>依頼シミュレーター</h1>
+            <h1 data-i18n="page.title" data-i18n-source="commission">依頼シミュレーター</h1>
             <div class="controls">
-                <button id="resetAll" class="btn btn-danger">初期化</button>
-                <button id="showUsage" class="btn btn-info">使い方</button>
+                <button id="resetAll" class="btn btn-danger" data-i18n="buttons.reset" data-i18n-source="commission">初期化</button>
+                <button id="showUsage" class="btn btn-info" data-i18n="buttons.usage" data-i18n-source="commission">使い方</button>
                 <button id="languageToggle" class="btn">English</button>
             </div>
         </header>
@@ -31,8 +31,8 @@
         <div class="main-content">
             <!-- 上部コントロール -->
             <div class="top-controls">
-                <button id="manageOwned" class="btn btn-primary">所持巡遊者の設定</button>
-                <button id="autoAssign" class="btn btn-success" disabled>おまかせ</button>
+                <button id="manageOwned" class="btn btn-primary" data-i18n="buttons.manageOwned" data-i18n-source="commission">所持巡遊者の設定</button>
+                <button id="autoAssign" class="btn btn-success" disabled data-i18n="buttons.autoAssign" data-i18n-source="commission">おまかせ</button>
             </div>
 
             <!-- 依頼エリア -->
@@ -41,14 +41,13 @@
                 <div class="commission-slot" data-slot="1">
                     <div class="commission-header">
                         <button class="commission-select-btn" data-slot="1">
-                            <span class="commission-select-text">依頼を選択</span>
+                            <span class="commission-select-text" data-i18n="buttons.selectCommission" data-i18n-source="commission">依頼を選択</span>
                         </button>
                     </div>
                     <div class="commission-requirements">
                         <div class="requirement-section">
-                            <h4 class="requirement-title">条件達成に必要な性格</h4>
+                            <h4 class="requirement-title" data-i18n="labels.requirementTitle" data-i18n-source="commission">条件達成に必要な性格</h4>
                             <div class="requirement-badges style-badges" data-slot="1">
-                                <!-- スタイルバッジが動的に生成 -->
                             </div>
                         </div>
                     </div>
@@ -77,12 +76,12 @@
                 <div class="commission-slot" data-slot="2">
                     <div class="commission-header">
                         <button class="commission-select-btn" data-slot="2">
-                            <span class="commission-select-text">依頼を選択</span>
+                            <span class="commission-select-text" data-i18n="buttons.selectCommission" data-i18n-source="commission">依頼を選択</span>
                         </button>
                     </div>
                     <div class="commission-requirements">
                         <div class="requirement-section">
-                            <h4 class="requirement-title">条件達成に必要な性格</h4>
+                            <h4 class="requirement-title" data-i18n="labels.requirementTitle" data-i18n-source="commission">条件達成に必要な性格</h4>
                             <div class="requirement-badges style-badges" data-slot="2">
                             </div>
                         </div>
@@ -112,12 +111,12 @@
                 <div class="commission-slot" data-slot="3">
                     <div class="commission-header">
                         <button class="commission-select-btn" data-slot="3">
-                            <span class="commission-select-text">依頼を選択</span>
+                            <span class="commission-select-text" data-i18n="buttons.selectCommission" data-i18n-source="commission">依頼を選択</span>
                         </button>
                     </div>
                     <div class="commission-requirements">
                         <div class="requirement-section">
-                            <h4 class="requirement-title">条件達成に必要な性格</h4>
+                            <h4 class="requirement-title" data-i18n="labels.requirementTitle" data-i18n-source="commission">条件達成に必要な性格</h4>
                             <div class="requirement-badges style-badges" data-slot="3">
                             </div>
                         </div>
@@ -147,12 +146,12 @@
                 <div class="commission-slot" data-slot="4">
                     <div class="commission-header">
                         <button class="commission-select-btn" data-slot="4">
-                            <span class="commission-select-text">依頼を選択</span>
+                            <span class="commission-select-text" data-i18n="buttons.selectCommission" data-i18n-source="commission">依頼を選択</span>
                         </button>
                     </div>
                     <div class="commission-requirements">
                         <div class="requirement-section">
-                            <h4 class="requirement-title">条件達成に必要な性格</h4>
+                            <h4 class="requirement-title" data-i18n="labels.requirementTitle" data-i18n-source="commission">条件達成に必要な性格</h4>
                             <div class="requirement-badges style-badges" data-slot="4">
                             </div>
                         </div>
@@ -182,97 +181,77 @@
 
             <!-- プリセット管理エリア -->
             <aside class="presets-area">
-                <h3>プリセット</h3>
+                <h3 data-i18n="preset.title">プリセット</h3>
                 <div class="presets-list">
                     <!-- プリセット1～10 -->
                     <div class="preset-item" data-preset="1">
-                        <div class="preset-thumbnail">
-                            <span class="preset-number">1</span>
-                        </div>
+                        <div class="preset-thumbnail"><span class="preset-number">1</span></div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="1">保存</button>
-                            <button class="btn-load" data-preset="1" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="1" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="1" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="2">
-                        <div class="preset-thumbnail">
-                            <span class="preset-number">2</span>
-                        </div>
+                        <div class="preset-thumbnail"><span class="preset-number">2</span></div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="2">保存</button>
-                            <button class="btn-load" data-preset="2" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="2" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="2" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="3">
-                        <div class="preset-thumbnail">
-                            <span class="preset-number">3</span>
-                        </div>
+                        <div class="preset-thumbnail"><span class="preset-number">3</span></div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="3">保存</button>
-                            <button class="btn-load" data-preset="3" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="3" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="3" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="4">
-                        <div class="preset-thumbnail">
-                            <span class="preset-number">4</span>
-                        </div>
+                        <div class="preset-thumbnail"><span class="preset-number">4</span></div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="4">保存</button>
-                            <button class="btn-load" data-preset="4" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="4" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="4" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="5">
-                        <div class="preset-thumbnail">
-                            <span class="preset-number">5</span>
-                        </div>
+                        <div class="preset-thumbnail"><span class="preset-number">5</span></div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="5">保存</button>
-                            <button class="btn-load" data-preset="5" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="5" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="5" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="6">
-                        <div class="preset-thumbnail">
-                            <span class="preset-number">6</span>
-                        </div>
+                        <div class="preset-thumbnail"><span class="preset-number">6</span></div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="6">保存</button>
-                            <button class="btn-load" data-preset="6" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="6" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="6" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="7">
-                        <div class="preset-thumbnail">
-                            <span class="preset-number">7</span>
-                        </div>
+                        <div class="preset-thumbnail"><span class="preset-number">7</span></div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="7">保存</button>
-                            <button class="btn-load" data-preset="7" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="7" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="7" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="8">
-                        <div class="preset-thumbnail">
-                            <span class="preset-number">8</span>
-                        </div>
+                        <div class="preset-thumbnail"><span class="preset-number">8</span></div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="8">保存</button>
-                            <button class="btn-load" data-preset="8" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="8" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="8" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="9">
-                        <div class="preset-thumbnail">
-                            <span class="preset-number">9</span>
-                        </div>
+                        <div class="preset-thumbnail"><span class="preset-number">9</span></div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="9">保存</button>
-                            <button class="btn-load" data-preset="9" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="9" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="9" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="10">
-                        <div class="preset-thumbnail">
-                            <span class="preset-number">10</span>
-                        </div>
+                        <div class="preset-thumbnail"><span class="preset-number">10</span></div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="10">保存</button>
-                            <button class="btn-load" data-preset="10" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="10" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="10" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                 </div>
@@ -288,39 +267,39 @@
         <div class="usage-modal-overlay"></div>
         <div class="usage-modal-content">
             <div class="usage-modal-header">
-                <h3 class="usage-modal-title">使い方</h3>
+                <h3 class="usage-modal-title" data-i18n="modal.usage.title" data-i18n-source="commission">使い方</h3>
                 <button class="usage-modal-close">&times;</button>
             </div>
             <div class="usage-modal-body">
-                <h3>基本操作</h3>
-                <p><strong>1. 所持巡遊者の設定</strong><br>
-                自分のデータに合わせて設定しよう！<br>
+                <h3 data-i18n="modal.usage.basic" data-i18n-source="commission">基本操作</h3>
+                <p><strong data-i18n="modal.usage.step1Title" data-i18n-source="commission">1. 所持巡遊者の設定</strong><br>
+                <span data-i18n-html="modal.usage.step1Text" data-i18n-source="commission">自分のデータに合わせて設定しよう！<br>
                 ここでグレーアウトさせた巡遊者は（おまかせを含めて）候補に出なくなるから、<br>
-                持ってない巡遊者と、レベル70未満の巡遊者も設定しておくのがおすすめ！</p>
+                持ってない巡遊者と、レベル70未満の巡遊者も設定しておくのがおすすめ！</span></p>
                 
-                <p><strong>2. 依頼を選択</strong><br>
-                依頼を最大4つ選んでね！<br>
-                ※おまかせ機能は1～3枠だけの時でも機能するよ</p>
+                <p><strong data-i18n="modal.usage.step2Title" data-i18n-source="commission">2. 依頼を選択</strong><br>
+                <span data-i18n-html="modal.usage.step2Text" data-i18n-source="commission">依頼を最大4つ選んでね！<br>
+                ※おまかせ機能は1～3枠だけの時でも機能するよ</span></p>
                 
-                <p><strong>3. 巡遊者を配置</strong><br>
-                「？」をクリックして巡遊者をあてはめていこう！<br>
+                <p><strong data-i18n="modal.usage.step3Title" data-i18n-source="commission">3. 巡遊者を配置</strong><br>
+                <span data-i18n-html="modal.usage.step3Text" data-i18n-source="commission">「？」をクリックして巡遊者をあてはめていこう！<br>
                 性格の条件を満たすと、要求されてる性格の色が変わるよ<br>
-                2人設定した時点で性格の条件を両方満たすと、残り1枠が「誰でもOK」表示に変化するよ！</p>
+                2人設定した時点で性格の条件を両方満たすと、残り1枠が「誰でもOK」表示に変化するよ！</span></p>
                 
-                <p><strong>4. おまかせ機能（試験中）</strong><br>
-                「おまかせ」ボタンを押すと、自動で組み合わせを提案してくれるよ！（最大20パターン）<br>
+                <p><strong data-i18n="modal.usage.step4Title" data-i18n-source="commission">4. おまかせ機能（試験中）</strong><br>
+                <span data-i18n-html="modal.usage.step4Text" data-i18n-source="commission">「おまかせ」ボタンを押すと、自動で組み合わせを提案してくれるよ！（最大20パターン）<br>
                 出てきた候補をクリックするとそれが設定されるよ<br>
                 全部の条件を満たせなかった時は足りないキャラが出てくるから、<br>
                 設定をいじってもう1回おまかせを実行してみてね<br>
-                6人以上必要な時は多すぎてエラーになるよ</p>
+                6人以上必要な時は多すぎてエラーになるよ</span></p>
                 
-                <p><strong>5. プリセット</strong><br>
-                現在の設定を保存できるよ<br>
-                ※所持巡遊者の設定もプリセットごとに保存されます</p>
+                <p><strong data-i18n="modal.usage.step5Title" data-i18n-source="commission">5. プリセット</strong><br>
+                <span data-i18n-html="modal.usage.step5Text" data-i18n-source="commission">現在の設定を保存できるよ<br>
+                ※所持巡遊者の設定もプリセットごとに保存されます</span></p>
                 
-                <p><strong>6. 初期化</strong><br>
-                現在の設定と所持巡遊者をデフォの状態に戻すよ<br>
-                ※プリセット情報は残ります</p>
+                <p><strong data-i18n="modal.usage.step6Title" data-i18n-source="commission">6. 初期化</strong><br>
+                <span data-i18n-html="modal.usage.step6Text" data-i18n-source="commission">現在の設定と所持巡遊者をデフォの状態に戻すよ<br>
+                ※プリセット情報は残ります</span></p>
             </div>
         </div>
     </div>
@@ -330,7 +309,7 @@
         <div class="commission-modal-overlay"></div>
         <div class="commission-modal-content">
             <div class="commission-modal-header">
-                <h3 class="commission-modal-title">依頼を選択</h3>
+                <h3 class="commission-modal-title" data-i18n="modal.selectCommission.title" data-i18n-source="commission">依頼を選択</h3>
                 <button class="commission-modal-close">&times;</button>
             </div>
             <div class="commission-modal-body">
@@ -346,7 +325,7 @@
         <div class="character-modal-overlay"></div>
         <div class="character-modal-content">
             <div class="character-modal-header">
-                <h3 class="character-modal-title">巡遊者を選択</h3>
+                <h3 class="character-modal-title" data-i18n="modal.selectCharacter.title" data-i18n-source="commission">巡遊者を選択</h3>
                 <button class="character-modal-close">&times;</button>
             </div>
             <div class="character-modal-body">
@@ -362,7 +341,7 @@
         <div class="owned-characters-modal-overlay"></div>
         <div class="owned-characters-modal-content">
             <div class="owned-characters-modal-header">
-                <h3 class="owned-characters-modal-title">所持巡遊者の設定</h3>
+                <h3 class="owned-characters-modal-title" data-i18n="modal.manageOwned.title" data-i18n-source="commission">所持巡遊者の設定</h3>
                 <button class="owned-characters-modal-close">&times;</button>
             </div>
             <div class="owned-characters-modal-body">
@@ -378,7 +357,7 @@
         <div class="auto-assign-modal-overlay"></div>
         <div class="auto-assign-modal-content">
             <div class="auto-assign-modal-header">
-                <h3 class="auto-assign-modal-title">おまかせ編成候補</h3>
+                <h3 class="auto-assign-modal-title" data-i18n="modal.autoAssign.title" data-i18n-source="commission">おまかせ編成候補</h3>
                 <button class="auto-assign-modal-close">&times;</button>
             </div>
             <div class="auto-assign-modal-body">
@@ -389,6 +368,8 @@
         </div>
     </div>
 
+    <!-- i18n -->
+    <script src="js/common/i18n.js"></script>
     <!-- 共通JS -->
     <script src="js/common/utils.js"></script>
     <script src="js/common/menu.js"></script>
@@ -403,11 +384,11 @@
     <footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #ffffff; text-align: center; color: #666;">
         <p style="color: white; margin-bottom: 10px;">
             <a href="https://x.com/denko_gaminggal" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">@denko_gaminggal</a> |
-            <a href="https://marshmallow-qa.com/2vagoau6ezqonbq?t=zH1owd&utm_medium=url_text&utm_source=promotion" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">マシュマロ（感想・要望など）</a> |
-            <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">プライバシーポリシー</a>
+            <a href="https://marshmallow-qa.com/2vagoau6ezqonbq?t=zH1owd&utm_medium=url_text&utm_source=promotion" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;" data-i18n="footer.marshmallow">マシュマロ（感想・要望など）</a> |
+            <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;" data-i18n="footer.privacy">プライバシーポリシー</a>
         </p>
-        <p style="color: white;">©Yostar<br>
-        ※本サイトはステラソラの非公式ファンサイトです！</p>
+        <p style="color: white;"><span data-i18n="footer.copyright">©Yostar</span><br>
+        <span data-i18n="footer.disclaimer">※本サイトはステラソラの非公式ファンサイトです！</span></p>
     </footer>
 </body>
 </html>

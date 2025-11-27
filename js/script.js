@@ -24,12 +24,11 @@ const POTENTIAL_DEFINITIONS = {
 
 // サブ素質をクリックした時のステータス順序
 const SUB_STATUS_ORDER = ['none', 'level1', 'level2', 'level6'];
-const SUB_STATUS_LABELS = {
-    'none': '取得しない',
-    'level1': 'レベル1',
-    'level2': 'レベル1～',
-    'level6': 'レベル6'
-};
+
+// サブ素質のラベルを取得（i18n対応）
+function getSubStatusLabel(status) {
+    return i18n.getText(`subStatus.${status}`, 'potential');
+}
 
 // 現在の状態を保持
 const currentState = {
@@ -59,7 +58,8 @@ function getPotentialImagePath(charId, potentialId) {
 
 // Descriptionの取得と文字数制御
 function getDescription(character, potentialId) {
-    const desc = character.descriptions[potentialId] || '説明文が設定されていません';
+    const descData = character.descriptions[potentialId];
+    const desc = (descData ? descData[i18n.getLanguage()] : null) || i18n.getText('messages.noDescription', 'potential');
     return formatTooltipText(desc, TOOLTIP_MAX_CHARS);
 }
 
@@ -97,6 +97,9 @@ function getSelectedCharacterIds() {
 
 // 初期化
 document.addEventListener('DOMContentLoaded', async () => {
+    // i18n初期化
+    await initI18n('potential');
+    
     // JSONデータの読み込み
     await loadCharacterData();
     
@@ -111,8 +114,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // プリセットの初期化
     initializePresets();
-    
-    // ハンバーガーメニューはcommon/menu.jsに移行
 });
 
 // データ読み込み
@@ -126,7 +127,7 @@ async function loadCharacterData() {
         console.log('キャラクターデータ読み込み完了:', charactersData);
     } catch (error) {
         console.error('データ読み込みエラー:', error);
-        showError('データの読み込みに失敗しました。data/potential.jsonを確認してください。');
+        showError(i18n.getText('messages.dataLoadError', 'potential'));
     }
 }
 
@@ -149,7 +150,7 @@ function populateCharacterSelects() {
         clearOption.dataset.value = '';
         clearOption.innerHTML = `
             <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 12px; font-weight: bold; color: #667eea;">
-                解除
+                ${i18n.getText('labels.clear', 'potential')}
             </div>
         `;
         clearOption.addEventListener('click', () => {
@@ -167,12 +168,12 @@ function populateCharacterSelects() {
             const icon = document.createElement('img');
             icon.className = 'character-option-icon';
             icon.src = char.icon;
-            icon.alt = char.name;
+            icon.alt = char.name[i18n.getLanguage()];
             
             // 名前のツールチップ
             const nameTooltip = document.createElement('div');
             nameTooltip.className = 'character-option-name';
-            nameTooltip.textContent = char.name;
+            nameTooltip.textContent = char.name[i18n.getLanguage()];
             
             option.appendChild(icon);
             option.appendChild(nameTooltip);
@@ -328,7 +329,7 @@ function savePresetNameInline() {
     // 空欄の場合は（未設定）にする
     if (presetName === '') {
         presetName = '';
-        presetNameInput.placeholder = '（未設定）';
+        presetNameInput.placeholder = i18n.getText('labels.presetNamePlaceholder', 'potential');
     }
     
     // ローカルストレージに保存（現在読み込み中のプリセット用）
@@ -389,10 +390,10 @@ function updateCharacterSelectButton(slot, character) {
     
     if (character) {
         button.innerHTML = `
-            <img src="${character.icon}" alt="${character.name}" class="character-select-icon">
+            <img src="${character.icon}" alt="${character.name[i18n.getLanguage()]}" class="character-select-icon">
         `;
     } else {
-        button.innerHTML = '<span class="select-text">巡遊者を<br>選択</span>';
+        button.innerHTML = `<span class="select-text">${i18n.getText('labels.selectCharacter', 'potential')}</span>`;
     }
 }
 
@@ -413,11 +414,11 @@ function displayPotentials(slot, character) {
     const potentialDef = POTENTIAL_DEFINITIONS[role];
     
     // コア素質セクション
-    const coreSection = createPotentialSection('コア素質', potentialDef.core, character, slot, 'core');
+    const coreSection = createPotentialSection(i18n.getText('labels.corePotential', 'potential'), potentialDef.core, character, slot, 'core');
     container.appendChild(coreSection);
     
     // サブ素質セクション
-    const subSection = createPotentialSection('サブ素質', potentialDef.sub, character, slot, 'sub');
+    const subSection = createPotentialSection(i18n.getText('labels.subPotential', 'potential'), potentialDef.sub, character, slot, 'sub');
     container.appendChild(subSection);
     
     // フィルターを適用
@@ -564,7 +565,7 @@ function createPotentialCard(character, potentialId, slot, type) {
         const btn = document.createElement('button');
         btn.className = 'sub-status-btn';
         btn.classList.add(state.status);
-        btn.textContent = SUB_STATUS_LABELS[state.status];
+        btn.textContent = getSubStatusLabel(state.status);
         btn.addEventListener('click', () => handleSubStatusClick(slot, potentialId));
         statusDiv.appendChild(btn);
     }
@@ -706,7 +707,7 @@ function handleResetCount() {
 
 // 初期化
 function handleResetAll() {
-    if (!confirm('全ての設定を初期化しますか？')) {
+    if (!confirm(i18n.getText('messages.confirmReset', 'potential'))) {
         return;
     }
     
@@ -774,7 +775,8 @@ function handleSavePreset(presetNum) {
     console.log(`プリセット${presetNum}保存時のプリセット名:`, presetName);
     
     // 空欄の場合は空文字列として保存（未設定にする）
-    if (presetName === '' || presetName === '（未設定）') {
+    const placeholderText = i18n.getText('labels.presetNamePlaceholder', 'potential');
+    if (presetName === '' || presetName === placeholderText) {
         presetName = '';
     }
     
@@ -847,7 +849,7 @@ function displayPresetName(name) {
     const input = document.getElementById('preset-name-input-inline');
     if (input) {
         input.value = name || '';
-        input.placeholder = name ? '' : '（未設定）';
+        input.placeholder = name ? '' : i18n.getText('labels.presetNamePlaceholder', 'potential');
     }
 }
 
@@ -1039,7 +1041,7 @@ async function handleScreenshot() {
         });
     } catch (error) {
         console.error('スクリーンショットエラー:', error);
-        showError('スクリーンショットの生成に失敗しました');
+        showError(i18n.getText('messages.screenshotError', 'potential'));
         
         // エラー時も要素を元に戻す
         const footer = document.getElementById('screenshot-footer');

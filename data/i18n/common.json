@@ -1,0 +1,122 @@
+{
+  "buttons": {
+    "close": {
+      "ja": "閉じる",
+      "en": "Close"
+    },
+    "delete": {
+      "ja": "削除",
+      "en": "Delete"
+    },
+    "reset": {
+      "ja": "初期化",
+      "en": "Reset"
+    },
+    "load": {
+      "ja": "読み込み",
+      "en": "Load"
+    },
+    "save": {
+      "ja": "保存",
+      "en": "Save"
+    },
+    "languageToggle": {
+      "ja": "English",
+      "en": "日本語"
+    },
+    "cancel": {
+      "ja": "キャンセル",
+      "en": "Cancel"
+    },
+    "usage": {
+      "ja": "使い方",
+      "en": "How to Use"
+    }
+  },
+  "preset": {
+    "title": {
+      "ja": "プリセット",
+      "en": "Presets"
+    }
+  },
+  "site": {
+    "title": {
+      "ja": "ステラソラ ラクラクおサボりツール 略してラール(仮)",
+      "en": "Stella Sora Laru's Lazy Tools"
+    },
+    "shortTitle": {
+      "ja": "おサボりツール",
+      "en": "Laru's Lazy Tools"
+    }
+  },
+  "menu": {
+    "commission": {
+      "ja": "依頼シミュレーター",
+      "en": "Commission Simulator"
+    },
+    "planned": {
+      "unreleased": {
+        "ja": "（予定）未実装キャラメモ",
+        "en": "(Planned) Unreleased Characters"
+      },
+      "quiz": {
+        "ja": "（予定）星ノ塔クイズのカンペ",
+        "en": "(Planned) Star Tower Quiz Cheat Sheet"
+      },
+      "cocotya": {
+        "ja": "（予定）ココチャまとめ",
+        "en": "(Planned) Cocotya Summary"
+      },
+      "materials": {
+        "ja": "（予定）昇格に必要な素材数計算機",
+        "en": "(Planned) Material Calculator"
+      },
+      "ring": {
+        "ja": "（予定）無限リングのバフ早見表",
+        "en": "(Planned) Infinite Ring Buff Guide"
+      },
+      "reverse": {
+        "ja": "（予定）素材逆引き",
+        "en": "(Planned) Material Reverse Lookup"
+      }
+    },
+    "exchange": {
+      "ja": "イベント交換所チェッカー",
+      "en": "Event Exchange Checker"
+    },
+    "top": {
+      "ja": "TOP",
+      "en": "TOP"
+    },
+    "header": {
+      "ja": "メニュー",
+      "en": "Menu"
+    },
+    "potential": {
+      "ja": "素質シミュレーター",
+      "en": "Potential Simulator"
+    }
+  },
+  "footer": {
+    "marshmallow": {
+      "ja": "マシュマロ（感想・要望など）",
+      "en": "Marshmallow (Feedback)"
+    },
+    "creatorX": {
+      "ja": "作った人のX",
+      "en": "my X account"
+    },
+    "disclaimer": {
+      "ja": "本サイトはステラソラの非公式ファンサイトであり、Yostarとは一切関係ありません。\n使用されているゲーム画像、情報の所有権および著作権はそれぞれの権利者に帰属します。",
+      "en": "This site is an unofficial fan site for StellaSola and is not affiliated with Yostar in any way. All game images and information used herein are the property of their respective rights holders."
+    },
+    "copyright": {
+      "ja": "©Yostar",
+      "en": "©Yostar"
+    },
+    "privacy": {
+      "ja": "プライバシーポリシー",
+      "en": "Privacy Policy"
+    }
+  }
+}

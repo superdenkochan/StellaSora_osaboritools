@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="google-adsense-account" content="ca-pub-2384775227983330">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>素質シミュレーター - おサボりツール</title>
+    <title data-i18n="page.htmlTitle" data-i18n-source="potential">素質シミュレーター - おサボりツール</title>
     
     <!-- ファビコン -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/others/favicon32.png">
@@ -19,16 +19,17 @@
 
     <div class="container">
         <header>
-            <h1>素質シミュレーター</h1>
+            <h1 data-i18n="page.title" data-i18n-source="potential">素質シミュレーター</h1>
             <div class="controls">
                 <label>
-                    <input type="checkbox" id="hideUnobtained"> 取得しない素質を非表示
+                    <input type="checkbox" id="hideUnobtained"> <span data-i18n="buttons.hideUnobtained" data-i18n-source="potential">取得しない素質を非表示</span>
                 </label>
-                <button id="resetCount" class="btn">カウントリセット</button>
-                <button id="resetAll" class="btn btn-danger">初期化</button>
-                <button id="screenshot" class="btn btn-primary">スクショ</button>
-                <button id="showUsage" class="btn btn-info">使い方</button>
-                <button id="showChangelog" class="btn btn-info">変更履歴</button>
+                <button id="resetCount" class="btn" data-i18n="buttons.resetCount" data-i18n-source="potential">カウントリセット</button>
+                <button id="resetAll" class="btn btn-danger" data-i18n="buttons.reset" data-i18n-source="potential">初期化</button>
+                <button id="screenshot" class="btn btn-primary" data-i18n="buttons.screenshot" data-i18n-source="potential">スクショ</button>
+                <button id="showUsage" class="btn btn-info" data-i18n="buttons.usage" data-i18n-source="potential">使い方</button>
+                <button id="showChangelog" class="btn btn-info" data-i18n="buttons.changelog" data-i18n-source="potential">変更履歴</button>
+                <button id="languageToggle" class="btn">English</button>
             </div>
         </header>
 
@@ -117,7 +118,7 @@
 
             <!-- プリセット管理エリア（下段配置） -->
             <aside class="presets-area">
-                <h3>プリセット</h3>
+                <h3 data-i18n="preset.title">プリセット</h3>
                 <div class="presets-list">
                     <!-- プリセット1～10 -->
                     <div class="preset-item" data-preset="1">
@@ -126,8 +127,8 @@
                             <span class="preset-number">1</span>
                         </div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="1">保存</button>
-                            <button class="btn-load" data-preset="1" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="1" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="1" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="2">
@@ -136,8 +137,8 @@
                             <span class="preset-number">2</span>
                         </div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="2">保存</button>
-                            <button class="btn-load" data-preset="2" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="2" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="2" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="3">
@@ -146,8 +147,8 @@
                             <span class="preset-number">3</span>
                         </div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="3">保存</button>
-                            <button class="btn-load" data-preset="3" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="3" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="3" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="4">
@@ -156,8 +157,8 @@
                             <span class="preset-number">4</span>
                         </div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="4">保存</button>
-                            <button class="btn-load" data-preset="4" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="4" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="4" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="5">
@@ -166,8 +167,8 @@
                             <span class="preset-number">5</span>
                         </div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="5">保存</button>
-                            <button class="btn-load" data-preset="5" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="5" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="5" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="6">
@@ -176,8 +177,8 @@
                             <span class="preset-number">6</span>
                         </div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="6">保存</button>
-                            <button class="btn-load" data-preset="6" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="6" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="6" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="7">
@@ -186,8 +187,8 @@
                             <span class="preset-number">7</span>
                         </div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="7">保存</button>
-                            <button class="btn-load" data-preset="7" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="7" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="7" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="8">
@@ -196,8 +197,8 @@
                             <span class="preset-number">8</span>
                         </div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="8">保存</button>
-                            <button class="btn-load" data-preset="8" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="8" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="8" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="9">
@@ -206,8 +207,8 @@
                             <span class="preset-number">9</span>
                         </div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="9">保存</button>
-                            <button class="btn-load" data-preset="9" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="9" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="9" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                     <div class="preset-item" data-preset="10">
@@ -216,8 +217,8 @@
                             <span class="preset-number">10</span>
                         </div>
                         <div class="preset-actions">
-                            <button class="btn-save" data-preset="10">保存</button>
-                            <button class="btn-load" data-preset="10" disabled>読み込み</button>
+                            <button class="btn-save" data-preset="10" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="10" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                 </div>
@@ -234,52 +235,52 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="modal-close">&times;</button>
-                <h2>使い方</h2>
+                <h2 data-i18n="modal.usage.title" data-i18n-source="potential">使い方</h2>
             </div>
             <div class="modal-body">
-                <h3>基本操作</h3>
-                <p><strong>1. 巡遊者を選択！</strong><br>
-                アイコンをクリックして選んでね。<br>
-                素質カードは主力と支援で自動で切り替わるから気にしなくていいよ～</p>
+                <h3 data-i18n="modal.usage.basic" data-i18n-source="potential">基本操作</h3>
+                <p><strong data-i18n="modal.usage.step1Title" data-i18n-source="potential">1. 巡遊者を選択！</strong><br>
+                <span data-i18n-html="modal.usage.step1Text" data-i18n-source="potential">アイコンをクリックして選んでね。<br>
+                素質カードは主力と支援で自動で切り替わるから気にしなくていいよ～</span></p>
                 
-                <p><strong>2. コア素質</strong><br>
-                「取得する/取得しない」ボタンをクリックして、取りたい素質を選ぼう！<br>
-                ゲームの仕様と同じで2つまでしか選べないようにしてるよ</p>
+                <p><strong data-i18n="modal.usage.step2Title" data-i18n-source="potential">2. コア素質</strong><br>
+                <span data-i18n-html="modal.usage.step2Text" data-i18n-source="potential">「取得する/取得しない」ボタンをクリックして、取りたい素質を選ぼう！<br>
+                ゲームの仕様と同じで2つまでしか選べないようにしてるよ</span></p>
                 
-                <p><strong>3. サブ素質</strong><br>
-                ボタンをクリックすると<br>
+                <p><strong data-i18n="modal.usage.step3Title" data-i18n-source="potential">3. サブ素質</strong><br>
+                <span data-i18n-html="modal.usage.step3Text" data-i18n-source="potential">ボタンをクリックすると<br>
                 [取得しない]→[レベル1]→[レベル1～]→[レベル6]の順に切り替わるよ<br>
                 絶対レベル6にしたい素質だとか、レベル1止めでいい素質とか<br>
                 優先度低いけど可能な限り上げたい素質とかを分けられて便利だね！<br>
-                これやりたいがためにこのツールを作ったし！</p>
+                これやりたいがためにこのツールを作ったし！</span></p>
                 
-                <p><strong>4. 素質レベルカウント</strong><br>
-                素質カードの画像部分をクリックするとレベルが上がっていくよ<br>
+                <p><strong data-i18n="modal.usage.step4Title" data-i18n-source="potential">4. 素質レベルカウント</strong><br>
+                <span data-i18n-html="modal.usage.step4Text" data-i18n-source="potential">素質カードの画像部分をクリックするとレベルが上がっていくよ<br>
                 2窓して登りながらポチポチすると、いちいちゲーム側で確認しなくて便利だね<br>
-                コア素質をクリックするとチェックマークが付くよ</p>
+                コア素質をクリックするとチェックマークが付くよ</span></p>
                 
-                <h3>その他色々</h3>
-                <p><strong>取得しない素質を非表示</strong><br>
-                チェックを入れると、「取得しない」素質が非表示になるよ<br>
-                見やすいね！</p>
+                <h3 data-i18n="modal.usage.others" data-i18n-source="potential">その他色々</h3>
+                <p><strong data-i18n="modal.usage.hideTitle" data-i18n-source="potential">取得しない素質を非表示</strong><br>
+                <span data-i18n-html="modal.usage.hideText" data-i18n-source="potential">チェックを入れると、「取得しない」素質が非表示になるよ<br>
+                見やすいね！</span></p>
                 
-                <p><strong>プリセット保存・読み込み</strong><br>
-                巡遊者と素質のラベル設定を10個まで保存できるよ。<br>
+                <p><strong data-i18n="modal.usage.presetTitle" data-i18n-source="potential">プリセット保存・読み込み</strong><br>
+                <span data-i18n-html="modal.usage.presetText" data-i18n-source="potential">巡遊者と素質のラベル設定を10個まで保存できるよ。<br>
                 ポチポチしたレベルは保存されないようにしてるけど別にそれでいいよね？<br>
                 ※更新によりプリセットが呼び出せなくなる可能性があるかもしれません。<br>
-                　どうしても忘れたくないプリセットは、スクリーンショットで保管しておくことを推奨します。</p>
+                　どうしても忘れたくないプリセットは、スクリーンショットで保管しておくことを推奨します。</span></p>
                 
-                <p><strong>カウントリセット</strong><br>
-                3キャラ分のレベルカウントとコア素質のチェックをデフォに戻すよ。<br>
-                塔を登り直す時はコレ！</p>
+                <p><strong data-i18n="modal.usage.resetCountTitle" data-i18n-source="potential">カウントリセット</strong><br>
+                <span data-i18n-html="modal.usage.resetCountText" data-i18n-source="potential">3キャラ分のレベルカウントとコア素質のチェックをデフォに戻すよ。<br>
+                塔を登り直す時はコレ！</span></p>
                 
-                <p><strong>初期化</strong><br>
-                すべての設定を初期状態に戻すよ<br>
-                具体的に言うと巡遊者スロットが空になって、非表示チェックもなしになるね</p>
+                <p><strong data-i18n="modal.usage.resetAllTitle" data-i18n-source="potential">初期化</strong><br>
+                <span data-i18n-html="modal.usage.resetAllText" data-i18n-source="potential">すべての設定を初期状態に戻すよ<br>
+                具体的に言うと巡遊者スロットが空になって、非表示チェックもなしになるね</span></p>
                 
-                <p><strong>スクショ</strong><br>
-                現在の画面を画像として保存できるよ。<br>
-                理想のビルド共有する時とかに使ってね</p>
+                <p><strong data-i18n="modal.usage.screenshotTitle" data-i18n-source="potential">スクショ</strong><br>
+                <span data-i18n-html="modal.usage.screenshotText" data-i18n-source="potential">現在の画面を画像として保存できるよ。<br>
+                理想のビルド共有する時とかに使ってね</span></p>
             </div>
         </div>
     </div>
@@ -290,7 +291,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button class="modal-close">&times;</button>
-                <h2>変更履歴</h2>
+                <h2 data-i18n="modal.changelog.title" data-i18n-source="potential">変更履歴</h2>
             </div>
             <div class="modal-body">
                 <h3>v1.0.1 2025.11.18</h3>
@@ -318,7 +319,7 @@
         <div class="modal-content" style="max-width: 400px;">
             <div class="modal-header">
                 <button class="modal-close">&times;</button>
-                <h2>プリセット名を入力</h2>
+                <h2 data-i18n="modal.presetName.title" data-i18n-source="potential">プリセット名を入力</h2>
             </div>
             <div class="modal-body">
                 <p style="margin-bottom: 15px;">プリセット<span id="preset-number-display"></span>の名前を入力してください（最大20文字）</p>
@@ -341,7 +342,7 @@
         <div class="character-modal-content">
             <div class="character-modal-header">
                 <button class="character-modal-close">&times;</button>
-                <h3 class="character-modal-title">主力キャラクター選択</h3>
+                <h3 class="character-modal-title" data-i18n="characterSelect.mainTitle" data-i18n-source="potential">主力キャラクター選択</h3>
             </div>
             <div class="character-modal-body">
                 <div class="character-modal-grid" data-slot="main"></div>
@@ -355,7 +356,7 @@
         <div class="character-modal-content">
             <div class="character-modal-header">
                 <button class="character-modal-close">&times;</button>
-                <h3 class="character-modal-title">支援キャラクター1選択</h3>
+                <h3 class="character-modal-title" data-i18n="characterSelect.support1Title" data-i18n-source="potential">支援キャラクター1選択</h3>
             </div>
             <div class="character-modal-body">
                 <div class="character-modal-grid" data-slot="support1"></div>
@@ -369,7 +370,7 @@
         <div class="character-modal-content">
             <div class="character-modal-header">
                 <button class="character-modal-close">&times;</button>
-                <h3 class="character-modal-title">支援キャラクター2選択</h3>
+                <h3 class="character-modal-title" data-i18n="characterSelect.support2Title" data-i18n-source="potential">支援キャラクター2選択</h3>
             </div>
             <div class="character-modal-body">
                 <div class="character-modal-grid" data-slot="support2"></div>
@@ -377,6 +378,8 @@
         </div>
     </div>
 
+    <!-- i18n -->
+    <script src="js/common/i18n.js"></script>
     <!-- 共通JS -->
     <script src="js/common/utils.js"></script>
     <script src="js/common/menu.js"></script>
@@ -394,11 +397,11 @@
     <footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #ffffff; text-align: center; color: #666;">
         <p style="color: white; margin-bottom: 10px;">
             <a href="https://x.com/denko_gaminggal" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">@denko_gaminggal</a> |
-            <a href="https://marshmallow-qa.com/2vagoau6ezqonbq?t=zH1owd&utm_medium=url_text&utm_source=promotion" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">マシュマロ（感想・要望など）</a> |
-            <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">プライバシーポリシー</a>
+            <a href="https://marshmallow-qa.com/2vagoau6ezqonbq?t=zH1owd&utm_medium=url_text&utm_source=promotion" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;" data-i18n="footer.marshmallow">マシュマロ（感想・要望など）</a> |
+            <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;" data-i18n="footer.privacy">プライバシーポリシー</a>
         </p>
-        <p style="color: white;">©Yostar<br>
-        ※本サイトはステラソラの非公式ファンサイトです！</p>
+        <p style="color: white;"><span data-i18n="footer.copyright">©Yostar</span><br>
+        <span data-i18n="footer.disclaimer">※本サイトはステラソラの非公式ファンサイトです！</span></p>
     </footer>
 </body>
 </html>

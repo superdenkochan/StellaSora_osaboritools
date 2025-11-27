@@ -2,8 +2,10 @@
   "categories": [
     {
       "id": "1001",
-      "name": "ドーラ",
-      "name_en": "Monetary",
+      "name": {
+        "ja": "ドーラ",
+        "en": "Dorra"
+      },
       "icon": "images/commission/commission_1001.png",
       "roles": [
         "vanguard",
@@ -17,8 +19,10 @@
     },
     {
       "id": "1002",
-      "name": "経験値_巡遊者",
-      "name_en": "Experience",
+      "name": {
+        "ja": "経験値_巡遊者",
+        "en": "EXP_Trekker"
+      },
       "icon": "images/commission/commission_1002.png",
       "roles": [
         "vanguard",
@@ -32,8 +36,10 @@
     },
     {
       "id": "1003",
-      "name": "経験値_ロスレコ",
-      "name_en": "Disc",
+      "name": {
+        "ja": "経験値_ロスレコ",
+        "en": "EXP_Runic Disc"
+      },
       "icon": "images/commission/commission_1003.png",
       "roles": [
         "versatile",
@@ -47,8 +53,10 @@
     },
     {
       "id": "1004",
-      "name": "巡遊者昇格_帽子",
-      "name_en": "Trekker Hat",
+      "name": {
+        "ja": "巡遊者昇格_帽子",
+        "en": "Trekker Hat"
+      },
       "icon": "images/commission/commission_1004.png",
       "roles": [
         "vanguard",
@@ -62,8 +70,10 @@
     },
     {
       "id": "1005",
-      "name": "巡遊者昇格_壺",
-      "name_en": "Trekker Pot",
+      "name": {
+        "ja": "巡遊者昇格_壺",
+        "en": "Trekker Pot"
+      },
       "icon": "images/commission/commission_1005.png",
       "roles": [
         "vanguard",
@@ -77,8 +87,10 @@
     },
     {
       "id": "1006",
-      "name": "巡遊者昇格_灯",
-      "name_en": "Trekker Emberfly",
+      "name": {
+        "ja": "巡遊者昇格_灯",
+        "en": "Trekker Emberfly"
+      },
       "icon": "images/commission/commission_1006.png",
       "roles": [
         "versatile",
@@ -92,8 +104,10 @@
     },
     {
       "id": "1007",
-      "name": "ロスレコ昇格_帽子",
-      "name_en": "Disc Hat",
+      "name": {
+        "ja": "ロスレコ昇格_帽子",
+        "en": "Disc Hat"
+      },
       "icon": "images/commission/commission_1007.png",
       "roles": [
         "versatile",
@@ -107,8 +121,10 @@
     },
     {
       "id": "1008",
-      "name": "ロスレコ昇格_壺",
-      "name_en": "Disc Pot",
+      "name": {
+        "ja": "ロスレコ昇格_壺",
+        "en": "Disc Pot"
+      },
       "icon": "images/commission/commission_1008.png",
       "roles": [
         "vanguard",
@@ -122,8 +138,10 @@
     },
     {
       "id": "1009",
-      "name": "ロスレコ昇格_灯",
-      "name_en": "Disc Emberfly",
+      "name": {
+        "ja": "ロスレコ昇格_灯",
+        "en": "Disc Emberfly"
+      },
       "icon": "images/commission/commission_1009.png",
       "roles": [
         "vanguard",
@@ -137,8 +155,10 @@
     },
     {
       "id": "1010",
-      "name": "音楽カセット",
-      "name_en": "Rhythm Cartridge",
+      "name": {
+        "ja": "音楽カセット",
+        "en": "Rhythm Cartridge"
+      },
       "icon": "images/commission/commission_1010.png",
       "roles": [
         "vanguard",
@@ -152,8 +172,10 @@
     },
     {
       "id": "1011",
-      "name": "弾幕カセット",
-      "name_en": "Shooter Cartridge",
+      "name": {
+        "ja": "弾幕カセット",
+        "en": "Shooter Cartridge"
+      },
       "icon": "images/commission/commission_1011.png",
       "roles": [
         "versatile",
@@ -167,8 +189,10 @@
     },
     {
       "id": "1012",
-      "name": "格闘カセット",
-      "name_en": " Kung-Fu Cartridge",
+      "name": {
+        "ja": "格闘カセット",
+        "en": "Kung-Fu Cartridge"
+      },
       "icon": "images/commission/commission_1012.png",
       "roles": [
         "versatile",

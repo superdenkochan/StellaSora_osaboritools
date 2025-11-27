@@ -16,6 +16,9 @@ let eventList = []; // イベント一覧
 
 // 初期化
 document.addEventListener('DOMContentLoaded', async () => {
+    // i18n初期化
+    await initI18n('exchange');
+    
     // イベント一覧読み込み
     await loadEventList();
     
@@ -37,7 +40,7 @@ async function loadEventList() {
         console.log('イベント一覧読み込み完了', eventList);
     } catch (error) {
         console.error('イベント一覧読み込みエラー:', error);
-        alert('イベント一覧の読み込みに失敗しました。ページをリロードしてください。');
+        alert(i18n.getText('messages.loadError', 'exchange'));
     }
 }
 
@@ -113,7 +116,7 @@ function initializeEventSelect() {
     eventList.forEach(event => {
         const option = document.createElement('option');
         option.value = event.eventId;
-        option.textContent = event.name;
+        option.textContent = event.name[i18n.getLanguage()];
         eventSelect.appendChild(option);
     });
 }
@@ -210,7 +213,7 @@ function displayEventInfo() {
         const pointIcon = document.getElementById('pointIcon');
         if (pointIcon) {
             pointIcon.src = pointData.icon;
-            pointIcon.alt = pointData.name;
+            pointIcon.alt = pointData.name[i18n.getLanguage()];
         }
     }
     
@@ -294,10 +297,10 @@ function createRewardItem(reward) {
     
     div.innerHTML = `
         <div class="reward-icon-wrapper">
-            <img src="${reward.icon}" alt="${reward.name}" class="reward-icon">
+            <img src="${reward.icon}" alt="${reward.name[i18n.getLanguage()]}" class="reward-icon">
             <div class="reward-stock-badge">×${state.remaining}</div>
         </div>
-        <div class="reward-name">${reward.name}</div>
+        <div class="reward-name">${reward.name[i18n.getLanguage()]}</div>
         <div class="reward-price">${reward.price.toLocaleString()}pt</div>
         <div class="reward-status">いる</div>
         <div class="reward-controls">
@@ -573,31 +576,31 @@ function initializeMissions() {
     const accordionGroups = [
         {
             title: 'ノーマル',
-            missionIds: missions.filter(m => m.name.includes('ノーマル')).map(m => m.id)
+            missionIds: missions.filter(m => m.name.ja.includes('ノーマル')).map(m => m.id)
         },
         {
             title: 'ハード',
-            missionIds: missions.filter(m => m.name.includes('ハード')).map(m => m.id)
+            missionIds: missions.filter(m => m.name.ja.includes('ハード')).map(m => m.id)
         },
         {
             title: '通常任務',
-            missionIds: missions.filter(m => m.name.includes('通常任務')).map(m => m.id)
+            missionIds: missions.filter(m => m.name.ja.includes('通常任務')).map(m => m.id)
         },
         {
             title: '挑戦任務',
-            missionIds: missions.filter(m => m.name.includes('挑戦任務')).map(m => m.id)
+            missionIds: missions.filter(m => m.name.ja.includes('挑戦任務')).map(m => m.id)
         },
         {
             title: '冒険任務',
-            missionIds: missions.filter(m => m.name.includes('冒険任務')).map(m => m.id)
+            missionIds: missions.filter(m => m.name.ja.includes('冒険任務')).map(m => m.id)
         },
         {
             title: 'ミニゲーム',
-            missionIds: missions.filter(m => m.name.includes('ミニゲーム')).map(m => m.id)
+            missionIds: missions.filter(m => m.name.ja.includes('ミニゲーム')).map(m => m.id)
         },
         {
             title: 'その他',
-            missionIds: missions.filter(m => !m.name.includes('ノーマル') && !m.name.includes('ハード') && !m.name.includes('通常任務') && !m.name.includes('挑戦任務') && !m.name.includes('冒険任務') && !m.name.includes('ミニゲーム')).map(m => m.id)
+            missionIds: missions.filter(m => !m.name.ja.includes('ノーマル') && !m.name.ja.includes('ハード') && !m.name.ja.includes('通常任務') && !m.name.ja.includes('挑戦任務') && !m.name.ja.includes('冒険任務') && !m.name.ja.includes('ミニゲーム')).map(m => m.id)
         }
     ];
     
@@ -753,7 +756,7 @@ function createMissionItem(mission) {
     div.innerHTML = `
         <div class="mission-checkbox"></div>
         <div class="mission-info">
-            <div class="mission-name">${mission.name}</div>
+            <div class="mission-name">${mission.name[i18n.getLanguage()]}</div>
             <div class="mission-points">+${mission.points.toLocaleString()}pt</div>
         </div>
     `;
@@ -1020,7 +1023,7 @@ function resetProgress() {
 
 // 完全初期化
 function resetAll() {
-    if (!confirm('「交換する/しない」を含めて全部初期化しますか？')) {
+    if (!confirm(i18n.getText('messages.confirmResetAll', 'exchange'))) {
         return;
     }
     
@@ -1176,7 +1179,7 @@ function createCompMissionItem(mission) {
     div.innerHTML = `
         <div class="mission-checkbox"></div>
         <div class="mission-info">
-            <div class="mission-name">${mission.name}</div>
+            <div class="mission-name">${mission.name[i18n.getLanguage()]}</div>
             <div class="mission-points">+${mission.points.toLocaleString()}pt</div>
         </div>
     `;

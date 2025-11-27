@@ -1,7 +1,10 @@
 {
   "event": {
     "eventId": 1101,
-    "name": "私たちのギルド-新章追加記念イベント",
+    "name": {
+      "ja": "私たちのギルド-新章追加記念イベント",
+      "en": "Guild Sweet Guild -Main Story Update Event-"
+    },
     "startDate": "2025-11-18T05:00:00",
     "endDate": "2025-12-02T04:59:00",
     "backgroundImage": "images/events/bg_1101.jpg",
@@ -11,619 +14,961 @@
   },
   "eventPoint": {
     "id": 1101,
-    "name": "深緑のガラス玉",
+    "name": {
+      "ja": "深緑のガラス玉",
+      "en": "Glass Marble"
+    },
     "icon": "images/events/item_1101.png",
     "eventId": 1101
   },
   "exchangeRewards": [
     {
       "id": 1101,
-      "name": "★5ロスレコ",
+      "name": {
+        "ja": "★5ロスレコ",
+        "en": "★5 Runic Disc"
+      },
       "stock": 1,
       "price": 8000,
       "icon": "images/exchange/exchange_1101_s.jpg",
       "eventId": 1101,
-      "category": "限定"
+      "category": {
+        "ja": "限定",
+        "en": "限定"
+      }
     },
     {
       "id": 1102,
-      "name": "★5ロスレコ凸素材",
+      "name": {
+        "ja": "★5ロスレコ凸素材",
+        "en": "Crescendo of ★5 Event Disc"
+      },
       "stock": 5,
       "price": 8000,
       "icon": "images/exchange/exchange_1102_s.jpg",
       "eventId": 1101,
-      "category": "限定"
+      "category": {
+        "ja": "限定",
+        "en": "限定"
+      }
     },
     {
       "id": 1103,
-      "name": "イベント称号",
+      "name": {
+        "ja": "イベント称号",
+        "en": "Honor Title"
+      },
       "stock": 1,
       "price": 5000,
       "icon": "images/exchange/exchange_1103_s.jpg",
       "eventId": 1101,
-      "category": "限定"
+      "category": {
+        "ja": "限定",
+        "en": "限定"
+      }
     },
     {
       "id": 1104,
-      "name": "首領素材",
+      "name": {
+        "ja": "首領素材",
+        "en": "Skill upgrade Lv.7 - 10"
+      },
       "stock": 12,
       "price": 1600,
       "icon": "images/exchange/exchange_1104_s.jpg",
       "eventId": 1101,
-      "category": "素材"
+      "category": {
+        "ja": "素材",
+        "en": "素材"
+      }
     },
     {
       "id": 1105,
-      "name": "青空旅券",
+      "name": {
+        "ja": "青空旅券",
+        "en": "Cerulean Ticket"
+      },
       "stock": 5,
       "price": 500,
       "icon": "images/exchange/exchange_1105_s.jpg",
       "eventId": 1101,
-      "category": "限定"
+      "category": {
+        "ja": "限定",
+        "en": "限定"
+      }
     },
     {
       "id": 1106,
-      "name": "オアシス旅券",
+      "name": {
+        "ja": "オアシス旅券",
+        "en": "Sprout Ticket"
+      },
       "stock": 5,
       "price": 500,
       "icon": "images/exchange/exchange_1106_s.jpg",
       "eventId": 1101,
-      "category": "限定"
+      "category": {
+        "ja": "限定",
+        "en": "限定"
+      }
     },
     {
       "id": 1107,
-      "name": "徴章研磨剤",
+      "name": {
+        "ja": "徴章研磨剤",
+        "en": "Star Emblem Polisher"
+      },
       "stock": 10,
       "price": 400,
       "icon": "images/exchange/exchange_1107_s.jpg",
       "eventId": 1101,
-      "category": "素材"
+      "category": {
+        "ja": "素材",
+        "en": "素材"
+      }
     },
     {
       "id": 1108,
-      "name": "ギフト（金）×5",
+      "name": {
+        "ja": "ギフト（金）×5",
+        "en": "gift"
+      },
       "stock": 2,
       "price": 250,
       "icon": "images/exchange/exchange_1108_s.jpg",
       "eventId": 1101,
-      "category": "素材"
+      "category": {
+        "ja": "素材",
+        "en": "素材"
+      }
     },
     {
       "id": 1109,
-      "name": "ギフト（金）×5",
+      "name": {
+        "ja": "ギフト（金）×5",
+        "en": "gift"
+      },
       "stock": 2,
       "price": 250,
       "icon": "images/exchange/exchange_1109_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1110,
-      "name": "ギフト（金）×5",
+      "name": {
+        "ja": "ギフト（金）×5",
+        "en": "gift"
+      },
       "stock": 2,
       "price": 250,
       "icon": "images/exchange/exchange_1110_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1111,
-      "name": "巡遊者昇格（金）×5",
+      "name": {
+        "ja": "巡遊者昇格（金）×5",
+        "en": "Trekker tier-up"
+      },
       "stock": 6,
       "price": 250,
       "icon": "images/exchange/exchange_1111_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1112,
-      "name": "スキル素材（金）×5",
+      "name": {
+        "ja": "スキル素材（金）×5",
+        "en": "Trekker ability upgrades"
+      },
       "stock": 10,
       "price": 250,
       "icon": "images/exchange/exchange_1112_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1113,
-      "name": "ロスレコ昇格（金）×5",
+      "name": {
+        "ja": "ロスレコ昇格（金）×5",
+        "en": "Runic Discs tier-up"
+      },
       "stock": 10,
       "price": 250,
       "icon": "images/exchange/exchange_1113_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1114,
-      "name": "【無期限】登頂チケット×2",
+      "name": {
+        "ja": "【無期限】登頂チケット×2",
+        "en": "Monolith Stairs Pass"
+      },
       "stock": 10,
       "price": 200,
       "icon": "images/exchange/exchange_1114_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1115,
-      "name": "巡遊者経験値×5",
+      "name": {
+        "ja": "巡遊者経験値×5",
+        "en": "Trekkers EXP"
+      },
       "stock": 30,
       "price": 150,
       "icon": "images/exchange/exchange_1115_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1116,
-      "name": "ロスレコ経験値×5",
+      "name": {
+        "ja": "ロスレコ経験値×5",
+        "en": "Runic Discs EXP"
+      },
       "stock": 40,
       "price": 150,
       "icon": "images/exchange/exchange_1116_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1117,
-      "name": "巡遊者昇格（青）×5",
+      "name": {
+        "ja": "巡遊者昇格（青）×5",
+        "en": "Trekker tier-up"
+      },
       "stock": 40,
       "price": 80,
       "icon": "images/exchange/exchange_1117_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1118,
-      "name": "スキル素材（青）×5",
+      "name": {
+        "ja": "スキル素材（青）×5",
+        "en": "Trekker ability upgrades"
+      },
       "stock": 90,
       "price": 80,
       "icon": "images/exchange/exchange_1118_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1119,
-      "name": "ロスレコ昇格（青）×5",
+      "name": {
+        "ja": "ロスレコ昇格（青）×5",
+        "en": "Runic Discs tier-up"
+      },
       "stock": 90,
       "price": 80,
       "icon": "images/exchange/exchange_1119_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1120,
-      "name": "新米巡遊者昇格箱",
+      "name": {
+        "ja": "新米巡遊者昇格箱",
+        "en": "Trekker tier-up"
+      },
       "stock": 20,
       "price": 25,
       "icon": "images/exchange/exchange_1120_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1121,
-      "name": "新米スキルカセット箱",
+      "name": {
+        "ja": "新米スキルカセット箱",
+        "en": "Trekker ability upgrades"
+      },
       "stock": 45,
       "price": 25,
       "icon": "images/exchange/exchange_1121_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1122,
-      "name": "新米ロスレコ昇格箱",
+      "name": {
+        "ja": "新米ロスレコ昇格箱",
+        "en": "Runic Discs tier-up"
+      },
       "stock": 20,
       "price": 25,
       "icon": "images/exchange/exchange_1122_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     },
     {
       "id": 1123,
-      "name": "3000ドーラ",
+      "name": {
+        "ja": "3000ドーラ",
+        "en": "Dorra"
+      },
       "stock": 1000,
       "price": 10,
       "icon": "images/exchange/exchange_1123_s.jpg",
       "eventId": 1101,
-      "category": "その他"
+      "category": {
+        "ja": "その他",
+        "en": "その他"
+      }
     }
   ],
   "missionRewards": [
     {
       "id": 11001,
-      "name": "ノーマル1",
+      "name": {
+        "ja": "ノーマル1",
+        "en": "Normal 1"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11002,
-      "name": "ノーマル2",
+      "name": {
+        "ja": "ノーマル2",
+        "en": "Normal 2"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11003,
-      "name": "ノーマル3",
+      "name": {
+        "ja": "ノーマル3",
+        "en": "Normal 3"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11004,
-      "name": "ノーマル4",
+      "name": {
+        "ja": "ノーマル4",
+        "en": "Normal 4"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11005,
-      "name": "ノーマル5",
+      "name": {
+        "ja": "ノーマル5",
+        "en": "Normal 5"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11006,
-      "name": "ノーマル6",
+      "name": {
+        "ja": "ノーマル6",
+        "en": "Normal 6"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11007,
-      "name": "ノーマル7",
+      "name": {
+        "ja": "ノーマル7",
+        "en": "Normal 7"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11008,
-      "name": "ノーマル8",
+      "name": {
+        "ja": "ノーマル8",
+        "en": "Normal 8"
+      },
       "points": 800,
       "eventId": 1101
     },
     {
       "id": 11011,
-      "name": "ハード1",
+      "name": {
+        "ja": "ハード1",
+        "en": "Hard 1"
+      },
       "points": 800,
       "eventId": 1101
     },
     {
       "id": 11012,
-      "name": "ハード2",
+      "name": {
+        "ja": "ハード2",
+        "en": "Hard 2"
+      },
       "points": 800,
       "eventId": 1101
     },
     {
       "id": 11013,
-      "name": "ハード3",
+      "name": {
+        "ja": "ハード3",
+        "en": "Hard 3"
+      },
       "points": 800,
       "eventId": 1101
     },
     {
       "id": 11014,
-      "name": "ハード4",
+      "name": {
+        "ja": "ハード4",
+        "en": "Hard 4"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11101,
-      "name": "通常任務1",
+      "name": {
+        "ja": "通常任務1",
+        "en": "Common Quest 1"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11102,
-      "name": "通常任務2",
+      "name": {
+        "ja": "通常任務2",
+        "en": "Common Quest 2"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11103,
-      "name": "通常任務3",
+      "name": {
+        "ja": "通常任務3",
+        "en": "Common Quest 3"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11104,
-      "name": "通常任務4",
+      "name": {
+        "ja": "通常任務4",
+        "en": "Common Quest 4"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11105,
-      "name": "通常任務5",
+      "name": {
+        "ja": "通常任務5",
+        "en": "Common Quest 5"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11106,
-      "name": "通常任務6",
+      "name": {
+        "ja": "通常任務6",
+        "en": "Common Quest 6"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11107,
-      "name": "通常任務7",
+      "name": {
+        "ja": "通常任務7",
+        "en": "Common Quest 7"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11108,
-      "name": "通常任務8",
+      "name": {
+        "ja": "通常任務8",
+        "en": "Common Quest 8"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11109,
-      "name": "通常任務9",
+      "name": {
+        "ja": "通常任務9",
+        "en": "Common Quest 9"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11110,
-      "name": "通常任務10",
+      "name": {
+        "ja": "通常任務10",
+        "en": "Common Quest 10"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11111,
-      "name": "通常任務11",
+      "name": {
+        "ja": "通常任務11",
+        "en": "Common Quest 11"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11112,
-      "name": "通常任務12",
+      "name": {
+        "ja": "通常任務12",
+        "en": "Common Quest 12"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11201,
-      "name": "挑戦任務1",
+      "name": {
+        "ja": "挑戦任務1",
+        "en": "Challenge Quest 1"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11202,
-      "name": "挑戦任務2",
+      "name": {
+        "ja": "挑戦任務2",
+        "en": "Challenge Quest 2"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11203,
-      "name": "挑戦任務3",
+      "name": {
+        "ja": "挑戦任務3",
+        "en": "Challenge Quest 3"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11204,
-      "name": "挑戦任務4",
+      "name": {
+        "ja": "挑戦任務4",
+        "en": "Challenge Quest 4"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11205,
-      "name": "挑戦任務5",
+      "name": {
+        "ja": "挑戦任務5",
+        "en": "Challenge Quest 5"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11206,
-      "name": "挑戦任務6",
+      "name": {
+        "ja": "挑戦任務6",
+        "en": "Challenge Quest 6"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11207,
-      "name": "挑戦任務7",
+      "name": {
+        "ja": "挑戦任務7",
+        "en": "Challenge Quest 7"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11208,
-      "name": "挑戦任務8",
+      "name": {
+        "ja": "挑戦任務8",
+        "en": "Challenge Quest 8"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11209,
-      "name": "挑戦任務9",
+      "name": {
+        "ja": "挑戦任務9",
+        "en": "Challenge Quest 9"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11210,
-      "name": "挑戦任務10",
+      "name": {
+        "ja": "挑戦任務10",
+        "en": "Challenge Quest 10"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11211,
-      "name": "挑戦任務11",
+      "name": {
+        "ja": "挑戦任務11",
+        "en": "Challenge Quest 11"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11212,
-      "name": "挑戦任務12",
+      "name": {
+        "ja": "挑戦任務12",
+        "en": "Challenge Quest 12"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11301,
-      "name": "冒険任務1",
+      "name": {
+        "ja": "冒険任務1",
+        "en": "Adventure Quest 1"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11302,
-      "name": "冒険任務2",
+      "name": {
+        "ja": "冒険任務2",
+        "en": "Adventure Quest 2"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11303,
-      "name": "冒険任務3",
+      "name": {
+        "ja": "冒険任務3",
+        "en": "Adventure Quest 3"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11304,
-      "name": "冒険任務4",
+      "name": {
+        "ja": "冒険任務4",
+        "en": "Adventure Quest 4"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11305,
-      "name": "冒険任務5",
+      "name": {
+        "ja": "冒険任務5",
+        "en": "Adventure Quest 5"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11306,
-      "name": "冒険任務6",
+      "name": {
+        "ja": "冒険任務6",
+        "en": "Adventure Quest 6"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11307,
-      "name": "冒険任務7",
+      "name": {
+        "ja": "冒険任務7",
+        "en": "Adventure Quest 7"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11308,
-      "name": "冒険任務8",
+      "name": {
+        "ja": "冒険任務8",
+        "en": "Adventure Quest 8"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11309,
-      "name": "冒険任務9",
+      "name": {
+        "ja": "冒険任務9",
+        "en": "Adventure Quest 9"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11310,
-      "name": "冒険任務10",
+      "name": {
+        "ja": "冒険任務10",
+        "en": "Adventure Quest 10"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11311,
-      "name": "冒険任務11",
+      "name": {
+        "ja": "冒険任務11",
+        "en": "Adventure Quest 11"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11312,
-      "name": "冒険任務12",
+      "name": {
+        "ja": "冒険任務12",
+        "en": "Adventure Quest 12"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11401,
-      "name": "ミニゲーム1",
+      "name": {
+        "ja": "ミニゲーム1",
+        "en": "Special Quest 1"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11402,
-      "name": "ミニゲーム2",
+      "name": {
+        "ja": "ミニゲーム2",
+        "en": "Special Quest 2"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11403,
-      "name": "ミニゲーム3",
+      "name": {
+        "ja": "ミニゲーム3",
+        "en": "Special Quest 3"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11404,
-      "name": "ミニゲーム4",
+      "name": {
+        "ja": "ミニゲーム4",
+        "en": "Special Quest 4"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11405,
-      "name": "ミニゲーム5",
+      "name": {
+        "ja": "ミニゲーム5",
+        "en": "Special Quest 5"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11406,
-      "name": "ミニゲーム6",
+      "name": {
+        "ja": "ミニゲーム6",
+        "en": "Special Quest 6"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11407,
-      "name": "ミニゲーム7",
+      "name": {
+        "ja": "ミニゲーム7",
+        "en": "Special Quest 7"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11408,
-      "name": "ミニゲーム8",
+      "name": {
+        "ja": "ミニゲーム8",
+        "en": "Special Quest 8"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11409,
-      "name": "ミニゲーム9",
+      "name": {
+        "ja": "ミニゲーム9",
+        "en": "Special Quest 9"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11410,
-      "name": "ミニゲーム10",
+      "name": {
+        "ja": "ミニゲーム10",
+        "en": "Special Quest 10"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11411,
-      "name": "ミニゲーム11",
+      "name": {
+        "ja": "ミニゲーム11",
+        "en": "Special Quest 11"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11412,
-      "name": "ミニゲーム12",
+      "name": {
+        "ja": "ミニゲーム12",
+        "en": "Special Quest 12"
+      },
       "points": 500,
       "eventId": 1101
     },
     {
       "id": 11501,
-      "name": "クッキーラボ1",
+      "name": {
+        "ja": "クッキーラボ1",
+        "en": "Cookie Workshop 1"
+      },
       "points": 300,
       "eventId": 1101
     },
     {
       "id": 11502,
-      "name": "クッキーラボ2",
+      "name": {
+        "ja": "クッキーラボ2",
+        "en": "Cookie Workshop 2"
+      },
       "points": 400,
       "eventId": 1101
     },
     {
       "id": 11503,
-      "name": "クッキーラボ3",
+      "name": {
+        "ja": "クッキーラボ3",
+        "en": "Cookie Workshop 3"
+      },
       "points": 600,
       "eventId": 1101
     },
     {
       "id": 11504,
-      "name": "クッキーラボ4",
+      "name": {
+        "ja": "クッキーラボ4",
+        "en": "Cookie Workshop 4"
+      },
       "points": 800,
       "eventId": 1101
     },
     {
       "id": 11505,
-      "name": "クッキーラボ5",
+      "name": {
+        "ja": "クッキーラボ5",
+        "en": "Cookie Workshop 5"
+      },
       "points": 1000,
       "eventId": 1101
     },
     {
       "id": 11506,
-      "name": "クッキーラボ6",
+      "name": {
+        "ja": "クッキーラボ6",
+        "en": "Cookie Workshop 6"
+      },
       "points": 2000,
       "eventId": 1101
     },
     {
       "id": 11507,
-      "name": "クッキーラボ7",
+      "name": {
+        "ja": "クッキーラボ7",
+        "en": "Cookie Workshop 7"
+      },
       "points": 3000,
       "eventId": 1101
     }

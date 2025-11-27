@@ -1,0 +1,188 @@
+{
+  "summary": {
+    "dailyStamina": {
+      "ja": "1日あたりのやる気",
+      "en": "Vigor per Day"
+    },
+    "runsNeeded": {
+      "ja": "あと何周？",
+      "en": "Remaining Laps"
+    },
+    "dailyQuota": {
+      "ja": "1日あたりのノルマ",
+      "en": "Remaining laps per Day"
+    },
+    "remainingNeeded": {
+      "ja": "残り周回ポイント",
+      "en": "Remaining Points"
+    },
+    "remainingDays": {
+      "ja": "残り日数",
+      "en": "Remaining Days"
+    },
+    "totalNeeded": {
+      "ja": "欲しいもの全交換ノルマ",
+      "en": "Total Exchange Target"
+    }
+  },
+  "time": {
+    "minutes": {
+      "ja": "分",
+      "en": "m"
+    },
+    "ended": {
+      "ja": "終了",
+      "en": "Ended"
+    },
+    "seconds": {
+      "ja": "秒",
+      "en": "s"
+    },
+    "days": {
+      "ja": "日と",
+      "en": "d"
+    },
+    "hours": {
+      "ja": "時間",
+      "en": "h"
+    }
+  },
+  "page": {
+    "htmlTitle": {
+      "ja": "イベント交換所チェッカー - おサボりツール",
+      "en": "Event Exchange Checker - Laru's Lazy Tools"
+    },
+    "title": {
+      "ja": "イベント交換所チェッカー",
+      "en": "Event Exchange Checker"
+    }
+  },
+  "labels": {
+    "hideCompleted": {
+      "ja": "クリア済を非表示",
+      "en": "Hide Completed missions"
+    },
+    "currentPoints": {
+      "ja": "所持ポイント数",
+      "en": "Current Points"
+    },
+    "event": {
+      "ja": "イベント：",
+      "en": "Event:"
+    }
+  },
+  "unit": {
+    "runs": {
+      "ja": "周",
+      "en": "runs"
+    }
+  },
+  "buttons": {
+    "reset": {
+      "ja": "初期化",
+      "en": "Reset All"
+    },
+    "resetProgress": {
+      "ja": "進捗リセット",
+      "en": "Reset Progress"
+    },
+    "usage": {
+      "ja": "使い方",
+      "en": "How to Use"
+    }
+  },
+  "mission": {
+    "earnedPoints": {
+      "ja": "獲得済み：",
+      "en": "Earned points:"
+    },
+    "remainingPoints": {
+      "ja": "残り獲得可能：",
+      "en": "Remaining points:"
+    },
+    "totalPoints": {
+      "ja": "全達成の合計：",
+      "en": "Points awarded upon completing all missions:"
+    }
+  },
+  "modal": {
+    "usage": {
+      "title": {
+        "ja": "使い方",
+        "en": "How to Use"
+      },
+      "step1Title": {
+        "ja": "1. 欲しいアイテムを決める",
+        "en": "1. Decide Which Items You Want."
+      },
+      "step1Text": {
+        "ja": "各カードをクリックすると取る・取らないを切り替えられるよ！<br>交換しないアイテムの分はノルマから差し引かれるよ",
+        "en": "Click each card to toggle want/don't want!<br>Items you don't want are subtracted from the quota."
+      },
+      "step2Title": {
+        "ja": "2. 右側のクリア済任務を選択",
+        "en": "2. Select Completed Missions on the Right."
+      },
+      "step2Text": {
+        "ja": "ゲーム内の状況と同じにしよう！<br>左のポイントを合わせただけだと、あと何周すればいいかが正しく出ないから注意してね<br>※[全交換ノルマ]－[クリア報酬全達成pt]－[交換済みポイント]＝[周回ノルマ]<br>※このツールは全ステージ・全任務をクリアすること前提で作られています",
+        "en": "Match your in-game progress!<br>Just matching points won't give accurate run counts.<br>*[Total Exchange Target] - [Mission Points] - [Exchanged Points] = [Runs Needed]<br>*This tool assumes all stages and missions will be cleared."
+      },
+      "step3Title": {
+        "ja": "3. 所持ポイント数を入力",
+        "en": "3. Enter Current Points."
+      },
+      "step3Text": {
+        "ja": "ここもゲーム内の状況と一致させてね（直接入力可）<br>任務の分は自動で入るから周回した分とかを微調整",
+        "en": "Match your in-game points (direct input OK)<br>Mission points are auto-added, adjust for runs completed."
+      },
+      "step4Title": {
+        "ja": "4. アイテムの交換状況を更新",
+        "en": "4. Update Exchange Progress."
+      },
+      "step4Text": {
+        "ja": "交換所で交換したら「-1」ボタン（緑）をクリックして在庫を減らしていこう！<br>間違えた時は「+1」ボタン（赤）で戻せるよ",
+        "en": "After exchanging, click '-1' (green) to reduce stock!<br>Use '+1' (red) to undo mistakes."
+      },
+      "step5Title": {
+        "ja": "5. 計算結果を見る",
+        "en": "5. Check Results."
+      },
+      "step5Text": {
+        "ja": "左の数字が計算結果！<br>イベント終了までどれくらいのペースで周回すれば間に合うのかがわかるよ",
+        "en": "Numbers on the left show calculations!<br>See how fast you need to farm before the event ends."
+      }
+    }
+  },
+  "messages": {
+    "eventLoadError": {
+      "ja": "イベントデータの読み込みに失敗しました。ページをリロードしてください。",
+      "en": "Failed to load event data. Please reload the page."
+    },
+    "loadError": {
+      "ja": "イベント一覧の読み込みに失敗しました。ページをリロードしてください。",
+      "en": "Failed to load event list. Please reload the page."
+    },
+    "confirmResetProgress": {
+      "ja": "進捗をリセットしますか？",
+      "en": "Reset progress?"
+    },
+    "confirmResetAll": {
+      "ja": "「交換する/しない」を含めて全部初期化しますか？",
+      "en": "Reset everything including want/don't want settings?"
+    }
+  },
+  "section": {
+    "clearReward": {
+      "ja": "クリア報酬",
+      "en": "Clear Rewards"
+    },
+    "lineup": {
+      "ja": "ラインナップ",
+      "en": "Lineup"
+    },
+    "calcResult": {
+      "ja": "計算結果",
+      "en": "Calculation Results"
+    }
+  }
+}

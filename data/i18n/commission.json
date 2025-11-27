@@ -1,0 +1,164 @@
+{
+  "buttons": {
+    "reset": {
+      "ja": "初期化",
+      "en": "Reset"
+    },
+    "usage": {
+      "ja": "使い方",
+      "en": "How to Use"
+    },
+    "manageOwned": {
+      "ja": "所持巡遊者の設定",
+      "en": "Select Trekker"
+    },
+    "autoAssign": {
+      "ja": "おまかせ",
+      "en": "Quick Select"
+    },
+    "selectCommission": {
+      "ja": "依頼を選択",
+      "en": "Select Commission"
+    }
+  },
+  "roles": {
+    "vanguard": {
+      "ja": "アタッカー",
+      "en": "Vanguard"
+    },
+    "versatile": {
+      "ja": "バランサー",
+      "en": "Versatile"
+    },
+    "support": {
+      "ja": "サポーター",
+      "en": "Support"
+    }
+  },
+  "messages": {
+    "confirmReset": {
+      "ja": "現在表示中の設定を初期化しますか？\n（プリセットは削除されません）",
+      "en": "Reset current settings?\n(Presets will not be deleted)"
+    },
+    "resetComplete": {
+      "ja": "初期化しました",
+      "en": "Reset Completed!"
+    },
+    "autoAssignNormal": {
+      "ja": "お待たせー！（よーし、あたしはサボっちゃお～っと♪）",
+      "en": "It's done! (Alright, I'm gonna slack off now.)"
+    },
+    "autoAssignSuccess": {
+      "ja": "じゃ～ん♪…って、あたしが候補に入ってるんですけど!?",
+      "en": "Done! ...Wait, I'm included in the candidates!?"
+    },
+    "anyoneOk": {
+      "ja": "誰でもOK",
+      "en": "Free"
+    }
+  },
+  "page": {
+    "htmlTitle": {
+      "ja": "依頼シミュレーター - おサボりツール",
+      "en": "Commission Simulator - Laru's Lazy Tools"
+    },
+    "title": {
+      "ja": "依頼シミュレーター",
+      "en": "Commission Simulator"
+    }
+  },
+  "labels": {
+    "requirementTitle": {
+      "ja": "条件達成に必要な性格",
+      "en": "Required Trekker Style"
+    },
+    "placeholder": {
+      "ja": "?",
+      "en": "?"
+    }
+  },
+  "modal": {
+    "manageOwned": {
+      "title": {
+        "ja": "所持巡遊者の設定",
+        "en": "Trekker Settings"
+      }
+    },
+    "selectCommission": {
+      "title": {
+        "ja": "依頼を選択",
+        "en": "Select Commission"
+      }
+    },
+    "autoAssign": {
+      "title": {
+        "ja": "おまかせ編成候補",
+        "en": "Quick Select Suggestions"
+      }
+    },
+    "selectCharacter": {
+      "title": {
+        "ja": "巡遊者を選択",
+        "en": "Select Trekker"
+      }
+    },
+    "usage": {
+      "title": {
+        "ja": "使い方",
+        "en": "How to Use"
+      },
+      "basic": {
+        "ja": "基本操作",
+        "en": "Basic Operations"
+      },
+      "step1Title": {
+        "ja": "1. 所持巡遊者の設定",
+        "en": "1. Trekker Settings"
+      },
+      "step1Text": {
+        "ja": "自分のデータに合わせて設定しよう！<br>ここでグレーアウトさせた巡遊者は（おまかせを含めて）候補に出なくなるから、<br>持ってない巡遊者と、レベル70未満の巡遊者も設定しておくのがおすすめ！",
+        "en": "Set up according to your data!<br>Grayed out characters won't appear in suggestions.<br>Recommend disabling characters you don't own or under level 70."
+      },
+      "step2Title": {
+        "ja": "2. 依頼を選択",
+        "en": "2. Select Commissions"
+      },
+      "step2Text": {
+        "ja": "依頼を最大4つ選んでね！<br>※おまかせ機能は1～3枠だけの時でも機能するよ",
+        "en": "Select up to 4 commissions!<br>*Auto assign works with 1-3 slots too"
+      },
+      "step3Title": {
+        "ja": "3. 巡遊者を配置",
+        "en": "3. Assign Characters"
+      },
+      "step3Text": {
+        "ja": "「？」をクリックして巡遊者をあてはめていこう！<br>性格の条件を満たすと、要求されてる性格の色が変わるよ<br>2人設定した時点で性格の条件を両方満たすと、残り1枠が「誰でもOK」表示に変化するよ！",
+        "en": "Click '?' to assign Trekkers!<br>When Style requirements are met, the badge color changes.<br>If 2 Trekkers satisfy both requirements, the 3rd slot shows 'Free'!"
+      },
+      "step4Title": {
+        "ja": "4. おまかせ機能（試験中）",
+        "en": "4. Quick Select (Beta)"
+      },
+      "step4Text": {
+        "ja": "「おまかせ」ボタンを押すと、自動で組み合わせを提案してくれるよ！（最大20パターン）<br>出てきた候補をクリックするとそれが設定されるよ<br>全部の条件を満たせなかった時は足りないキャラが出てくるから、<br>設定をいじってもう1回おまかせを実行してみてね<br>6人以上必要な時は多すぎてエラーになるよ",
+        "en": "Press 'Quick Select' to get suggestions! (Up to 20 patterns)<br>Click a suggestion to apply it.<br>If requirements can't be fully met, missing Trekkers will be shown.<br>Try adjusting settings and run auto assign again.<br>Errors may occur if 6+ Trekkers are needed."
+      },
+      "step5Title": {
+        "ja": "5. プリセット",
+        "en": "5. Presets"
+      },
+      "step5Text": {
+        "ja": "現在の設定を保存できるよ<br>※所持巡遊者の設定もプリセットごとに保存されます",
+        "en": "Save your current settings<br>*Owned Trekker settings are also saved per preset"
+      },
+      "step6Title": {
+        "ja": "6. 初期化",
+        "en": "6. Reset"
+      },
+      "step6Text": {
+        "ja": "現在の設定と所持巡遊者をデフォの状態に戻すよ<br>※プリセット情報は残ります",
+        "en": "Reset current settings and Trekker Settings to default<br>*Preset data is preserved"
+      }
+    }
+  }
+}

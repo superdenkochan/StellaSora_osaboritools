@@ -1,5 +1,10 @@
 /* 共通コンポーネント */
 
+/* jsonで\nの改行が効くように設定 */
+[data-i18n] {
+    white-space: pre-line;
+}
+
 /* ハンバーガーメニュー */
 .hamburger-menu {
     position: fixed;

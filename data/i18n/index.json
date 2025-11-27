@@ -1,0 +1,54 @@
+{
+  "page": {
+    "heading": {
+      "ja": "ステラソラ ラクラクおサボりツール 略してラール(仮)",
+      "en": "StellaSora Laru's Lazy Tools"
+    },
+    "intro": {
+      "ja": "ステラソラの色々だる～い管理を楽にするツールを作る予定！",
+      "en": "Tools to make managing StellaSora easier!"
+    },
+    "title": {
+      "ja": "おサボりツール",
+      "en": "Laru's Lazy Tools"
+    }
+  },
+  "tools": {
+    "potential": {
+      "name": {
+        "ja": "素質シミュレーター",
+        "en": "Potential Simulator"
+      },
+      "description": {
+        "ja": "取りたい素質・レベル6にしたい素質・レベル1だけでいい素質などをメモして<br>登りながらポチポチするとレベルの状況まで確認できちゃうちょ～便利ツール！",
+        "en": "A super handy tool to plan which potentials you want,<br>which ones to max, and which to leave at level 1!"
+      }
+    },
+    "exchange": {
+      "name": {
+        "ja": "交換所チェッカー",
+        "en": "Exchange Checker"
+      },
+      "description": {
+        "ja": "イベントアイテムを管理するやつ<br>1日あたりやる気いくつ消費すれば間に合うかがわかるよ！",
+        "en": "Manage event items<br>and see how much Vigor you need per day!"
+      }
+    },
+    "commission": {
+      "name": {
+        "ja": "依頼シミュレーター",
+        "en": "Commission Simulator"
+      },
+      "description": {
+        "ja": "選んだ依頼4つにアイコンをあてはめていくツール！<br>しっかり者いなさすぎ問題",
+        "en": "A tool to assign Trekkers to 4 commissions!<br>Never enough Steady Trekkers..."
+      }
+    }
+  },
+  "section": {
+    "toolList": {
+      "ja": "ツール一覧",
+      "en": "Tool List"
+    }
+  }
+}
