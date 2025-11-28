@@ -1,12 +1,12 @@
-/* メニュー共通コンポーネント（テキストベタ打ちをやめたi18n対応版） */
+/* グローバルヘッダー＆メニュー共通コンポーネント */
 
-/* メニュー項目の設定（キーベース） */
+/* メニュー項目の設定 */
 const MENU_ITEMS = [
-    { href: 'index.html', textKey: 'menu.top', id: 'index' },
-    { href: 'simu_potential.html', textKey: 'menu.potential', id: 'potential' },
-    { href: 'exchange_checker.html', textKey: 'menu.exchange', id: 'exchange' },
-    { href: 'simu_commission.html', textKey: 'menu.commission', id: 'commission' },
-    // 未実装
+    { href: 'index.html', textKey: 'menu.top', id: 'index', showInTab: true },
+    { href: 'simu_potential.html', textKey: 'menu.potential', id: 'potential', showInTab: true },
+    { href: 'exchange_checker.html', textKey: 'menu.exchange', id: 'exchange', showInTab: true },
+    { href: 'simu_commission.html', textKey: 'menu.commission', id: 'commission', showInTab: true },
+    // 未実装（サイドメニューのみ表示）
     { textKey: 'menu.planned.materials', disabled: true },
     { textKey: 'menu.planned.reverse', disabled: true },
     { textKey: 'menu.planned.quiz', disabled: true },
@@ -19,86 +19,35 @@ const MENU_ITEMS = [
 function getCurrentPage() {
     const path = window.location.pathname;
     const filename = path.split('/').pop();
-    // 空の場合はindex.htmlを返す
     return filename || 'index.html';
 }
 
 /* メニュー項目のテキストを取得（i18n対応） */
 function getMenuText(textKey) {
-    // i18nが初期化されていればそれを使用、なければデフォルト
     if (typeof i18n !== 'undefined' && i18n.commonData) {
         return i18n.getText(textKey, 'common');
     }
     // フォールバック用のデフォルトテキスト
     const defaults = {
         'menu.top': 'TOP',
-        'menu.potential': '素質シミュレーター',
-        'menu.exchange': 'イベント交換所チェッカー',
-        'menu.commission': '依頼シミュレーター',
+        'menu.potential': '素質シミュ',
+        'menu.exchange': '交換所',
+        'menu.commission': '依頼シミュ',
         'menu.planned.materials': '（予定）昇格に必要な素材数計算機',
         'menu.planned.reverse': '（予定）素材逆引き',
         'menu.planned.quiz': '（予定）星ノ塔クイズのカンペ',
         'menu.planned.ring': '（予定）無限リングのバフ早見表',
         'menu.planned.unreleased': '（予定）未実装キャラメモ',
         'menu.planned.cocotya': '（予定）ココチャまとめ',
-        'menu.header': 'メニュー'
+        'menu.header': 'メニュー',
+        'site.shortTitle': 'おサボりツール'
     };
     return defaults[textKey] || textKey;
 }
 
-/* ハンバーガーメニューのHTMLを生成 */
-function createHamburgerHTML() {
-    return `
-        <div class="hamburger-menu" id="hamburgerMenu">
-            <div class="hamburger-line"></div>
-            <div class="hamburger-line"></div>
-            <div class="hamburger-line"></div>
-        </div>
-    `;
-}
-
-/* サイドメニューのHTMLを生成 */
-function createSideMenuHTML() {
-    const currentPage = getCurrentPage();
-    
-    const menuItems = MENU_ITEMS.map(item => {
-        // 無効化項目
-        if (item.disabled) {
-            return `<li><span class="menu-item-disabled" data-i18n="${item.textKey}">${getMenuText(item.textKey)}</span></li>`;
-        }
-        
-        // 現在のページかどうか判定
-        const isCurrent = item.href === currentPage;
-        const currentClass = isCurrent ? ' class="menu-item-current"' : '';
-        
-        return `<li><a href="${item.href}"${currentClass} data-i18n="${item.textKey}">${getMenuText(item.textKey)}</a></li>`;
-    }).join('');
-    
-    const headerText = getMenuText('menu.header');
-    
-    return `
-        <nav class="side-menu" id="sideMenu">
-            <div class="side-menu-header" data-i18n="menu.header">${headerText}</div>
-            <ul class="side-menu-list">
-                ${menuItems}
-            </ul>
-        </nav>
-    `;
-}
-
-/* オーバーレイのHTMLを生成 */
-function createOverlayHTML() {
-    return `<div class="menu-overlay" id="menuOverlay"></div>`;
-}
-
-/* メニュー全体のHTMLを生成 */
-function createMenuHTML() {
-    return createHamburgerHTML() + createSideMenuHTML() + createOverlayHTML();
-}
-
-/* メニューのイベントリスナーを設定 */
+/* サイドメニューのイベント設定 */
 function setupMenuEvents() {
-    const hamburger = document.getElementById('hamburgerMenu');
+    const hamburger = document.getElementById('headerHamburger');
     const sideMenu = document.getElementById('sideMenu');
     const overlay = document.getElementById('menuOverlay');
     
@@ -128,7 +77,12 @@ function setupMenuEvents() {
     hamburger.addEventListener('click', toggleMenu);
     overlay.addEventListener('click', closeMenu);
     
-    // Escキーで閉じられるように
+    // サイドメニュー内のリンクをクリックしたら閉じる
+    sideMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+    
+    // Escキーで閉じる
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && sideMenu.classList.contains('open')) {
             closeMenu();
@@ -136,42 +90,95 @@ function setupMenuEvents() {
     });
 }
 
-/* メニューを再描画（言語変更時用） */
-function updateMenuLanguage() {
-    const sideMenu = document.getElementById('sideMenu');
-    if (!sideMenu) return;
+/* 言語切り替えボタンのイベント設定 */
+function setupLanguageButton() {
+    const langBtn = document.getElementById('headerLangBtn');
+    if (!langBtn) return;
     
-    // ヘッダーの更新
-    const header = sideMenu.querySelector('.side-menu-header');
-    if (header) {
-        header.textContent = getMenuText('menu.header');
+    // 既存のlanguageToggleボタンがあれば非表示に
+    const oldLangBtn = document.getElementById('languageToggle');
+    if (oldLangBtn) {
+        oldLangBtn.style.display = 'none';
     }
     
-    // 各メニュー項目の更新
-    MENU_ITEMS.forEach(item => {
-        const element = sideMenu.querySelector(`[data-i18n="${item.textKey}"]`);
-        if (element) {
-            element.textContent = getMenuText(item.textKey);
+    // 現在の言語を反映
+    function updateLangButtonText() {
+        if (typeof i18n !== 'undefined') {
+            const currentLang = i18n.getLanguage();
+            langBtn.textContent = currentLang === 'ja' ? 'English' : '日本語';
+            // HTML要素のlang属性を変更（CSSで表示切り替え）
+            document.documentElement.lang = currentLang;
+        }
+    }
+    
+    updateLangButtonText();
+    
+    // クリックで言語切り替え
+    langBtn.addEventListener('click', () => {
+        if (typeof i18n !== 'undefined') {
+            i18n.toggleLanguage();
+            updateLangButtonText();
         }
     });
-}
-
-/* メニューを初期化 */
-function initMenu() {
-    const menuHTML = createMenuHTML();
-    document.body.insertAdjacentHTML('afterbegin', menuHTML);
-    setupMenuEvents();
     
     // 言語変更イベントをリッスン
-    document.addEventListener('languageChanged', () => {
-        updateMenuLanguage();
-    });
+    document.addEventListener('languageChanged', updateLangButtonText);
+}
+
+/* ページ固有コントロールをヘッダー下段に移植 */
+function movePageControlsToHeader() {
+    const headerControls = document.getElementById('headerControls');
+    const pageControls = document.getElementById('pageControls');
+    
+    if (!headerControls) return;
+    
+    if (pageControls) {
+        // pageControlsの中身をヘッダーに移動
+        while (pageControls.firstChild) {
+            headerControls.appendChild(pageControls.firstChild);
+        }
+        // 元のコンテナを削除
+        pageControls.remove();
+    }
+    
+    // 下段が空なら非表示
+    if (headerControls.children.length === 0) {
+        headerControls.style.display = 'none';
+    }
+}
+
+/* 初期化 */
+
+function initGlobalHeader() {
+    // ヘッダーの要素が存在するか確認
+    const globalHeader = document.getElementById('globalHeader');
+    if (!globalHeader) {
+        console.error('グローバルヘッダーが見つかりません');
+        return;
+    }
+    
+    // イベント設定
+    setupMenuEvents();
+    setupLanguageButton();
+    
+    // ページ固有コントロールをヘッダーに移植
+    movePageControlsToHeader();
+    
+    // 旧headerタグを削除（あれば）
+    const oldHeader = document.querySelector('.container > header');
+    if (oldHeader) {
+        oldHeader.remove();
+    }
+    
+    // 言語設定をHTML要素に反映（CSSで表示切り替え）
+    if (typeof i18n !== 'undefined') {
+        document.documentElement.lang = i18n.getLanguage();
+    }
 }
 
 // DOMContentLoaded後に実行
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initMenu);
+    document.addEventListener('DOMContentLoaded', initGlobalHeader);
 } else {
-    // 既にDOMが読み込まれている場合は即時実行
-    initMenu();
+    initGlobalHeader();
 }

@@ -13,110 +13,20 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/tabs.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- グローバルヘッダー -->
-    <header class="global-header" id="globalHeader">
-        <!-- 上段：ハンバーガー + アイコン + サイト名 + タブ + 言語 -->
-        <div class="header-main">
-            <button class="header-hamburger" id="headerHamburger" aria-label="メニューを開く">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-            <div class="header-icon" id="headerIcon">
-                <!-- 将来アイコンを入れる場所 -->
-            </div>
-            <span class="header-title">
-                <span class="text-ja">おサボりツール</span>
-                <span class="text-en">Laru's Lazy Tools</span>
-            </span>
-            <ul class="header-tabs" id="headerTabs">
-                <li><a href="index.html" class="header-tab-link active">
-                    <span class="text-ja">TOP</span>
-                    <span class="text-en">TOP</span>
-                </a></li>
-                <li><a href="simu_potential.html" class="header-tab-link">
-                    <span class="text-ja">素質シミュ</span>
-                    <span class="text-en">Potential Sim</span>
-                </a></li>
-                <li><a href="exchange_checker.html" class="header-tab-link">
-                    <span class="text-ja">交換所</span>
-                    <span class="text-en">Exchange</span>
-                </a></li>
-                <li><a href="simu_commission.html" class="header-tab-link">
-                    <span class="text-ja">依頼シミュ</span>
-                    <span class="text-en">Commission Sim</span>
-                </a></li>
-            </ul>
-            <div class="header-lang">
-                <button class="header-lang-btn" id="headerLangBtn">English</button>
-            </div>
-        </div>
-        <!-- 下段：ページ固有コントロール（JSで移植される） -->
-        <div class="header-controls" id="headerControls">
-        </div>
-    </header>
-    
-    <!-- サイドメニュー -->
-    <nav class="side-menu" id="sideMenu">
-        <div class="side-menu-header">
-            <span class="text-ja">メニュー</span>
-            <span class="text-en">Menu</span>
-        </div>
-        <ul class="side-menu-list">
-            <li><a href="index.html" class="menu-item-current">
-                <span class="text-ja">TOP</span>
-                <span class="text-en">TOP</span>
-            </a></li>
-            <li><a href="simu_potential.html">
-                <span class="text-ja">素質シミュ</span>
-                <span class="text-en">Potential Sim</span>
-            </a></li>
-            <li><a href="exchange_checker.html">
-                <span class="text-ja">交換所</span>
-                <span class="text-en">Exchange</span>
-            </a></li>
-            <li><a href="simu_commission.html">
-                <span class="text-ja">依頼シミュ</span>
-                <span class="text-en">Commission Sim</span>
-            </a></li>
-            <li><span class="menu-item-disabled">
-                <span class="text-ja">（予定）昇格に必要な素材数計算機</span>
-                <span class="text-en">(Planned) Material Calculator</span>
-            </span></li>
-            <li><span class="menu-item-disabled">
-                <span class="text-ja">（予定）素材逆引き</span>
-                <span class="text-en">(Planned) Material Lookup</span>
-            </span></li>
-            <li><span class="menu-item-disabled">
-                <span class="text-ja">（予定）星ノ塔クイズのカンペ</span>
-                <span class="text-en">(Planned) Star Tower Quiz</span>
-            </span></li>
-            <li><span class="menu-item-disabled">
-                <span class="text-ja">（予定）無限リングのバフ早見表</span>
-                <span class="text-en">(Planned) Infinite Ring Buffs</span>
-            </span></li>
-            <li><span class="menu-item-disabled">
-                <span class="text-ja">（予定）未実装キャラメモ</span>
-                <span class="text-en">(Planned) Unreleased Characters</span>
-            </span></li>
-            <li><span class="menu-item-disabled">
-                <span class="text-ja">（予定）ココチャまとめ</span>
-                <span class="text-en">(Planned) Cocotya Summary</span>
-            </span></li>
-        </ul>
-    </nav>
-    
-    <!-- メニューオーバーレイ -->
-    <div class="menu-overlay" id="menuOverlay"></div>
+    <!-- メニューはJSで動的挿入される -->
 
-    <!-- ページ固有コントロール（TOPページはなし） -->
+    <div class="container">
+        <header>
+            <h1 data-i18n="page.heading" data-i18n-source="index">ステラソラ ラクラクおサボりツール 略してラール(仮)</h1>
+            <div class="controls">
+                <button id="languageToggle" class="btn">English</button>
+            </div>
+        </header>
 
-    <!-- メインコンテンツ -->
-    <main class="main-content" style="padding: 40px;">
+        <div class="main-content" style="padding: 40px;">
             <p style="font-size: 18px; margin-bottom: 30px;" data-i18n="page.intro" data-i18n-source="index">ステラソラの色々だる～い管理を楽にするツールを作る予定！</p>
             
             <h2 style="font-size: 24px; color: #667eea; margin-bottom: 20px; border-bottom: 2px solid #667eea; padding-bottom: 10px;" data-i18n="section.toolList" data-i18n-source="index">ツール一覧</h2>
@@ -189,7 +99,8 @@
                 <p><span data-i18n="footer.copyright">©Yostar</span><br>
                 <span data-i18n="footer.disclaimer">※本サイトはステラソラの非公式ファンサイトです！</span></p>
             </footer>
-        </main>
+        </div>
+    </div>
 
     <!-- i18n -->
     <script src="js/common/i18n.js"></script>

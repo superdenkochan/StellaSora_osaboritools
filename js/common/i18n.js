@@ -111,6 +111,11 @@ class I18n {
     applyTranslations() {
         // data-i18n属性のテキスト
         document.querySelectorAll('[data-i18n]').forEach(elem => {
+            // ヘッダー関連は完全にスキップ（CSSで言語切り替え）
+            if (elem.closest('.global-header') || elem.closest('.side-menu')) {
+                return;
+            }
+            
             const key = elem.getAttribute('data-i18n');
             const source = elem.getAttribute('data-i18n-source') || 'common';
             const text = this.getText(key, source);
@@ -172,6 +177,12 @@ class I18n {
     /* 現在の言語を取得 */
     getLanguage() {
         return this.language;
+    }
+    
+    /* 言語をトグル */
+    toggleLanguage() {
+        const newLang = this.language === 'ja' ? 'en' : 'ja';
+        this.setLanguage(newLang);
     }
 }
 

@@ -29,139 +29,57 @@
     --count-top: 4px;
     --count-right: 65px;
     --count-padding: 0px 12px;
+    
+    /* グローバルヘッダーの高さ（JSでも参照するため変数化） */
+    --header-height: 100px;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #d5cdc7;
     min-height: 100vh;
-    padding: 20px;
+    padding: 0;
+    margin: 0;
 }
 
-.container {
+/* メインコンテンツエリア */
+.main-content {
     max-width: 1800px;
     margin: 0 auto;
+    padding: 20px;
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
+    min-height: calc(100vh - var(--header-height));
+    overflow-x: hidden; /* 横方向のはみ出しを防止 */
+    box-sizing: border-box;
 }
 
-/* ハンバーガーメニュー */
-.hamburger-menu {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 10000;
-    width: 40px;
-    height: 40px;
-    background: #667eea;
-    border-radius: 5px;
-    cursor: pointer;
+/* 旧コンテナは互換性のため残すがシンプル化 */
+.container {
+    /* 背景・影・角丸は削除 */
+}
+
+/* ページ内コントロール（旧headerのcontrols） */
+.page-controls {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    gap: 10px;
     align-items: center;
-    gap: 6px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s;
-}
-
-.hamburger-menu:hover {
-    background: #764ba2;
-}
-
-.hamburger-line {
-    width: 24px;
-    height: 3px;
-    background: white;
-    border-radius: 2px;
-    transition: all 0.3s;
-}
-
-.side-menu {
-    position: fixed;
-    top: 0;
-    left: -300px;
-    width: 300px;
-    height: 100vh;
-    background: white;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-    z-index: 9999;
-    transition: left 0.3s;
-    overflow-y: auto;
-}
-
-.side-menu.open {
-    left: 0;
-}
-
-.side-menu-header {
+    flex-wrap: wrap;
+    padding: 15px 20px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 20px 20px 20px 70px; /* ハンバーガーメニュー分の余白 */
-    font-size: 20px;
-    font-weight: bold;
 }
 
-.side-menu-list {
-    list-style: none;
-    padding: 0;
+.page-controls label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
 }
 
-.side-menu-list li {
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.side-menu-list a {
-    display: block;
-    padding: 15px 20px;
-    color: #333;
-    text-decoration: none;
-    transition: background 0.3s;
-}
-
-.side-menu-list a:hover {
-    background: #f0f0f0;
-}
-
-.side-menu-list .menu-item-disabled {
-    display: block;
-    padding: 15px 20px;
-    color: #999;
-    text-decoration: none;
-    cursor: default;
-    pointer-events: none;
-}
-
-.menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 9998;
-    display: none;
-}
-
-.menu-overlay.active {
-    display: block;
-}
-
-/* ヘッダー */
-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 20px 30px 20px 80px; /* ハンバーガーメニューの余白 */
-    position: sticky;
-    top: 0;
-    z-index: 999;
-}
-
-header h1 {
-    font-size: 28px;
-    margin-bottom: 15px;
+.page-controls input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
 }
 
 .controls {
@@ -950,6 +868,8 @@ header h1 {
 /* プリセットエリア（下段配置） */
 .presets-area {
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     background: #f9f9f9;
     border-top: 2px solid #e0e0e0;
     padding: 20px;

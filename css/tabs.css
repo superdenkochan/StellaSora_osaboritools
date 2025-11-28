@@ -1,0 +1,317 @@
+/* グローバルヘッダー CSS（jsで表示崩れしていたので移植） */
+
+/* 言語切り替え*/
+.text-en { display: none; }
+.text-ja { display: inline; }
+
+/* 英語設定時は逆転 */
+html[lang="en"] .text-ja { display: none; }
+html[lang="en"] .text-en { display: inline; }
+
+/* グローバルヘッダー全体 */
+.global-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* 上段：サイト名＋タブ＋言語切り替え */
+.header-main {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    height: 50px;
+    gap: 10px;
+}
+
+/* ハンバーガーボタン（ヘッダー内） */
+.header-hamburger {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.header-hamburger:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.header-hamburger .hamburger-line {
+    width: 20px;
+    height: 2px;
+    background: white;
+    border-radius: 1px;
+}
+
+/* アイコン領域 */
+.header-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+}
+
+.header-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* サイト名 */
+.header-title {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 140px; /* 言語切り替え時の幅変動対策 */
+}
+
+/* タブナビゲーション */
+.header-tabs {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex: 1;
+    justify-content: center;
+}
+
+.header-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.header-tabs li {
+    flex-shrink: 0;
+}
+
+.header-tabs a {
+    display: block;
+    padding: 8px 16px;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    border-radius: 5px;
+    transition: all 0.2s;
+}
+
+.header-tabs a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+.header-tabs a.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+/* 言語切り替えボタン */
+.header-lang {
+    flex-shrink: 0;
+}
+
+.header-lang-btn {
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.header-lang-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* 下段：ページごとのボタン */
+.header-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+    min-height: 50px;
+}
+
+/* 下段が空の場合は非表示 */
+.header-controls:empty {
+    display: none;
+}
+
+/* 下段のボタン */
+.header-controls .btn {
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+/* 下段のチェックボックス */
+.header-controls label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.header-controls input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* サイドメニュー */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    background: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+}
+
+.side-menu.open {
+    left: 0;
+}
+
+.side-menu-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.side-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-menu-list li {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.side-menu-list a {
+    display: block;
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.side-menu-list a:hover {
+    background: #f5f5f5;
+}
+
+.side-menu-list .menu-item-current {
+    background: #f0f0ff;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.side-menu-list .menu-item-disabled {
+    display: block;
+    padding: 15px 20px;
+    color: #999;
+    cursor: default;
+}
+
+/* メニューオーバーレイ */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+}
+
+.menu-overlay.active {
+    display: block;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .header-main {
+        padding: 0 10px;
+        height: 45px;
+    }
+    
+    .header-title {
+        font-size: 14px;
+    }
+    
+    .header-tabs a {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+    
+    .header-controls {
+        padding: 8px 10px;
+        gap: 8px;
+    }
+    
+    .header-controls .btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-main {
+        height: 42px;
+        gap: 8px;
+    }
+    
+    .header-title {
+        font-size: 13px;
+    }
+    
+    /* タブを横スクロール対応 */
+    .header-tabs {
+        justify-content: flex-start;
+    }
+    
+    .header-tabs a {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+    
+    .header-hamburger {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .header-icon {
+        width: 32px;
+        height: 32px;
+    }
+}

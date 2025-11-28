@@ -12,6 +12,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="images/others/favicon180.png">
     <!-- CSS -->
     <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/tabs.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/exchange_checker.css">
 </head>
@@ -19,20 +20,78 @@
     <!-- 背景 -->
     <div id="backgroundLayer" class="background-layer"></div>
 
-    <!-- メニューはJSで動的挿入される -->
-
-    <div class="container">
-        <header>
-            <h1 data-i18n="page.title" data-i18n-source="exchange">イベント交換所チェッカー</h1>
-            <div class="controls">
-                <button id="resetProgress" class="btn" data-i18n="buttons.resetProgress" data-i18n-source="exchange">進捗リセット</button>
-                <button id="resetAll" class="btn btn-danger" data-i18n="buttons.reset" data-i18n-source="exchange">初期化</button>
-                <button id="showUsage" class="btn btn-info" data-i18n="buttons.usage" data-i18n-source="exchange">使い方</button>
-                <button id="languageToggle" class="btn">English</button>
+    <!-- グローバルヘッダー -->
+    <header class="global-header" id="globalHeader">
+        <!-- 上段:ハンバーガー + アイコン + サイト名 + タブ + 言語 -->
+        <div class="header-main">
+            <button class="header-hamburger" id="headerHamburger" aria-label="メニューを開く">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <div class="header-icon" id="headerIcon">
+                <!-- 将来アイコンを入れる場所 -->
             </div>
-        </header>
+            <span class="header-title">
+                <span class="text-ja">おサボりツール</span>
+                <span class="text-en">Laru's Lazy Tools</span>
+            </span>
+            <ul class="header-tabs" id="headerTabs">
+                <li><a href="index.html" class="header-tab-link">
+                    <span class="text-ja">TOP</span>
+                    <span class="text-en">TOP</span>
+                </a></li>
+                <li><a href="simu_potential.html" class="header-tab-link">
+                    <span class="text-ja">素質シミュ</span>
+                    <span class="text-en">Potential Sim</span>
+                </a></li>
+                <li><a href="exchange_checker.html" class="header-tab-link active">
+                    <span class="text-ja">交換所</span>
+                    <span class="text-en">Exchange</span>
+                </a></li>
+                <li><a href="simu_commission.html" class="header-tab-link">
+                    <span class="text-ja">依頼シミュ</span>
+                    <span class="text-en">Commission Sim</span>
+                </a></li>
+            </ul>
+            <div class="header-lang">
+                <button class="header-lang-btn" id="headerLangBtn">English</button>
+            </div>
+        </div>
+        <!-- 下段：ページ固有コントロール（JSで移植される） -->
+        <div class="header-controls" id="headerControls">
+        </div>
+    </header>
+    
+    <!-- サイドメニュー -->
+    <nav class="side-menu" id="sideMenu">
+        <div class="side-menu-header" data-i18n="menu.header">メニュー</div>
+        <ul class="side-menu-list">
+            <li><a href="index.html" data-i18n="menu.top">TOP</a></li>
+            <li><a href="simu_potential.html" data-i18n="menu.potential">素質シミュ</a></li>
+            <li><a href="exchange_checker.html" class="menu-item-current" data-i18n="menu.exchange">交換所</a></li>
+            <li><a href="simu_commission.html" data-i18n="menu.commission">依頼シミュ</a></li>
+            <li><span class="menu-item-disabled" data-i18n="menu.planned.materials">（予定）昇格に必要な素材数計算機</span></li>
+            <li><span class="menu-item-disabled" data-i18n="menu.planned.reverse">（予定）素材逆引き</span></li>
+            <li><span class="menu-item-disabled" data-i18n="menu.planned.quiz">（予定）星ノ塔クイズのカンペ</span></li>
+            <li><span class="menu-item-disabled" data-i18n="menu.planned.ring">（予定）無限リングのバフ早見表</span></li>
+            <li><span class="menu-item-disabled" data-i18n="menu.planned.unreleased">（予定）未実装キャラメモ</span></li>
+            <li><span class="menu-item-disabled" data-i18n="menu.planned.cocotya">（予定）ココチャまとめ</span></li>
+        </ul>
+    </nav>
+    
+    <!-- メニューオーバーレイ -->
+    <div class="menu-overlay" id="menuOverlay"></div>
 
-        <div class="main-content">
+    <!-- ページ固有コントロール（ヘッダー下段に移植される） -->
+    <div id="pageControls">
+        <button id="resetProgress" class="btn" data-i18n="buttons.resetProgress" data-i18n-source="exchange">進捗リセット</button>
+        <button id="resetAll" class="btn btn-danger" data-i18n="buttons.reset" data-i18n-source="exchange">初期化</button>
+        <button id="showUsage" class="btn btn-info" data-i18n="buttons.usage" data-i18n-source="exchange">使い方</button>
+    </div>
+
+    <!-- メインコンテンツ -->
+    <main class="main-content">
             <!-- イベント選択エリア -->
             <div class="event-selector">
                 <label for="eventSelect" data-i18n="labels.event" data-i18n-source="exchange">イベント：</label>
@@ -129,7 +188,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- 使い方モーダル -->
     <div id="usageModal" class="modal hidden">
