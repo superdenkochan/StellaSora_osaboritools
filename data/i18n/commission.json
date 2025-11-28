@@ -55,6 +55,52 @@
     "anyoneOk": {
       "ja": "誰でもOK",
       "en": "Free"
+    },
+    "confirmOverwrite": {
+      "ja": "プリセット{number}に上書き保存しますか?",
+      "en": "Overwrite Preset {number}?"
+    },
+    "savedPreset": {
+      "ja": "プリセット{number}に保存しました",
+      "en": "Saved to Preset {number}"
+    },
+    "confirmLoad": {
+      "ja": "プリセットを読み込みますか？（現在表示中の設定は破棄されます）",
+      "en": "Load preset? (Current settings will be discarded)"
+    },
+    "confirmDelete": {
+      "ja": "プリセット{number}を削除しますか？",
+      "en": "Delete Preset {number}?"
+    },
+    "dataLoadError": {
+      "ja": "データの読み込みに失敗しました。JSONファイルを確認してください。",
+      "en": "Failed to load data. Please check JSON files."
+    }
+  },
+  "autoAssign": {
+    "failedTitle": {
+      "ja": "おまかせ編成失敗！",
+      "en": "Quick Select Failed!"
+    },
+    "failedMessage": {
+      "ja": "あっちゃ～…今の手持ちじゃ全部の条件満たすのは無理っぽいねー",
+      "en": "Oops... Looks like we can't meet all requirements with current Trekkers~"
+    },
+    "needSix": {
+      "ja": "最低でもあと<strong>6人以上必要</strong>だから候補を表示しきれないよ！",
+      "en": "Need at least <strong>6+ more Trekkers</strong>, too many to display!"
+    },
+    "need1": {
+      "ja": "あと1人必要なパターン",
+      "en": "Patterns needing 1 more"
+    },
+    "needN": {
+      "ja": "あと{count}人必要なパターン",
+      "en": "Patterns needing {count} more"
+    },
+    "tryAgain": {
+      "ja": "所持巡遊者の設定を変えてもう1回試してみてね",
+      "en": "Try adjusting your owned Trekkers and run again"
     }
   },
   "page": {
@@ -75,6 +121,14 @@
     "placeholder": {
       "ja": "?",
       "en": "?"
+    },
+    "clear": {
+      "ja": "解除",
+      "en": "Clear"
+    },
+    "delete": {
+      "ja": "削除",
+      "en": "Delete"
     }
   },
   "modal": {

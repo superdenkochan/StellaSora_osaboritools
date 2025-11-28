@@ -114,6 +114,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // プリセットの初期化
     initializePresets();
+    
+    // 言語変更イベントをリッスン
+    document.addEventListener('languageChanged', () => {
+        updateLanguageDisplay();
+    });
 });
 
 // データ読み込み
@@ -555,7 +560,9 @@ function createPotentialCard(character, potentialId, slot, type) {
         const toggleBtn = document.createElement('button');
         toggleBtn.className = 'status-btn';
         const state = currentState[slot].corePotentials[potentialId];
-        toggleBtn.textContent = state.obtained ? '取得する' : '取得しない';
+        toggleBtn.textContent = state.obtained 
+            ? i18n.getText('coreToggle.obtain', 'potential') 
+            : i18n.getText('coreToggle.notObtain', 'potential');
         toggleBtn.classList.add(state.obtained ? 'active' : 'inactive');
         toggleBtn.addEventListener('click', () => handleCoreToggle(slot, potentialId));
         statusDiv.appendChild(toggleBtn);
@@ -594,7 +601,7 @@ function handleCoreToggle(slot, potentialId) {
         .filter(s => s.obtained).length;
     
     if (obtainedCount >= MAX_CORE_POTENTIALS) {
-        showError(`コア素質は${MAX_CORE_POTENTIALS}つまでしか取れないよ！`);
+        showError(i18n.getText('messages.coreLimitError', 'potential'));
         return;
     }
     
@@ -807,7 +814,7 @@ function handleLoadPreset(presetNum) {
                           !currentState.support2.characterId;
     
     if (!isInitialState && JSON.stringify(currentState) !== JSON.stringify(preset)) {
-        if (!confirm('現在表示中の情報は失われますが、よろしいですか？')) {
+        if (!confirm(i18n.getText('messages.confirmPresetLoad', 'potential'))) {
             return;
         }
     }
@@ -1091,3 +1098,92 @@ document.addEventListener('keydown', (e) => {
         });
     }
 });
+
+// 言語切り替え時の表示更新
+function updateLanguageDisplay() {
+    if (!charactersData) return;
+    
+    const lang = i18n.getLanguage();
+    
+    // キャラクター選択モーダル内のキャラ名を更新
+    document.querySelectorAll('.character-option').forEach(option => {
+        const charId = option.dataset.value;
+        const char = charactersData.characters.find(c => c.id === charId);
+        if (char) {
+            const icon = option.querySelector('.character-option-icon');
+            if (icon) {
+                icon.alt = char.name[lang];
+            }
+            const nameTooltip = option.querySelector('.character-option-name');
+            if (nameTooltip) {
+                nameTooltip.textContent = char.name[lang];
+            }
+        }
+    });
+    
+    // 選択済みキャラクターボタンのalt更新
+    ['main', 'support1', 'support2'].forEach(slot => {
+        const charId = currentState[slot].characterId;
+        if (charId) {
+            const char = charactersData.characters.find(c => c.id === charId);
+            if (char) {
+                const button = document.querySelector(`.character-select-button[data-slot="${slot}"]`);
+                const icon = button?.querySelector('.character-select-icon');
+                if (icon) {
+                    icon.alt = char.name[lang];
+                }
+            }
+        }
+    });
+    
+    // 素質カードのツールチップを更新
+    document.querySelectorAll('.potential-card').forEach(card => {
+        const potentialId = card.dataset.potentialId;
+        const slot = card.dataset.slot;  // カード自身のdata-slotを参照
+        if (potentialId && slot) {
+            const charId = currentState[slot]?.characterId;
+            if (charId) {
+                const char = charactersData.characters.find(c => c.id === charId);
+                if (char && char.descriptions && char.descriptions[potentialId]) {
+                    const desc = char.descriptions[potentialId][lang] || '';
+                    const tooltip = card.querySelector('.potential-tooltip');
+                    if (tooltip) {
+                        tooltip.innerHTML = formatTooltipText(desc, TOOLTIP_MAX_CHARS);
+                    }
+                }
+            }
+        }
+    });
+    
+    // サブ素質のステータスラベルを更新
+    document.querySelectorAll('.potential-card[data-type="sub"]').forEach(card => {
+        const potentialId = card.dataset.potentialId;
+        const slot = card.dataset.slot;
+        if (potentialId && slot) {
+            const state = currentState[slot]?.subPotentials?.[potentialId];
+            if (state) {
+                const btn = card.querySelector('.sub-status-btn');
+                if (btn) {
+                    btn.textContent = getSubStatusLabel(state.status);
+                }
+            }
+        }
+    });
+    
+    // コア素質のトグルボタンを更新
+    document.querySelectorAll('.potential-card[data-type="core"]').forEach(card => {
+        const potentialId = card.dataset.potentialId;
+        const slot = card.dataset.slot;
+        if (potentialId && slot) {
+            const state = currentState[slot]?.corePotentials?.[potentialId];
+            if (state) {
+                const btn = card.querySelector('.status-btn');
+                if (btn) {
+                    btn.textContent = state.obtained 
+                        ? i18n.getText('coreToggle.obtain', 'potential') 
+                        : i18n.getText('coreToggle.notObtain', 'potential');
+                }
+            }
+        }
+    });
+}

@@ -31,16 +31,16 @@
   },
   "characterSelect": {
     "mainTitle": {
-      "ja": "主力キャラクター選択",
-      "en": "Select Main Character"
+      "ja": "主力巡遊者選択",
+      "en": "Select Main Trekker"
     },
     "support1Title": {
-      "ja": "支援キャラクター1選択",
-      "en": "Select Support Character 1"
+      "ja": "支援巡遊者選択",
+      "en": "Select Support Trekker 1"
     },
     "support2Title": {
-      "ja": "支援キャラクター2選択",
-      "en": "Select Support Character 2"
+      "ja": "支援巡遊者選択",
+      "en": "Select Support Trekker 2"
     }
   },
   "messages": {
@@ -59,6 +59,24 @@
     "confirmReset": {
       "ja": "すべての設定を初期化しますか？",
       "en": "Reset all settings?"
+    },
+    "coreLimitError": {
+      "ja": "コア素質は2つまでしか取れないよ！",
+      "en": "You can only obtain up to 2 core potentials!"
+    },
+    "confirmPresetLoad": {
+      "ja": "現在表示中の情報は失われますが、よろしいですか？",
+      "en": "Current display will be lost. Continue?"
+    }
+  },
+  "coreToggle": {
+    "obtain": {
+      "ja": "取得する",
+      "en": "Get"
+    },
+    "notObtain": {
+      "ja": "取得しない",
+      "en": "Don't Get"
     }
   },
   "page": {

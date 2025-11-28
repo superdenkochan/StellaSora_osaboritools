@@ -30,6 +30,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // ローカルストレージから復元
     loadFromLocalStorage();
+    
+    // 言語変更イベントをリッスン
+    document.addEventListener('languageChanged', () => {
+        updateLanguageDisplay();
+    });
 });
 
 // イベント一覧読み込み
@@ -73,7 +78,7 @@ async function loadEventData(eventId) {
         console.log('Background image:', eventData.event.backgroundImage);
     } catch (error) {
         console.error(`イベント${eventId}のデータ読み込みエラー:`, error);
-        alert(`イベントデータの読み込みに失敗しました。ページをリロードしてください。`);
+        alert(i18n.getText('messages.eventLoadError', 'exchange'));
     }
 }
 
@@ -248,12 +253,17 @@ function updateRemainingDays() {
         const minutesStr = String(minutes).padStart(2, '0');
         const secondsStr = String(seconds).padStart(2, '0');
         
-        remainingDaysElement.textContent = `${daysStr}日と${hoursStr}時間${minutesStr}分${secondsStr}秒`;
+        const format = i18n.getText('time.format', 'exchange');
+        remainingDaysElement.textContent = format
+            .replace('{days}', daysStr)
+            .replace('{hours}', hoursStr)
+            .replace('{minutes}', minutesStr)
+            .replace('{seconds}', secondsStr);
         
         // 1秒ごとに更新
         setTimeout(updateRemainingDays, 1000);
     } else {
-        remainingDaysElement.textContent = '終了';
+        remainingDaysElement.textContent = i18n.getText('time.ended', 'exchange');
     }
 }
 
@@ -302,16 +312,16 @@ function createRewardItem(reward) {
         </div>
         <div class="reward-name">${reward.name[i18n.getLanguage()]}</div>
         <div class="reward-price">${reward.price.toLocaleString()}pt</div>
-        <div class="reward-status">いる</div>
+        <div class="reward-status">${i18n.getText('reward.wantedShort', 'exchange')}</div>
         <div class="reward-controls">
-            <button class="reward-btn reward-btn-decrease">－1</button>
-            <button class="reward-btn reward-btn-increase">＋1</button>
+            <button class="reward-btn reward-btn-decrease">${i18n.getText('reward.decrease', 'exchange')}</button>
+            <button class="reward-btn reward-btn-increase">${i18n.getText('reward.increase', 'exchange')}</button>
         </div>
         <div class="reward-controls" style="margin-top: 4px;">
-            <button class="reward-btn reward-btn-buy-all">一括購入</button>
-            <button class="reward-btn reward-btn-reset">リセット</button>
+            <button class="reward-btn reward-btn-buy-all">${i18n.getText('reward.buyAll', 'exchange')}</button>
+            <button class="reward-btn reward-btn-reset">${i18n.getText('reward.reset', 'exchange')}</button>
         </div>
-        <div class="sold-out-badge" style="display: none;">売り切れ</div>
+        <div class="sold-out-badge" style="display: none;">${i18n.getText('reward.soldOut', 'exchange')}</div>
     `;
     
     // カード全体クリックでトグル切り替え（交換するしない）
@@ -406,11 +416,11 @@ function updateRewardUI(rewardId) {
     if (state.wanted) {
         item.classList.remove('unwanted');
         item.classList.add('wanted');
-        statusText.textContent = '交換する';
+        statusText.textContent = i18n.getText('reward.wanted', 'exchange');
     } else {
         item.classList.remove('wanted');
         item.classList.add('unwanted');
-        statusText.textContent = '交換しない';
+        statusText.textContent = i18n.getText('reward.notWanted', 'exchange');
     }
     
     // 在庫表示更新
@@ -575,31 +585,31 @@ function initializeMissions() {
     // jsonで設定した特定の単語を含むミッション名をグループ化
     const accordionGroups = [
         {
-            title: 'ノーマル',
+            titleKey: 'accordion.groups.normal',
             missionIds: missions.filter(m => m.name.ja.includes('ノーマル')).map(m => m.id)
         },
         {
-            title: 'ハード',
+            titleKey: 'accordion.groups.hard',
             missionIds: missions.filter(m => m.name.ja.includes('ハード')).map(m => m.id)
         },
         {
-            title: '通常任務',
+            titleKey: 'accordion.groups.regularMission',
             missionIds: missions.filter(m => m.name.ja.includes('通常任務')).map(m => m.id)
         },
         {
-            title: '挑戦任務',
+            titleKey: 'accordion.groups.challengeMission',
             missionIds: missions.filter(m => m.name.ja.includes('挑戦任務')).map(m => m.id)
         },
         {
-            title: '冒険任務',
+            titleKey: 'accordion.groups.adventureMission',
             missionIds: missions.filter(m => m.name.ja.includes('冒険任務')).map(m => m.id)
         },
         {
-            title: 'ミニゲーム',
+            titleKey: 'accordion.groups.minigame',
             missionIds: missions.filter(m => m.name.ja.includes('ミニゲーム')).map(m => m.id)
         },
         {
-            title: 'その他',
+            titleKey: 'accordion.groups.other',
             missionIds: missions.filter(m => !m.name.ja.includes('ノーマル') && !m.name.ja.includes('ハード') && !m.name.ja.includes('通常任務') && !m.name.ja.includes('挑戦任務') && !m.name.ja.includes('冒険任務') && !m.name.ja.includes('ミニゲーム')).map(m => m.id)
         }
     ];
@@ -634,13 +644,13 @@ function renderMissionsWithAccordion(missions, accordionGroups) {
         header.className = 'mission-accordion-header';
         header.innerHTML = `
             <div class="accordion-toggle">
-                <span class="accordion-icon">▶</span>
-                <span class="accordion-title">${group.title}</span>
+                <span class="accordion-icon">${i18n.getText('accordion.iconClosed', 'exchange')}</span>
+                <span class="accordion-title">${i18n.getText(group.titleKey, 'exchange')}</span>
                 <span class="accordion-count"></span>
             </div>
             <div class="accordion-actions">
-                <button class="accordion-check-all" data-group-index="${index}">一括ON</button>
-                <button class="accordion-uncheck-all" data-group-index="${index}">一括OFF</button>
+                <button class="accordion-check-all" data-group-index="${index}">${i18n.getText('accordion.checkAll', 'exchange')}</button>
+                <button class="accordion-uncheck-all" data-group-index="${index}">${i18n.getText('accordion.uncheckAll', 'exchange')}</button>
             </div>
         `;
         
@@ -669,7 +679,9 @@ function renderMissionsWithAccordion(missions, accordionGroups) {
         toggle.addEventListener('click', () => {
             content.classList.toggle('open');
             const icon = header.querySelector('.accordion-icon');
-            icon.textContent = content.classList.contains('open') ? '▼' : '▶';
+            icon.textContent = content.classList.contains('open') 
+                ? i18n.getText('accordion.iconOpen', 'exchange') 
+                : i18n.getText('accordion.iconClosed', 'exchange');
         });
         
         // 一括ONボタン
@@ -702,7 +714,7 @@ function renderMissionsWithAccordion(missions, accordionGroups) {
     if (ungroupedMissions.length > 0) {
         const otherHeader = document.createElement('div');
         otherHeader.className = 'mission-section-title';
-        otherHeader.textContent = 'その他';
+        otherHeader.textContent = i18n.getText('accordion.groups.other', 'exchange');
         grid.appendChild(otherHeader);
         
         ungroupedMissions.forEach(mission => {
@@ -727,7 +739,7 @@ function updateAccordionGroupStatus(groupIndex, missionIds) {
     
     if (allCompleted) {
         header.classList.add('all-completed');
-        countSpan.textContent = '★';
+        countSpan.textContent = i18n.getText('accordion.completedMark', 'exchange');
     } else {
         header.classList.remove('all-completed');
         countSpan.textContent = ``;
@@ -957,14 +969,14 @@ function updateCalculations() {
     // UI更新
     document.getElementById('totalNeeded').textContent = totalNeeded.toLocaleString();
     document.getElementById('remainingNeeded').textContent = remainingNeeded.toLocaleString();
-    document.getElementById('runsNeeded').textContent = runsNeeded.toFixed(3) + '周';
-    document.getElementById('dailyQuota').textContent = dailyQuota + '周';
+    document.getElementById('runsNeeded').textContent = runsNeeded.toFixed(3) + i18n.getText('unit.runs', 'exchange');
+    document.getElementById('dailyQuota').textContent = dailyQuota + i18n.getText('unit.runs', 'exchange');
     document.getElementById('dailyStamina').textContent = dailyStamina.toLocaleString();
 }
 
 // 進捗リセット
 function resetProgress() {
-    if (!confirm('在庫数と任務達成状況をリセットしますか？\n※「交換する/しない」の設定はそのまま')) {
+    if (!confirm(i18n.getText('messages.confirmResetProgress', 'exchange'))) {
         return;
     }
     
@@ -1278,3 +1290,71 @@ function increasePoints() {
     saveToLocalStorage();
 }
 
+// 言語切り替え時の表示更新
+function updateLanguageDisplay() {
+    const lang = i18n.getLanguage();
+    
+    // イベントセレクトの更新
+    const eventSelect = document.getElementById('eventSelect');
+    if (eventSelect) {
+        Array.from(eventSelect.options).forEach(option => {
+            if (option.value) {
+                const event = eventList.find(e => e.eventId === parseInt(option.value));
+                if (event) {
+                    option.textContent = event.name[lang];
+                }
+            }
+        });
+    }
+    
+    // ポイントアイコンのalt更新
+    if (currentEvent) {
+        const pointData = gameData.eventPoints.find(p => p.id === currentEvent.pointId);
+        if (pointData) {
+            const pointIcon = document.getElementById('pointIcon');
+            if (pointIcon) {
+                pointIcon.alt = pointData.name[lang];
+            }
+        }
+    }
+    
+    // 報酬カードの名前更新
+    document.querySelectorAll('.reward-item[data-reward-id]').forEach(item => {
+        const rewardId = parseInt(item.dataset.rewardId);
+        const reward = gameData.exchangeRewards.find(r => r.id === rewardId);
+        if (reward) {
+            const nameElem = item.querySelector('.reward-name');
+            if (nameElem) {
+                nameElem.textContent = reward.name[lang];
+            }
+            const iconElem = item.querySelector('.reward-icon');
+            if (iconElem) {
+                iconElem.alt = reward.name[lang];
+            }
+        }
+    });
+    
+    // ミッションの名前更新
+    document.querySelectorAll('.mission-item[data-mission-id]').forEach(item => {
+        const missionId = parseInt(item.dataset.missionId);
+        const mission = gameData.missionRewards.find(m => m.id === missionId);
+        if (mission) {
+            const nameElem = item.querySelector('.mission-name');
+            if (nameElem) {
+                nameElem.textContent = mission.name[lang];
+            }
+        }
+    });
+    
+    // コンプリートミッションの名前更新
+    document.querySelectorAll('.mission-item[data-comp-mission-id]').forEach(item => {
+        const missionId = parseInt(item.dataset.compMissionId);
+        const mission = gameData.missionCompRewards.find(m => m.id === missionId);
+        if (mission) {
+            const nameElem = item.querySelector('.mission-name');
+            if (nameElem) {
+                nameElem.textContent = mission.name[lang];
+            }
+        }
+    });
+}

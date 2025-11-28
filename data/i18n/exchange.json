@@ -45,6 +45,96 @@
     "hours": {
       "ja": "時間",
       "en": "h"
+    },
+    "format": {
+      "ja": "{days}日と{hours}時間{minutes}分{seconds}秒",
+      "en": "{days}d {hours}h {minutes}m {seconds}s"
+    }
+  },
+  "reward": {
+    "wanted": {
+      "ja": "交換する",
+      "en": "Want"
+    },
+    "notWanted": {
+      "ja": "交換しない",
+      "en": "Don't Want"
+    },
+    "wantedShort": {
+      "ja": "いる",
+      "en": "Want"
+    },
+    "soldOut": {
+      "ja": "売り切れ",
+      "en": "Sold Out"
+    },
+    "decrease": {
+      "ja": "－1",
+      "en": "-1"
+    },
+    "increase": {
+      "ja": "＋1",
+      "en": "+1"
+    },
+    "buyAll": {
+      "ja": "一括購入",
+      "en": "Buy All"
+    },
+    "reset": {
+      "ja": "リセット",
+      "en": "Reset"
+    }
+  },
+  "accordion": {
+    "groups": {
+      "normal": {
+        "ja": "ノーマル",
+        "en": "Normal"
+      },
+      "hard": {
+        "ja": "ハード",
+        "en": "Hard"
+      },
+      "regularMission": {
+        "ja": "通常任務",
+        "en": "Regular Missions"
+      },
+      "challengeMission": {
+        "ja": "挑戦任務",
+        "en": "Challenge Missions"
+      },
+      "adventureMission": {
+        "ja": "冒険任務",
+        "en": "Adventure Missions"
+      },
+      "minigame": {
+        "ja": "ミニゲーム",
+        "en": "Minigames"
+      },
+      "other": {
+        "ja": "その他",
+        "en": "Others"
+      }
+    },
+    "checkAll": {
+      "ja": "一括ON",
+      "en": "All ON"
+    },
+    "uncheckAll": {
+      "ja": "一括OFF",
+      "en": "All OFF"
+    },
+    "completedMark": {
+      "ja": "★",
+      "en": "★"
+    },
+    "iconClosed": {
+      "ja": "▶",
+      "en": "▶"
+    },
+    "iconOpen": {
+      "ja": "▼",
+      "en": "▼"
     }
   },
   "page": {
@@ -163,8 +253,8 @@
       "en": "Failed to load event list. Please reload the page."
     },
     "confirmResetProgress": {
-      "ja": "進捗をリセットしますか？",
-      "en": "Reset progress?"
+      "ja": "在庫数と任務達成状況をリセットしますか？\n※「交換する/しない」の設定はそのまま",
+      "en": "Reset stock and mission progress?\n*Want/Don't want settings will be kept"
     },
     "confirmResetAll": {
       "ja": "「交換する/しない」を含めて全部初期化しますか？",

@@ -25,18 +25,12 @@ const autoAssignMessages = {
     // ラールが含まれている場合
     withSpecialCharacters: {
         icon: 'images/commission/success_laru.png', 
-        message: {
-            ja: 'じゃ～ん♪…って、あたしが候補に入ってるんですけど!?',
-            en: 'Special team composition found!'
-        }
+        messageKey: 'messages.autoAssignSuccess'
     },
     // それ以外（通常）
     normal: {
         icon: 'images/commission/success_default.png', 
-        message: {
-            ja: 'お待たせー！（よーし、あたしはサボっちゃお～っと♪）',
-            en: 'Recommended team composition!'
-        }
+        messageKey: 'messages.autoAssignNormal'
     },
     // 分岐トリガーのキャラクターID
     specialCharacterIds: ['50005']
@@ -86,7 +80,7 @@ async function loadData() {
         
     } catch (error) {
         console.error('データ読み込みエラー:', error);
-        showError('データの読み込みに失敗しました。JSONファイルを確認してください。');
+        showError(i18n.getText('messages.dataLoadError', 'commission'));
     }
 }
 
@@ -272,7 +266,7 @@ function openCommissionModal(slot) {
     clearOption.className = 'commission-option';
     clearOption.innerHTML = `
         <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 16px; font-weight: bold; color: #667eea; background: white;">
-            解除
+            ${i18n.getText('labels.clear', 'commission')}
         </div>
     `;
     clearOption.addEventListener('click', (e) => {
@@ -500,7 +494,7 @@ function openCharacterModal(commissionSlot, position) {
     clearOption.className = 'character-option';
     clearOption.innerHTML = `
         <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 16px; font-weight: bold; color: #667eea;">
-            解除
+            ${i18n.getText('labels.clear', 'commission')}
         </div>
     `;
     clearOption.addEventListener('click', (e) => {
@@ -732,7 +726,7 @@ function checkAnythingOk(slot) {
                 // 空いているスロットに「なんでもOK」を表示
                 const emptySlotElement = document.querySelector(`.character-slot-item[data-commission="${slot}"][data-position="${combo.empty + 1}"]`);
                 emptySlotElement.classList.add('anything');
-                const text = currentLanguage === 'ja' ? '誰でもOK' : 'Free';
+                const text = i18n.getText('messages.anyoneOk', 'commission');
                 emptySlotElement.innerHTML = `<div class="character-slot-placeholder">${text}</div>`;
                 
                 // 1つ見つかったら終了
@@ -876,7 +870,7 @@ function displayAutoAssignResults(solutions) {
         // 達成できない場合
         const errorDiv = document.createElement('div');
         errorDiv.className = 'auto-assign-error';
-        errorDiv.innerHTML = '<h4>おまかせ編成失敗！</h4><p>あっちゃ～…今の手持ちじゃ全部の条件満たすのは無理っぽいねー</p>';
+        errorDiv.innerHTML = `<h4>${i18n.getText('autoAssign.failedTitle', 'commission')}</h4><p>${i18n.getText('autoAssign.failedMessage', 'commission')}</p>`;
         
         // 不足しているキャラクターの提案
         const missingResult = findMissingCharacters({
@@ -886,7 +880,7 @@ function displayAutoAssignResults(solutions) {
         
         if (missingResult.tooMany) {
             // 必要キャラが多すぎる場合
-            errorDiv.innerHTML += '<p>最低でもあと<strong>6人以上必要</strong>だから候補を表示しきれないよ！</p>';
+            errorDiv.innerHTML += `<p>${i18n.getText('autoAssign.needSix', 'commission')}</p>`;
         } else if (missingResult.groups.length > 0) {
             // 候補がある場合
             errorDiv.innerHTML += '<div class="missing-characters-section"></div>';
@@ -900,8 +894,8 @@ function displayAutoAssignResults(solutions) {
                 const groupTitle = document.createElement('h5');
                 groupTitle.className = 'missing-group-title';
                 groupTitle.textContent = group.requiredCount === 1 
-                    ? 'あと1人必要なパターン' 
-                    : `あと${group.requiredCount}人必要なパターン`;
+                    ? i18n.getText('autoAssign.need1', 'commission')
+                    : i18n.getText('autoAssign.needN', 'commission').replace('{count}', group.requiredCount);
                 groupDiv.appendChild(groupTitle);
                 
                 // 候補を1つずつコンテナに格納
@@ -943,7 +937,7 @@ function displayAutoAssignResults(solutions) {
                 sectionContainer.appendChild(groupDiv);
             });
             
-            errorDiv.innerHTML += '<p>所持巡遊者の設定を変えてもう1回試してみてね</p>';
+            errorDiv.innerHTML += `<p>${i18n.getText('autoAssign.tryAgain', 'commission')}</p>`;
         }
         
         resultsContainer.appendChild(errorDiv);
@@ -955,7 +949,7 @@ function displayAutoAssignResults(solutions) {
             : autoAssignMessages.normal;
         
         // メッセージヘッダーを作成
-        if (messageConfig.message) {
+        if (messageConfig.messageKey) {
             const headerDiv = document.createElement('div');
             headerDiv.className = 'auto-assign-success-header';
             
@@ -971,9 +965,7 @@ function displayAutoAssignResults(solutions) {
             // メッセージテキスト
             const message = document.createElement('div');
             message.className = 'auto-assign-success-message';
-            message.textContent = currentLanguage === 'ja' 
-                ? messageConfig.message.ja 
-                : messageConfig.message.en;
+            message.textContent = i18n.getText(messageConfig.messageKey, 'commission');
             headerDiv.appendChild(message);
             
             resultsContainer.appendChild(headerDiv);
@@ -1201,7 +1193,7 @@ function handleSavePreset(presetNum) {
     // 確認ダイアログ
     const existingPreset = localStorage.getItem(`commission_preset_${presetNum}`);
     if (existingPreset) {
-        if (!confirm(`プリセット${presetNum}に上書き保存しますか?`)) {
+        if (!confirm(i18n.getText('messages.confirmOverwrite', 'commission').replace('{number}', presetNum))) {
             return;
         }
     }
@@ -1220,7 +1212,7 @@ function savePreset(presetNum) {
     
     updatePresetButtons();
     updatePresetThumbnails();
-    alert(`プリセット${presetNum}に保存しました`);
+    alert(i18n.getText('messages.savedPreset', 'commission').replace('{number}', presetNum));
 }
 
 function handleLoadPreset(presetNum) {
@@ -1230,7 +1222,7 @@ function handleLoadPreset(presetNum) {
     
     // 現在の設定と異なる場合は警告
     if (JSON.stringify(currentState.commissions) !== JSON.stringify(presetData.commissions)) {
-        if (!confirm('プリセットを読み込みますか？（現在表示中の設定は破棄されます）')) {
+        if (!confirm(i18n.getText('messages.confirmLoad', 'commission'))) {
             return;
         }
     }
@@ -1250,7 +1242,7 @@ function handleLoadPreset(presetNum) {
 }
 
 function deletePreset(presetNum) {
-    if (!confirm(`プリセット${presetNum}を削除しますか？`)) {
+    if (!confirm(i18n.getText('messages.confirmDelete', 'commission').replace('{number}', presetNum))) {
         return;
     }
     
@@ -1360,7 +1352,7 @@ function updatePresetThumbnails() {
             const actionsDiv = presetItem.querySelector('.preset-actions');
             const deleteBtn = document.createElement('button');
             deleteBtn.className = 'btn-delete-preset';
-            deleteBtn.textContent = '削除';
+            deleteBtn.textContent = i18n.getText('labels.delete', 'commission');
             deleteBtn.dataset.preset = i;
             deleteBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -1471,7 +1463,7 @@ function updateLanguageDisplay() {
             for (let i = 1; i <= 3; i++) {
                 const slotElement = document.querySelector(`.character-slot-item[data-commission="${slot}"][data-position="${i}"]`);
                 if (slotElement.classList.contains('anything') && !commission.characters[i - 1]) {
-                    const text = currentLanguage === 'ja' ? '誰でもOK' : 'Free';
+                    const text = i18n.getText('messages.anyoneOk', 'commission');
                     slotElement.innerHTML = `<div class="character-slot-placeholder">${text}</div>`;
                 }
             }
