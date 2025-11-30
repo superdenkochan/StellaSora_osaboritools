@@ -13,8 +13,8 @@ html[lang="en"] .text-en { display: inline; }
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    background: linear-gradient(135deg, #252a42 0%, #424d71 100%);
+    box-shadow: 0 2px 2px rgba(0,0,0,0.5);
 }
 
 /* 上段：サイト名＋タブ＋言語切り替え */
@@ -88,7 +88,7 @@ html[lang="en"] .text-en { display: inline; }
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     flex: 1;
-    justify-content: center;
+    justify-content: left; /* タブの位置 */
 }
 
 .header-tabs::-webkit-scrollbar {
@@ -132,7 +132,7 @@ html[lang="en"] .text-en { display: inline; }
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 5px;
     color: white;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s;
@@ -142,21 +142,79 @@ html[lang="en"] .text-en { display: inline; }
     background: rgba(255, 255, 255, 0.25);
 }
 
-/* 下段：ページごとのボタン */
+/* 下段：ページごとのボタン（スマホは開閉可） */
+.header-controls-wrapper {
+    position: relative;
+}
+
 .header-controls {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* ボタン位置 */
     gap: 10px;
     padding: 10px 15px;
     background: rgba(0, 0, 0, 0.1);
     flex-wrap: wrap;
     min-height: 50px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* 閉じた状態 */
+.header-controls.collapsed {
+    max-height: 0;
+    padding: 0 15px;
+    min-height: 0;
+    opacity: 0;
 }
 
 /* 下段が空の場合は非表示 */
 .header-controls:empty {
     display: none;
+}
+
+.header-controls:empty + .header-toggle {
+    display: none;
+}
+
+/* 開閉トグルボタン */
+.header-toggle {
+    display: none; /* デフォルトはPC向けに非表示 */
+    position: absolute;
+    bottom: -24px;
+    left: 10%;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 24px;
+    background: linear-gradient(135deg, #252a42 0%, #424d71 100%);
+    border: none;
+    border-radius: 0 0 10px 10px;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    touch-action: manipulation;
+}
+
+.header-toggle::after {
+    content: '▼';
+    color: white;
+    font-size: 14px;
+    transition: transform 0.3s;
+}
+
+.header-toggle.collapsed::after {
+    content: '▲';
+}
+
+/* モバイルでトグルボタンを表示 */
+@media (max-width: 768px) {
+    .header-toggle {
+        display: block;
+    }
+    
+    .header-controls-wrapper {
+        padding-bottom: 8px; /* トグルボタン分の余白 */
+    }
 }
 
 /* 下段のボタン */
@@ -170,7 +228,7 @@ html[lang="en"] .text-en { display: inline; }
     display: flex;
     align-items: center;
     gap: 6px;
-    color: white;
+    color: #ffffff;
     font-size: 13px;
     cursor: pointer;
 }
@@ -188,8 +246,8 @@ html[lang="en"] .text-en { display: inline; }
     left: -300px;
     width: 300px;
     height: 100vh;
-    background: white;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    background: #ffffff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     z-index: 9999;
     transition: left 0.3s ease;
     overflow-y: auto;
@@ -200,7 +258,7 @@ html[lang="en"] .text-en { display: inline; }
 }
 
 .side-menu-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #252a42 0%, #424d71 100%);
     color: white;
     padding: 20px;
     font-size: 18px;
@@ -214,7 +272,7 @@ html[lang="en"] .text-en { display: inline; }
 }
 
 .side-menu-list li {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #d5cdc7;
 }
 
 .side-menu-list a {
@@ -230,8 +288,8 @@ html[lang="en"] .text-en { display: inline; }
 }
 
 .side-menu-list .menu-item-current {
-    background: #f0f0ff;
-    color: #667eea;
+    background: #dddddd;
+    color: #635b58;
     font-weight: bold;
 }
 
@@ -259,59 +317,180 @@ html[lang="en"] .text-en { display: inline; }
 }
 
 /* モバイル対応 */
+
+/* タブレット */
 @media (max-width: 768px) {
     .header-main {
         padding: 0 10px;
-        height: 45px;
+        height: 48px;
     }
     
     .header-title {
         font-size: 14px;
+        min-width: 100px;
     }
     
     .header-tabs a {
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 13px;
+        min-height: 36px;
+        display: flex;
+        align-items: center;
     }
     
     .header-controls {
-        padding: 8px 10px;
+        padding: 10px;
         gap: 8px;
+        min-height: 52px;
     }
     
     .header-controls .btn {
-        padding: 6px 12px;
-        font-size: 12px;
+        padding: 8px 14px;
+        font-size: 13px;
+        min-height: 40px;
+    }
+    
+    .header-controls label {
+        font-size: 14px;
+        min-height: 40px;
+    }
+    
+    .header-lang-btn {
+        padding: 8px 12px;
+        min-height: 36px;
+    }
+    
+    /* サイドメニューの調整 */
+    .side-menu {
+        width: 280px;
+        left: -280px;
+    }
+    
+    .side-menu-list a {
+        padding: 16px 20px;
+        min-height: 52px;
     }
 }
 
+/* スマートフォン */
 @media (max-width: 480px) {
     .header-main {
-        height: 42px;
-        gap: 8px;
+        height: 48px;
+        gap: 4px;
+        padding: 0 4px;
     }
     
     .header-title {
-        font-size: 13px;
+        font-size: 8px;
+        min-width: 20px;
     }
     
     /* タブを横スクロール対応 */
     .header-tabs {
         justify-content: flex-start;
+        gap: 3px;
+        scroll-snap-type: x mandatory;
+    }
+    
+    .header-tabs li {
+        scroll-snap-align: start;
     }
     
     .header-tabs a {
-        padding: 5px 10px;
-        font-size: 12px;
+        padding: 8px 8px;
+        font-size: 10px;
+        min-height: 36px;
     }
     
     .header-hamburger {
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
     }
     
     .header-icon {
-        width: 32px;
-        height: 32px;
+        width: 0px;
+        height: 0px;
+    }
+    
+    .header-lang-btn {
+        padding: 6px 8px;
+        font-size: 10px;
+        min-height: 36px;
+    }
+    
+    /* コントロール部分 */
+    .header-controls {
+        padding: 8px;
+        gap: 6px;
+        min-height: 48px;
+    }
+    
+    .header-controls .btn {
+        padding: 8px 32px;
+        font-size: 12px;
+        min-height: 40px;
+        flex: 1 1 48px; /* ボタンサイズ調整中 */
+    }
+    
+    .header-controls label {
+        font-size: 16px;
+        min-height: 40px;
+        flex: 1 1 auto;
+    }
+    
+    /* サイドメニューの調整 */
+    .side-menu {
+        width: 75vw;
+        max-width: 300px;
+        left: -85vw;
+    }
+    
+    .side-menu.open {
+        left: 0;
+    }
+    
+    .side-menu-header {
+        padding: 16px;
+        font-size: 16px;
+    }
+    
+    .side-menu-list a,
+    .side-menu-list .menu-item-disabled {
+        padding: 14px 16px;
+        min-height: 48px;
+        font-size: 15px;
+    }
+}
+
+/* 小型スマホ（iPhone SE等） */
+@media (max-width: 374px) {
+    .header-main {
+        gap: 4px;
+        padding: 0 4px;
+    }
+    
+    .header-title {
+        font-size: 8px;
+        min-width: 20px;
+    }
+    
+    .header-tabs a {
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+    
+    .header-lang-btn {
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+    
+    .header-controls .btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    .header-controls label {
+        font-size: 12px;
     }
 }

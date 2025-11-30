@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="google-adsense-account" content="ca-pub-2384775227983330">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title data-i18n="page.htmlTitle" data-i18n-source="potential">素質シミュレーター - おサボりツール</title>
     
     <!-- ファビコン -->
@@ -96,21 +96,21 @@
             <!-- キャラクター選択＋素質表示エリア -->
             <div class="characters-area">
                 <!-- プリセット名表示・編集エリア -->
-                <div id="preset-name-container" style="text-align: center; margin-bottom: 15px; padding: 10px; background: #f0f0ff; border-radius: 5px;">
-                    <div id="preset-name-display-area" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                        <span style="font-size: 14px; color: #667eea; font-weight: bold;">プリセット名:</span>
+                <div id="preset-name-container" style="text-align: center; white-space: nowrap; margin-bottom: 2px; padding: 8px; background: rgba(255,255,255,0.75); border-radius: 4px;">
+                    <div id="preset-name-display-area" style="display: flex; align-items: center; justify-content: center; gap: 0px;">
+                        <span style="font-size: 14px; color: #252a42; font-weight: bold;">プリセット名:</span>
                         <input type="text" id="preset-name-input-inline" maxlength="20" placeholder="（未設定）" 
-                               style="font-size: 16px; color: #667eea; font-weight: bold; border: 2px solid transparent; background: transparent; padding: 5px; width: 300px; text-align: center; outline: none;"
+                               style="font-size: 14px; color: #40539f; font-weight: bold; border: 2px solid transparent; background: transparent; padding: 0px; width: 300px; text-align: center; outline: none;"
                                readonly>
-                        <button id="preset-name-edit-btn" class="btn" style="padding: 5px 15px; font-size: 14px;">✎ 編集</button>
+                        <button id="preset-name-edit-btn" class="btn" style="padding: 5px 12px; font-size: 14px;">✎ 編集</button>
                     </div>
                 </div>
                 
                 <!-- スクリーンショット用フッター（通常は非表示） -->
-                <div id="screenshot-footer" style="display: none; text-align: center; padding: 10px; background: #f9f9f9; border-top: 2px solid #667eea; margin-top: 20px;">
-                    <p style="margin: 0; font-size: 14px; color: #666;">
+                <div id="screenshot-footer" style="display: none; text-align: center; padding: 4px; background: rgba(37,42,66,1); border-top: 2px solid #252a42; margin-top: 4px;">
+                    <p style="margin: 0; font-size: 14px; color: #ffffff;">
                         ステラソラ おサボりツール - 素質シミュレーター
-                        <a href="https://superdenkochan.github.io/StellaSora_osaboritools/" style="color: #667eea; text-decoration: none;"></a>
+                        <a href="https://superdenkochan.github.io/StellaSora_osaboritools/" style="color: #ffffff; text-decoration: none;"></a>
                     </p>
                 </div>
                 <!-- キャラクター1（主力） -->
@@ -121,11 +121,11 @@
                         </div>
                         <div class="character-select-wrapper">
                             <button class="character-select-button" data-slot="main">
-                                <span class="select-text">巡遊者を<br>選択してね</span>
+                                <span class="select-text">巡遊者<br>選択</span>
                             </button>
                             <!-- 互換性のため隠しselect -->
                             <select class="character-select" data-slot="main">
-                                <option value="">巡遊者を選択してね</option>
+                                <option value="">巡遊者選択</option>
                             </select>
                         </div>
                     </div>
@@ -142,10 +142,10 @@
                         </div>
                         <div class="character-select-wrapper">
                             <button class="character-select-button" data-slot="support1">
-                                <span class="select-text">巡遊者を<br>選択してね</span>
+                                <span class="select-text">巡遊者<br>選択</span>
                             </button>
                             <select class="character-select" data-slot="support1">
-                                <option value="">巡遊者を選択してね</option>
+                                <option value="">巡遊者選択</option>
                             </select>
                         </div>
                     </div>
@@ -162,10 +162,10 @@
                         </div>
                         <div class="character-select-wrapper">
                             <button class="character-select-button" data-slot="support2">
-                                <span class="select-text">巡遊者を<br>選択してね</span>
+                                <span class="select-text">巡遊者<br>選択</span>
                             </button>
                             <select class="character-select" data-slot="support2">
-                                <option value="">巡遊者を選択してね</option>
+                                <option value="">巡遊者選択</option>
                             </select>
                         </div>
                     </div>
@@ -293,8 +293,8 @@
         <div class="modal-overlay"></div>
         <div class="modal-content">
             <div class="modal-header">
+                <h3 data-i18n="modal.usage.title" data-i18n-source="potential">使い方</h3>
                 <button class="modal-close">&times;</button>
-                <h2 data-i18n="modal.usage.title" data-i18n-source="potential">使い方</h2>
             </div>
             <div class="modal-body">
                 <h3 data-i18n="modal.usage.basic" data-i18n-source="potential">基本操作</h3>
@@ -349,8 +349,8 @@
         <div class="modal-overlay"></div>
         <div class="modal-content">
             <div class="modal-header">
+                <h3 data-i18n="modal.changelog.title" data-i18n-source="potential">変更履歴</h3>
                 <button class="modal-close">&times;</button>
-                <h2 data-i18n="modal.changelog.title" data-i18n-source="potential">変更履歴</h2>
             </div>
             <div class="modal-body">
                 <h3>v1.0.1 2025.11.18</h3>
@@ -377,8 +377,8 @@
         <div class="modal-overlay"></div>
         <div class="modal-content" style="max-width: 400px;">
             <div class="modal-header">
+                <h3 data-i18n="modal.presetName.title" data-i18n-source="potential">プリセット名を入力</h3>
                 <button class="modal-close">&times;</button>
-                <h2 data-i18n="modal.presetName.title" data-i18n-source="potential">プリセット名を入力</h2>
             </div>
             <div class="modal-body">
                 <p style="margin-bottom: 15px;">プリセット<span id="preset-number-display"></span>の名前を入力してください（最大20文字）</p>
@@ -391,17 +391,14 @@
         </div>
     </div>
 
-    <!-- ========================================
-         キャラクター選択モーダル
-         ======================================== -->
-    
+    <!-- キャラクター選択モーダル -->
     <!-- 主力キャラクター選択モーダル -->
     <div class="character-modal" id="character-modal-main">
         <div class="character-modal-overlay"></div>
         <div class="character-modal-content">
             <div class="character-modal-header">
-                <button class="character-modal-close">&times;</button>
                 <h3 class="character-modal-title" data-i18n="characterSelect.mainTitle" data-i18n-source="potential">主力キャラクター選択</h3>
+                <button class="character-modal-close">&times;</button>
             </div>
             <div class="character-modal-body">
                 <div class="character-modal-grid" data-slot="main"></div>
@@ -414,8 +411,8 @@
         <div class="character-modal-overlay"></div>
         <div class="character-modal-content">
             <div class="character-modal-header">
-                <button class="character-modal-close">&times;</button>
                 <h3 class="character-modal-title" data-i18n="characterSelect.support1Title" data-i18n-source="potential">支援キャラクター1選択</h3>
+                <button class="character-modal-close">&times;</button>
             </div>
             <div class="character-modal-body">
                 <div class="character-modal-grid" data-slot="support1"></div>
@@ -428,8 +425,8 @@
         <div class="character-modal-overlay"></div>
         <div class="character-modal-content">
             <div class="character-modal-header">
-                <button class="character-modal-close">&times;</button>
                 <h3 class="character-modal-title" data-i18n="characterSelect.support2Title" data-i18n-source="potential">支援キャラクター2選択</h3>
+                <button class="character-modal-close">&times;</button>
             </div>
             <div class="character-modal-body">
                 <div class="character-modal-grid" data-slot="support2"></div>
@@ -461,7 +458,7 @@
             <a href="https://marshmallow-qa.com/2vagoau6ezqonbq?t=zH1owd&utm_medium=url_text&utm_source=promotion" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;" data-i18n="footer.marshmallow">マシュマロ（感想・要望など）</a> |
             <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;" data-i18n="footer.privacy">プライバシーポリシー</a>
         </p>
-        <p style="color: white;"><span data-i18n="footer.copyright">©Yostar</span><br>
+        <p style="color: black;"><span data-i18n="footer.copyright">©Yostar</span><br>
         <span data-i18n="footer.disclaimer">※本サイトはステラソラの非公式ファンサイトです！</span></p>
     </footer>
 </body>

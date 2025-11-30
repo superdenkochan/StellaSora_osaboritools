@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="google-adsense-account" content="ca-pub-2384775227983330">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title data-i18n="page.htmlTitle" data-i18n-source="exchange">イベント交換所チェッカー - おサボりツール</title>
     
     <!-- ファビコン -->
@@ -111,7 +111,7 @@
                         <!-- 現在のポイント入力 -->
                         <div class="current-points-section">
                             <label for="currentPoints" data-i18n="labels.currentPoints" data-i18n-source="exchange">所持ポイント数</label>
-                            <input type="number" id="currentPoints" min="0" max="999999" value="0" class="points-input">
+                            <input type="number" id="currentPoints" min="0" max="999999" value="0" class="points-input" inputmode="numeric" pattern="[0-9]*">
                             <div class="points-buttons">
                                 <button id="pointsDecrease" class="points-btn points-btn-minus">-<span id="pointsDecreaseAmount">400</span></button>
                                 <img id="pointIcon" src="" alt="" class="point-icon">
@@ -195,8 +195,8 @@
         <div class="modal-overlay"></div>
         <div class="modal-content">
             <div class="modal-header">
+                <h3 data-i18n="modal.usage.title" data-i18n-source="exchange">使い方</h3>
                 <button class="modal-close">&times;</button>
-                <h2 data-i18n="modal.usage.title" data-i18n-source="exchange">使い方</h2>
             </div>
             <div class="modal-body">
                 <p><strong data-i18n="modal.usage.step1Title" data-i18n-source="exchange">1. 欲しいアイテムを決める</strong><br>

@@ -125,7 +125,7 @@
       "en": "Clear"
     },
     "selectCharacter": {
-      "ja": "巡遊者を<br>選択してね",
+      "ja": "巡遊者<br>選択",
       "en": "Select<br>Trekker"
     },
     "screenshotFooter": {
@@ -134,7 +134,7 @@
     },
     "presetNamePlaceholder": {
       "ja": "（未設定）",
-      "en": "(Not set)"
+      "en": "(No Name)"
     }
   },
   "modal": {

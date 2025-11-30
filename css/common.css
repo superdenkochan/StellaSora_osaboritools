@@ -1,8 +1,367 @@
 /* 共通コンポーネント */
 
+/* モバイル基本設定 */
+/* ボックスサイズ計算を統一 */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* ルート要素 */
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%; /* iOS のフォントサイズ自動調整を防ぐ */
+    text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* 横スクロール防止 */
+}
+
+/* 画像のレスポンシブ対応 */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* タップ操作系 */
+/* ボタン・リンクのタップ対応 */
+.btn,
+button,
+a,
+label,
+select,
+input[type="checkbox"],
+input[type="radio"] {
+    -webkit-tap-highlight-color: transparent; /* タップ時のハイライト削除 */
+}
+
+/* ダブルタップズーム防止 */
+.btn,
+button,
+.reward-btn,
+.points-btn,
+.accordion-check-all,
+.accordion-uncheck-all {
+    touch-action: manipulation;
+}
+
+/* ボタンの最小タップ領域指定 */
+.btn {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 16px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* タップ時のフィードバック */
+.btn:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+}
+
+/* フォーム要素の最適化 */
+
+/* テキスト入力 */
+input[type="text"],
+input[type="number"],
+input[type="search"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+    font-size: 16px;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* チェックボックス・ラジオボタン */
+input[type="checkbox"],
+input[type="radio"] {
+    min-width: 20px;
+    min-height: 20px;
+}
+
+/* ラベル（タップ領域を広く） */
+label {
+    cursor: pointer;
+}
+
+/* テーブルのレスポンシブ対応 */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ユーティリティ */
+/* モバイルのみ表示 */
+.mobile-only {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .mobile-only {
+        display: block;
+    }
+    
+    .desktop-only {
+        display: none !important;
+    }
+}
+
+/* スクロール防止（モーダルなど） */
+body.no-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* ページの一番上に戻るボタン（右下） */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #40539f 0%, #8090cf 100%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 32px;
+    cursor: pointer;
+    z-index: 9000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    transform: scale(1.1);
+}
+
+.scroll-to-top:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 480px) {
+    .scroll-to-top {
+        width: 44px;
+        height: 44px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 20px;
+    }
+}
+
+/* モーダル共通スタイル */
+
+.modal-unified,
+.commission-modal,
+.character-modal,
+.owned-characters-modal,
+.auto-assign-modal,
+.usage-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-unified.open,
+.commission-modal.open,
+.character-modal.open,
+.owned-characters-modal.open,
+.auto-assign-modal.open,
+.usage-modal.open {
+    display: flex;
+}
+
+/* モーダルオーバーレイ */
+.modal-unified-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+/* モーダルコンテンツ */
+.modal-unified-content {
+    position: relative;
+    background: white;
+    border-radius: 10px;
+    max-width: 800px;
+    max-height: 85vh;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* モーダルヘッダー（固定） */
+.modal-unified-header {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+    padding: 15px 20px;
+    border-bottom: 2px solid #252a42;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.modal-unified-title {
+    font-size: 18px;
+    color: #252a42;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* 閉じるボタン */
+.modal-unified-close {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    border: none;
+    background: #252a42;
+    color: white;
+    font-size: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    line-height: 1;
+    padding: 0;
+    flex-shrink: 0;
+    touch-action: manipulation;
+}
+
+.modal-unified-close:hover {
+    background: #000000;
+}
+
+/* モーダルボディ（スクロール可能） */
+.modal-unified-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* i18n設定 */
 /* jsonで\nの改行が効くように設定 */
 [data-i18n] {
     white-space: pre-line;
 }
 
-/* グローバルヘッダー、サイドメニューのスタイルはtabs.cssに定義 */
+/* TOPページ用スタイル */
+
+/* ツール一覧カード */
+.tool-card {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s;
+}
+
+.tool-card:hover {
+    border-color: #000000;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.tool-card a {
+    font-size: 20px;
+    color: #252a42;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.tool-card p {
+    color: #666;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* フッター */
+.site-footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 2px solid #e0e0e0;
+    text-align: center;
+    color: #000000;
+}
+
+.site-footer a {
+    color: #667eea;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* TOPページのモバイル対応 */
+@media (max-width: 768px) {
+    .main-content[style*="padding: 40px"] {
+        padding: 20px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content[style*="padding: 40px"] {
+        padding: 15px !important;
+    }
+    
+    /* インラインスタイルのフォントサイズ調整 */
+    .main-content h2[style*="font-size: 24px"] {
+        font-size: 20px !important;
+    }
+    
+    .main-content a[style*="font-size: 20px"] {
+        font-size: 18px !important;
+    }
+    
+    .main-content p[style*="font-size: 18px"] {
+        font-size: 16px !important;
+    }
+    
+    /* フッターのリンク */
+    .main-content footer p {
+        line-height: 2;
+    }
+    
+    .main-content footer a {
+        display: inline-block;
+        margin: 5px 10px !important;
+    }
+}

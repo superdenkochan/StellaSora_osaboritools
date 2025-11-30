@@ -154,7 +154,7 @@ function populateCharacterSelects() {
         clearOption.className = 'character-option';
         clearOption.dataset.value = '';
         clearOption.innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 12px; font-weight: bold; color: #667eea;">
+            <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 14px; font-weight: bold; color: #252a42;">
                 ${i18n.getText('labels.clear', 'potential')}
             </div>
         `;
@@ -294,7 +294,7 @@ function setupEventListeners() {
         if (presetNameInput.readOnly) {
             // 編集モードに切り替え
             presetNameInput.readOnly = false;
-            presetNameInput.style.borderColor = '#667eea';
+            presetNameInput.style.borderColor = '#252a42';
             presetNameInput.style.background = 'white';
             presetNameInput.focus();
             presetNameInput.select();
@@ -1074,7 +1074,7 @@ function showError(message) {
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
-        modal.classList.remove('hidden');
+        modal.classList.add('open');
         // スクロールを一番上に
         const modalContent = modal.querySelector('.modal-content');
         if (modalContent) {
@@ -1086,15 +1086,15 @@ function openModal(modalId) {
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
-        modal.classList.add('hidden');
+        modal.classList.remove('open');
     }
 }
 
 // Escキーでモーダルを閉じる
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        document.querySelectorAll('.modal:not(.hidden)').forEach(modal => {
-            modal.classList.add('hidden');
+        document.querySelectorAll('.modal.open').forEach(modal => {
+            modal.classList.remove('open');
         });
     }
 });

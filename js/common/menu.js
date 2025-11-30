@@ -147,6 +147,86 @@ function movePageControlsToHeader() {
     }
 }
 
+/* ヘッダーコントロールの開閉トグル（スマホ用） */
+function setupHeaderControlsToggle() {
+    const headerControls = document.getElementById('headerControls');
+    if (!headerControls || headerControls.children.length === 0) return;
+    
+    // 親要素をラッパーに変更
+    const wrapper = document.createElement('div');
+    wrapper.className = 'header-controls-wrapper';
+    headerControls.parentNode.insertBefore(wrapper, headerControls);
+    wrapper.appendChild(headerControls);
+    
+    // トグルボタンを作成
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'header-toggle';
+    toggleBtn.setAttribute('aria-label', 'メニューを開閉');
+    wrapper.appendChild(toggleBtn);
+    
+    // ローカルストレージから状態を復元
+    const storageKey = 'headerControlsCollapsed';
+    const isCollapsed = localStorage.getItem(storageKey) === 'true';
+    
+    if (isCollapsed) {
+        headerControls.classList.add('collapsed');
+        toggleBtn.classList.add('collapsed');
+    }
+    
+    // トグル機能
+    toggleBtn.addEventListener('click', () => {
+        const collapsed = headerControls.classList.toggle('collapsed');
+        toggleBtn.classList.toggle('collapsed', collapsed);
+        localStorage.setItem(storageKey, collapsed);
+    });
+}
+
+/* トップへ戻るボタンの作成と機能 */
+function setupScrollToTop() {
+    // ボタンを作成
+    const scrollBtn = document.createElement('button');
+    scrollBtn.className = 'scroll-to-top';
+    scrollBtn.innerHTML = '↑';
+    scrollBtn.setAttribute('aria-label', 'ページトップへ戻る');
+    document.body.appendChild(scrollBtn);
+    
+    // スクロール監視
+    function checkScroll() {
+        if (window.scrollY > 300) {
+            scrollBtn.classList.add('visible');
+        } else {
+            scrollBtn.classList.remove('visible');
+        }
+    }
+    
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    checkScroll(); // 初期状態をチェック
+    
+    // クリックでトップへスクロール
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+/* モーダル用スクロール制御ヘルパー */
+let scrollPosition = 0;
+
+window.modalScrollLock = {
+    lock: function() {
+        scrollPosition = window.scrollY;
+        document.body.classList.add('no-scroll');
+        document.body.style.top = `-${scrollPosition}px`;
+    },
+    unlock: function() {
+        document.body.classList.remove('no-scroll');
+        document.body.style.top = '';
+        window.scrollTo(0, scrollPosition);
+    }
+};
+
 /* 初期化 */
 
 function initGlobalHeader() {
@@ -163,6 +243,12 @@ function initGlobalHeader() {
     
     // ページ固有コントロールをヘッダーに移植
     movePageControlsToHeader();
+    
+    // ヘッダーコントロールの開閉機能
+    setupHeaderControlsToggle();
+    
+    // トップへ戻るボタン
+    setupScrollToTop();
     
     // 旧headerタグを削除（あれば）
     const oldHeader = document.querySelector('.container > header');

@@ -265,7 +265,7 @@ function openCommissionModal(slot) {
     const clearOption = document.createElement('div');
     clearOption.className = 'commission-option';
     clearOption.innerHTML = `
-        <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 16px; font-weight: bold; color: #667eea; background: white;">
+        <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 16px; font-weight: bold; color: #252a42; background: white;">
             ${i18n.getText('labels.clear', 'commission')}
         </div>
     `;
@@ -493,7 +493,7 @@ function openCharacterModal(commissionSlot, position) {
     const clearOption = document.createElement('div');
     clearOption.className = 'character-option';
     clearOption.innerHTML = `
-        <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 16px; font-weight: bold; color: #667eea;">
+        <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 16px; font-weight: bold; color: #252a42;">
             ${i18n.getText('labels.clear', 'commission')}
         </div>
     `;

@@ -36,7 +36,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #d5cdc7;
+    background: rgba(37,42,66,0.5);
     min-height: 100vh;
     padding: 0;
     margin: 0;
@@ -44,10 +44,10 @@ body {
 
 /* メインコンテンツエリア */
 .main-content {
-    max-width: 1800px;
+    max-width: 1920px;
     margin: 0 auto;
     padding: 20px;
-    background: white;
+    background: rgba(37,42,66,0.15);
     min-height: calc(100vh - var(--header-height));
     overflow-x: hidden; /* 横方向のはみ出しを防止 */
     box-sizing: border-box;
@@ -65,7 +65,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
     padding: 15px 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #252a42 0%, #424d71 100%);
     color: white;
 }
 
@@ -127,6 +127,7 @@ body {
     color: white;
 }
 
+/* スクショのボタン色 */
 .btn-primary {
     background: #2196F3;
     color: white;
@@ -137,6 +138,7 @@ body {
     color: white;
 }
 
+/* 使い方と変更履歴 */
 .btn-info {
     background: #17a2b8;
     color: white;
@@ -144,19 +146,17 @@ body {
 
 /* モーダル */
 .modal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 10001;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    z-index: 10000;
 }
 
-.modal.hidden {
-    display: none;
+.modal.open {
+    display: block;
 }
 
 .modal-overlay {
@@ -165,89 +165,81 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    cursor: pointer;
-}
-
-.modal-content {
-    position: relative;
-    background: white;
-    border-radius: 10px;
-    max-width: 800px;
-    max-height: 80vh;
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     z-index: 1;
 }
 
-.modal-header {
-    position: sticky;
-    top: 0;
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background: white;
-    z-index: 10;
-    padding: 30px 30px 0 30px;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    width: 90%;
+    z-index: 2;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #252a42;
+    padding-bottom: 10px;
 }
 
 .modal-close {
-    position: sticky;
-    top: 15px;
-    right: 15px;
-    width: 35px;
-    height: 35px;
+    background: none;
     border: none;
-    background: #f44336;
-    color: white;
-    font-size: 24px;
-    border-radius: 50%;
+    font-size: 32px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
+    color: #424d71;
     line-height: 1;
     padding: 0;
-    float: right;
-    z-index: 11;
+    width: 32px;
+    height: 32px;
 }
 
 .modal-close:hover {
-    background: #d32f2f;
-    transform: none;
+    color: #252a42;
 }
 
+/* h2は未使用かも */
 .modal-content h2 {
-    font-size: 28px;
-    color: #667eea;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 3px solid #667eea;
-    clear: both;
+    font-size: 18px;
+    color: #252a42;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: bold;
+    order: 1;
 }
 
 .modal-content h3 {
-    font-size: 20px;
-    color: #333;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    font-size: 18px;
+    color: #252a42;
+    margin-top: 0;
+    margin-bottom: 15px;
 }
 
 .modal-body {
-    color: #333;
+    color: #252a42;
     line-height: 1.8;
-    padding: 0 30px 30px 30px;
+    padding: 0 8px 8px 8px;
     overflow-y: auto;
     flex: 1;
 }
 
 .modal-body p {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .modal-body strong {
-    color: #667eea;
+    color: #252a42;
 }
 
 .modal-body ul {
@@ -270,47 +262,47 @@ body {
 }
 
 .modal-content::-webkit-scrollbar-thumb {
-    background: #667eea;
-    border-radius: 10px;
+    background: #999999;
+    border-radius: 8px;
 }
 
 .modal-content::-webkit-scrollbar-thumb:hover {
-    background: #764ba2;
+    background: #666666;
 }
 
 /* 素質シミュ部分 */
 .main-content {
-    padding: 5px;
+    padding: 8px;
 }
 
 .characters-area {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 8px;
 }
 
 /* キャラクターセクション */
 .character-section {
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 20px;
-    background: #f9f9f9;
+    border: 2px solid rgba(99,91,88,0.7);
+    border-radius: 8px;
+    padding: 12px;
+    background: rgba(66,77,113,1);
     display: flex;
     align-items: flex-start;
-    gap: 15px;
+    gap: 12px;
 }
 
 .character-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 0px;
     flex-shrink: 0;
 }
 
 .character-label {
-    height: auto;
-    width: 150px;
+    width: 128px;
+    height: 100%;
 }
 
 .character-label img {
@@ -326,8 +318,8 @@ body {
 .character-select-button {
     width: 125px;
     height: 125px;
-    border: 3px solid #667eea;
-    border-radius: 10px;
+    border: 2px solid #8090cf;
+    border-radius: 8px;
     background: white;
     cursor: pointer;
     display: flex;
@@ -338,7 +330,7 @@ body {
 }
 
 .character-select-button:hover {
-    border-color: #764ba2;
+    border-color: #40539f;
     transform: scale(1.05);
 }
 
@@ -346,32 +338,30 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 7px;
+    border-radius: 8px;
 }
 
 .select-text {
     font-size: 14px;
     font-weight: bold;
-    color: #667eea;
+    color: #40539f;
     text-align: center;
-    padding: 10px;
+    padding: 8px;
 }
 
 /* キャラクター選択 */
 .character-modal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 10001;
-    display: none;
-    align-items: center;
-    justify-content: center;
+    z-index: 10000;
 }
 
 .character-modal.open {
-    display: flex;
+    display: block;
 }
 
 .character-modal-overlay {
@@ -380,84 +370,76 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    cursor: pointer;
-}
-
-.character-modal-content {
-    position: relative;
-    background: white;
-    border-radius: 10px;
-    max-width: 950px; /* 6列分の領域を想定 */
-    max-height: 80vh;
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     z-index: 1;
 }
 
-.character-modal-header {
-    position: sticky;
-    top: 0;
-    background: white;
-    z-index: 10;
-    padding: 20px 20px 10px 20px;
-    border-radius: 10px 10px 0 0;
-    border-bottom: 2px solid #667eea;
-}
-
-.character-modal-close {
+.character-modal-content {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 35px;
-    height: 35px;
-    border: none;
-    background: #f44336;
-    color: white;
-    font-size: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-    line-height: 1;
-    padding: 0;
-    z-index: 11;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 960px;
+    max-height: 80vh;
+    overflow-y: auto;
+    width: 90%;
+    z-index: 2;
 }
 
-.character-modal-close:hover {
-    background: #d32f2f;
-    transform: scale(1.1);
+.character-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #252a42;
+    padding-bottom: 10px;
 }
 
 .character-modal-title {
     font-size: 20px;
-    color: #667eea;
-    font-weight: bold;
+    color: #252a42;
     margin: 0;
-    padding-right: 50px;
+}
+
+.character-modal-close {
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: #424d71;
+    line-height: 1;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+}
+
+.character-modal-close:hover {
+    color: #252a42;
 }
 
 .character-modal-body {
-    padding: 20px;
+    color: #252a42;
+    line-height: 1.8;
+    padding: 0 8px 8px 8px;
     overflow-y: auto;
     flex: 1;
 }
 
 .character-modal-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    padding: 8px 0 0 0;
+    gap: 8px;
     justify-items: center;
 }
 
 /* モーダル内のキャラクターオプション */
 .character-option {
-    width: 125px;
-    height: 125px;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -470,13 +452,13 @@ body {
 }
 
 .character-option:hover:not(.disabled) {
-    border-color: #667eea;
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+    border-color: #d5cdc7;
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(0,0,0, 0.5);
 }
 
 .character-option.disabled {
-    opacity: 0.3;
+    opacity: 0.34;
     cursor: not-allowed;
     background: #f9f9f9;
 }
@@ -490,21 +472,21 @@ body {
 
 /* ツールチップ */
 .character-option-name {
-    position: fixed;
-    bottom: auto;
-    left: 0%;
-    transform: translateX(50%);
-    transform: translateY(-115%);
-    background: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
     color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
+    padding: 4px;
     font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
+    text-align: center;
+    font-weight: bold;
+    opacity: 1;
     transition: opacity 0.3s;
-    z-index: 99999;
+    pointer-events: none;
+    z-index: 10;
+    line-height: 1.25;
 }
 
 .character-option:hover .character-option-name {
@@ -523,13 +505,13 @@ body {
 }
 
 .character-modal-body::-webkit-scrollbar-thumb {
-    background: #667eea;
+    background: #d5cdc7;
     border-radius: 5px;
     border: 2px solid #f1f1f1;
 }
 
 .character-modal-body::-webkit-scrollbar-thumb:hover {
-    background: #764ba2;
+    background: #635b58;
 }
 
 /* 小さい画面用の調整 */
@@ -587,10 +569,11 @@ body {
 /* 素質コンテナ */
 .potentials-container {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     flex-wrap: wrap;
     flex: 1;
     align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .potential-group {
@@ -610,12 +593,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 5px;
+    gap: 4px;
+    padding: 4px;
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.6);
     position: relative; /* ツールチップの基準位置 */
+    width: 111px; /* 固定幅（クリックのたびに表示崩れするの防止） */
+    flex-shrink: 0;
 }
 
 .potential-card.hidden {
@@ -624,28 +610,28 @@ body {
 
 .potential-image-wrapper {
     position: relative;
-    width: 101px;
-    height: 128px;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
     transition: all 0.3s;
 }
 
 /* 素質画像のホバーアニメーション */
 .potential-image-wrapper:hover {
-    transform: scale(1.05);
+    transform: scale(1.00);
 }
 
 /* 素質画像のクリックアニメーション */
 .potential-image-wrapper:active {
-    transform: scale(0.95);
+    transform: scale(1.00);
 }
 
 .potential-image {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 0px;
-    border: 0px solid;
+    border-radius: 4px;
+    border: 1px solid rgba(64,64,64,0.5);
 }
 
 /* グレーアウト状態（取得済み用） */
@@ -655,11 +641,11 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(128, 128, 128, 0.6);
-    z-index: 1; /* 画像の上～カウント・サムズアップの間に置くように調整 */
+    height: 97%;
+    background: rgba(32, 32, 32, 0.6);
+    z-index: 1;
     pointer-events: none;
-    border-radius: 0px;
+    border-radius: 4px;
 }
 
 /* グレーアウト状態（取得しない素質用） */
@@ -670,7 +656,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(128, 128, 128, 0.6);
+    background: rgba(128, 128, 128, 0);
     z-index: 1;
     pointer-events: none;
     border-radius: 0px;
@@ -730,13 +716,14 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 40px;
+    font-size: 48px;
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
     pointer-events: none;
     z-index: 3; /* グレーアウトとカウントの上 */
 }
 
+/* 取得済コア素質のグレーアウト */
 .potential-image-wrapper.obtained::before {
     content: '';
     position: absolute;
@@ -753,16 +740,16 @@ body {
 /* ツールチップ */
 .potential-tooltip {
     position: absolute;
-    bottom: calc(100% + 5px);
-    left: 50%;
+    bottom: calc(100% - 7px);
+    left: 37%;
     transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.9);
     color: white;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 4px;
     font-size: 12px;
     white-space: pre-wrap;
-    word-wrap: break-word;
+    word-wrap: wrap;
     max-width: 210px; 
     min-width: 210px; /* ゲーム画面意識のツールチップ幅 */
     z-index: 10003; /* 最前面に表示 */
@@ -777,7 +764,7 @@ body {
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border: 5px solid transparent;
+    border: 4px solid transparent;
     border-top-color: rgba(0, 0, 0, 0.9);
 }
 
@@ -785,16 +772,16 @@ body {
 .potential-status {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
     width: 100%;
 }
 
 .status-btn {
-    padding: 6px 10px;
+    padding: 6px 8px;
     font-size: 14px;
     font-weight: bold;
     border: 2px solid #ddd;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s;
     background: white;
@@ -802,7 +789,7 @@ body {
 
 .status-btn:hover {
     background: #f0f0f0;
-    transform: scale(1.05);
+    transform: scale(1.00);
 }
 
 .status-btn:active {
@@ -813,18 +800,18 @@ body {
 .status-btn.active {
     background: #4CAF50;
     color: white;
-    border-color: #4CAF50;
+    border-color: rgba(37,42,66,0.5);
 }
 
 .status-btn.inactive {
     background: #f44336;
     color: white;
-    border-color: #f44336;
+    border-color: rgba(37,42,66,0.5);
 }
 
 /* サブ素質のステータスボタン（レベル別色分け） */
 .sub-status-btn {
-    padding: 6px 10px;
+    padding: 6px 8px;
     font-size: 14px;
     font-weight: bold;
     border: 2px solid #ddd;
@@ -836,29 +823,30 @@ body {
 
 .sub-status-btn.none {
     background: #999999;
-    border-color: #999999;
+    border-color: rgba(37,42,66,0.5);
 }
 
 .sub-status-btn.level1 {
-    background: #00ff00;
-    border-color: #00ff00;
-    color: #333;
+    background: rgba(124,252,0,1);
+    border-color: rgba(37,42,66,0.5);
+    color: rgba(37,42,66,1);
 }
 
 .sub-status-btn.level2 {
-    background: #ffff00;
-    border-color: #ffff00;
-    color: #333;
+    background: rgba(255,215,0,1);
+    border-color: rgba(37,42,66,0.5);
+    color: rgba(37,42,66,1);
 }
 
 .sub-status-btn.level6 {
     background: #ff9900;
-    border-color: #ff9900;
+    border-color: rgba(37,42,66,0.5);
+    color: rgba(37,42,66,1);
 }
 
 .sub-status-btn:hover {
     opacity: 0.8;
-    transform: scale(1.05);
+    transform: scale(1.00);
 }
 
 .sub-status-btn:active {
@@ -867,34 +855,33 @@ body {
 
 /* プリセットエリア（下段配置） */
 .presets-area {
-    width: 100%;
+    padding: 16px;
+    background: rgba(66,77,113,0.5);
+    border-radius: 10px;
+    margin: 20px 0;
     max-width: 100%;
     box-sizing: border-box;
-    background: #f9f9f9;
-    border-top: 2px solid #e0e0e0;
-    padding: 20px;
-    margin-top: 30px;
 }
 
 .presets-area h3 {
+    color: #252a42;
+    margin-bottom: 8px;
     font-size: 20px;
-    color: #667eea;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #667eea;
+    border-bottom: 2px solid #252a42;
 }
 
 .presets-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
+    gap: 16px;
+    align-items: start;
 }
 
 .preset-item {
     background: white;
-    border: 2px solid #ddd;
     border-radius: 8px;
     padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -904,8 +891,8 @@ body {
     position: relative;
     width: 80px;
     height: 80px;
-    background: #e0e0e0;
-    border-radius: 5px;
+    background: linear-gradient(135deg, #252a42 0%, #424d71 100%);
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1004,11 +991,12 @@ body {
     }
 }
 
-/* レスポンシブ対応（一旦コメントアウト） */
-/*
+/* レスポンシブ対応 */
+
+/* タブレット */
 @media (max-width: 1200px) {
     .main-content {
-        flex-direction: column;
+        padding: 12px;
     }
     
     .presets-area {
@@ -1019,8 +1007,250 @@ body {
 }
 
 @media (max-width: 768px) {
-    .potentials-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    .main-content {
+        padding: 12px;
+    }
+    
+    /* キャラクターエリア */
+    .character-area {
+        gap: 12px;
+    }
+    
+    .character-select-button {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .character-label {
+        width: 120px;
+    }
+    
+    /* キャラクターセクションを縦並びに */
+    .character-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .character-header {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    /* 素質カード */
+    .potentials-container {
+        gap: 8px;
+        width: 100%;
+        flex: none;
+    }
+    
+    .potential-card {
+        padding: 4px;
+    }
+    
+    .potential-image-wrapper {
+        width: 85px;
+        height: 108px;
+    }
+    
+    /* コントロール */
+    .page-controls,
+    .controls {
+        padding: 12px;
+        gap: 8px;
+    }
+    
+    /* プリセット */
+    .presets-list {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+    }
+    
+    .preset-item {
+        padding: 8px;
+    }
+    
+    .preset-thumbnail {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .btn-save,
+    .btn-load {
+        padding: 10px 10px;
+        font-size: 13px;
+        min-height: 40px;
+    }
+    
+    /* モーダル */
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .modal-header {
+        padding: 12px 15px;
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .modal-content h2 {
+        font-size: 16px;
     }
 }
-*/
+
+/* スマートフォン */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 4px;
+    }
+    
+    /* キャラクターセクション（キャラ選択＋素質カード） */
+    .character-section {
+        flex-direction: column;
+        align-items: center;
+        padding: 8px;
+        gap: 8px;
+    }
+    
+    /* キャラクターヘッダー（ラベル＋選択ボタン） */
+    .character-header {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .character-select-button {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .character-label {
+        width: 80px;
+    }
+    
+    /* 素質カード - 1行3つ表示 */
+    .potentials-container {
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        flex: none;
+    }
+    
+    .potential-card {
+        width: 95px;
+        padding: 4px;
+        gap: 6px;
+    }
+    
+    .potential-image-wrapper {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .potential-count {
+        font-size: 14px;
+        min-width: 18px;
+        padding: 0 0px;
+    }
+    
+    /* ステータスボタンの調整 */
+    .potential-status {
+        gap: 3px;
+    }
+    
+    .status-btn,
+    .sub-status-btn {
+        padding: 6px 6px;
+        font-size: 12px;
+    }
+    
+    /* コントロール */
+    .page-controls,
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .page-controls label,
+    .controls label {
+        justify-content: center;
+        flex-wrap: nowrap;
+        min-height: 44px;
+    }
+    
+    .btn {
+        width: 100%;
+        min-height: 32px;
+    }
+    
+    /* プリセット */
+    .presets-list {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .preset-thumbnail {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .btn-save,
+    .btn-load {
+        padding: 6px 6px;
+        font-size: 12px;
+    }
+}
+
+/* 小型スマホ（iPhone SE等） */
+@media (max-width: 374px) {
+    .main-content {
+        padding: 6px;
+    }
+    
+    .character-select-button {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .character-label {
+        width: 90px;
+    }
+    
+    /* 素質カード - 小型スマホでも3列維持 */
+    .potentials-container {
+        gap: 4px;
+    }
+    
+    .potential-card {
+        width: calc((100% - 8px) / 3);
+        min-width: 90px;
+        padding: 3px;
+        gap: 4px;
+    }
+    
+    .potential-image-wrapper {
+        width: 80px;
+        height: 101px;
+    }
+    
+    .status-btn,
+    .sub-status-btn {
+        padding: 3px 4px;
+        font-size: 10px;
+    }
+    
+    .presets-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .preset-item {
+        flex-direction: row;
+    }
+}

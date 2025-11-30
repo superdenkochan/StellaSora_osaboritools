@@ -29,15 +29,15 @@ const PotentialApp = (function() {
                     <div class="characters-area">
                         <div id="preset-name-container" style="text-align: center; margin-bottom: 15px; padding: 10px; background: #f0f0ff; border-radius: 5px;">
                             <div id="preset-name-display-area" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                                <span style="font-size: 14px; color: #667eea; font-weight: bold;">プリセット名:</span>
+                                <span style="font-size: 14px; color: #252a42; font-weight: bold;">プリセット名:</span>
                                 <input type="text" id="preset-name-input-inline" maxlength="20" placeholder="（未設定）" 
-                                       style="font-size: 16px; color: #667eea; font-weight: bold; border: 2px solid transparent; background: transparent; padding: 5px; width: 300px; text-align: center; outline: none;"
+                                       style="font-size: 16px; color: #252a42; font-weight: bold; border: 2px solid transparent; background: transparent; padding: 5px; width: 300px; text-align: center; outline: none;"
                                        readonly>
                                 <button id="preset-name-edit-btn" class="btn" style="padding: 5px 15px; font-size: 14px;">✎ 編集</button>
                             </div>
                         </div>
                         
-                        <div id="screenshot-footer" style="display: none; text-align: center; padding: 10px; background: #f9f9f9; border-top: 2px solid #667eea; margin-top: 20px;">
+                        <div id="screenshot-footer" style="display: none; text-align: center; padding: 10px; background: #f9f9f9; border-top: 2px solid #252a42; margin-top: 20px;">
                             <p style="margin: 0; font-size: 14px; color: #666;">ステラソラ おサボりツール - 素質シミュレーター</p>
                         </div>
                         
@@ -48,10 +48,10 @@ const PotentialApp = (function() {
                                 </div>
                                 <div class="character-select-wrapper">
                                     <button class="character-select-button" data-slot="main">
-                                        <span class="select-text">巡遊者を<br>選択してね</span>
+                                        <span class="select-text">巡遊者<br>選択</span>
                                     </button>
                                     <select class="character-select" data-slot="main" style="display: none;">
-                                        <option value="">巡遊者を選択してね</option>
+                                        <option value="">巡遊者選択</option>
                                     </select>
                                 </div>
                             </div>
@@ -65,10 +65,10 @@ const PotentialApp = (function() {
                                 </div>
                                 <div class="character-select-wrapper">
                                     <button class="character-select-button" data-slot="support1">
-                                        <span class="select-text">巡遊者を<br>選択してね</span>
+                                        <span class="select-text">巡遊者<br>選択</span>
                                     </button>
                                     <select class="character-select" data-slot="support1" style="display: none;">
-                                        <option value="">巡遊者を選択してね</option>
+                                        <option value="">巡遊者選択</option>
                                     </select>
                                 </div>
                             </div>
@@ -82,10 +82,10 @@ const PotentialApp = (function() {
                                 </div>
                                 <div class="character-select-wrapper">
                                     <button class="character-select-button" data-slot="support2">
-                                        <span class="select-text">巡遊者を<br>選択してね</span>
+                                        <span class="select-text">巡遊者<br>選択</span>
                                     </button>
                                     <select class="character-select" data-slot="support2" style="display: none;">
-                                        <option value="">巡遊者を選択してね</option>
+                                        <option value="">巡遊者選択</option>
                                     </select>
                                 </div>
                             </div>

@@ -3,7 +3,7 @@
     display: flex;
     gap: 15px;
     padding: 20px;
-    background: #f0f0ff;
+    background: #ffffff;
     border-radius: 10px;
     margin: 20px;
     justify-content: center;
@@ -30,7 +30,7 @@
 /* 依頼エリア */
 .commissions-area {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     padding: 20px;
 }
@@ -39,19 +39,19 @@
 .commission-slot {
     background: #f9f9f9;
     border-radius: 10px;
-    padding: 15px;
+    padding: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .commission-header {
-    margin-bottom: 15px;
+    margin-bottom: 0px;
 }
 
 .commission-select-btn {
-    width: 170px;
-    height: 170px;
+    width: 128px;
+    height: 128px;
     background: white;
-    border: 2px dashed #667eea;
+    border: 2px dashed #8090cf;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
@@ -64,7 +64,7 @@
 
 .commission-select-btn:hover {
     background: #f0f0ff;
-    border-color: #764ba2;
+    border-color: #40539f;
 }
 
 .commission-select-btn.selected {
@@ -76,7 +76,7 @@
 .commission-select-text {
     font-size: 16px;
     font-weight: bold;
-    color: #667eea;
+    color: #252a42;
 }
 
 .commission-select-btn.selected .commission-select-text {
@@ -92,7 +92,7 @@
     background: rgba(0, 0, 0, 0.7);
     color: white;
     padding: 5px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     border-radius: 4px;
     text-align: center;
@@ -100,18 +100,18 @@
 
 /* 要件セクション */
 .commission-requirements {
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .requirement-section {
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .requirement-title {
-    font-size: 14px;
+    font-size: 0px;
     font-weight: bold;
-    color: #667eea;
-    margin-bottom: 5px;
+    color: #252a42;
+    margin-bottom: 4px;
 }
 
 .requirement-badges {
@@ -122,7 +122,7 @@
 
 .requirement-badge {
     padding: 5px 10px;
-    border-radius: 15px;
+    border-radius: 12px;
     font-size: 14px;
     font-weight: bold;
     background: #e0e0e0;
@@ -131,7 +131,7 @@
 }
 
 .requirement-badge.active {
-    background: #ff8800;
+    background: #ff7700;
     color: white;
     box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
 }
@@ -151,7 +151,7 @@
     transition: all 0.3s;
     
     /* デフォルト（未配置） */
-    background: #f0f0f0;
+    background: #ffffff;
 }
 
 /* ロール別の背景色 - 未配置 */
@@ -185,7 +185,7 @@
     text-align: center;
     font-size: 14px;
     font-weight: bold;
-    color: #666;
+    color: #252a42;
     margin-bottom: 4px;
     min-height: 4px;
 }
@@ -205,7 +205,7 @@
 .character-slot-item {
     aspect-ratio: 1;
     background: white;
-    border: 3px solid white;
+    border: 2px solid white;
     border-radius: 4px;
     cursor: pointer;
     display: flex;
@@ -222,24 +222,24 @@
 }
 
 .character-slot-item:hover {
-    border-color: #667eea;
+    border-color: rgba(66,77,113,0.5);
     background: #f0f0ff;
 }
 
 .character-slot-item.filled {
     border-style: solid;
-    border-color: #667eea;
+    border-color: rgba(66,77,113,0.5);
 }
 
 .character-slot-item.disabled {
     opacity: 0.3;
     cursor: not-allowed;
     pointer-events: none;
-    background: #f0f0f0;
+    background: #ffffff;
 }
 
 .character-slot-placeholder {
-    font-size: 32px;
+    font-size: 48px;
     color: #ddd;
     font-weight: bold;
 }
@@ -271,7 +271,7 @@
 }
 
 .presets-area h3 {
-    color: #667eea;
+    color: #252a42;
     margin-bottom: 8px;
     font-size: 20px;
 }
@@ -297,7 +297,7 @@
     position: relative;
     width: 100px;
     height: 100px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #252a42 0%, #424d71 100%);
     border-radius: 4px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -391,7 +391,7 @@
     max-width: 800px;
     max-height: 80vh;
     overflow-y: auto;
-    width: 100%;
+    width: 90%;
     z-index: 2;
 }
 
@@ -399,14 +399,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
-    border-bottom: 2px solid #667eea;
-    padding-bottom: 8px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #252a42;
+    padding-bottom: 10px;
 }
 
 .commission-modal-title {
     font-size: 20px;
-    color: #667eea;
+    color: #252a42;
     margin: 0;
 }
 
@@ -415,7 +415,7 @@
     border: none;
     font-size: 32px;
     cursor: pointer;
-    color: #667eea;
+    color: #424d71;
     line-height: 1;
     padding: 0;
     width: 32px;
@@ -423,7 +423,7 @@
 }
 
 .commission-modal-close:hover {
-    color: #764ba2;
+    color: #252a42;
 }
 
 .commission-modal-grid {
@@ -435,7 +435,7 @@
 .commission-option {
     aspect-ratio: 1;
     background: #f0f0ff;
-    border: 2px solid #ddd;
+    border: 2px solid #d5cdc7;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s;
@@ -444,9 +444,9 @@
 }
 
 .commission-option:hover {
-    border-color: #667eea;
+    border-color: #635b58;
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 2px 4px rgba(99,91,88,0.25);
 }
 
 .commission-option.disabled {
@@ -512,8 +512,8 @@
     transform: translate(-50%, -50%);
     background: white;
     border-radius: 10px;
-    padding: 16px;
-    max-width: 900px;
+    padding: 20px;
+    max-width: 850px;
     max-height: 80vh;
     overflow-y: auto;
     width: 90%;
@@ -524,14 +524,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
-    border-bottom: 2px solid #667eea;
-    padding-bottom: 8px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #252a42;
+    padding-bottom: 10px;
 }
 
 .character-modal-title {
     font-size: 20px;
-    color: #667eea;
+    color: #252a42;
     margin: 0;
 }
 
@@ -540,7 +540,7 @@
     border: none;
     font-size: 32px;
     cursor: pointer;
-    color: #667eea;
+    color: #424d71;
     line-height: 1;
     padding: 0;
     width: 32px;
@@ -548,19 +548,19 @@
 }
 
 .character-modal-close:hover {
-    color: #ffffff;
+    color: #252a42;
 }
 
 .character-modal-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 24px;
+    gap: 16px;
 }
 
 .character-option {
     aspect-ratio: 1;
     background: white;
-    border: 2px solid #ddd;
+    border: 2px solid #d5cdc7;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s;
@@ -569,9 +569,9 @@
 }
 
 .character-option:hover:not(.disabled) {
-    border-color: #667eea;
+    border-color: #40539f;
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 12px rgba(64,83,159,0.5);
 }
 
 .character-option.disabled {
@@ -588,13 +588,13 @@
 /* 性格ツールチップは常時表示（opacity） */
 .character-option-name {
     position: absolute;
-    bottom: -30px;
+    bottom: 0px;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.7);
     color: white;
     padding: 4px;
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
     font-weight: bold;
     opacity: 1;
@@ -641,7 +641,7 @@
     background: white;
     border-radius: 10px;
     padding: 20px;
-    max-width: 900px;
+    max-width: 800px;
     max-height: 80vh;
     overflow-y: auto;
     width: 90%;
@@ -653,13 +653,13 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    border-bottom: 2px solid #667eea;
+    border-bottom: 2px solid #252a42;
     padding-bottom: 10px;
 }
 
 .owned-characters-modal-title {
     font-size: 20px;
-    color: #667eea;
+    color: #252a42;
     margin: 0;
 }
 
@@ -668,7 +668,7 @@
     border: none;
     font-size: 32px;
     cursor: pointer;
-    color: #667eea;
+    color: #424d71;
     line-height: 1;
     padding: 0;
     width: 32px;
@@ -676,13 +676,23 @@
 }
 
 .owned-characters-modal-close:hover {
-    color: #764ba2;
+    color: #252a42;
+}
+
+.owned-characters-modal-body {
+    color: #252a42;
+    line-height: 1.8;
+    padding: 0 8px 8px 8px;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .owned-characters-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 8px;
+    width: 100%;
+    max-width: 100%;
 }
 
 .owned-character-option {
@@ -706,8 +716,8 @@
 }
 
 .owned-character-option.active {
-    border-color: #667eea;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    border-color: rgba(213,205,199,1);
+    box-shadow: 0 4px 12px rgba(99,91,88,0.5);
 }
 
 /* ホバーでロール+性格を表示させるツールチップ */
@@ -716,13 +726,13 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.7);
     color: white;
-    padding: 4px;
-    font-size: 12px;
+    padding: 2px;
+    font-size: 9px;
     text-align: center;
     font-weight: bold;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.3s;
     pointer-events: none;
     z-index: 10;
@@ -764,9 +774,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background: white;
-    border-radius: 8px;
-    padding: 16px;
-    max-width: 1540px;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 700px;
     max-height: 80vh;
     overflow-y: auto;
     width: 90%;
@@ -777,14 +787,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
-    border-bottom: 2px solid #667eea;
-    padding-bottom: 8px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #252a42;
+    padding-bottom: 10px;
 }
 
 .auto-assign-modal-title {
     font-size: 20px;
-    color: #667eea;
+    color: #252a42;
     margin: 0;
 }
 
@@ -793,31 +803,44 @@
     border: none;
     font-size: 32px;
     cursor: pointer;
-    color: #667eea;
+    color: #424d71;
     line-height: 1;
     padding: 0;
     width: 32px;
     height: 32px;
 }
 
+.auto-assign-modal-close:hover {
+    color: #252a42;
+}
+
+.auto-assign-modal-body {
+    color: #252a42;
+    line-height: 1.8;
+    padding: 0 8px 8px 8px;
+    overflow-y: auto;
+    flex: 1;
+}
+
 /* 成功時のメッセージ（ヘッダー） */
 .auto-assign-success-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #252a42 0%, #424d71 100%);
     border-radius: 8px;
-    padding: 16px;
+    padding: 8px;
     margin-bottom: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 12px;
 }
 
 .auto-assign-success-icon {
-    width: 96px;
-    height: 96px;
+    width: 64px;
+    height: 64px;
     border-radius: 8px;
     object-fit: cover;
     border: 0px solid white;
+    flex-shrink: 0;
 }
 
 .auto-assign-success-message {
@@ -827,69 +850,81 @@
     text-align: center;
 }
 
+/* 候補カード */
 .auto-assign-result {
-    background: #ffddaa;
+    background: #ffffff;
+    border: 2px solid #ff8800;
     border-radius: 8px;
-    padding: 8px;
-    margin-bottom: 8px;
+    padding: 4px;
+    margin: 0 auto 12px auto; /* 中央寄せ */
     cursor: pointer;
     transition: all 0.3s;
+    width: 100%;
 }
 
 .auto-assign-result:hover {
-    background: #ffaa00;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    background: #ffeecc;
+    box-shadow: 0 4px 12px rgba(255, 170, 0, 0.3);
 }
 
-/* 候補1～4と表示させるヘッダー（やっぱいらない） */
-/* .auto-assign-result h4 {
-    color: #667eea;
-    margin-bottom: 10px;
-} */
-
 .auto-assign-commissions {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    justify-content: center;
 }
 
 .auto-assign-commission {
     background: white;
-    border-radius: 4px;
-    padding: 4px;
+    border-radius: 6px;
+    padding: 6px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    border: 1px solid #e0e0e0;
+    width: fit-content; /* 中身に合わせた幅 */
 }
 
 .auto-assign-commission-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 5px;
+    /* clamp(最小, 推奨, 最大) で画面幅に応じて自動調整 */
+    width: clamp(32px, 8vw, 64px);
+    height: clamp(32px, 8vw, 64px);
+    border-radius: 6px;
     object-fit: cover;
-    border: 2px solid #667eea;
+    border: 1px solid rgba(99,91,88,0.5);
     flex-shrink: 0;
 }
 
 .auto-assign-commission-name {
     font-weight: bold;
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #667eea;
+    font-size: 12px;
+    margin-bottom: 4px;
+    color: #635b58;
 }
 
 .auto-assign-characters {
     display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
+    gap: 2px;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .auto-assign-character-icon {
-    width: 80px;
-    height: 80px;
+    /* clamp(最小, 推奨, 最大) で画面幅に応じて自動調整 */
+    width: clamp(32px, 8vw, 64px);
+    height: clamp(32px, 8vw, 64px);
     border-radius: 5px;
     object-fit: cover;
-    border: 2px solid #ddd;
+    border: 1px solid #ddd;
+    flex-shrink: 0;
+}
+
+/* スマホでは縦並びに */
+@media (max-width: 768px) {
+    .auto-assign-commissions {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .auto-assign-error {
@@ -932,7 +967,7 @@
 }
 
 .missing-group-title {
-    color: #667eea;
+    color: #252a42;
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 4px;
@@ -948,7 +983,7 @@
 
 .missing-candidate-item {
     background: #fff5e6;
-    border: 2px solid #667eea;
+    border: 2px solid #424d71;
     border-radius: 8px;
     padding: 4px;
     transition: all 0.3s;
@@ -957,11 +992,13 @@
     justify-content: center;
 }
 
+/*
 .missing-candidate-item:hover {
     background: #ffe4b3;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-    transform: translateY(-2px);
+    box-shadow: 0 0px 0px rgba(102, 126, 234, 0.3);
+    transform: translateY(0px);
 }
+*/
 
 .missing-candidate-icons {
     display: flex;
@@ -1031,13 +1068,13 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    border-bottom: 2px solid #667eea;
+    border-bottom: 2px solid #252a42;
     padding-bottom: 10px;
 }
 
 .usage-modal-title {
     font-size: 20px;
-    color: #667eea;
+    color: #252a42;
     margin: 0;
 }
 
@@ -1046,7 +1083,7 @@
     border: none;
     font-size: 32px;
     cursor: pointer;
-    color: #667eea;
+    color: #424d71;
     line-height: 1;
     padding: 0;
     width: 32px;
@@ -1054,56 +1091,334 @@
 }
 
 .usage-modal-close:hover {
-    color: #764ba2;
+    color: #252a42;
 }
 
 .usage-modal-body {
-    color: #333;
+    color: #252a42;
     line-height: 1.8;
+    padding: 0 8px 8px 8px;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .usage-modal-body h3 {
     font-size: 18px;
-    color: #667eea;
+    color: #252a42;
     margin-top: 0;
     margin-bottom: 15px;
 }
 
 .usage-modal-body p {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .usage-modal-body strong {
-    color: #667eea;
+    color: #252a42;
 }
 
-/* ========================================
-   レスポンシブ対応
-   ======================================== */
+/* レスポンシブ対応 */
 
-@media (max-width: 768px) {
+/* タブレット */
+@media (max-width: 1024px) {
     .commissions-area {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .presets-area {
+        margin: 15px;
     }
     
     .presets-list {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    /* 依頼エリア - 1列 */
+    .commissions-area {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 12px;
     }
     
-    .commission-modal-grid,
+    /* 上部コントロール */
+    .top-controls {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+        margin: 12px;
+    }
+    
+    .top-controls button {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 15px;
+        min-height: 48px;
+    }
+    
+    /* 依頼スロット */
+    .commission-slot {
+        padding: 12px;
+    }
+    
+    .commission-select-btn {
+        width: 140px;
+        height: 140px;
+    }
+    
+    /* キャラクタースロット */
+    .character-slots-with-roles {
+        gap: 4px;
+    }
+    
+    .role-character-container {
+        padding: 4px;
+    }
+    
+    .role-label {
+        font-size: 12px;
+    }
+    
+    /* プリセット */
+    .presets-area {
+        margin: 12px;
+        padding: 12px;
+    }
+    
+    .presets-list {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+    }
+    
+    .preset-item {
+        padding: 8px;
+        gap: 8px;
+    }
+    
+    .preset-thumbnail {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .preset-actions button {
+        padding: 10px 10px;
+        font-size: 13px;
+        min-height: 40px;
+    }
+    
+    /* モーダル */
+    .commission-modal-content,
+    .character-modal-content,
+    .owned-characters-modal-content,
+    .usage-modal-content {
+        width: 95%;
+        max-height: 85vh;
+        padding: 15px;
+    }
+    
+    .commission-modal-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 6px;
+    }
+    
     .character-modal-grid,
     .owned-characters-grid {
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+        gap: 6px;
+    }
+    
+    /* おまかせ結果モーダル */
+    .auto-assign-modal-content {
+        width: 90%;
+        max-width: 700px;
+        padding: 12px;
     }
     
     .auto-assign-commissions {
         grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .auto-assign-commission {
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        padding: 8px;
+    }
+    
+    .auto-assign-commission-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .auto-assign-character-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .auto-assign-success-header {
+        flex-direction: column;
+        padding: 12px;
+        gap: 10px;
+    }
+    
+    .auto-assign-success-icon {
+        width: 64px;
+        height: 64px;
     }
 }
 
-/* ========================================
-   ユーティリティ
-   ======================================== */
+/* スマートフォン */
+@media (max-width: 480px) {
+    .commissions-area {
+        padding: 10px;
+        gap: 12px;
+    }
+    
+    .top-controls {
+        margin: 10px;
+        padding: 12px;
+    }
+    
+    .commission-slot {
+        padding: 10px;
+    }
+    
+    .commission-select-btn {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .commission-select-text {
+        font-size: 14px;
+    }
+    
+    .commission-name-badge {
+        font-size: 12px;
+        padding: 4px;
+    }
+    
+    .requirement-title {
+        font-size: 12px;
+    }
+    
+    .requirement-badge {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+    
+    /* プリセット */
+    .presets-area {
+        margin: 10px;
+        padding: 10px;
+    }
+    
+    .presets-area h3 {
+        font-size: 16px;
+    }
+    
+    .presets-list {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .preset-thumbnail {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .preset-actions button {
+        padding: 8px 8px;
+        font-size: 12px;
+    }
+    
+    /* モーダル */
+    .commission-modal-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+    }
+    
+    /* おまかせ結果モーダル（スマホ）- clampで自動調整されるので最小限の調整 */
+    .auto-assign-commissions {
+        gap: 6px;
+    }
+    
+    .auto-assign-commission {
+        padding: 4px;
+        gap: 4px;
+    }
+    
+    .auto-assign-result {
+        padding: 8px;
+    }
+    
+    .character-modal-grid,
+    .owned-characters-grid {
+        grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+        gap: 5px;
+    }
+    
+    .commission-modal-title,
+    .character-modal-title,
+    .owned-characters-modal-title,
+    .usage-modal-title,
+    .auto-assign-modal-title {
+        font-size: 16px;
+    }
+    
+    .commission-modal-close,
+    .character-modal-close,
+    .owned-characters-modal-close,
+    .usage-modal-close,
+    .auto-assign-modal-close {
+        width: 36px;
+        height: 36px;
+        font-size: 24px;
+    }
+    
+    /* 不足キャラクター */
+    .missing-candidates-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .missing-character-icon-box {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .candidate-plus {
+        font-size: 24px;
+    }
+}
+
+/* 小型スマホ（iPhone SE等） */
+@media (max-width: 374px) {
+    .commission-select-btn {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .presets-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .preset-item {
+        flex-direction: row;
+    }
+    
+    .commission-modal-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .character-modal-grid,
+    .owned-characters-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ユーティリティ */
 
 .hidden {
     display: none !important;
