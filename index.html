@@ -52,7 +52,7 @@
                 </a></li>
             </ul>
             <div class="header-extra-btns" id="headerExtraBtns">
-                <button id="showChangelog" class="btn btn-info header-extra-btn" data-i18n="buttons.changelog" data-i18n-source="common">変更履歴</button>
+                <button id="showChangelog" class="btn btn-info header-extra-btn" data-i18n="buttons.changelog" data-i18n-source="common">更新履歴</button>
             </div>
             <div class="header-lang">
                 <button class="header-lang-btn" id="headerLangBtn">English</button>
@@ -194,23 +194,16 @@
             </footer>
         </main>
 
-    <!-- 変更履歴モーダル -->
+    <!-- 更新履歴モーダル -->
     <div id="changelogModal" class="modal">
         <div class="modal-overlay"></div>
         <div class="modal-content">
             <div class="modal-header">
-                <h3 data-i18n="buttons.changelog" data-i18n-source="common">変更履歴</h3>
+                <h3 data-i18n="buttons.changelog" data-i18n-source="common">更新履歴</h3>
                 <button class="modal-close">&times;</button>
             </div>
             <div class="modal-body">
-                <h3>v1.0.1 2025.11.18</h3>
-                <ul>
-                    <li>フユカに対応。キャラクター選択画面をモーダル形式に変更</li>
-                </ul>
-                <h3>v1.0.0 2025.11.16</h3>
-                <ul>
-                    <li>お試しリリース！</li>
-                </ul>
+                <!-- 更新履歴はchangelog.jsで動的生成 -->
             </div>
         </div>
     </div>
@@ -221,13 +214,14 @@
     <!-- 共通JS -->
     <script src="js/common/utils.js"></script>
     <script src="js/common/menu.js"></script>
+    <script src="js/common/changelog.js"></script>
     
     <!-- ページ初期化 -->
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             await initI18n('index');
             
-            // 変更履歴モーダル
+            // 更新履歴モーダル
             const showChangelogBtn = document.getElementById('showChangelog');
             if (showChangelogBtn) {
                 showChangelogBtn.addEventListener('click', () => {

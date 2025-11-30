@@ -138,7 +138,7 @@ body {
     color: white;
 }
 
-/* 使い方と変更履歴 */
+/* 使い方と更新履歴 */
 .btn-info {
     background: #17a2b8;
     color: white;
@@ -1326,6 +1326,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
+    font-weight: bold;
     transition: all 0.3s;
 }
 
