@@ -54,6 +54,9 @@
                     <span class="text-en">Commission Sim</span>
                 </a></li>
             </ul>
+            <div class="header-extra-btns" id="headerExtraBtns">
+                <button id="showChangelog" class="btn btn-info header-extra-btn" data-i18n="buttons.changelog" data-i18n-source="common">変更履歴</button>
+            </div>
             <div class="header-lang">
                 <button class="header-lang-btn" id="headerLangBtn">English</button>
             </div>
@@ -191,7 +194,7 @@
     </main>
 
     <!-- 使い方モーダル -->
-    <div id="usageModal" class="modal hidden">
+    <div id="usageModal" class="modal">
         <div class="modal-overlay"></div>
         <div class="modal-content">
             <div class="modal-header">
@@ -220,6 +223,27 @@
                 <p><strong data-i18n="modal.usage.step5Title" data-i18n-source="exchange">5. 計算結果を見る</strong><br>
                 <span data-i18n-html="modal.usage.step5Text" data-i18n-source="exchange">左の数字が計算結果！<br>
                 イベント終了までどれくらいのペースで周回すれば間に合うのかがわかるよ</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 変更履歴モーダル -->
+    <div id="changelogModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-i18n="buttons.changelog" data-i18n-source="common">変更履歴</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>v1.0.1 2025.11.18</h3>
+                <ul>
+                    <li>フユカに対応。キャラクター選択画面をモーダル形式に変更</li>
+                </ul>
+                <h3>v1.0.0 2025.11.16</h3>
+                <ul>
+                    <li>お試しリリース！</li>
+                </ul>
             </div>
         </div>
     </div>

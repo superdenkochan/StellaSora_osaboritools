@@ -856,7 +856,7 @@ body {
 /* プリセットエリア（下段配置） */
 .presets-area {
     padding: 16px;
-    background: rgba(66,77,113,0.5);
+    background: #f0f0ff;
     border-radius: 10px;
     margin: 20px 0;
     max-width: 100%;
@@ -1253,4 +1253,82 @@ body {
     .preset-item {
         flex-direction: row;
     }
+}
+
+/* トグルボタン（hideUnobtained用） */
+.toggle-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #f0f0f0;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.toggle-button:hover {
+    background: #e0e0e0;
+    border-color: #ccc;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.toggle-button.active {
+    background: #008000;
+    border-color: #008000;
+    color: white;
+}
+
+.toggle-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s;
+    background: white;
+}
+
+.toggle-button.active .toggle-checkbox {
+    background: #008000;
+    border-color: #008000;
+}
+
+.toggle-checkbox::after {
+    content: '✓';
+    font-size: 16px;
+    color: white;
+    display: none;
+}
+
+.toggle-button.active .toggle-checkbox::after {
+    display: block;
+}
+
+.toggle-label {
+    user-select: none;
+}
+
+/* プリセット削除ボタン */
+.btn-delete-preset {
+    background: #ff6b6b !important;
+    color: white !important;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-delete-preset:hover {
+    background: #ff5252 !important;
 }

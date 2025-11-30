@@ -67,6 +67,14 @@
     "confirmPresetLoad": {
       "ja": "現在表示中の情報は失われますが、よろしいですか？",
       "en": "Current display will be lost. Continue?"
+    },
+    "confirmOverwrite": {
+      "ja": "プリセット{number}に上書き保存しますか?",
+      "en": "Overwrite Preset {number}?"
+    },
+    "confirmDelete": {
+      "ja": "プリセット{number}を削除しますか？",
+      "en": "Delete Preset {number}?"
     }
   },
   "coreToggle": {
@@ -135,6 +143,10 @@
     "presetNamePlaceholder": {
       "ja": "（未設定）",
       "en": "(No Name)"
+    },
+    "delete": {
+      "ja": "削除",
+      "en": "Delete"
     }
   },
   "modal": {

@@ -23,7 +23,16 @@ const POTENTIAL_DEFINITIONS = {
 };
 
 // サブ素質をクリックした時のステータス順序
-const SUB_STATUS_ORDER = ['none', 'level1', 'level2', 'level6'];
+// hideUnobtainedがOFFの時（通常）
+const SUB_STATUS_ORDER_NORMAL = ['none', 'level1', 'level2', 'level6'];
+// hideUnobtainedがONの時（noneをスキップ）
+const SUB_STATUS_ORDER_FILTERED = ['level1', 'level2', 'level6'];
+
+// 現在のhideUnobtained状態に応じた順序を取得
+function getCurrentSubStatusOrder() {
+    const hideUnobtained = document.getElementById('hideUnobtained')?.classList.contains('active') || false;
+    return hideUnobtained ? SUB_STATUS_ORDER_FILTERED : SUB_STATUS_ORDER_NORMAL;
+}
 
 // サブ素質のラベルを取得（i18n対応）
 function getSubStatusLabel(status) {
@@ -238,8 +247,12 @@ function closeAllModals() {
 
 // イベントリスナーの設定
 function setupEventListeners() {
-    // 取得しない素質を非表示
-    document.getElementById('hideUnobtained').addEventListener('change', handleHideUnobtained);
+    // 取得しない素質を非表示（トグルボタン）
+    const hideUnobtainedBtn = document.getElementById('hideUnobtained');
+    hideUnobtainedBtn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        handleHideUnobtained();
+    });
     
     // カウントリセット
     document.getElementById('resetCount').addEventListener('click', handleResetCount);
@@ -633,6 +646,7 @@ function handlePotentialImageClick(slot, potentialId, type) {
 // サブ素質のステータスクリック処理
 function handleSubStatusClick(slot, potentialId) {
     const state = currentState[slot].subPotentials[potentialId];
+    const SUB_STATUS_ORDER = getCurrentSubStatusOrder();
     const currentIndex = SUB_STATUS_ORDER.indexOf(state.status);
     const nextIndex = (currentIndex + 1) % SUB_STATUS_ORDER.length;
     state.status = SUB_STATUS_ORDER[nextIndex];
@@ -658,7 +672,7 @@ function refreshPotentialDisplay(slot) {
 
 // 取得しない素質を非表示
 function applyHideUnobtainedFilter() {
-    const hideUnobtained = document.getElementById('hideUnobtained').checked;
+    const hideUnobtained = document.getElementById('hideUnobtained').classList.contains('active');
     
     document.querySelectorAll('.potential-card').forEach(card => {
         const slot = card.dataset.slot;
@@ -735,7 +749,7 @@ function handleResetAll() {
     });
     
     // チェックボックスをリセット
-    document.getElementById('hideUnobtained').checked = false;
+    document.getElementById('hideUnobtained').classList.remove('active');
     
     // 現在のプリセット番号をリセット
     currentPresetNumber = null;
@@ -762,9 +776,19 @@ function initializePresets() {
             }
         }
     }
+    // 削除ボタンを初期化
+    updatePresetDeleteButtons();
 }
 
 function handleSavePreset(presetNum) {
+    // 既存プリセットの確認
+    const existingPreset = localStorage.getItem(`preset_${presetNum}`);
+    if (existingPreset) {
+        if (!confirm(i18n.getText('messages.confirmOverwrite', 'potential').replace('{number}', presetNum))) {
+            return;
+        }
+    }
+    
     // カウントをリセットした状態でコピー（素質の現在レベルは保存しない）
     const stateToSave = JSON.parse(JSON.stringify(currentState));
     Object.values(stateToSave).forEach(slotState => {
@@ -802,6 +826,9 @@ function handleSavePreset(presetNum) {
     // 現在のプリセット番号を設定
     currentPresetNumber = presetNum;
     console.log('currentPresetNumberを設定:', currentPresetNumber);
+    
+    // プリセット削除ボタンを更新
+    updatePresetDeleteButtons();
 }
 
 function handleLoadPreset(presetNum) {
@@ -881,9 +908,69 @@ function updatePresetDisplay(presetNum, preset) {
     }
 }
 
+function deletePreset(presetNum) {
+    if (!confirm(i18n.getText('messages.confirmDelete', 'potential').replace('{number}', presetNum))) {
+        return;
+    }
+    
+    localStorage.removeItem(`preset_${presetNum}`);
+    localStorage.removeItem(`preset_${presetNum}_name`);
+    
+    // プリセット表示を更新
+    const presetItem = document.querySelector(`.preset-item[data-preset="${presetNum}"]`);
+    if (presetItem) {
+        const iconImg = presetItem.querySelector('.preset-icon');
+        iconImg.style.display = 'none';
+    }
+    
+    // 読み込みボタンを無効化
+    const loadBtn = document.querySelector(`.btn-load[data-preset="${presetNum}"]`);
+    if (loadBtn) {
+        loadBtn.disabled = true;
+    }
+    
+    // 削除ボタンを更新
+    updatePresetDeleteButtons();
+    
+    // 削除したプリセットが現在のプリセットだった場合
+    if (currentPresetNumber === presetNum) {
+        currentPresetNumber = null;
+        displayPresetName('');
+    }
+}
+
+function updatePresetDeleteButtons() {
+    for (let i = 1; i <= 10; i++) {
+        const presetItem = document.querySelector(`.preset-item[data-preset="${i}"]`);
+        const presetData = localStorage.getItem(`preset_${i}`);
+        const actionsDiv = presetItem.querySelector('.preset-actions');
+        
+        // 既存の削除ボタンを削除
+        const existingDeleteBtn = actionsDiv.querySelector('.btn-delete-preset');
+        if (existingDeleteBtn) {
+            existingDeleteBtn.remove();
+        }
+        
+        // プリセットが存在する場合のみ削除ボタンを追加
+        if (presetData) {
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'btn-delete-preset';
+            deleteBtn.textContent = i18n.getText('labels.delete', 'potential');
+            deleteBtn.dataset.preset = i;
+            deleteBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const presetNum = parseInt(e.target.dataset.preset);
+                deletePreset(presetNum);
+            });
+            actionsDiv.appendChild(deleteBtn);
+        }
+    }
+}
+
+
 // ローカルストレージ
 function saveCurrentState() {
-    const hideUnobtained = document.getElementById('hideUnobtained').checked;
+    const hideUnobtained = document.getElementById('hideUnobtained').classList.contains('active');
     const stateToSave = {
         ...currentState,
         hideUnobtained: hideUnobtained,
@@ -918,7 +1005,11 @@ function loadCurrentState() {
         
         // チェックボックスの状態を復元
         if (savedState.hideUnobtained !== undefined) {
-            document.getElementById('hideUnobtained').checked = savedState.hideUnobtained;
+            if (savedState.hideUnobtained) {
+                document.getElementById('hideUnobtained').classList.add('active');
+            } else {
+                document.getElementById('hideUnobtained').classList.remove('active');
+            }
         }
         
         // 現在のプリセット番号を復元

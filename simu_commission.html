@@ -51,6 +51,9 @@
                     <span class="text-en">Commission Sim</span>
                 </a></li>
             </ul>
+            <div class="header-extra-btns" id="headerExtraBtns">
+                <button id="showChangelog" class="btn btn-info header-extra-btn" data-i18n="buttons.changelog" data-i18n-source="common">変更履歴</button>
+            </div>
             <div class="header-lang">
                 <button class="header-lang-btn" id="headerLangBtn">English</button>
             </div>
@@ -82,18 +85,14 @@
 
     <!-- ページ固有コントロール（ヘッダー下段に移植される） -->
     <div id="pageControls">
+        <button id="manageOwned" class="btn btn-primary" data-i18n="buttons.manageOwned" data-i18n-source="commission">所持巡遊者の設定</button>
+        <button id="autoAssign" class="btn btn-success" disabled data-i18n="buttons.autoAssign" data-i18n-source="commission">おまかせ</button>
         <button id="resetAll" class="btn btn-danger" data-i18n="buttons.reset" data-i18n-source="commission">初期化</button>
         <button id="showUsage" class="btn btn-info" data-i18n="buttons.usage" data-i18n-source="commission">使い方</button>
     </div>
 
     <!-- メインコンテンツ -->
     <main class="main-content">
-            <!-- 上部コントロール -->
-            <div class="top-controls">
-                <button id="manageOwned" class="btn btn-primary" data-i18n="buttons.manageOwned" data-i18n-source="commission">所持巡遊者の設定</button>
-                <button id="autoAssign" class="btn btn-success" disabled data-i18n="buttons.autoAssign" data-i18n-source="commission">おまかせ</button>
-            </div>
-
             <!-- 依頼エリア -->
             <div class="commissions-area">
                 <!-- 依頼スロット1～4 -->
@@ -359,6 +358,27 @@
                 <p><strong data-i18n="modal.usage.step6Title" data-i18n-source="commission">6. 初期化</strong><br>
                 <span data-i18n-html="modal.usage.step6Text" data-i18n-source="commission">現在の設定と所持巡遊者をデフォの状態に戻すよ<br>
                 ※プリセット情報は残ります</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 変更履歴モーダル -->
+    <div class="usage-modal" id="changelogModal">
+        <div class="usage-modal-overlay"></div>
+        <div class="usage-modal-content">
+            <div class="usage-modal-header">
+                <h3 class="usage-modal-title" data-i18n="buttons.changelog" data-i18n-source="common">変更履歴</h3>
+                <button class="usage-modal-close">&times;</button>
+            </div>
+            <div class="usage-modal-body">
+                <h3>v1.0.1 2025.11.18</h3>
+                <ul>
+                    <li>フユカに対応。キャラクター選択画面をモーダル形式に変更</li>
+                </ul>
+                <h3>v1.0.0 2025.11.16</h3>
+                <ul>
+                    <li>お試しリリース！</li>
+                </ul>
             </div>
         </div>
     </div>

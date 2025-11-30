@@ -98,6 +98,12 @@ function setupEventListeners() {
     // 使い方
     document.getElementById('showUsage').addEventListener('click', () => openModal('usageModal'));
     
+    // 変更履歴
+    const showChangelogBtn = document.getElementById('showChangelog');
+    if (showChangelogBtn) {
+        showChangelogBtn.addEventListener('click', () => openModal('changelogModal'));
+    }
+    
     // 依頼選択スロット
     document.querySelectorAll('.commission-select-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -144,6 +150,10 @@ function closeUsageModal() {
     document.getElementById('usageModal').classList.remove('open');
 }
 
+function closeChangelogModal() {
+    document.getElementById('changelogModal').classList.remove('open');
+}
+
 function setupModalClosers() {
     // 依頼選択モーダル
     const commissionModal = document.getElementById('commissionModal');
@@ -169,6 +179,13 @@ function setupModalClosers() {
     const usageModal = document.getElementById('usageModal');
     usageModal.querySelector('.usage-modal-close').addEventListener('click', closeUsageModal);
     usageModal.querySelector('.usage-modal-overlay').addEventListener('click', closeUsageModal);
+    
+    // 変更履歴モーダル
+    const changelogModal = document.getElementById('changelogModal');
+    if (changelogModal) {
+        changelogModal.querySelector('.usage-modal-close').addEventListener('click', closeChangelogModal);
+        changelogModal.querySelector('.usage-modal-overlay').addEventListener('click', closeChangelogModal);
+    }
 }
 
 function openModal(modalId) {

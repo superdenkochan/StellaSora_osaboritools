@@ -707,13 +707,13 @@
     width: 100%;
     height: 100%;
     z-index: 10001;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
 }
 
-.modal.hidden {
-    display: none;
+.modal.open {
+    display: flex;
 }
 
 .modal-overlay {
@@ -859,6 +859,14 @@
     .event-select {
         flex: 1 1 100%;
         max-width: 100%;
+    }
+}
+
+/* タブレット専用（うまくいかないしPC版にも干渉してしまうので保留） */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .rewards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
     }
 }
 

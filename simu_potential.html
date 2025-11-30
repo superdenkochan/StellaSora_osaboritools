@@ -50,6 +50,9 @@
                     <span class="text-en">Commission Sim</span>
                 </a></li>
             </ul>
+            <div class="header-extra-btns" id="headerExtraBtns">
+                <button id="showChangelog" class="btn btn-info header-extra-btn" data-i18n="buttons.changelog" data-i18n-source="common">変更履歴</button>
+            </div>
             <div class="header-lang">
                 <button class="header-lang-btn" id="headerLangBtn">English</button>
             </div>
@@ -81,14 +84,14 @@
 
     <!-- ページ固有コントロール（ヘッダー下段に移植される） -->
     <div id="pageControls">
-        <label>
-            <input type="checkbox" id="hideUnobtained"> <span data-i18n="buttons.hideUnobtained" data-i18n-source="potential">取得しない素質を非表示</span>
-        </label>
+        <button id="hideUnobtained" class="toggle-button">
+            <span class="toggle-checkbox"></span>
+            <span class="toggle-label" data-i18n="buttons.hideUnobtained" data-i18n-source="potential">取得しない素質を非表示</span>
+        </button>
         <button id="resetCount" class="btn" data-i18n="buttons.resetCount" data-i18n-source="potential">カウントリセット</button>
         <button id="resetAll" class="btn btn-danger" data-i18n="buttons.reset" data-i18n-source="potential">初期化</button>
         <button id="screenshot" class="btn btn-primary" data-i18n="buttons.screenshot" data-i18n-source="potential">スクショ</button>
         <button id="showUsage" class="btn btn-info" data-i18n="buttons.usage" data-i18n-source="potential">使い方</button>
-        <button id="showChangelog" class="btn btn-info" data-i18n="buttons.changelog" data-i18n-source="potential">変更履歴</button>
     </div>
 
     <!-- メインコンテンツ -->
@@ -289,7 +292,7 @@
     </div>
 
     <!-- 使い方モーダル -->
-    <div id="usageModal" class="modal hidden">
+    <div id="usageModal" class="modal">
         <div class="modal-overlay"></div>
         <div class="modal-content">
             <div class="modal-header">
@@ -345,7 +348,7 @@
     </div>
 
     <!-- 変更履歴モーダル -->
-    <div id="changelogModal" class="modal hidden">
+    <div id="changelogModal" class="modal">
         <div class="modal-overlay"></div>
         <div class="modal-content">
             <div class="modal-header">
@@ -373,7 +376,7 @@
     </div>
 
     <!-- プリセット名入力モーダル -->
-    <div id="presetNameModal" class="modal hidden">
+    <div id="presetNameModal" class="modal">
         <div class="modal-overlay"></div>
         <div class="modal-content" style="max-width: 400px;">
             <div class="modal-header">

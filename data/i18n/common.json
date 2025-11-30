@@ -31,6 +31,10 @@
     "usage": {
       "ja": "使い方",
       "en": "How to Use"
+    },
+    "changelog": {
+      "ja": "変更履歴",
+      "en": "Changelog"
     }
   },
   "preset": {

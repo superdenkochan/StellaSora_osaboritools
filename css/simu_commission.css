@@ -3,7 +3,7 @@
     display: flex;
     gap: 15px;
     padding: 20px;
-    background: #ffffff;
+    background: rgba(66,77,113,1);
     border-radius: 10px;
     margin: 20px;
     justify-content: center;
@@ -37,7 +37,7 @@
 
 /* 依頼スロット */
 .commission-slot {
-    background: #f9f9f9;
+    background: rgba(66,77,113,1);
     border-radius: 10px;
     padding: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -51,7 +51,7 @@
     width: 128px;
     height: 128px;
     background: white;
-    border: 2px dashed #8090cf;
+    border: 2px solid #8090cf;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
@@ -232,7 +232,7 @@
 }
 
 .character-slot-item.disabled {
-    opacity: 0.3;
+    opacity: 1;
     cursor: not-allowed;
     pointer-events: none;
     background: #ffffff;

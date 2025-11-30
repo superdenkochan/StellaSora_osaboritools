@@ -106,6 +106,12 @@ function setupEventListeners() {
         showUsageBtn.addEventListener('click', showUsageModal);
     }
     
+    // 変更履歴モーダル
+    const showChangelogBtn = document.getElementById('showChangelog');
+    if (showChangelogBtn) {
+        showChangelogBtn.addEventListener('click', showChangelogModal);
+    }
+    
     // モーダル閉じる
     document.querySelectorAll('.modal-close, .modal-overlay').forEach(element => {
         element.addEventListener('click', closeAllModals);
@@ -1058,13 +1064,18 @@ function resetAll() {
 
 // モーダル表示
 function showUsageModal() {
-    document.getElementById('usageModal').classList.remove('hidden');
+    document.getElementById('usageModal').classList.add('open');
+}
+
+// 変更履歴モーダルを開く
+function showChangelogModal() {
+    document.getElementById('changelogModal').classList.add('open');
 }
 
 // モーダルを閉じる
 function closeAllModals() {
     document.querySelectorAll('.modal').forEach(modal => {
-        modal.classList.add('hidden');
+        modal.classList.remove('open');
     });
 }
 

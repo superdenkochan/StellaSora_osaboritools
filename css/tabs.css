@@ -75,6 +75,12 @@ html[lang="en"] .text-en { display: inline; }
     white-space: nowrap;
     flex-shrink: 0;
     min-width: 140px; /* 言語切り替え時の幅変動対策 */
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.header-title:hover {
+    opacity: 0.8;
 }
 
 /* タブナビゲーション */
@@ -140,6 +146,22 @@ html[lang="en"] .text-en { display: inline; }
 
 .header-lang-btn:hover {
     background: rgba(255, 255, 255, 0.25);
+}
+
+/* ヘッダー上部のボタン追加（変更履歴を移植） */
+.header-extra-btns {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.header-extra-btn {
+    padding: 6px 12px;
+    min-width: auto;
+    min-height: auto;
+    font-size: 13px;
+    white-space: nowrap;
 }
 
 /* 下段：ページごとのボタン（スマホは開閉可） */
@@ -424,19 +446,44 @@ html[lang="en"] .text-en { display: inline; }
         padding: 8px;
         gap: 6px;
         min-height: 48px;
+        justify-content: flex-start; /* 左寄せに変更 */
     }
     
     .header-controls .btn {
-        padding: 8px 32px;
-        font-size: 12px;
-        min-height: 40px;
-        flex: 1 1 48px; /* ボタンサイズ調整中 */
+        padding: 6px 10px;
+        font-size: 11px;
+        min-height: 36px;
+        min-width: auto;
+        flex: 0 1 auto; /* フレックスを自動サイズに */
+        white-space: nowrap; /* テキストを折り返さない */
+    }
+    
+    .header-controls .toggle-button {
+        padding: 6px 10px;
+        font-size: 11px;
+        min-height: 36px;
+        flex: 0 1 auto;
+    }
+    
+    .header-controls .toggle-button .toggle-checkbox {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .header-controls .toggle-button .toggle-label {
+        font-size: 11px;
     }
     
     .header-controls label {
-        font-size: 16px;
-        min-height: 40px;
-        flex: 1 1 auto;
+        font-size: 12px;
+        min-height: 36px;
+        flex: 0 1 auto;
+    }
+    
+    /* ヘッダー上部の追加ボタン（スマホ用） */
+    .header-extra-btn {
+        padding: 4px 8px;
+        font-size: 10px;
     }
     
     /* サイドメニューの調整 */

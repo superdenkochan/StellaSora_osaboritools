@@ -237,6 +237,14 @@ function initGlobalHeader() {
         return;
     }
     
+    // ヘッダータイトルをクリックでindex.htmlへ遷移
+    const headerTitle = document.querySelector('.header-title');
+    if (headerTitle) {
+        headerTitle.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    }
+    
     // イベント設定
     setupMenuEvents();
     setupLanguageButton();
