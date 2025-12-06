@@ -739,19 +739,15 @@ body {
 
 /* ツールチップ */
 .potential-tooltip {
-    position: absolute;
-    bottom: calc(100% - 7px);
-    left: 37%;
-    transform: translateX(-50%);
+    position: fixed;
     background: rgba(0, 0, 0, 0.9);
     color: white;
     padding: 10px;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 14px;
     white-space: pre-wrap;
     word-wrap: wrap;
-    max-width: 210px; 
-    min-width: 210px; /* ゲーム画面意識のツールチップ幅 */
+    width: 245px; /* ゲーム画面意識の幅 */
     z-index: 10003; /* 最前面に表示 */
     opacity: 0;
     pointer-events: none;
@@ -767,6 +763,20 @@ body {
     border: 4px solid transparent;
     border-top-color: rgba(0, 0, 0, 0.9);
 }
+
+/* ツールチップの下表示分岐 */
+.potential-tooltip.show-below {
+    bottom: auto;
+    top: calc(100% + 7px);
+}
+
+.potential-tooltip.show-below::after {
+    top: auto;
+    bottom: 100%;
+    border-top-color: transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.9);
+}
+
 
 /* ステータスボタン */
 .potential-status {

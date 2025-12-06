@@ -558,6 +558,63 @@ function createPotentialCard(character, potentialId, slot, type) {
     
     // ツールチップの表示制御
     imageWrapper.addEventListener('mouseenter', () => {
+        // 要素の位置を取得
+        const rect = imageWrapper.getBoundingClientRect();
+        const tooltipHeight = tooltip.offsetHeight || 150; // ツールチップの高さ
+        const tooltipWidth = 245; // ツールチップの幅
+        const headerHeight = 50;
+        const margin = -5; // 中心に寄せるかどうか
+        const screenPadding = 20; // 画面端からの余白
+        
+        // 画面上部の余白
+        const spaceAbove = rect.top - headerHeight;
+        const spaceBelow = window.innerHeight - rect.bottom;
+        
+        // ツールチップの左右位置を計算
+        let left = rect.left + (rect.width / 2);
+        
+        // 左右の画面端チェック（はみ出し防止）
+        const halfTooltipWidth = tooltipWidth / 2;
+        if (left + halfTooltipWidth > window.innerWidth - screenPadding) {
+            // 右端からはみ出る場合：右端から余白を取った位置に調整
+            left = window.innerWidth - screenPadding - halfTooltipWidth;
+        } else if (left - halfTooltipWidth < screenPadding) {
+            // 左端からはみ出る場合：左端から余白を取った位置に調整
+            left = screenPadding + halfTooltipWidth;
+        }
+        
+        // 上下どちらに表示するか判定
+        if (spaceAbove >= tooltipHeight + margin) {
+            // 上
+            tooltip.classList.remove('show-below');
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = (rect.top - tooltipHeight - margin) + 'px';
+            tooltip.style.bottom = 'auto';
+            tooltip.style.transform = 'translateX(-50%)';
+        } else if (spaceBelow >= tooltipHeight + margin) {
+            // 下
+            tooltip.classList.add('show-below');
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = (rect.bottom + margin) + 'px';
+            tooltip.style.bottom = 'auto';
+            tooltip.style.transform = 'translateX(-50%)';
+        } else {
+            // どちらも厳しい場合は広い方
+            if (spaceBelow > spaceAbove) {
+                tooltip.classList.add('show-below');
+                tooltip.style.left = left + 'px';
+                tooltip.style.top = (rect.bottom + margin) + 'px';
+                tooltip.style.bottom = 'auto';
+                tooltip.style.transform = 'translateX(-50%)';
+            } else {
+                tooltip.classList.remove('show-below');
+                tooltip.style.left = left + 'px';
+                tooltip.style.top = (headerHeight + margin) + 'px';
+                tooltip.style.bottom = 'auto';
+                tooltip.style.transform = 'translateX(-50%)';
+            }
+        }
+        
         tooltip.style.opacity = '1';
     });
     imageWrapper.addEventListener('mouseleave', () => {
