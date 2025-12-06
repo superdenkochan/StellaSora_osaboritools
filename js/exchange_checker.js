@@ -163,6 +163,10 @@ async function onEventChange(e) {
     // コンプリートミッション初期化
     initializeCompMissions();
     
+    // 現在のポイントを0にリセット（復元前）
+    currentPoints = 0;
+    document.getElementById('currentPoints').value = 0;
+    
     // ローカルストレージから復元
     loadEventStateFromLocalStorage(eventId);
     
