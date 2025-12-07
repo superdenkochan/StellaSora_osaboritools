@@ -346,15 +346,6 @@
     transition: all 0.3s;
 }
 
-.btn-delete-preset {
-    background: #ff6b6b !important;
-    color: white !important;
-}
-
-.btn-delete-preset:hover {
-    background: #ff5252 !important;
-}
-
 /* 依頼選択モーダル */
 .commission-modal {
     display: none;

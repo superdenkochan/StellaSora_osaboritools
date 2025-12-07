@@ -6,6 +6,12 @@
     box-sizing: border-box;
 }
 
+/* 基本リセット */
+* {
+    margin: 0;
+    padding: 0;
+}
+
 /* ルート要素 */
 html {
     font-size: 16px;
@@ -13,10 +19,79 @@ html {
     text-size-adjust: 100%;
 }
 
+/* CSS変数（共通） */
+:root {
+    /* グローバルヘッダーの高さ（JSでも参照するため変数化） */
+    --header-height: 100px;
+}
+
 body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: rgba(37,42,66,0.5);
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     overflow-x: hidden; /* 横スクロール防止 */
+}
+
+/* メインコンテンツエリア（共通） */
+.main-content {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(37,42,66,0.15);
+    min-height: calc(100vh - var(--header-height));
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* 旧コンテナ（互換性のため残す） */
+.container {
+    /* 背景・影・角丸は削除 */
+}
+
+/* ページ内コントロール */
+.page-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #252a42 0%, #424d71 100%);
+    color: white;
+}
+
+.page-controls label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.page-controls input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.controls label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.controls input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
 }
 
 /* 画像のレスポンシブ対応 */
@@ -54,12 +129,94 @@ button,
     padding: 10px 16px;
     user-select: none;
     -webkit-user-select: none;
+    /* 装飾 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+    background: #4CAF50;
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 /* タップ時のフィードバック */
 .btn:active {
     transform: scale(0.97);
     opacity: 0.9;
+}
+
+/* ボタンバリエーション */
+.btn-primary {
+    background: #2196F3;
+    color: white;
+}
+
+.btn-danger {
+    background: #f44336;
+    color: white;
+}
+
+.btn-info {
+    background: #17a2b8;
+    color: white;
+}
+
+/* プリセット用ボタン */
+.btn-save,
+.btn-load {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-save {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-save:hover {
+    background: #45a049;
+}
+
+.btn-load {
+    background: #2196F3;
+    color: white;
+}
+
+.btn-load:hover:not(:disabled) {
+    background: #0b7dda;
+}
+
+.btn-load:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.btn-delete-preset {
+    background: #ff6b6b !important;
+    color: white !important;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-delete-preset:hover {
+    background: #ff5252 !important;
 }
 
 /* フォーム要素の最適化 */
@@ -170,6 +327,132 @@ body.no-scroll {
 
 /* モーダル共通スタイル */
 
+/* 旧モーダルスタイル（互換性維持） */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+}
+
+.modal.open {
+    display: block;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    width: 90%;
+    z-index: 2;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #252a42;
+    padding-bottom: 10px;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: #424d71;
+    line-height: 1;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+}
+
+.modal-close:hover {
+    color: #252a42;
+}
+
+.modal-content h2 {
+    font-size: 18px;
+    color: #252a42;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: bold;
+    order: 1;
+}
+
+.modal-content h3 {
+    font-size: 18px;
+    color: #252a42;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.modal-body {
+    color: #252a42;
+    line-height: 1.8;
+    padding: 0 8px 8px 8px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-body p {
+    margin-bottom: 16px;
+}
+
+.modal-body strong {
+    color: #252a42;
+}
+
+.modal-body ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-body li {
+    margin-bottom: 8px;
+}
+
+/* モーダルスクロールバー */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #999999;
+    border-radius: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #666666;
+}
+
+/* 新モーダルスタイル（modal-unified系） */
 .modal-unified,
 .commission-modal,
 .character-modal,
@@ -281,6 +564,37 @@ body.no-scroll {
 /* jsonで\nの改行が効くように設定 */
 [data-i18n] {
     white-space: pre-line;
+}
+
+/* エラーメッセージ（共通） */
+.error-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f44336;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    animation: slideDown 0.3s ease-out;
+}
+
+.error-message.hidden {
+    display: none;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
 }
 
 /* TOPページ用スタイル */

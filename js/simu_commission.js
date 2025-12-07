@@ -126,6 +126,8 @@ function setupEventListeners() {
     
     // プリセット
     setupPresetButtons();
+    updatePresetButtons();      // 保存済みプリセットのボタンを有効化
+    updatePresetThumbnails();   // サムネイルを表示
 }
 
 // モーダル関連
@@ -1190,15 +1192,16 @@ function checkForSpecialCharacters(solutions) {
 // プリセット機能
 function setupPresetButtons() {
     document.querySelectorAll('.btn-save').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const presetNum = parseInt(e.target.dataset.preset);
+        btn.addEventListener('click', function(e) {
+            const presetNum = parseInt(this.dataset.preset);
             handleSavePreset(presetNum);
         });
     });
     
     document.querySelectorAll('.btn-load').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const presetNum = parseInt(e.target.dataset.preset);
+        btn.addEventListener('click', function(e) {
+            if (this.disabled) return;
+            const presetNum = parseInt(this.dataset.preset);
             handleLoadPreset(presetNum);
         });
     });
@@ -1373,7 +1376,7 @@ function updatePresetThumbnails() {
             deleteBtn.dataset.preset = i;
             deleteBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const presetNum = parseInt(e.target.dataset.preset);
+                const presetNum = parseInt(e.currentTarget.dataset.preset);
                 deletePreset(presetNum);
             });
             actionsDiv.appendChild(deleteBtn);

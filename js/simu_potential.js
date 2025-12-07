@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // データ読み込み
 async function loadCharacterData() {
     try {
-        const response = await fetch('data/potential.json');
+        const response = await fetch('data/potential_desc.json');
         if (!response.ok) {
             throw new Error('データの読み込みに失敗しました');
         }
@@ -271,16 +271,17 @@ function setupEventListeners() {
     
     // プリセット保存
     document.querySelectorAll('.btn-save').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const presetNum = parseInt(e.target.dataset.preset);
+        btn.addEventListener('click', function(e) {
+            const presetNum = parseInt(this.dataset.preset);
             handleSavePreset(presetNum);
         });
     });
     
     // プリセット読み込み
     document.querySelectorAll('.btn-load').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const presetNum = parseInt(e.target.dataset.preset);
+        btn.addEventListener('click', function(e) {
+            if (this.disabled) return;
+            const presetNum = parseInt(this.dataset.preset);
             handleLoadPreset(presetNum);
         });
     });
@@ -827,14 +828,12 @@ function initializePresets() {
         const preset = loadPreset(i);
         if (preset) {
             updatePresetDisplay(i, preset);
-            const loadBtn = document.querySelector(`.btn-load[data-preset="${i}"]`);
-            if (loadBtn) {
-                loadBtn.disabled = false;
-            }
         }
     }
     // 削除ボタンを初期化
     updatePresetDeleteButtons();
+    // 読み込みボタンの状態を初期化
+    updateLoadButtonsState();
 }
 
 function handleSavePreset(presetNum) {
@@ -886,6 +885,8 @@ function handleSavePreset(presetNum) {
     
     // プリセット削除ボタンを更新
     updatePresetDeleteButtons();
+    // 読み込みボタンの状態を更新（現在読み込み中のプリセットを無効化）
+    updateLoadButtonsState();
 }
 
 function handleLoadPreset(presetNum) {
@@ -933,9 +934,32 @@ function handleLoadPreset(presetNum) {
     console.log('currentPresetNumberを設定:', currentPresetNumber);
     displayPresetName(presetName);
     
+    // 読み込みボタンの状態を更新（現在読み込み中のプリセットを無効化）
+    updateLoadButtonsState();
+    
     saveCurrentState();
 }
 
+// 読み込みボタンの状態を更新（現在読み込み中のプリセットを無効化）
+function updateLoadButtonsState() {
+    for (let i = 1; i <= 10; i++) {
+        const loadBtn = document.querySelector(`.btn-load[data-preset="${i}"]`);
+        if (!loadBtn) continue;
+        
+        const presetData = localStorage.getItem(`preset_${i}`);
+        
+        if (!presetData) {
+            // プリセットが存在しない場合は無効化
+            loadBtn.disabled = true;
+        } else if (currentPresetNumber === i) {
+            // 現在読み込み中のプリセットは無効化
+            loadBtn.disabled = true;
+        } else {
+            // それ以外は有効化
+            loadBtn.disabled = false;
+        }
+    }
+}
 function displayPresetName(name) {
     const input = document.getElementById('preset-name-input-inline');
     if (input) {
@@ -980,12 +1004,6 @@ function deletePreset(presetNum) {
         iconImg.style.display = 'none';
     }
     
-    // 読み込みボタンを無効化
-    const loadBtn = document.querySelector(`.btn-load[data-preset="${presetNum}"]`);
-    if (loadBtn) {
-        loadBtn.disabled = true;
-    }
-    
     // 削除ボタンを更新
     updatePresetDeleteButtons();
     
@@ -994,6 +1012,9 @@ function deletePreset(presetNum) {
         currentPresetNumber = null;
         displayPresetName('');
     }
+    
+    // 読み込みボタンの状態を更新
+    updateLoadButtonsState();
 }
 
 function updatePresetDeleteButtons() {
@@ -1016,7 +1037,7 @@ function updatePresetDeleteButtons() {
             deleteBtn.dataset.preset = i;
             deleteBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                const presetNum = parseInt(e.target.dataset.preset);
+                const presetNum = parseInt(e.currentTarget.dataset.preset);
                 deletePreset(presetNum);
             });
             actionsDiv.appendChild(deleteBtn);
