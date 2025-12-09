@@ -60,9 +60,90 @@ const currentState = {
 
 // ヘルパー関数
 
-// 定義に沿った画像パスの自動生成
-function getPotentialImagePath(charId, potentialId) {
-    return `images/potentials/${charId}_${potentialId}.jpg`;
+// 定義に沿った画像パスの自動生成（言語対応）
+function getPotentialImagePath(charId, potentialId, lang = null) {
+    const targetLang = lang || (window.i18n ? i18n.getLanguage() : 'ja');
+    const langSuffix = targetLang === 'ja' ? 'JP' : 'EN';
+    return `images/potentials/${charId}_${potentialId}_${langSuffix}.png`;
+}
+
+// 共通画像パス（言語識別子なし）
+function getPotentialImagePathCommon(charId, potentialId) {
+    return `images/potentials/${charId}_${potentialId}.png`;
+}
+
+// 画像のsrcを設定（初期設定用 - カード生成時に使用）
+function initPotentialImageSrc(img, charId, potentialId) {
+    const currentLang = window.i18n ? i18n.getLanguage() : 'ja';
+    const langPath = getPotentialImagePath(charId, potentialId, currentLang);
+    const commonPath = getPotentialImagePathCommon(charId, potentialId);
+    
+    console.log('initPotentialImageSrc:', { charId, potentialId, currentLang, langPath });
+    
+    img.src = langPath;
+    
+    // エラー時のフォールバック処理を設定
+    img.onerror = function() {
+        if (this.src.includes('_JP.') || this.src.includes('_EN.')) {
+            this.src = commonPath;
+        } else {
+            this.onerror = null;
+            this.src = 'https://placehold.co/202x256?text=' + potentialId;
+        }
+    };
+}
+
+// 画像のsrcを更新（言語切り替え時に使用）
+function updatePotentialImageSrc(img, charId, potentialId, targetLang) {
+    const langPath = getPotentialImagePath(charId, potentialId, targetLang);
+    const commonPath = getPotentialImagePathCommon(charId, potentialId);
+    
+    // 現在のsrcのファイル名部分を取得
+    const currentSrc = img.src || '';
+    const currentFilename = currentSrc.split('/').pop().split('?')[0];
+    const newFilename = langPath.split('/').pop();
+    const commonFilename = commonPath.split('/').pop();
+    
+    console.log('updatePotentialImageSrc:', {
+        charId, potentialId, targetLang,
+        currentFilename, newFilename,
+        langPath
+    });
+    
+    // 同じファイル名なら更新しない（ちらつき防止）
+    if (currentFilename === newFilename) {
+        console.log('  -> スキップ（同じファイル名）');
+        return;
+    }
+    
+    // 共通画像を表示中の場合、言語付き画像があるかチェック
+    if (currentFilename === commonFilename) {
+        console.log('  -> 共通画像から言語付き画像をテスト');
+        const testImg = new Image();
+        testImg.onload = () => { 
+            console.log('  -> 言語付き画像が存在、切り替え:', langPath);
+            img.src = langPath; 
+        };
+        testImg.onerror = () => {
+            console.log('  -> 言語付き画像なし、共通画像を維持');
+        };
+        testImg.src = langPath;
+        return;
+    }
+    
+    console.log('  -> 言語付きパスを設定:', langPath);
+    img.src = langPath;
+    
+    // エラー時のフォールバック処理
+    img.onerror = function() {
+        if (this.src.includes('_JP.') || this.src.includes('_EN.')) {
+            console.log('  -> フォールバック: 共通画像へ');
+            this.src = commonPath;
+        } else {
+            this.onerror = null;
+            this.src = 'https://placehold.co/202x256?text=' + potentialId;
+        }
+    };
 }
 
 // Descriptionの取得と文字数制御
@@ -538,11 +619,8 @@ function createPotentialCard(character, potentialId, slot, type) {
     // 画像（＋保険のプレースホルダー）
     const img = document.createElement('img');
     img.className = 'potential-image';
-    img.src = getPotentialImagePath(character.id, potentialId);
     img.alt = potentialId;
-    img.onerror = () => {
-        img.src = 'https://placehold.co/202x256?text=' + potentialId;
-    };
+    initPotentialImageSrc(img, character.id, potentialId);
     
     // 画像クリックイベント
     img.addEventListener('click', () => handlePotentialImageClick(slot, potentialId, type));
@@ -714,7 +792,7 @@ function handleSubStatusClick(slot, potentialId) {
     saveCurrentState();
 }
 
-// 素質表示の更新
+// 素質表示の更新（カードを再生成せず状態のみ更新）
 function refreshPotentialDisplay(slot) {
     const charId = currentState[slot].characterId;
     if (!charId) return;
@@ -722,7 +800,83 @@ function refreshPotentialDisplay(slot) {
     const character = charactersData.characters.find(c => c.id === charId);
     if (!character) return;
     
-    displayPotentials(slot, character);
+    // 既存のカードを取得
+    const container = document.getElementById(`${slot}-potentials`);
+    const existingCards = container.querySelectorAll('.potential-card');
+    
+    // カードが存在しない場合のみ再生成
+    if (existingCards.length === 0) {
+        displayPotentials(slot, character);
+        applyHideUnobtainedFilter();
+        return;
+    }
+    
+    // 既存のカードの状態を更新
+    existingCards.forEach(card => {
+        const potentialId = card.dataset.potentialId;
+        const type = card.dataset.type;
+        const imageWrapper = card.querySelector('.potential-image-wrapper');
+        
+        if (!imageWrapper) return;
+        
+        if (type === 'core') {
+            // コア素質の状態更新
+            const state = currentState[slot].corePotentials[potentialId];
+            if (!state) return;
+            
+            // グレーアウト状態の更新
+            imageWrapper.classList.toggle('grayed-out-unobtained', !state.obtained);
+            imageWrapper.classList.toggle('obtained', state.acquired);
+            
+        } else {
+            // サブ素質の状態更新
+            const state = currentState[slot].subPotentials[potentialId];
+            if (!state) return;
+            
+            // グレーアウト状態の更新
+            imageWrapper.classList.remove('grayed-out', 'grayed-out-unobtained');
+            if (state.status === 'none') {
+                imageWrapper.classList.add('grayed-out-unobtained');
+            } else if (state.count > 0) {
+                imageWrapper.classList.add('grayed-out');
+            }
+            
+            // サムズアップの更新
+            let thumbsUp = imageWrapper.querySelector('.thumbs-up');
+            if (state.status === 'level6') {
+                if (!thumbsUp) {
+                    thumbsUp = document.createElement('div');
+                    thumbsUp.className = 'thumbs-up';
+                    const thumbImg = document.createElement('img');
+                    thumbImg.src = 'images/others/thumbs_up.png';
+                    thumbImg.alt = 'Level 6';
+                    thumbsUp.appendChild(thumbImg);
+                    imageWrapper.appendChild(thumbsUp);
+                }
+            } else if (thumbsUp) {
+                thumbsUp.remove();
+            }
+            
+            // カウント表示の更新
+            let countElem = imageWrapper.querySelector('.potential-count');
+            if (state.count > 0) {
+                if (!countElem) {
+                    countElem = document.createElement('div');
+                    countElem.className = 'potential-count';
+                    imageWrapper.appendChild(countElem);
+                }
+                countElem.textContent = state.count;
+            } else if (countElem) {
+                countElem.remove();
+            }
+            
+            // ステータスボタンの更新
+            const btn = card.querySelector('.sub-status-btn');
+            if (btn) {
+                btn.textContent = getSubStatusLabel(state.status);
+            }
+        }
+    });
     
     // チェック状態を再適用
     applyHideUnobtainedFilter();
@@ -1351,6 +1505,21 @@ function updateLanguageDisplay() {
                     btn.textContent = state.obtained 
                         ? i18n.getText('coreToggle.obtain', 'potential') 
                         : i18n.getText('coreToggle.notObtain', 'potential');
+                }
+            }
+        }
+    });
+    
+    // 素質画像の言語切り替え
+    document.querySelectorAll('.potential-card').forEach(card => {
+        const potentialId = card.dataset.potentialId;
+        const slot = card.dataset.slot;
+        if (potentialId && slot) {
+            const charId = currentState[slot]?.characterId;
+            if (charId) {
+                const img = card.querySelector('.potential-image');
+                if (img) {
+                    updatePotentialImageSrc(img, charId, potentialId, lang);
                 }
             }
         }

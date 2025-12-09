@@ -6,7 +6,7 @@
         "ja": "チーシア",
         "en": "Chixia"
       },
-      "icon": "images/characters/char_10001.jpg",
+      "icon": "images/characters/char_10001.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキルの持続時間が<span style='color: #0abec5;'>3</span>秒延長され、スキルダメージが<span style='color: #0abec5;'>45%</span>増加する。",
@@ -144,7 +144,7 @@
         "ja": "コハク",
         "en": "Amber"
       },
-      "icon": "images/characters/char_10002.jpg",
+      "icon": "images/characters/char_10002.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキル発動後、弾丸を<span style='color: #0abec5;'>36</span>発装填するようになる。\n弾倉が空になるまで、通常攻撃ダメージが<span style='color: #0abec5;'>50%</span>増加する。",
@@ -282,7 +282,7 @@
         "ja": "カシミラ",
         "en": "Kasimira"
       },
-      "icon": "images/characters/char_10003.jpg",
+      "icon": "images/characters/char_10003.png",
       "descriptions": {
         "mc1": {
           "ja": "1回の主力スキルで装填できる火炎散弾が<span style='color: #0abec5;'>1発</span>になる。装填後、次の射撃で発射する火炎散弾の数が増加し、追加で範囲内に、攻撃力の<span style='color: #0abec5;'>136%</span>の火属性ダメージを与えるようになる。この効果は火炎散弾を発射するとリセットされる。",
@@ -420,7 +420,7 @@
         "ja": "フローラ",
         "en": "Flora"
       },
-      "icon": "images/characters/char_10004.jpg",
+      "icon": "images/characters/char_10004.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキルは追加で<span style='color: #0abec5;'>2</span>つのマジックハットを投げ、0.5秒ごとに攻撃力の<span style='color: #0abec5;'>31.5%</span>の火属性のスキルダメージを与えるようになる。",
@@ -558,7 +558,7 @@
         "ja": "フユカ",
         "en": "Fuyuka"
       },
-      "icon": "images/characters/char_10005.jpg",
+      "icon": "images/characters/char_10005.png",
       "descriptions": {
         "mc1": {
           "ja": "フユカの弾丸の装填上限が9発になる。\n主力スキル発動時、追加で攻撃力の<span style='color: #0abec5;'>275%x3</span>の火属性のスキルダメージを与えるようになる。",
@@ -696,7 +696,7 @@
         "ja": "フリージア",
         "en": "Freesia"
       },
-      "icon": "images/characters/char_20001.jpg",
+      "icon": "images/characters/char_20001.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキル終了時、10秒間持続する氷霧を生成するようになる。氷霧内の敵は移動速度が<span style='color: #0abec5;'>35%</span>低下し、味方の通常攻撃ダメージが<span style='color: #0abec5;'>13%</span>増加する。",
@@ -834,7 +834,7 @@
         "ja": "チトセ",
         "en": "Chitose"
       },
-      "icon": "images/characters/char_20002.jpg",
+      "icon": "images/characters/char_20002.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキル発動後、通常攻撃は騰蛇を生成し、範囲内に攻撃力の<span style='color: #0abec5;'>42.3%</span>の水属性の通常攻撃ダメージを与えるようになる。生成した騰蛇は<span style='color: #6a90e7;'>水属性の印</span>❄️を発動させることができる。発動させると、12秒間、中断耐性が上昇する。",
@@ -972,7 +972,7 @@
         "ja": "アヤメ",
         "en": "Iris"
       },
-      "icon": "images/characters/char_20003.jpg",
+      "icon": "images/characters/char_20003.png",
       "descriptions": {
         "mc1": {
           "ja": "アヤメの通常攻撃命中時、次に発動する主力スキルのダメージが<span style='color: #0abec5;'>1%</span>増加する。この効果は20回重複でき、主力スキルを発動するとリセットされる。\n20回重複後、次に発動する主力スキルは霜幕の壁に変化し、範囲内に攻撃力の<span style='color: #0abec5;'>323%</span>の水属性ダメージを与える。",
@@ -1110,7 +1110,7 @@
         "ja": "シーミャオ",
         "en": "Shimiao"
       },
-      "icon": "images/characters/char_20004.jpg",
+      "icon": "images/characters/char_20004.png",
       "descriptions": {
         "mc1": {
           "ja": "一式の攻撃回数が<span style='color: #0abec5;'>6</span>回増加する。エリート以上の敵にダメージを与えた時から13秒間、攻撃力が<span style='color: #0abec5;'>1.7%</span>上昇する。この効果は20回重複でき、二式発動時にリセットされる。",
@@ -1248,7 +1248,7 @@
         "ja": "テレサ",
         "en": "Teresa"
       },
-      "icon": "images/characters/char_20005.jpg",
+      "icon": "images/characters/char_20005.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキルのダメージが<span style='color: #0abec5;'>16%</span>増加し、追加で波を発生させるようになる。波は攻撃力の<span style='color: #0abec5;'>125%</span>の水属性のスキルダメージを与え、<span style='color: #6a90e7;'>水属性の印：水流</span>❄️を付与する。",
@@ -1386,7 +1386,7 @@
         "ja": "ナノハ",
         "en": "Nanoha"
       },
-      "icon": "images/characters/char_30001.jpg",
+      "icon": "images/characters/char_30001.png",
       "descriptions": {
         "mc1": {
           "ja": "ナノハの通常攻撃で敵に<span style='color: #0abec5;'>3</span>回ダメージを与えた後、範囲内に攻撃力の<span style='color: #0abec5;'>26.2%</span>の風属性ダメージを追加で与えるようになる。",
@@ -1524,7 +1524,7 @@
         "ja": "セイナ",
         "en": "Noya"
       },
-      "icon": "images/characters/char_30002.jpg",
+      "icon": "images/characters/char_30002.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキルの2段階スキルの昇竜斬が解放される。スキル発動後、一定時間内に再度スキルボタンを押すと発動できる。発動すると、攻撃力の<span style='color: #0abec5;'>86%x3</span>、<span style='color: #0abec5;'>336%</span>の風属性のスキルダメージを与える。",
@@ -1662,7 +1662,7 @@
         "ja": "カナーチェ",
         "en": "Canace"
       },
-      "icon": "images/characters/char_30003.jpg",
+      "icon": "images/characters/char_30003.png",
       "descriptions": {
         "mc1": {
           "ja": "追加で<span style='color: #0abec5;'>3</span>つの飛葉を生成するようになる。",
@@ -1800,7 +1800,7 @@
         "ja": "アンズ",
         "en": "Ann"
       },
-      "icon": "images/characters/char_30004.jpg",
+      "icon": "images/characters/char_30004.png",
       "descriptions": {
         "mc1": {
           "ja": "ポポがフィールドに存在し、アンズがダメージを与えた時、<span style='color: #0abec5;'>25%</span>の確率で爆風が発生するようになる。\n爆風発生時から6秒間、チーム全体の印ダメージが<span style='color: #0abec5;'>51.6%</span>上昇する。",
@@ -1933,12 +1933,150 @@
       }
     },
     {
+      "id": "30005",
+      "name": {
+        "ja": "ナツカ",
+        "en": "Nazuka"
+      },
+      "icon": "images/characters/char_30005.png",
+      "descriptions": {
+        "mc1": {
+          "ja": "作成中",
+          "en": "主力コア素質1"
+        },
+        "mc2": {
+          "ja": "作成中",
+          "en": "主力コア素質2"
+        },
+        "mc3": {
+          "ja": "作成中",
+          "en": "主力コア素質3"
+        },
+        "mc4": {
+          "ja": "作成中",
+          "en": "主力コア素質4"
+        },
+        "ms1": {
+          "ja": "作成中",
+          "en": "主力サブ素質1"
+        },
+        "ms2": {
+          "ja": "作成中",
+          "en": "主力サブ素質2"
+        },
+        "ms3": {
+          "ja": "作成中",
+          "en": "主力サブ素質3"
+        },
+        "ms4": {
+          "ja": "作成中",
+          "en": "主力サブ素質4"
+        },
+        "ms5": {
+          "ja": "作成中",
+          "en": "主力サブ素質5"
+        },
+        "ms6": {
+          "ja": "作成中",
+          "en": "主力サブ素質6"
+        },
+        "ms7": {
+          "ja": "作成中",
+          "en": "主力サブ素質7"
+        },
+        "ms8": {
+          "ja": "作成中",
+          "en": "主力サブ素質8"
+        },
+        "ms9": {
+          "ja": "作成中",
+          "en": "主力サブ素質9"
+        },
+        "ms10": {
+          "ja": "作成中",
+          "en": "主力サブ素質10"
+        },
+        "ms11": {
+          "ja": "作成中",
+          "en": "主力サブ素質11"
+        },
+        "ms12": {
+          "ja": "作成中",
+          "en": "主力サブ素質12"
+        },
+        "sc1": {
+          "ja": "作成中",
+          "en": "支援コア素質1"
+        },
+        "sc2": {
+          "ja": "作成中",
+          "en": "支援コア素質2"
+        },
+        "sc3": {
+          "ja": "作成中",
+          "en": "支援コア素質3"
+        },
+        "sc4": {
+          "ja": "作成中",
+          "en": "支援コア素質4"
+        },
+        "ss1": {
+          "ja": "作成中",
+          "en": "支援サブ素質1"
+        },
+        "ss2": {
+          "ja": "作成中",
+          "en": "支援サブ素質2"
+        },
+        "ss3": {
+          "ja": "作成中",
+          "en": "支援サブ素質3"
+        },
+        "ss4": {
+          "ja": "作成中",
+          "en": "支援サブ素質4"
+        },
+        "ss5": {
+          "ja": "作成中",
+          "en": "支援サブ素質5"
+        },
+        "ss6": {
+          "ja": "作成中",
+          "en": "支援サブ素質6"
+        },
+        "ss7": {
+          "ja": "作成中",
+          "en": "支援サブ素質7"
+        },
+        "ss8": {
+          "ja": "作成中",
+          "en": "支援サブ素質8"
+        },
+        "ss9": {
+          "ja": "作成中",
+          "en": "支援サブ素質9"
+        },
+        "ss10": {
+          "ja": "作成中",
+          "en": "支援サブ素質10"
+        },
+        "ss11": {
+          "ja": "作成中",
+          "en": "支援サブ素質11"
+        },
+        "ss12": {
+          "ja": "作成中",
+          "en": "支援サブ素質12"
+        }
+      }
+    },
+    {
       "id": "40001",
       "name": {
         "ja": "グレイ",
         "en": "Gerie"
       },
-      "icon": "images/characters/char_40001.jpg",
+      "icon": "images/characters/char_40001.png",
       "descriptions": {
         "mc1": {
           "ja": "殺伐状態時、グレイの移動速度が<span style='color: #0abec5;'>15%</span>上昇し、通常攻撃ダメージが<span style='color: #0abec5;'>47%</span>増加する。鉄の牢獄の付近にいなくても殺伐状態が持続するようになる。",
@@ -2076,7 +2214,7 @@
         "ja": "ナズナ",
         "en": "Nazuna"
       },
-      "icon": "images/characters/char_40002.jpg",
+      "icon": "images/characters/char_40002.png",
       "descriptions": {
         "mc1": {
           "ja": "ぬいぐるみペンギンのサイズが大幅に大きくなり、移動速度が大幅に上昇する。ぬいぐるみペンギンがダメージを与えた時から3秒間、その敵の地属性被ダメージを<span style='color: #0abec5;'>10%</span>増加させる。この効果は5回重複できる。",
@@ -2214,7 +2352,7 @@
         "ja": "レイセン",
         "en": "Ridge"
       },
-      "icon": "images/characters/char_40003.jpg",
+      "icon": "images/characters/char_40003.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキルは追加で種子を<span style='color: #0abec5;'>1</span>個発射するようになる。",
@@ -2352,7 +2490,7 @@
         "ja": "ミネルバ",
         "en": "Minova"
       },
-      "icon": "images/characters/char_50001.jpg",
+      "icon": "images/characters/char_50001.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキルの3段階スキルの三塁打が解放される。二塁打を発動後、一定時間内に再度スキルボタンを押すと発動できる。発動すると、範囲内に攻撃力の<span style='color: #0abec5;'>320%x2</span>、<span style='color: #0abec5;'>479%</span>の光属性のスキルダメージを与える。\n三塁打持続中、ミネルバはダメージを<span style='color: #0abec5;'>受けない</span>。",
@@ -2490,7 +2628,7 @@
         "ja": "シア",
         "en": "Shia"
       },
-      "icon": "images/characters/char_50002.jpg",
+      "icon": "images/characters/char_50002.png",
       "descriptions": {
         "mc1": {
           "ja": "雪兎の通常攻撃ダメージを与えた時、電音を付与するようになる。電音は<span style='color: #0abec5;'>20</span>まで重複できる。\n上限に達した後、電音をリセットし、攻撃力の<span style='color: #0abec5;'>544%</span>の光属性のスキルダメージを与える。",
@@ -2581,7 +2719,7 @@
           "en": "支援サブ素質2"
         },
         "ss3": {
-          "ja": "シアが<span style='color: #6a90e7;'>光属性の印</span>⚡️を発動させた時から5秒間、夜兔のスキルダメージが<span style='color: #ec6d21;'>34～135%</span>増加する。",
+          "ja": "シアが<span style='color: #6a90e7;'>光属性の印</span>⚡️を発動させた時から5秒間、夜兎のスキルダメージが<span style='color: #ec6d21;'>34～135%</span>増加する。",
           "en": "支援サブ素質3"
         },
         "ss4": {
@@ -2628,7 +2766,7 @@
         "ja": "ティリア",
         "en": "Tilia"
       },
-      "icon": "images/characters/char_50003.jpg",
+      "icon": "images/characters/char_50003.png",
       "descriptions": {
         "mc1": {
           "ja": "防御態勢を取ってダメージを無効にした後、その防御態勢の反撃が強化され、範囲内に攻撃力の<span style='color: #0abec5;'>562%</span>の光属性のスキルダメージを与え、<span style='color: #6a90e7;'>光属性の印：光明</span>⚡️を付与し、8秒間、防御力を<span style='color: #0abec5;'>110</span>低下させるようになる。",
@@ -2766,7 +2904,7 @@
         "ja": "ジンリン",
         "en": "Jinglin"
       },
-      "icon": "images/characters/char_50004.jpg",
+      "icon": "images/characters/char_50004.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキルのクールタイムが<span style='color: #0abec5;'>2</span>秒短縮される。\n主力スキル発動後、自動で敵にダメージを与え続けるようになる。この効果はスキルの発動可能回数を消費し、回数がなくなるまで発動し続ける。",
@@ -2904,7 +3042,7 @@
         "ja": "ラール",
         "en": "Laru"
       },
-      "icon": "images/characters/char_50005.jpg",
+      "icon": "images/characters/char_50005.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキル発動後、雷電エリアを発生させ、10秒間、<span style='color: #0abec5;'>0.5</span>秒ごとに、範囲内に攻撃力の<span style='color: #0abec5;'>35.9%</span>の光属性のスキルダメージを与える。",
@@ -3042,7 +3180,7 @@
         "ja": "ミスティ",
         "en": "Mistique"
       },
-      "icon": "images/characters/char_60001.jpg",
+      "icon": "images/characters/char_60001.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキルのクールタイムが2秒短縮される。\nかぼちゃおばけ消滅時、敵に向かって自爆し、広範囲に攻撃力の<span style='color: #0abec5;'>74%</span>の闇属性の従者ダメージを与える。",
@@ -3180,7 +3318,7 @@
         "ja": "クルニス",
         "en": "Coronis"
       },
-      "icon": "images/characters/char_60002.jpg",
+      "icon": "images/characters/char_60002.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキルの攻撃回数が<span style='color: #0abec5;'>4</span>回増加する。\nスキルダメージが<span style='color: #0abec5;'>27.2%</span>増加する。",
@@ -3318,7 +3456,7 @@
         "ja": "コゼット",
         "en": "Cosette"
       },
-      "icon": "images/characters/char_60003.jpg",
+      "icon": "images/characters/char_60003.png",
       "descriptions": {
         "mc1": {
           "ja": "主力スキルの2連フックのダメージが<span style='color: #0abec5;'>30%</span>増加し、範囲が拡大する。\n主力スキル発動時から8秒間、味方の会心率が<span style='color: #0abec5;'>10%</span>上昇する。",
@@ -3456,7 +3594,7 @@
         "ja": "キャラメル",
         "en": "Caramel"
       },
-      "icon": "images/characters/char_60004.jpg",
+      "icon": "images/characters/char_60004.png",
       "descriptions": {
         "mc1": {
           "ja": "悪魔のスピーカーの近くにいる時、通常攻撃の最終撃が範囲攻撃に変化し、範囲内に攻撃力の<span style='color: #0abec5;'>44.4%</span>の闇属性ダメージを与えるようになる。この効果は<span style='color: #6a90e7;'>闇属性の印：暗影</span>🟣を発動させることができる。",

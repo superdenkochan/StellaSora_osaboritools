@@ -1,5 +1,18 @@
 [
   {
+    "eventId": 1201,
+    "name": {
+      "ja": "夢の先へ-新章追加記念イベント",
+      "en": "Beyond the Dream -Main Story Update Event-"
+    },
+    "startDate": "2025-12-09T05:00:00",
+    "endDate": "2025-12-23T04:59:00",
+    "backgroundImage": "images/events/bg_1201.png",
+    "pointId": 1201,
+    "staminaCost": 30,
+    "pointsPerRun": 500
+  },
+  {
     "eventId": 1101,
     "name": {
       "ja": "私たちのギルド-新章追加記念イベント",
@@ -7,7 +20,7 @@
     },
     "startDate": "2025-11-18T05:00:00",
     "endDate": "2025-12-02T04:59:00",
-    "backgroundImage": "images/events/bg_1101.jpg",
+    "backgroundImage": "images/events/bg_1101.png",
     "pointId": 1101,
     "staminaCost": 30,
     "pointsPerRun": 500

@@ -6,7 +6,7 @@
         "ja": "チーシア",
         "en": "Chixia"
       },
-      "icon": "images/characters/char_10001.jpg",
+      "icon": "images/characters/char_10001.png",
       "role": "versatile",
       "style": "shushu"
     },
@@ -16,7 +16,7 @@
         "ja": "コハク",
         "en": "Amber"
       },
-      "icon": "images/characters/char_10002.jpg",
+      "icon": "images/characters/char_10002.png",
       "role": "vanguard",
       "style": "shushu"
     },
@@ -26,7 +26,7 @@
         "ja": "カシミラ",
         "en": "Kasimira"
       },
-      "icon": "images/characters/char_10003.jpg",
+      "icon": "images/characters/char_10003.png",
       "role": "versatile",
       "style": "boukenka"
     },
@@ -36,7 +36,7 @@
         "ja": "フローラ",
         "en": "Flora"
       },
-      "icon": "images/characters/char_10004.jpg",
+      "icon": "images/characters/char_10004.png",
       "role": "support",
       "style": "shushu"
     },
@@ -46,7 +46,7 @@
         "ja": "フユカ",
         "en": "Fuyuka"
       },
-      "icon": "images/characters/char_10005.jpg",
+      "icon": "images/characters/char_10005.png",
       "role": "vanguard",
       "style": "chiteki"
     },
@@ -56,7 +56,7 @@
         "ja": "フリージア",
         "en": "Freesia"
       },
-      "icon": "images/characters/char_20001.jpg",
+      "icon": "images/characters/char_20001.png",
       "role": "versatile",
       "style": "boukenka"
     },
@@ -66,7 +66,7 @@
         "ja": "チトセ",
         "en": "Chitose"
       },
-      "icon": "images/characters/char_20002.jpg",
+      "icon": "images/characters/char_20002.png",
       "role": "vanguard",
       "style": "chiteki"
     },
@@ -76,7 +76,7 @@
         "ja": "アヤメ",
         "en": "Iris"
       },
-      "icon": "images/characters/char_20003.jpg",
+      "icon": "images/characters/char_20003.png",
       "role": "versatile",
       "style": "dokusou"
     },
@@ -86,7 +86,7 @@
         "ja": "シーミャオ",
         "en": "Shimiao"
       },
-      "icon": "images/characters/char_20004.jpg",
+      "icon": "images/characters/char_20004.png",
       "role": "vanguard",
       "style": "chiteki"
     },
@@ -96,7 +96,7 @@
         "ja": "テレサ",
         "en": "Teresa"
       },
-      "icon": "images/characters/char_20005.jpg",
+      "icon": "images/characters/char_20005.png",
       "role": "support",
       "style": "shikkari"
     },
@@ -106,7 +106,7 @@
         "ja": "ナノハ",
         "en": "Nanoha"
       },
-      "icon": "images/characters/char_30001.jpg",
+      "icon": "images/characters/char_30001.png",
       "role": "vanguard",
       "style": "chiteki"
     },
@@ -116,7 +116,7 @@
         "ja": "セイナ",
         "en": "Noya"
       },
-      "icon": "images/characters/char_30002.jpg",
+      "icon": "images/characters/char_30002.png",
       "role": "vanguard",
       "style": "dokusou"
     },
@@ -126,7 +126,7 @@
         "ja": "カナーチェ",
         "en": "Canace"
       },
-      "icon": "images/characters/char_30003.jpg",
+      "icon": "images/characters/char_30003.png",
       "role": "versatile",
       "style": "boukenka"
     },
@@ -136,9 +136,19 @@
         "ja": "アンズ",
         "en": "Ann"
       },
-      "icon": "images/characters/char_30004.jpg",
+      "icon": "images/characters/char_30004.png",
       "role": "support",
       "style": "boukenka"
+    },
+    {
+      "id": "30005",
+      "name": {
+        "ja": "ナツカ",
+        "en": "Nazuka"
+      },
+      "icon": "images/characters/char_30005.png",
+      "role": "versatile",
+      "style": "shikkari"
     },
     {
       "id": "40001",
@@ -146,7 +156,7 @@
         "ja": "グレイ",
         "en": "Gerie"
       },
-      "icon": "images/characters/char_40001.jpg",
+      "icon": "images/characters/char_40001.png",
       "role": "vanguard",
       "style": "chiteki"
     },
@@ -156,7 +166,7 @@
         "ja": "ナズナ",
         "en": "Nazuna"
       },
-      "icon": "images/characters/char_40002.jpg",
+      "icon": "images/characters/char_40002.png",
       "role": "support",
       "style": "shushu"
     },
@@ -166,7 +176,7 @@
         "ja": "レイセン",
         "en": "Ridge"
       },
-      "icon": "images/characters/char_40003.jpg",
+      "icon": "images/characters/char_40003.png",
       "role": "versatile",
       "style": "shushu"
     },
@@ -176,7 +186,7 @@
         "ja": "ミネルバ",
         "en": "Minova"
       },
-      "icon": "images/characters/char_50001.jpg",
+      "icon": "images/characters/char_50001.png",
       "role": "versatile",
       "style": "shikkari"
     },
@@ -186,7 +196,7 @@
         "ja": "シア",
         "en": "Shia"
       },
-      "icon": "images/characters/char_50002.jpg",
+      "icon": "images/characters/char_50002.png",
       "role": "vanguard",
       "style": "boukenka"
     },
@@ -196,7 +206,7 @@
         "ja": "ティリア",
         "en": "Tilia"
       },
-      "icon": "images/characters/char_50003.jpg",
+      "icon": "images/characters/char_50003.png",
       "role": "support",
       "style": "shikkari"
     },
@@ -206,7 +216,7 @@
         "ja": "ジンリン",
         "en": "Jinglin"
       },
-      "icon": "images/characters/char_50004.jpg",
+      "icon": "images/characters/char_50004.png",
       "role": "versatile",
       "style": "chiteki"
     },
@@ -216,7 +226,7 @@
         "ja": "ラール",
         "en": "Laru"
       },
-      "icon": "images/characters/char_50005.jpg",
+      "icon": "images/characters/char_50005.png",
       "role": "vanguard",
       "style": "boukenka"
     },
@@ -226,7 +236,7 @@
         "ja": "ミスティ",
         "en": "Mistique"
       },
-      "icon": "images/characters/char_60001.jpg",
+      "icon": "images/characters/char_60001.png",
       "role": "versatile",
       "style": "dokusou"
     },
@@ -236,7 +246,7 @@
         "ja": "クルニス",
         "en": "Coronis"
       },
-      "icon": "images/characters/char_60002.jpg",
+      "icon": "images/characters/char_60002.png",
       "role": "versatile",
       "style": "boukenka"
     },
@@ -246,7 +256,7 @@
         "ja": "コゼット",
         "en": "Cosette"
       },
-      "icon": "images/characters/char_60003.jpg",
+      "icon": "images/characters/char_60003.png",
       "role": "support",
       "style": "chiteki"
     },
@@ -256,7 +266,7 @@
         "ja": "キャラメル",
         "en": "Caramel"
       },
-      "icon": "images/characters/char_60004.jpg",
+      "icon": "images/characters/char_60004.png",
       "role": "vanguard",
       "style": "dokusou"
     }

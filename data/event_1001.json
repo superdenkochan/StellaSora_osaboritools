@@ -7,7 +7,7 @@
     },
     "startDate": "2025-10-28T18:00:00",
     "endDate": "2025-11-11T04:59:00",
-    "backgroundImage": "images/events/bg_1001.jpg",
+    "backgroundImage": "images/events/bg_1001.png",
     "pointId": 1001,
     "staminaCost": 30,
     "pointsPerRun": 400
