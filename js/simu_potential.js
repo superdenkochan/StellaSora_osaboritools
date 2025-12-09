@@ -828,6 +828,16 @@ function refreshPotentialDisplay(slot) {
             imageWrapper.classList.toggle('grayed-out-unobtained', !state.obtained);
             imageWrapper.classList.toggle('obtained', state.acquired);
             
+            // ボタンの更新
+            const btn = card.querySelector('.status-btn');
+            if (btn) {
+                btn.textContent = state.obtained 
+                    ? i18n.getText('coreToggle.obtain', 'potential') 
+                    : i18n.getText('coreToggle.notObtain', 'potential');
+                btn.classList.remove('active', 'inactive');
+                btn.classList.add(state.obtained ? 'active' : 'inactive');
+            }
+            
         } else {
             // サブ素質の状態更新
             const state = currentState[slot].subPotentials[potentialId];
@@ -870,10 +880,13 @@ function refreshPotentialDisplay(slot) {
                 countElem.remove();
             }
             
-            // ステータスボタンの更新
+            // ステータスボタンの更新（テキストとクラス両方）
             const btn = card.querySelector('.sub-status-btn');
             if (btn) {
                 btn.textContent = getSubStatusLabel(state.status);
+                // クラスを更新（none, level1, level2, level6）
+                btn.classList.remove('none', 'level1', 'level2', 'level6');
+                btn.classList.add(state.status);
             }
         }
     });
