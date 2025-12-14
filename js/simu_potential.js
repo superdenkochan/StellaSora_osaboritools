@@ -78,8 +78,6 @@ function initPotentialImageSrc(img, charId, potentialId) {
     const langPath = getPotentialImagePath(charId, potentialId, currentLang);
     const commonPath = getPotentialImagePathCommon(charId, potentialId);
     
-    console.log('initPotentialImageSrc:', { charId, potentialId, currentLang, langPath });
-    
     img.src = langPath;
     
     // エラー時のフォールバック処理を設定
@@ -104,40 +102,29 @@ function updatePotentialImageSrc(img, charId, potentialId, targetLang) {
     const newFilename = langPath.split('/').pop();
     const commonFilename = commonPath.split('/').pop();
     
-    console.log('updatePotentialImageSrc:', {
-        charId, potentialId, targetLang,
-        currentFilename, newFilename,
-        langPath
-    });
-    
     // 同じファイル名なら更新しない（ちらつき防止）
     if (currentFilename === newFilename) {
-        console.log('  -> スキップ（同じファイル名）');
         return;
     }
     
     // 共通画像を表示中の場合、言語付き画像があるかチェック
     if (currentFilename === commonFilename) {
-        console.log('  -> 共通画像から言語付き画像をテスト');
         const testImg = new Image();
         testImg.onload = () => { 
-            console.log('  -> 言語付き画像が存在、切り替え:', langPath);
             img.src = langPath; 
         };
         testImg.onerror = () => {
-            console.log('  -> 言語付き画像なし、共通画像を維持');
+            // 言語付き画像なし、共通画像を維持
         };
         testImg.src = langPath;
         return;
     }
     
-    console.log('  -> 言語付きパスを設定:', langPath);
     img.src = langPath;
     
     // エラー時のフォールバック処理
     img.onerror = function() {
         if (this.src.includes('_JP.') || this.src.includes('_EN.')) {
-            console.log('  -> フォールバック: 共通画像へ');
             this.src = commonPath;
         } else {
             this.onerror = null;

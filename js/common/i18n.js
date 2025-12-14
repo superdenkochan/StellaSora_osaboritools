@@ -189,6 +189,9 @@ class I18n {
 // グローバルインスタンス
 const i18n = new I18n();
 
+// window.i18n としてもアクセス可能に
+window.i18n = i18n;
+
 /* i18n初期化関数 */
 async function initI18n(pageName = null) {
     await i18n.loadCommon();
