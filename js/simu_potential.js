@@ -2,7 +2,7 @@
 let charactersData = null; // JSONからキャラクターデータ読み込み
 const MAX_SUB_LEVEL = 6; // サブ素質の最大レベル
 const MAX_CORE_POTENTIALS = 2; // コア素質の最大取得数
-const TOOLTIP_MAX_CHARS = 320; // ツールチップの1行あたりの最大文字数（？）
+
 
 // プリセット名入力用の一時変数
 let pendingPresetNumber = null;
@@ -133,34 +133,10 @@ function updatePotentialImageSrc(img, charId, potentialId, targetLang) {
     };
 }
 
-// Descriptionの取得と文字数制御
+// Descriptionの取得
 function getDescription(character, potentialId) {
     const descData = character.descriptions[potentialId];
-    const desc = (descData ? descData[i18n.getLanguage()] : null) || i18n.getText('messages.noDescription', 'potential');
-    return formatTooltipText(desc, TOOLTIP_MAX_CHARS);
-}
-
-// ツールチップテキストのフォーマット
-function formatTooltipText(text, maxChars) {
-    if (text.length <= maxChars) return text;
-    
-    let result = '';
-    let currentLine = '';
-    
-    for (let i = 0; i < text.length; i++) {
-        currentLine += text[i];
-        
-        if (currentLine.length >= maxChars) {
-            result += currentLine + '\n';
-            currentLine = '';
-        }
-    }
-    
-    if (currentLine.length > 0) {
-        result += currentLine;
-    }
-    
-    return result;
+    return (descData ? descData[i18n.getLanguage()] : null) || i18n.getText('messages.noDescription', 'potential');
 }
 
 // 選択済みキャラクターIDの取得
@@ -230,8 +206,9 @@ function populateCharacterSelects() {
         const clearOption = document.createElement('div');
         clearOption.className = 'character-option';
         clearOption.dataset.value = '';
+        clearOption.dataset.clearOption = 'true';
         clearOption.innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 14px; font-weight: bold; color: #252a42;">
+            <div class="clear-option-text" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 14px; font-weight: bold; color: #252a42;">
                 ${i18n.getText('labels.clear', 'potential')}
             </div>
         `;
@@ -1428,6 +1405,14 @@ function updateLanguageDisplay() {
     
     const lang = i18n.getLanguage();
     
+    // キャラクター選択モーダルの「解除」オプションを更新
+    document.querySelectorAll('.character-option[data-clear-option="true"]').forEach(option => {
+        const textDiv = option.querySelector('.clear-option-text');
+        if (textDiv) {
+            textDiv.textContent = i18n.getText('labels.clear', 'potential');
+        }
+    });
+    
     // キャラクター選択モーダル内のキャラ名を更新
     document.querySelectorAll('.character-option').forEach(option => {
         const charId = option.dataset.value;
@@ -1471,7 +1456,7 @@ function updateLanguageDisplay() {
                     const desc = char.descriptions[potentialId][lang] || '';
                     const tooltip = card.querySelector('.potential-tooltip');
                     if (tooltip) {
-                        tooltip.innerHTML = formatTooltipText(desc, TOOLTIP_MAX_CHARS);
+                        tooltip.innerHTML = desc;
                     }
                 }
             }
@@ -1524,4 +1509,23 @@ function updateLanguageDisplay() {
             }
         }
     });
+    
+    // プリセットモーダルの説明文を更新
+    if (pendingPresetNumber !== null) {
+        updatePresetModalDescription(pendingPresetNumber);
+    }
+    
+    // プリセットの削除ボタンを更新
+    document.querySelectorAll('.btn-delete-preset').forEach(btn => {
+        btn.textContent = i18n.getText('labels.delete', 'potential');
+    });
+}
+
+// プリセットモーダルの説明文を更新する関数
+function updatePresetModalDescription(presetNumber) {
+    const descElem = document.getElementById('preset-modal-description');
+    if (descElem) {
+        const template = i18n.getText('modal.presetName.description', 'potential');
+        descElem.textContent = template.replace('{number}', presetNumber);
+    }
 }

@@ -504,7 +504,8 @@
     border-radius: 4px;
     font-size: 14px;
     white-space: pre-wrap;
-    word-wrap: wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
     width: 245px; /* ゲーム画面意識の幅 */
     z-index: 10003; /* 最前面に表示 */
     opacity: 0;

@@ -283,8 +283,9 @@ function openCommissionModal(slot) {
     // 依頼を外す選択肢
     const clearOption = document.createElement('div');
     clearOption.className = 'commission-option';
+    clearOption.dataset.clearOption = 'commission';
     clearOption.innerHTML = `
-        <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 16px; font-weight: bold; color: #252a42; background: white;">
+        <div class="clear-option-text" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 16px; font-weight: bold; color: #252a42; background: white;">
             ${i18n.getText('labels.clear', 'commission')}
         </div>
     `;
@@ -511,8 +512,9 @@ function openCharacterModal(commissionSlot, position) {
     // 選択解除オプション
     const clearOption = document.createElement('div');
     clearOption.className = 'character-option';
+    clearOption.dataset.clearOption = 'character';
     clearOption.innerHTML = `
-        <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 16px; font-weight: bold; color: #252a42;">
+        <div class="clear-option-text" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 16px; font-weight: bold; color: #252a42;">
             ${i18n.getText('labels.clear', 'commission')}
         </div>
     `;
@@ -1451,6 +1453,29 @@ function handleResetAll() {
 }
 
 function updateLanguageDisplay() {
+    // 解除オプションのテキスト更新
+    document.querySelectorAll('[data-clear-option]').forEach(option => {
+        const textDiv = option.querySelector('.clear-option-text');
+        if (textDiv) {
+            textDiv.textContent = i18n.getText('labels.clear', 'commission');
+        }
+    });
+    
+    // 「?」プレースホルダーの更新（未選択スロット）
+    document.querySelectorAll('.character-slot-item').forEach(slot => {
+        if (!slot.classList.contains('filled') && !slot.classList.contains('anything')) {
+            const placeholder = slot.querySelector('.character-slot-placeholder');
+            if (placeholder) {
+                placeholder.textContent = i18n.getText('labels.placeholder', 'commission');
+            }
+        }
+    });
+    
+    // 削除ボタンの更新
+    document.querySelectorAll('.btn-delete-preset').forEach(btn => {
+        btn.textContent = i18n.getText('labels.delete', 'commission');
+    });
+    
     // 依頼名バッジの更新
     Object.entries(currentState.commissions).forEach(([slot, commission]) => {
         if (commission.categoryId) {

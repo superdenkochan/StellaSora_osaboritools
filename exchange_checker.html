@@ -54,7 +54,10 @@
                 </a></li>
             </ul>
             <div class="header-extra-btns" id="headerExtraBtns">
-                <button id="showChangelog" class="btn btn-info header-extra-btn" data-i18n="buttons.changelog" data-i18n-source="common">更新履歴</button>
+                <button id="showChangelog" class="btn btn-info header-extra-btn">
+                    <span class="text-ja">更新履歴</span>
+                    <span class="text-en">Changelog</span>
+                </button>
             </div>
             <div class="header-lang">
                 <button class="header-lang-btn" id="headerLangBtn">English</button>
@@ -87,9 +90,18 @@
 
     <!-- ページ固有コントロール（ヘッダー下段に移植される） -->
     <div id="pageControls">
-        <button id="resetProgress" class="btn" data-i18n="buttons.resetProgress" data-i18n-source="exchange">進捗リセット</button>
-        <button id="resetAll" class="btn btn-danger" data-i18n="buttons.reset" data-i18n-source="exchange">初期化</button>
-        <button id="showUsage" class="btn btn-info" data-i18n="buttons.usage" data-i18n-source="exchange">使い方</button>
+        <button id="resetProgress" class="btn">
+            <span class="text-ja">進捗リセット</span>
+            <span class="text-en">Reset Progress</span>
+        </button>
+        <button id="resetAll" class="btn btn-danger">
+            <span class="text-ja">初期化</span>
+            <span class="text-en">Reset All</span>
+        </button>
+        <button id="showUsage" class="btn btn-info">
+            <span class="text-ja">使い方</span>
+            <span class="text-en">How to Use</span>
+        </button>
     </div>
 
     <!-- メインコンテンツ -->

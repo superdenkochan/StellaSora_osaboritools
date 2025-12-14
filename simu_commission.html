@@ -51,7 +51,10 @@
                 </a></li>
             </ul>
             <div class="header-extra-btns" id="headerExtraBtns">
-                <button id="showChangelog" class="btn btn-info header-extra-btn" data-i18n="buttons.changelog" data-i18n-source="common">更新履歴</button>
+                <button id="showChangelog" class="btn btn-info header-extra-btn">
+                    <span class="text-ja">更新履歴</span>
+                    <span class="text-en">Changelog</span>
+                </button>
             </div>
             <div class="header-lang">
                 <button class="header-lang-btn" id="headerLangBtn">English</button>
@@ -84,10 +87,22 @@
 
     <!-- ページ固有コントロール（ヘッダー下段に移植される） -->
     <div id="pageControls">
-        <button id="manageOwned" class="btn btn-primary" data-i18n="buttons.manageOwned" data-i18n-source="commission">所持巡遊者の設定</button>
-        <button id="autoAssign" class="btn btn-success" disabled data-i18n="buttons.autoAssign" data-i18n-source="commission">おまかせ</button>
-        <button id="resetAll" class="btn btn-danger" data-i18n="buttons.reset" data-i18n-source="commission">初期化</button>
-        <button id="showUsage" class="btn btn-info" data-i18n="buttons.usage" data-i18n-source="commission">使い方</button>
+        <button id="manageOwned" class="btn btn-primary">
+            <span class="text-ja">所持巡遊者の設定</span>
+            <span class="text-en">Select Trekker</span>
+        </button>
+        <button id="autoAssign" class="btn btn-success" disabled>
+            <span class="text-ja">おまかせ</span>
+            <span class="text-en">Quick Select</span>
+        </button>
+        <button id="resetAll" class="btn btn-danger">
+            <span class="text-ja">初期化</span>
+            <span class="text-en">Reset</span>
+        </button>
+        <button id="showUsage" class="btn btn-info">
+            <span class="text-ja">使い方</span>
+            <span class="text-en">How to Use</span>
+        </button>
     </div>
 
     <!-- メインコンテンツ -->

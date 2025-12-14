@@ -51,7 +51,10 @@
                 </a></li>
             </ul>
             <div class="header-extra-btns" id="headerExtraBtns">
-                <button id="showChangelog" class="btn btn-info header-extra-btn" data-i18n="buttons.changelog" data-i18n-source="common">更新履歴</button>
+                <button id="showChangelog" class="btn btn-info header-extra-btn">
+                    <span class="text-ja">更新履歴</span>
+                    <span class="text-en">Changelog</span>
+                </button>
             </div>
             <div class="header-lang">
                 <button class="header-lang-btn" id="headerLangBtn">English</button>
@@ -86,12 +89,27 @@
     <div id="pageControls">
         <button id="hideUnobtained" class="toggle-button">
             <span class="toggle-checkbox"></span>
-            <span class="toggle-label" data-i18n="buttons.hideUnobtained" data-i18n-source="potential">取得しない素質を非表示</span>
+            <span class="toggle-label">
+                <span class="text-ja">取得しない素質を非表示</span>
+                <span class="text-en">Hide Unobtained</span>
+            </span>
         </button>
-        <button id="resetCount" class="btn" data-i18n="buttons.resetCount" data-i18n-source="potential">カウントリセット</button>
-        <button id="resetAll" class="btn btn-danger" data-i18n="buttons.reset" data-i18n-source="potential">初期化</button>
-        <button id="screenshot" class="btn btn-primary" data-i18n="buttons.screenshot" data-i18n-source="potential">スクショ</button>
-        <button id="showUsage" class="btn btn-info" data-i18n="buttons.usage" data-i18n-source="potential">使い方</button>
+        <button id="resetCount" class="btn">
+            <span class="text-ja">カウントリセット</span>
+            <span class="text-en">Reset Count</span>
+        </button>
+        <button id="resetAll" class="btn btn-danger">
+            <span class="text-ja">初期化</span>
+            <span class="text-en">Reset All</span>
+        </button>
+        <button id="screenshot" class="btn btn-primary">
+            <span class="text-ja">スクショ</span>
+            <span class="text-en">Screenshot</span>
+        </button>
+        <button id="showUsage" class="btn btn-info">
+            <span class="text-ja">使い方</span>
+            <span class="text-en">How to Use</span>
+        </button>
     </div>
 
     <!-- メインコンテンツ -->
@@ -101,11 +119,11 @@
                 <!-- プリセット名表示・編集エリア -->
                 <div id="preset-name-container" style="text-align: center; white-space: nowrap; margin-bottom: 2px; padding: 8px; background: rgba(255,255,255,0.75); border-radius: 4px;">
                     <div id="preset-name-display-area" style="display: flex; align-items: center; justify-content: center; gap: 0px;">
-                        <span style="font-size: 14px; color: #252a42; font-weight: bold;">プリセット名:</span>
-                        <input type="text" id="preset-name-input-inline" maxlength="20" placeholder="（未設定）" 
+                        <span style="font-size: 14px; color: #252a42; font-weight: bold;" data-i18n="labels.presetName" data-i18n-source="potential">プリセット名:</span>
+                        <input type="text" id="preset-name-input-inline" maxlength="20" data-i18n-placeholder="labels.presetNamePlaceholder" data-i18n-source="potential" placeholder="（未設定）" 
                                style="font-size: 14px; color: #40539f; font-weight: bold; border: 2px solid transparent; background: transparent; padding: 0px; width: 300px; text-align: center; outline: none;"
                                readonly>
-                        <button id="preset-name-edit-btn" class="btn" style="padding: 5px 12px; font-size: 14px;">✎ 編集</button>
+                        <button id="preset-name-edit-btn" class="btn" style="padding: 5px 12px; font-size: 14px;" data-i18n="buttons.edit" data-i18n-source="potential">✎ 編集</button>
                     </div>
                 </div>
                 
@@ -124,7 +142,7 @@
                         </div>
                         <div class="character-select-wrapper">
                             <button class="character-select-button" data-slot="main">
-                                <span class="select-text">巡遊者<br>選択</span>
+                                <span class="select-text" data-i18n-html="labels.selectCharacter" data-i18n-source="potential">巡遊者<br>選択</span>
                             </button>
                             <!-- 互換性のため隠しselect -->
                             <select class="character-select" data-slot="main">
@@ -145,7 +163,7 @@
                         </div>
                         <div class="character-select-wrapper">
                             <button class="character-select-button" data-slot="support1">
-                                <span class="select-text">巡遊者<br>選択</span>
+                                <span class="select-text" data-i18n-html="labels.selectCharacter" data-i18n-source="potential">巡遊者<br>選択</span>
                             </button>
                             <select class="character-select" data-slot="support1">
                                 <option value="">巡遊者選択</option>
@@ -165,7 +183,7 @@
                         </div>
                         <div class="character-select-wrapper">
                             <button class="character-select-button" data-slot="support2">
-                                <span class="select-text">巡遊者<br>選択</span>
+                                <span class="select-text" data-i18n-html="labels.selectCharacter" data-i18n-source="potential">巡遊者<br>選択</span>
                             </button>
                             <select class="character-select" data-slot="support2">
                                 <option value="">巡遊者選択</option>
@@ -370,11 +388,11 @@
                 <button class="modal-close">&times;</button>
             </div>
             <div class="modal-body">
-                <p style="margin-bottom: 15px;">プリセット<span id="preset-number-display"></span>の名前を入力してください（最大20文字）</p>
+                <p id="preset-modal-description" style="margin-bottom: 15px;"></p>
                 <input type="text" id="preset-name-input" maxlength="20" style="width: 100%; padding: 10px; font-size: 16px; border: 2px solid #ddd; border-radius: 5px; margin-bottom: 15px;">
                 <div style="display: flex; gap: 10px; justify-content: flex-end;">
-                    <button id="preset-name-cancel" class="btn btn-danger">キャンセル</button>
-                    <button id="preset-name-save" class="btn">保存</button>
+                    <button id="preset-name-cancel" class="btn btn-danger" data-i18n="buttons.cancel">キャンセル</button>
+                    <button id="preset-name-save" class="btn" data-i18n="buttons.save">保存</button>
                 </div>
             </div>
         </div>

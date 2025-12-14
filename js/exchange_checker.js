@@ -648,6 +648,7 @@ function renderMissionsWithAccordion(missions, accordionGroups) {
         const accordionContainer = document.createElement('div');
         accordionContainer.className = 'mission-accordion';
         accordionContainer.dataset.accordionIndex = index;
+        accordionContainer.dataset.titleKey = group.titleKey;
         
         // アコーディオンヘッダー
         const header = document.createElement('div');
@@ -1333,10 +1334,11 @@ function updateLanguageDisplay() {
         }
     }
     
-    // 報酬カードの名前更新
+    // 報酬カードの名前とボタンテキスト更新
     document.querySelectorAll('.reward-item[data-reward-id]').forEach(item => {
         const rewardId = parseInt(item.dataset.rewardId);
         const reward = gameData.exchangeRewards.find(r => r.id === rewardId);
+        const state = rewardStates[rewardId];
         if (reward) {
             const nameElem = item.querySelector('.reward-name');
             if (nameElem) {
@@ -1346,6 +1348,25 @@ function updateLanguageDisplay() {
             if (iconElem) {
                 iconElem.alt = reward.name[lang];
             }
+            // ステータステキスト更新
+            const statusElem = item.querySelector('.reward-status');
+            if (statusElem && state) {
+                statusElem.textContent = state.wanted 
+                    ? i18n.getText('reward.wanted', 'exchange')
+                    : i18n.getText('reward.notWanted', 'exchange');
+            }
+            // ボタンテキスト更新
+            const decreaseBtn = item.querySelector('.reward-btn-decrease');
+            if (decreaseBtn) decreaseBtn.textContent = i18n.getText('reward.decrease', 'exchange');
+            const increaseBtn = item.querySelector('.reward-btn-increase');
+            if (increaseBtn) increaseBtn.textContent = i18n.getText('reward.increase', 'exchange');
+            const buyAllBtn = item.querySelector('.reward-btn-buy-all');
+            if (buyAllBtn) buyAllBtn.textContent = i18n.getText('reward.buyAll', 'exchange');
+            const resetBtn = item.querySelector('.reward-btn-reset');
+            if (resetBtn) resetBtn.textContent = i18n.getText('reward.reset', 'exchange');
+            // 売り切れバッジ
+            const soldOutBadge = item.querySelector('.sold-out-badge');
+            if (soldOutBadge) soldOutBadge.textContent = i18n.getText('reward.soldOut', 'exchange');
         }
     });
     
@@ -1371,5 +1392,38 @@ function updateLanguageDisplay() {
                 nameElem.textContent = mission.name[lang];
             }
         }
+    });
+    
+    // アコーディオンのテキスト更新
+    document.querySelectorAll('.mission-accordion').forEach(accordion => {
+        const header = accordion.querySelector('.mission-accordion-header');
+        if (header) {
+            // タイトルの更新
+            const titleKey = accordion.dataset.titleKey;
+            if (titleKey) {
+                const titleElem = header.querySelector('.accordion-title');
+                if (titleElem) {
+                    titleElem.textContent = i18n.getText(titleKey, 'exchange');
+                }
+            }
+            // 一括ON/OFFボタン
+            const checkAllBtn = header.querySelector('.accordion-check-all');
+            if (checkAllBtn) checkAllBtn.textContent = i18n.getText('accordion.checkAll', 'exchange');
+            const uncheckAllBtn = header.querySelector('.accordion-uncheck-all');
+            if (uncheckAllBtn) uncheckAllBtn.textContent = i18n.getText('accordion.uncheckAll', 'exchange');
+            // アイコン（現在の開閉状態に応じて）
+            const content = accordion.querySelector('.mission-accordion-content');
+            const icon = header.querySelector('.accordion-icon');
+            if (icon && content) {
+                icon.textContent = content.classList.contains('open')
+                    ? i18n.getText('accordion.iconOpen', 'exchange')
+                    : i18n.getText('accordion.iconClosed', 'exchange');
+            }
+        }
+    });
+    
+    // その他セクションタイトル
+    document.querySelectorAll('.mission-section-title').forEach(title => {
+        title.textContent = i18n.getText('accordion.groups.other', 'exchange');
     });
 }
