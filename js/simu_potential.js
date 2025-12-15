@@ -7,6 +7,7 @@ const MAX_CORE_POTENTIALS = 2; // コア素質の最大取得数
 // プリセット名入力用の一時変数
 let pendingPresetNumber = null;
 let currentPresetNumber = null; // 現在読み込み中のプリセット番号
+let isProgrammaticUpdate = false; // プログラム的な更新フラグ
 
 // 素質データの定義（全キャラ共通）
 const POTENTIAL_DEFINITIONS = {
@@ -41,6 +42,7 @@ function getSubStatusLabel(status) {
 
 // 現在の状態を保持
 const currentState = {
+    presetName: '',  // 編集中のプリセット名（一時的）
     main: {
         characterId: null,
         corePotentials: {}, // { potentialId: { obtained: bool, acquired: bool } }
@@ -354,19 +356,49 @@ function setupEventListeners() {
     const presetNameInput = document.getElementById('preset-name-input-inline');
     const editBtn = document.getElementById('preset-name-edit-btn');
     
+    // textarea用の自動高さ調整関数
+    function adjustTextareaHeight() {
+        presetNameInput.style.height = 'auto';
+        presetNameInput.style.height = presetNameInput.scrollHeight + 'px';
+    }
+    
+    // 編集モード開始関数
+    function startEditingPresetName() {
+        presetNameInput.readOnly = false;
+        presetNameInput.style.borderColor = '#252a42';
+        presetNameInput.style.background = 'white';
+        presetNameInput.focus();
+        presetNameInput.select();
+        adjustTextareaHeight();
+        // 編集中はボタンをグレーアウト
+        editBtn.disabled = true;
+        editBtn.style.opacity = '0.5';
+        editBtn.style.cursor = 'not-allowed';
+    }
+    
     editBtn.addEventListener('click', () => {
         if (presetNameInput.readOnly) {
-            // 編集モードに切り替え
-            presetNameInput.readOnly = false;
-            presetNameInput.style.borderColor = '#252a42';
-            presetNameInput.style.background = 'white';
-            presetNameInput.focus();
-            presetNameInput.select();
-            // 編集中はボタンをグレーアウト（確定ボタンはややこしかったからやらない）
-            editBtn.disabled = true;
-            editBtn.style.opacity = '0.5';
-            editBtn.style.cursor = 'not-allowed';
+            startEditingPresetName();
         }
+    });
+    
+    // input時に高さを自動調整、currentState.presetNameに保存
+    presetNameInput.addEventListener('input', () => {
+        // プログラム的な更新の場合はスキップ
+        if (isProgrammaticUpdate) {
+            return;
+        }
+        
+        adjustTextareaHeight();
+        
+        // 編集中の値をcurrentState.presetNameに保存
+        currentState.presetName = presetNameInput.value.trim();
+        
+        // リロード巻き戻り対策：currentStateをlocalStorageに保存
+        saveCurrentState();
+        
+        // 読み込みボタンの状態を更新（現在と比較、変更があれば有効化する）
+        updateLoadButtonsState();
     });
     
     presetNameInput.addEventListener('blur', () => {
@@ -376,8 +408,10 @@ function setupEventListeners() {
         }
     });
     
+    // textareaでのEnterキー制御
     presetNameInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
+            e.preventDefault();
             presetNameInput.blur(); // フォーカスアウトで自動保存
         }
     });
@@ -396,17 +430,8 @@ function setupEventListeners() {
             // クリックされたボタンに active クラスを追加
             this.classList.add('active');
             
-            // ラベルを保存
-            if (currentPresetNumber) {
-                localStorage.setItem(`preset_${currentPresetNumber}_label`, selectedLabel);
-                console.log(`プリセット${currentPresetNumber}のラベルを${selectedLabel}に設定`);
-                
-                // プリセット表示を更新
-                const preset = loadPreset(currentPresetNumber);
-                if (preset) {
-                    updatePresetDisplay(currentPresetNumber, preset);
-                }
-            }
+            // 読み込みボタンの状態を更新（変更があることを反映）
+            updateLoadButtonsState();
         });
     });
 }
@@ -417,27 +442,22 @@ function savePresetNameInline() {
     const editBtn = document.getElementById('preset-name-edit-btn');
     let presetName = presetNameInput.value.trim();
     
-    console.log('プリセット名保存処理開始:', { 
+    console.log('プリセット名編集確定:', { 
         currentPresetNumber, 
         inputValue: presetNameInput.value,
         trimmedValue: presetName 
     });
     
-    // 空欄の場合は（未設定）にする
+    // 空欄の場合はプレースホルダー
     if (presetName === '') {
-        presetName = '';
         presetNameInput.placeholder = i18n.getText('labels.presetNamePlaceholder', 'potential');
     }
     
-    // ローカルストレージに保存（現在読み込み中のプリセット用）
-    if (currentPresetNumber) {
-        localStorage.setItem(`preset_${currentPresetNumber}_name`, presetName);
-        console.log(`プリセット${currentPresetNumber}の名前を保存しました:`, presetName);
-    } else {
-        console.warn('currentPresetNumberがnullのため、プリセット名を保存できませんでした');
-    }
+    // textareaの高さを調整
+    presetNameInput.style.height = 'auto';
+    presetNameInput.style.height = presetNameInput.scrollHeight + 'px';
     
-    // 編集モードを終了
+    // 編集モードを終了（プリセットへの保存はしない）
     presetNameInput.readOnly = true;
     presetNameInput.style.borderColor = 'transparent';
     presetNameInput.style.background = 'transparent';
@@ -446,6 +466,9 @@ function savePresetNameInline() {
     editBtn.disabled = false;
     editBtn.style.opacity = '1';
     editBtn.style.cursor = 'pointer';
+    
+    // 読み込みボタンの状態を更新（変更があれば有効化）
+    updateLoadButtonsState();
 }
 
 // キャラクター選択時の処理
@@ -730,6 +753,12 @@ function createPotentialCard(character, potentialId, slot, type) {
 
 // コア素質のトグル処理
 function handleCoreToggle(slot, potentialId) {
+    // 「取得しない素質を非表示」が有効な場合はクリック無効にする
+    const hideUnobtained = document.getElementById('hideUnobtained')?.classList.contains('active');
+    if (hideUnobtained) {
+        return;
+    }
+    
     const state = currentState[slot].corePotentials[potentialId];
     const newObtained = !state.obtained;
     
@@ -921,6 +950,15 @@ function applyHideUnobtainedFilter() {
 
 function handleHideUnobtained(e) {
     applyHideUnobtainedFilter();
+    
+    // コア素質ボタンの無効化
+    const hideUnobtained = document.getElementById('hideUnobtained').classList.contains('active');
+    if (hideUnobtained) {
+        document.body.classList.add('hide-unobtained-active');
+    } else {
+        document.body.classList.remove('hide-unobtained-active');
+    }
+    
     saveCurrentState();
 }
 
@@ -955,6 +993,7 @@ function handleResetAll() {
     }
     
     // 状態をクリア
+    currentState.presetName = '';
     ['main', 'support1', 'support2'].forEach(slot => {
         currentState[slot].characterId = null;
         currentState[slot].corePotentials = {};
@@ -1017,19 +1056,17 @@ function handleSavePreset(presetNum) {
     
     // カウントをリセットした状態でコピー（素質の現在レベルは保存しない）
     const stateToSave = JSON.parse(JSON.stringify(currentState));
-    Object.values(stateToSave).forEach(slotState => {
-        Object.values(slotState.corePotentials).forEach(state => {
+    ['main', 'support1', 'support2'].forEach(slot => {
+        Object.values(stateToSave[slot].corePotentials).forEach(state => {
             state.acquired = false;
         });
-        Object.values(slotState.subPotentials).forEach(state => {
+        Object.values(stateToSave[slot].subPotentials).forEach(state => {
             state.count = 0;
         });
     });
     
-    // プリセット名を保存（インライン入力されている文字列を取得）
-    const presetNameInput = document.getElementById('preset-name-input-inline');
-    let presetName = presetNameInput.value.trim();
-    console.log(`プリセット${presetNum}保存時のプリセット名:`, presetName);
+    // プリセット名を保存（currentState.presetNameから取得）
+    let presetName = currentState.presetName || '';
     
     // 空欄の場合は空文字列として保存（未設定にする）
     const placeholderText = i18n.getText('labels.presetNamePlaceholder', 'potential');
@@ -1068,18 +1105,22 @@ function handleLoadPreset(presetNum) {
     const preset = loadPreset(presetNum);
     if (!preset) return;
     
-    // 現在の状態が初期状態でない場合は確認
+    // 現在の状態が初期状態でない場合、または変更がある場合は確認
     const isInitialState = !currentState.main.characterId && 
                           !currentState.support1.characterId && 
                           !currentState.support2.characterId;
     
-    if (!isInitialState && JSON.stringify(currentState) !== JSON.stringify(preset)) {
+    // 変更があるかチェック
+    const hasChanges = checkPresetChanges(presetNum);
+    
+    if (!isInitialState && hasChanges) {
         if (!confirm(i18n.getText('messages.confirmPresetLoad', 'potential'))) {
             return;
         }
     }
     
     // プリセットを読み込み
+    currentState.presetName = '';
     Object.assign(currentState, JSON.parse(JSON.stringify(preset)));
     
     // UIを更新
@@ -1106,7 +1147,6 @@ function handleLoadPreset(presetNum) {
     const presetName = localStorage.getItem(`preset_${presetNum}_name`) || '';
     currentPresetNumber = presetNum; // 現在のプリセット番号を保存
     console.log(`プリセット${presetNum}を読み込みました（名前: "${presetName}"）`);
-    console.log('currentPresetNumberを設定:', currentPresetNumber);
     displayPresetName(presetName);
     
     // ラベル選択ボタンの状態を更新
@@ -1130,19 +1170,110 @@ function updateLoadButtonsState() {
             // プリセットが存在しない場合は無効化
             loadBtn.disabled = true;
         } else if (currentPresetNumber === i) {
-            // 現在読み込み中のプリセットは無効化
-            loadBtn.disabled = true;
+            // 現在読み込み中のプリセットの場合、状態を比較
+            const hasChanges = checkPresetChanges(i);
+            // 変更がある場合は有効化、ない場合は無効化
+            loadBtn.disabled = !hasChanges;
         } else {
             // それ以外は有効化
             loadBtn.disabled = false;
         }
     }
 }
+
+// プリセットと現在の状態を比較
+function checkPresetChanges(presetNum) {
+    const preset = loadPreset(presetNum);
+    if (!preset) return false;
+    
+    // キャラクターIDを比較
+    for (const slot of ['main', 'support1', 'support2']) {
+        if (currentState[slot].characterId !== preset[slot].characterId) {
+            return true;
+        }
+    }
+    
+    // 素質の取得状態を比較（acquired以外）
+    for (const slot of ['main', 'support1', 'support2']) {
+        // コア素質のobtained状態を比較
+        const currentCoreKeys = Object.keys(currentState[slot].corePotentials);
+        const presetCoreKeys = Object.keys(preset[slot].corePotentials);
+        
+        if (currentCoreKeys.length !== presetCoreKeys.length) {
+            return true;
+        }
+        
+        for (const key of currentCoreKeys) {
+            const currentObtained = currentState[slot].corePotentials[key]?.obtained || false;
+            const presetObtained = preset[slot].corePotentials[key]?.obtained || false;
+            if (currentObtained !== presetObtained) {
+                return true;
+            }
+        }
+        
+        // サブ素質のstatus状態を比較
+        const currentSubKeys = Object.keys(currentState[slot].subPotentials);
+        const presetSubKeys = Object.keys(preset[slot].subPotentials);
+        
+        if (currentSubKeys.length !== presetSubKeys.length) {
+            return true;
+        }
+        
+        for (const key of currentSubKeys) {
+            const currentStatus = currentState[slot].subPotentials[key]?.status || 'none';
+            const presetStatus = preset[slot].subPotentials[key]?.status || 'none';
+            if (currentStatus !== presetStatus) {
+                return true;
+            }
+        }
+    }
+    
+    // プリセット名を比較（currentState.presetName vs 保存済）
+    const currentPresetName = currentState.presetName || '';
+    const savedPresetName = localStorage.getItem(`preset_${presetNum}_name`) || '';
+    if (currentPresetName !== savedPresetName) {
+        return true;
+    }
+    
+    // ラベルを比較
+    const currentLabel = document.querySelector('.label-select-btn.active')?.dataset.label || 'none';
+    const savedLabel = localStorage.getItem(`preset_${presetNum}_label`) || 'none';
+    if (currentLabel !== savedLabel) {
+        return true;
+    }
+    
+    return false;
+}
+
 function displayPresetName(name) {
     const input = document.getElementById('preset-name-input-inline');
     if (input) {
+        // プログラム的な更新フラグを立てる
+        isProgrammaticUpdate = true;
+        
+        // 値を設定（空文字列でも明示的に設定）
         input.value = name || '';
-        input.placeholder = name ? '' : i18n.getText('labels.presetNamePlaceholder', 'potential');
+        
+        // currentState.presetNameも更新
+        currentState.presetName = name || '';
+        
+        // textareaの高さを調整
+        input.style.height = 'auto';
+        input.style.height = input.scrollHeight + 'px';
+        
+        // プレースホルダーの設定
+        if (name && name.trim() !== '') {
+            // 名前がある場合はプレースホルダーを空にする
+            input.placeholder = '';
+        } else {
+            // 名前が空の場合はプレースホルダーを設定
+            input.placeholder = i18n.getText('labels.presetNamePlaceholder', 'potential');
+        }
+        
+        // フラグを戻す（非同期処理のため次のイベントループで）
+        setTimeout(() => {
+            isProgrammaticUpdate = false;
+        }, 0);
     }
 }
 
@@ -1205,11 +1336,24 @@ function deletePreset(presetNum) {
     localStorage.removeItem(`preset_${presetNum}_name`);
     localStorage.removeItem(`preset_${presetNum}_label`);
     
-    // プリセット表示を更新
+    // プリセット表示を更新（初期状態に戻す）
     const presetItem = document.querySelector(`.preset-item[data-preset="${presetNum}"]`);
     if (presetItem) {
+        // アイコンを非表示
         const iconImg = presetItem.querySelector('.preset-icon');
         iconImg.style.display = 'none';
+        
+        // ラベル画像を削除
+        const existingLabel = presetItem.querySelector('.preset-label');
+        if (existingLabel) {
+            existingLabel.remove();
+        }
+        
+        // プリセット番号を表示
+        const presetNumber = presetItem.querySelector('.preset-number');
+        if (presetNumber) {
+            presetNumber.style.display = 'block';
+        }
     }
     
     // 削除ボタンを更新
@@ -1264,6 +1408,9 @@ function saveCurrentState() {
     };
     localStorage.setItem('currentState', JSON.stringify(stateToSave));
     console.log('現在の状態を保存しました（プリセット番号:', currentPresetNumber, '）');
+    
+    // 読み込みボタンの状態を更新（変更検知）
+    updateLoadButtonsState();
 }
 
 function loadCurrentState() {
@@ -1275,7 +1422,8 @@ function loadCurrentState() {
         Object.assign(currentState, {
             main: savedState.main,
             support1: savedState.support1,
-            support2: savedState.support2
+            support2: savedState.support2,
+            presetName: savedState.presetName || ''  // 編集中のプリセット名を復元
         });
         
         // UIに反映
@@ -1293,8 +1441,10 @@ function loadCurrentState() {
         if (savedState.hideUnobtained !== undefined) {
             if (savedState.hideUnobtained) {
                 document.getElementById('hideUnobtained').classList.add('active');
+                document.body.classList.add('hide-unobtained-active');
             } else {
                 document.getElementById('hideUnobtained').classList.remove('active');
+                document.body.classList.remove('hide-unobtained-active');
             }
         }
         
@@ -1303,15 +1453,36 @@ function loadCurrentState() {
             currentPresetNumber = savedState.currentPresetNumber;
             console.log('現在のプリセット番号を復元:', currentPresetNumber);
             
-            // プリセット名を表示
+            // プリセット名を表示（currentState.presetNameから）
             if (currentPresetNumber) {
-                const presetName = localStorage.getItem(`preset_${currentPresetNumber}_name`) || '';
-                displayPresetName(presetName);
-                console.log('プリセット名を復元:', presetName);
+                // 編集中のプリセット名を表示（リロード時は保存内容よりこっちを優先）
+                const presetName = currentState.presetName || '';
+                
+                // プリセット名を即設定
+                const input = document.getElementById('preset-name-input-inline');
+                if (input) {
+                    // プログラム的な更新フラグを立てる
+                    isProgrammaticUpdate = true;
+                    
+                    input.value = presetName;
+                    input.placeholder = presetName ? '' : i18n.getText('labels.presetNamePlaceholder', 'potential');
+                    
+                    // textareaの高さを調整
+                    input.style.height = 'auto';
+                    input.style.height = input.scrollHeight + 'px';
+                    
+                    // フラグを戻す
+                    setTimeout(() => {
+                        isProgrammaticUpdate = false;
+                    }, 0);
+                }
+                
+                console.log('プリセット名を復元:', currentPresetNumber, presetName);
                 
                 // ラベル選択ボタンの状態を復元
                 updateLabelSelector(currentPresetNumber);
             }
+
         }
         
         // ドロップダウンを更新

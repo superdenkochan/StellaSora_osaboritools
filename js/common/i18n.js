@@ -136,6 +136,11 @@ class I18n {
         
         // data-i18n-placeholder属性
         document.querySelectorAll('[data-i18n-placeholder]').forEach(elem => {
+            // プリセット名入力欄は除外（JavaScriptで管理）
+            if (elem.id === 'preset-name-input-inline') {
+                return;
+            }
+            
             const key = elem.getAttribute('data-i18n-placeholder');
             const source = elem.getAttribute('data-i18n-source') || 'common';
             const text = this.getText(key, source);
