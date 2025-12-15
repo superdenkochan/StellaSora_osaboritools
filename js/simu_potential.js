@@ -172,6 +172,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.addEventListener('languageChanged', () => {
         updateLanguageDisplay();
     });
+    
+    // ラベル選択ボタンの初期状態を設定
+    if (!currentPresetNumber) {
+        document.querySelector(".label-select-btn[data-label=\"none\"]")?.classList.add("active");
+    }
 });
 
 // データ読み込み
@@ -375,6 +380,34 @@ function setupEventListeners() {
         if (e.key === 'Enter') {
             presetNameInput.blur(); // フォーカスアウトで自動保存
         }
+    });
+    
+    // ラベル選択ボタン
+    document.querySelectorAll('.label-select-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const selectedLabel = this.dataset.label;
+            
+            // 全てのボタンから active クラスを削除
+            document.querySelectorAll('.label-select-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+            
+            // クリックされたボタンに active クラスを追加
+            this.classList.add('active');
+            
+            // ラベルを保存
+            if (currentPresetNumber) {
+                localStorage.setItem(`preset_${currentPresetNumber}_label`, selectedLabel);
+                console.log(`プリセット${currentPresetNumber}のラベルを${selectedLabel}に設定`);
+                
+                // プリセット表示を更新
+                const preset = loadPreset(currentPresetNumber);
+                if (preset) {
+                    updatePresetDisplay(currentPresetNumber, preset);
+                }
+            }
+        });
     });
 }
 
@@ -946,6 +979,12 @@ function handleResetAll() {
     // プリセット名を空に
     displayPresetName('');
     
+    // ラベル選択をリセット
+    document.querySelectorAll(".label-select-btn").forEach(btn => {
+        btn.classList.remove("active");
+    });
+    document.querySelector(".label-select-btn[data-label=\"none\"]")?.classList.add("active");
+    
     // ドロップダウンを更新
     updateAllModals();
     
@@ -955,7 +994,7 @@ function handleResetAll() {
 
 // プリセット管理
 function initializePresets() {
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 12; i++) {
         const preset = loadPreset(i);
         if (preset) {
             updatePresetDisplay(i, preset);
@@ -1001,6 +1040,11 @@ function handleSavePreset(presetNum) {
     // 保存
     localStorage.setItem(`preset_${presetNum}`, JSON.stringify(stateToSave));
     localStorage.setItem(`preset_${presetNum}_name`, presetName);
+    
+    // 現在のラベル選択を保存
+    const activeLabel = document.querySelector(".label-select-btn.active");
+    const currentLabel = activeLabel ? activeLabel.dataset.label : "none";
+    localStorage.setItem(`preset_${presetNum}_label`, currentLabel);
     console.log(`プリセット${presetNum}を保存しました（名前: "${presetName}"）`);
     updatePresetDisplay(presetNum, stateToSave);
     
@@ -1065,6 +1109,9 @@ function handleLoadPreset(presetNum) {
     console.log('currentPresetNumberを設定:', currentPresetNumber);
     displayPresetName(presetName);
     
+    // ラベル選択ボタンの状態を更新
+    updateLabelSelector(presetNum);
+    
     // 読み込みボタンの状態を更新（現在読み込み中のプリセットを無効化）
     updateLoadButtonsState();
     
@@ -1073,7 +1120,7 @@ function handleLoadPreset(presetNum) {
 
 // 読み込みボタンの状態を更新（現在読み込み中のプリセットを無効化）
 function updateLoadButtonsState() {
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 12; i++) {
         const loadBtn = document.querySelector(`.btn-load[data-preset="${i}"]`);
         if (!loadBtn) continue;
         
@@ -1109,6 +1156,9 @@ function updatePresetDisplay(presetNum, preset) {
     if (!presetItem) return;
     
     const iconImg = presetItem.querySelector('.preset-icon');
+    const presetNumber = presetItem.querySelector('.preset-number');
+    
+    // キャラクターアイコンの表示
     if (preset.main.characterId) {
         const character = charactersData.characters.find(c => c.id === preset.main.characterId);
         if (character) {
@@ -1118,7 +1168,33 @@ function updatePresetDisplay(presetNum, preset) {
     } else {
         iconImg.style.display = 'none';
     }
+    
+    // ラベル画像の表示・非表示
+    const savedLabel = localStorage.getItem(`preset_${presetNum}_label`) || 'none';
+    
+    // 既存のラベル画像を削除
+    const existingLabel = presetItem.querySelector('.preset-label');
+    if (existingLabel) {
+        existingLabel.remove();
+    }
+    
+    if (savedLabel !== 'none') {
+        // ラベル画像を表示（プリセット番号を非表示）
+        presetNumber.style.display = 'none';
+        
+        const labelImg = document.createElement('img');
+        labelImg.className = 'preset-label';
+        labelImg.src = `images/others/${savedLabel}.png`;
+        labelImg.alt = savedLabel;
+        
+        const thumbnail = presetItem.querySelector('.preset-thumbnail');
+        thumbnail.appendChild(labelImg);
+    } else {
+        // ラベルなしの場合はプリセット番号を表示
+        presetNumber.style.display = 'block';
+    }
 }
+
 
 function deletePreset(presetNum) {
     if (!confirm(i18n.getText('messages.confirmDelete', 'potential').replace('{number}', presetNum))) {
@@ -1127,6 +1203,7 @@ function deletePreset(presetNum) {
     
     localStorage.removeItem(`preset_${presetNum}`);
     localStorage.removeItem(`preset_${presetNum}_name`);
+    localStorage.removeItem(`preset_${presetNum}_label`);
     
     // プリセット表示を更新
     const presetItem = document.querySelector(`.preset-item[data-preset="${presetNum}"]`);
@@ -1149,7 +1226,7 @@ function deletePreset(presetNum) {
 }
 
 function updatePresetDeleteButtons() {
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 12; i++) {
         const presetItem = document.querySelector(`.preset-item[data-preset="${i}"]`);
         const presetData = localStorage.getItem(`preset_${i}`);
         const actionsDiv = presetItem.querySelector('.preset-actions');
@@ -1231,6 +1308,9 @@ function loadCurrentState() {
                 const presetName = localStorage.getItem(`preset_${currentPresetNumber}_name`) || '';
                 displayPresetName(presetName);
                 console.log('プリセット名を復元:', presetName);
+                
+                // ラベル選択ボタンの状態を復元
+                updateLabelSelector(currentPresetNumber);
             }
         }
         
@@ -1527,5 +1607,21 @@ function updatePresetModalDescription(presetNumber) {
     if (descElem) {
         const template = i18n.getText('modal.presetName.description', 'potential');
         descElem.textContent = template.replace('{number}', presetNumber);
+    }
+}
+
+// ラベル選択ボタンの状態を更新
+function updateLabelSelector(presetNum) {
+    const savedLabel = localStorage.getItem(`preset_${presetNum}_label`) || 'none';
+    
+    // 全てのボタンから active クラスを削除
+    document.querySelectorAll('.label-select-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // 保存されているラベルに対応するボタンを active に
+    const targetBtn = document.querySelector(`.label-select-btn[data-label="${savedLabel}"]`);
+    if (targetBtn) {
+        targetBtn.classList.add('active');
     }
 }

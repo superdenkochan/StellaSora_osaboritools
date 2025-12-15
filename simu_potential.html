@@ -118,7 +118,19 @@
             <div class="characters-area">
                 <!-- プリセット名表示・編集エリア -->
                 <div id="preset-name-container" style="text-align: center; white-space: nowrap; margin-bottom: 2px; padding: 8px; background: rgba(255,255,255,0.75); border-radius: 4px;">
-                    <div id="preset-name-display-area" style="display: flex; align-items: center; justify-content: center; gap: 0px;">
+                    <div id="preset-name-display-area" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                        <!-- ラベル選択アイコン -->
+                        <div id="label-selector" style="display: flex; gap: 4px; align-items: center;">
+                            <button class="label-select-btn" data-label="none" title="" style="width: 48px; height: 48px; padding: 2px; border: 2px solid #ddd; background: #fff; cursor: pointer; border-radius: 4px;">
+                                <span style="font-size: 32px; font-weight: bold; color: #999;">×</span>
+                            </button>
+                            <button class="label-select-btn" data-label="labelA" title="指名手配用" style="width: 48px; height: 48px; padding: 0; border: 2px solid #ddd; background: #fff; cursor: pointer; border-radius: 4px; overflow: hidden;">
+                                <img src="images/others/labelA.png" alt="A" style="width: 100%; height: 100%; object-fit: cover;">
+                            </button>
+                            <button class="label-select-btn" data-label="labelB" title="無限リング用" style="width: 48px; height: 48px; padding: 0; border: 2px solid #ddd; background: #fff; cursor: pointer; border-radius: 4px; overflow: hidden;">
+                                <img src="images/others/labelB.png" alt="B" style="width: 100%; height: 100%; object-fit: cover;">
+                            </button>
+                        </div>
                         <span style="font-size: 14px; color: #252a42; font-weight: bold;" data-i18n="labels.presetName" data-i18n-source="potential">プリセット名:</span>
                         <input type="text" id="preset-name-input-inline" maxlength="20" data-i18n-placeholder="labels.presetNamePlaceholder" data-i18n-source="potential" placeholder="（未設定）" 
                                style="font-size: 14px; color: #40539f; font-weight: bold; border: 2px solid transparent; background: transparent; padding: 0px; width: 300px; text-align: center; outline: none;"
@@ -299,6 +311,26 @@
                         <div class="preset-actions">
                             <button class="btn-save" data-preset="10" data-i18n="buttons.save">保存</button>
                             <button class="btn-load" data-preset="10" disabled data-i18n="buttons.load">読み込み</button>
+                        </div>
+                    </div>
+                    <div class="preset-item" data-preset="11">
+                        <div class="preset-thumbnail">
+                            <img src="" alt="プリセット11" class="preset-icon" style="display: none;">
+                            <span class="preset-number">11</span>
+                        </div>
+                        <div class="preset-actions">
+                            <button class="btn-save" data-preset="11" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="11" disabled data-i18n="buttons.load">読み込み</button>
+                        </div>
+                    </div>
+                    <div class="preset-item" data-preset="12">
+                        <div class="preset-thumbnail">
+                            <img src="" alt="プリセット12" class="preset-icon" style="display: none;">
+                            <span class="preset-number">12</span>
+                        </div>
+                        <div class="preset-actions">
+                            <button class="btn-save" data-preset="12" data-i18n="buttons.save">保存</button>
+                            <button class="btn-load" data-preset="12" disabled data-i18n="buttons.load">読み込み</button>
                         </div>
                     </div>
                 </div>
