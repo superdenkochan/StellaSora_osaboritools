@@ -8,6 +8,14 @@
       "ja": "カウントリセット",
       "en": "Reset Count"
     },
+    "resetOrder": {
+      "ja": "並び順リセット",
+      "en": "Reset Order"
+    },
+    "reorderMode": {
+      "ja": "並べ替えモード",
+      "en": "Reorder Mode"
+    },
     "screenshot": {
       "ja": "スクショ",
       "en": "Screenshot"
@@ -59,6 +67,10 @@
     "confirmReset": {
       "ja": "すべての設定を初期化しますか？",
       "en": "Reset all settings?"
+    },
+    "confirmResetOrder": {
+      "ja": "素質の並び順をリセットしますか？",
+      "en": "Reset potential order?"
     },
     "coreLimitError": {
       "ja": "コア素質は2つまでしか取れないよ！",
@@ -219,6 +231,14 @@
         "ja": "チェックを入れると、「取得しない」素質が非表示になるよ<br>見やすいね！",
         "en": "Check to hide 'Don't Get' potentials<br>Much cleaner!"
       },
+      "reorderTitle": {
+        "ja": "並べ替えモード",
+        "en": "Reorder Mode"
+      },
+      "reorderText": {
+        "ja": "並べ替えモードをオンにすると、素質カードをドラッグ＆ドロップで並び替えられるよ！<br>よく使う素質を左に配置したり、自分好みの順番にカスタマイズできて便利だね<br>並び替えた順番はプリセットに保存されるよ",
+        "en": "Turn on Reorder Mode to drag & drop potential cards!<br>Place frequently-used potentials on the left or customize to your liking<br>Your custom order is saved in presets"
+      },
       "presetTitle": {
         "ja": "プリセット保存・読み込み",
         "en": "Save/Load Presets"
@@ -234,6 +254,14 @@
       "resetCountText": {
         "ja": "3キャラ分のレベルカウントとコア素質のチェックをデフォに戻すよ。<br>塔を登り直す時はコレ！",
         "en": "Reset level counts and core potential checks for all 3 characters.<br>Use this when re-climbing the tower!"
+      },
+      "resetOrderTitle": {
+        "ja": "並び順リセット",
+        "en": "Reset Order"
+      },
+      "resetOrderText": {
+        "ja": "素質の並び順を初期状態に戻すよ<br>保存済のプリセットには影響しないから安心してね",
+        "en": "Reset potential order to default<br>Saved presets remain unchanged"
       },
       "resetAllTitle": {
         "ja": "初期化",

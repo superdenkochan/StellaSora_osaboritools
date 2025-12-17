@@ -298,7 +298,7 @@ function openCommissionModal(slot) {
     
     // 既に選択されている依頼のIDを取得
     const usedCommissions = Object.entries(currentState.commissions)
-        .filter(([s, c]) => s != slot && c.categoryId !== null)
+        .filter(([s, c]) => c.categoryId !== null)
         .map(([s, c]) => c.categoryId);
     
     categoriesData.categories.forEach(category => {
@@ -663,7 +663,7 @@ function getUsedCharacters(excludeCommission = null, excludePosition = null) {
     
     Object.entries(currentState.commissions).forEach(([slot, commission]) => {
         commission.characters.forEach((charId, index) => {
-            if (charId && !(slot == excludeCommission && (index + 1) == excludePosition)) {
+            if (charId) {
                 used.push(charId);
             }
         });

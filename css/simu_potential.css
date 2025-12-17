@@ -441,6 +441,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     display: var(--count-show-circle);
     z-index: 2; /* グレーアウトの上 */
+    pointer-events: none; /* クリック判定なし */
 }
 
 /* レベル6のサムズアップのz-index調整 */
@@ -452,6 +453,7 @@
     height: var(--thumbs-up-size);
     box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
     z-index: 2; /* グレーアウトの上 */
+    pointer-events: none; /* クリック判定なし */
 }
 
 .thumbs-up img {
@@ -1208,5 +1210,76 @@ body.hide-unobtained-active .potential-card[data-type="core"] .status-btn:hover 
     #preset-name-edit-btn {
         font-size: 11px !important;
         padding: 3px 6px !important;
+    }
+}
+
+/* 並べ替えモード用 */
+
+/* ドラッグ中のカーソル */
+body.reorder-mode-active .potential-card {
+    cursor: move;
+    cursor: grab;
+    transition: all 0.2s ease;
+}
+
+body.reorder-mode-active .potential-card:active {
+    cursor: grabbing;
+}
+
+/* ホバー（ツールチップ）無効化 */
+body.reorder-mode-active .potential-image-wrapper:hover {
+    transform: none;
+}
+
+body.reorder-mode-active .potential-image-wrapper:active {
+    transform: none;
+}
+
+/* ドラッグ中のカード（元の位置側） */
+.potential-card.dragging {
+    opacity: 0.2;
+    transform: rotate(7deg);
+}
+
+/* 挿入位置の破線デザイン */
+.potential-card.drop-target-before::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    border-left: 3px dashed #ffffff;
+    border-radius: 0px;
+    z-index: 100;
+}
+
+.potential-card.drop-target-after::after {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    border-right: 3px dashed #ffffff;
+    border-radius: 0px;
+    z-index: 100;
+}
+
+/* 普段のクリックアクションを無効化 */
+body.reorder-mode-active .potential-image-wrapper {
+    pointer-events: none;
+}
+
+body.reorder-mode-active .status-btn,
+body.reorder-mode-active .sub-status-btn {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* スマートフォン・タブレットでスクショボタンを非表示 */
+@media (max-width: 768px) {
+    #screenshot {
+        display: none !important;
     }
 }

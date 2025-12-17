@@ -94,9 +94,20 @@
                 <span class="text-en">Hide Unobtained</span>
             </span>
         </button>
+        <button id="reorderMode" class="toggle-button">
+            <span class="toggle-checkbox"></span>
+            <span class="toggle-label">
+                <span class="text-ja">並べ替えモード</span>
+                <span class="text-en">Reorder Mode</span>
+            </span>
+        </button>
         <button id="resetCount" class="btn">
             <span class="text-ja">カウントリセット</span>
             <span class="text-en">Reset Count</span>
+        </button>
+        <button id="resetOrder" class="btn">
+            <span class="text-ja">並び順リセット</span>
+            <span class="text-en">Reset Order</span>
         </button>
         <button id="resetAll" class="btn btn-danger">
             <span class="text-ja">初期化</span>
@@ -376,6 +387,11 @@
                 <span data-i18n-html="modal.usage.hideText" data-i18n-source="potential">チェックを入れると、「取得しない」素質が非表示になるよ<br>
                 見やすいね！</span></p>
                 
+                <p><strong data-i18n="modal.usage.reorderTitle" data-i18n-source="potential">並べ替えモード</strong><br>
+                <span data-i18n-html="modal.usage.reorderText" data-i18n-source="potential">並べ替えモードをオンにすると、素質カードをドラッグ＆ドロップで並び替えられるよ！<br>
+                よく使う素質を左に配置したり、自分好みの順番にカスタマイズできて便利だね<br>
+                並び替えた順番はプリセットに保存されるよ</span></p>
+                
                 <p><strong data-i18n="modal.usage.presetTitle" data-i18n-source="potential">プリセット保存・読み込み</strong><br>
                 <span data-i18n-html="modal.usage.presetText" data-i18n-source="potential">巡遊者と素質のラベル設定を10個まで保存できるよ。<br>
                 ポチポチしたレベルは保存されないようにしてるけど別にそれでいいよね？<br>
@@ -385,6 +401,10 @@
                 <p><strong data-i18n="modal.usage.resetCountTitle" data-i18n-source="potential">カウントリセット</strong><br>
                 <span data-i18n-html="modal.usage.resetCountText" data-i18n-source="potential">3キャラ分のレベルカウントとコア素質のチェックをデフォに戻すよ。<br>
                 塔を登り直す時はコレ！</span></p>
+                
+                <p><strong data-i18n="modal.usage.resetOrderTitle" data-i18n-source="potential">並び順リセット</strong><br>
+                <span data-i18n-html="modal.usage.resetOrderText" data-i18n-source="potential">素質の並び順を初期状態に戻すよ<br>
+                保存済のプリセットには影響しないから安心してね</span></p>
                 
                 <p><strong data-i18n="modal.usage.resetAllTitle" data-i18n-source="potential">初期化</strong><br>
                 <span data-i18n-html="modal.usage.resetAllText" data-i18n-source="potential">すべての設定を初期状態に戻すよ<br>
