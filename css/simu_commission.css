@@ -23,14 +23,14 @@
 }
 
 .btn-disabled:hover {
-    background: #28a745 !important;
+    background: #ee82ee !important;
     transform: none !important;
 }
 
 /* おまかせボタンの色 */
 #autoAssign {
-    background: #008888;
-    border-color: #008888;
+    background: #ee82ee;
+    border-color: #ee82ee;
     color: white;
 }
 

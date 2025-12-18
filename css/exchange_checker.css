@@ -219,14 +219,14 @@
 
 /* 進捗リセット */
 #resetProgress {
-    background: #20b2aa;
-    border-color: #20b2aa;
+    background: #00bfff;
+    border-color: #00bfff;
     color: white;
 }
 
 #resetProgress:hover {
-    background: #1a958f;
-    border-color: #1a958f;
+    background: #00bfff;
+    border-color: #00bfff;
 }
 
 /* サマリーセクション */

@@ -1,16 +1,5 @@
-/* ===================================
-   素質シミュレーター専用スタイル
-   =================================== */
+/* 素質シミュレーター */
 
-/* カスタムフォント（動作確認だけして実際は入れてない） */
-@font-face {
-    font-family: 'CustomFont';
-    src: url('fonts/keifont.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-/* 素質シミュ専用CSS変数 */
 :root {
     /* サムズアップ画像 */
     --thumbs-up-size: 30px;
@@ -1116,18 +1105,17 @@
     }
 }
 
-/* 個別ボタンの色設定 */
-
+/* ボタンの色設定 */
 /* カウントリセット */
 #resetCount {
-    background: #4169e1;
-    border-color: #4169e1;
+    background: #00bfff;
+    border-color: #00bfff;
     color: white;
 }
 
 #resetCount:hover {
-    background: #365ab8;
-    border-color: #365ab8;
+    background: #00b0d7;
+    border-color: #00b0d7;
 }
 
 /* 並び順リセット */
