@@ -149,8 +149,8 @@
       "en": "Select<br>Trekker"
     },
     "screenshotFooter": {
-      "ja": "ステラソラ おサボりツール - 素質シミュレーター",
-      "en": "StellaSora Laru's Lazy Tools - Potential Simulator"
+      "ja": "Laru's Lazy Tools - 素質シミュレーター",
+      "en": "Laru's Lazy Tools - Potential Simulator"
     },
     "presetNamePlaceholder": {
       "ja": "（未設定）",
@@ -188,36 +188,36 @@
         "en": "Basic Operations"
       },
       "step1Title": {
-        "ja": "1. 巡遊者を選択！",
-        "en": "1. Select Character!"
+        "ja": "1. 巡遊者を選択",
+        "en": "1. Select Trekker"
       },
       "step1Text": {
-        "ja": "アイコンをクリックして選んでね。<br>素質カードは主力と支援で自動で切り替わるから気にしなくていいよ～",
-        "en": "Click the icon to select.<br>Potential cards automatically switch between Main and Support~"
+        "ja": "アイコンをクリックして選んでね！<br>※素質カードは主力と支援枠に合わせて自動で切り替わります",
+        "en": "Click the icon to select!<br>※Potential cards will automatically switch between main and support slots."
       },
       "step2Title": {
         "ja": "2. コア素質",
         "en": "2. Core Potentials"
       },
       "step2Text": {
-        "ja": "「取得する/取得しない」ボタンをクリックして、取りたい素質を選ぼう！<br>ゲームの仕様と同じで2つまでしか選べないようにしてるよ",
-        "en": "Click 'Obtain/Don't Obtain' to select desired potentials!<br>Like the game, you can only select up to 2"
+        "ja": "「取得する/取得しない」ボタンをクリックして、取りたい素質を選ぼう！<br>※ゲームの仕様と同じで、2つまでしか選べないようにしてます",
+        "en": "Click 'Get/Don't Get' button to choose the traits you want!<br>※Similar to the game's specifications, you can only select up to two traits."
       },
       "step3Title": {
         "ja": "3. サブ素質",
         "en": "3. Sub Potentials"
       },
       "step3Text": {
-        "ja": "ボタンをクリックすると<br>[取得しない]→[レベル1]→[レベル1～]→[レベル6]の順に切り替わるよ<br>絶対レベル6にしたい素質だとか、レベル1止めでいい素質とか<br>優先度低いけど可能な限り上げたい素質とかを分けられて便利だね！<br>これやりたいがためにこのツールを作ったし！",
-        "en": "Clicking cycles through:<br>[Don't Get]→[Level 1]→[Level 1+]→[Level 6]<br>Great for distinguishing must-max potentials, level-1-only potentials,<br>and lower priority ones you'd like to raise if possible!<br>This feature is why I made this tool!"
+        "ja": "ボタンをクリックすると<br>[取得しない]→[レベル1]→[レベル1～]→[レベル6]の順に切り替わるよ！<br>最優先で上げたい素質とか、レベル1止めで十分な素質とかを<br>メモするのに使ってね",
+        "en": "Clicking the button cycles through: [Don't Get] → [Level 1] → [Level 1+] → [Level 6]! Use this to note which traits you want to prioritize upgrading, or which traits you're satisfied stopping at Level 1."
       },
       "step4Title": {
         "ja": "4. 素質レベルカウント",
         "en": "4. Potential Level Count"
       },
       "step4Text": {
-        "ja": "素質カードの画像部分をクリックするとレベルが上がっていくよ<br>2窓して登りながらポチポチすると、いちいちゲーム側で確認しなくて便利だね<br>コア素質をクリックするとチェックマークが付くよ",
-        "en": "Click the potential card image to increase the level<br>Handy for dual-screening while climbing without checking the game<br>Clicking core potentials adds a checkmark"
+        "ja": "素質カードの画像部分をクリックするとレベルが上がっていくよ<br>実際にプレイしながらポチポチすると、いちいちゲーム側で確認しなくて便利だね<br>コア素質をクリックするとチェックマークが付くよ",
+        "en": "Click the image part of the potential card to level it up.<br>Clicking while actually playing is convenient since you don't have to keep checking the game interface.<br>Clicking core potential cards will mark it with a checkmark."
       },
       "others": {
         "ja": "その他色々",
@@ -225,7 +225,7 @@
       },
       "hideTitle": {
         "ja": "取得しない素質を非表示",
-        "en": "Hide Unobtained Potentials"
+        "en": "Hide Unobtained Potential cards"
       },
       "hideText": {
         "ja": "チェックを入れると、「取得しない」素質が非表示になるよ<br>見やすいね！",
@@ -236,16 +236,24 @@
         "en": "Reorder Mode"
       },
       "reorderText": {
-        "ja": "並べ替えモードをオンにすると、素質カードをドラッグ＆ドロップで並び替えられるよ！<br>よく使う素質を左に配置したり、自分好みの順番にカスタマイズできて便利だね<br>並び替えた順番はプリセットに保存されるよ",
-        "en": "Turn on Reorder Mode to drag & drop potential cards!<br>Place frequently-used potentials on the left or customize to your liking<br>Your custom order is saved in presets"
+        "ja": "並べ替えモードをオンにしている間、素質カードをドラッグ＆ドロップで並び替えられるよ！<br>並べ終わったらオフにしてね（普段のクリック操作を出来ないようにしてます）<br>カスタマイズした順番はプリセットにも保存されるよ！<br>「並び順リセット」でデフォの順番に戻るよ（保存済のプリセットまではリセットされないよ）",
+        "en": "While Sort Mode is on, you can drag and drop Potential cards to rearrange them!<br>Turn it off when you're done (it disables regular click operations).<br>Your customized order will also be saved as a preset!<br>Use “Reset Order” to go back to the default order (it won't reset saved presets)."
+      },
+      "LabelTitle": {
+        "ja": "指名手配・無限リングラベル",
+        "en": "Boss Blitz/Menace Arena Labels"
+      },
+      "LabelText": {
+        "ja": "主力巡遊者の上にある指名手配・無限リングアイコンをクリックすると<br>プリセット欄にそのアイコンも表示されるよ",
+        "en": "Click Boss Blitz/Menace Arena icon above main trekker,<br>and that icon will also appear in the preset section."
       },
       "presetTitle": {
         "ja": "プリセット保存・読み込み",
         "en": "Save/Load Presets"
       },
       "presetText": {
-        "ja": "巡遊者と素質のラベル設定を10個まで保存できるよ。<br>ポチポチしたレベルは保存されないようにしてるけど別にそれでいいよね？<br>※更新によりプリセットが呼び出せなくなる可能性があるかもしれません。<br>　どうしても忘れたくないプリセットは、スクリーンショットで保管しておくことを推奨します。",
-        "en": "Save up to 10 character and potential label settings.<br>Level counts aren't saved, but that's probably fine right?<br>*Updates may make presets unloadable.<br> Consider using screenshots to preserve important presets."
+        "ja": "巡遊者と素質の設定を12個まで保存できるよ",
+        "en": "You can save up to 12 settings for current Trekker and Potential cards."
       },
       "resetCountTitle": {
         "ja": "カウントリセット",
@@ -255,29 +263,21 @@
         "ja": "3キャラ分のレベルカウントとコア素質のチェックをデフォに戻すよ。<br>塔を登り直す時はコレ！",
         "en": "Reset level counts and core potential checks for all 3 characters.<br>Use this when re-climbing the tower!"
       },
-      "resetOrderTitle": {
-        "ja": "並び順リセット",
-        "en": "Reset Order"
-      },
-      "resetOrderText": {
-        "ja": "素質の並び順を初期状態に戻すよ<br>保存済のプリセットには影響しないから安心してね",
-        "en": "Reset potential order to default<br>Saved presets remain unchanged"
-      },
       "resetAllTitle": {
         "ja": "初期化",
         "en": "Reset All"
       },
       "resetAllText": {
-        "ja": "すべての設定を初期状態に戻すよ<br>具体的に言うと巡遊者スロットが空になって、非表示チェックもなしになるね",
-        "en": "Reset all settings to initial state<br>Character slots become empty and hide checkbox unchecked"
+        "ja": "表示中の設定が全部デフォルトに戻るよ<br>※保存中のプリセットには影響しません",
+        "en": "All displayed settings will be reset to default.<br>※This will not affect any saved presets."
       },
       "screenshotTitle": {
         "ja": "スクショ",
         "en": "Screenshot"
       },
       "screenshotText": {
-        "ja": "現在の画面を画像として保存できるよ。<br>理想のビルド共有する時とかに使ってね",
-        "en": "Save current screen as image.<br>Use for sharing ideal builds!"
+        "ja": "現在の画面を画像として保存できるよ<br>※スマホや小さすぎるウィンドウサイズではボタンが出ません",
+        "en": "You can save the current screen as an image.<br>※The button won't appear on smartphones or windows that are too small."
       }
     }
   }

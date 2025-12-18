@@ -130,15 +130,32 @@
     },
     "versions": [
       {
-        "version": "既知の不具合",
-        "date": "（2025.12.9現在）",
+        "version": "既知の不具合 / Known issues",
+        "date": "（2025.12.18）",
         "items": {
           "ja": [
-            "◆素質シミュレーター<br>- 素質カードの現在レベルと👍️にクリック判定がない<br>- スクショで3人目の素質カードの出力が正常でない<br>- スマホ・タブレットでページ更新するとプリセット名が（未設定）になる<br>- スマホだと素質をタップするたびに表示が崩れる（構造上直せないかも）<br>- タブレットだとページを一生下までスクロールできてしまう",
-            "◆イベント交換所チェッカー<br>- タブレット使用時の商品ラインナップ表示が1行1列になってしまう<br>----------"
+            "素質シミュレーター<br>- スマホで見た時のレイアウトが微妙（すいません）<br>- タブレットだとページを一生下までスクロールできてしまう",
+            "イベント交換所チェッカー<br>- タブレット使用時の商品ラインナップ表示が1行1列になってしまう<br>----------"
           ],
           "en": [
-            ""
+            "Potential Simulator<br>- The layout looks a bit off on smartphones (sorry)<br>- On tablets, you can scroll down forever",
+            "Exchange Checker<br>- Item lineup display becomes one row and one column when using a tablet<br>----------"
+          ]
+        }
+      },
+      {
+        "version": "v1.2.0",
+        "date": "2025.12.18",
+        "items": {
+          "ja": [
+            "機能追加：素質シミュレーター<br>- 並べ替えモードを追加<br>- 指名手配/無限リングのアイコンを各プリセットに付けられる機能を追加<br>- プリセット枠を10→12に拡張<br>- 「取得しない素質を非表示」がオンの時、コア素質の取得する/しないをクリックできないように変更<br>- 英語版との切り替え挙動を改善、英語版の素質説明文を追加",
+            "不具合修正：素質シミュレーター<br>- 巡遊者を選択し直す時、選択中の巡遊者を再度クリックできてしまう問題を修正<br>- プリセット名を変更時、（保存前なのに）読み込み元のプリセット名も連動して勝手に変わってしまう問題を修正<br>- リロード時に、表示中のプリセット名が巻き戻ってしまう問題を修正<br>- スクリーンショットの画質・サイズを改善<br>- スマホ（と横幅が狭いウィンドウ）でスクショボタンが出てこないように調整<br>- 👍️ボタンと現在レベルの領域をクリックしても素質レベルカウントが増えるように修正",
+            "不具合修正：依頼シミュレーター<br>- 依頼や巡遊者を選択し直す時、選択中のものを再度クリックできてしまう問題を修正<br>----------"
+          ],
+          "en": [
+            "Feature Added: Potential Simulator<br>- Added Reorder Mode<br>- Added ability to assign Boss Blitz/Menace Arena icons to each preset<br>- Expanded preset slots from 10 to 12<br>- When “Hide Unobtained” is enabled, clicking the Get/Don't Get buttons for core Potentials is disabled<br> - Improved switching behavior between JP and EN versions; added English Potential descriptions",
+            "Bug Fixes: Potential Simulator<br>- Fixed an issue where you could click the currently selected Trekker again when trying to reselect it<br>- Fixed an issue where changing a preset name would automatically change the source preset name as well (even before saving)<br> - Fixed an issue where the displayed preset name would reset during reloading<br>- Improved screenshot quality and size<br>- Adjusted so the screenshot button does not appear on smartphones (and narrow windows)<br>- Fixed an issue where clicking the thumbs-up button or the current level area did not increase the talent level count",
+            "Bug Fix: Commission Simulator<br>- Fixed an issue where you could click on the currently selected item again when reselecting Commissions or Trekkers<br>----------"
           ]
         }
       },
@@ -147,10 +164,10 @@
         "date": "2025.12.09",
         "items": {
           "ja": [
-            "◆新イベと新巡遊者「ナツカ」対応<br>----------"
+            "新イベと新巡遊者「ナツカ」対応<br>----------"
           ],
           "en": [
-            ""
+            "New Event and New Trekker “Nazuka” Added<br>----------"
           ]
         }
       },
@@ -159,11 +176,12 @@
         "date": "2025.12.07",
         "items": {
           "ja": [
-            "◆素質シミュレーター<br>- 素質説明文を追加（日本語版のみ）<br>  ※巡遊者の昇格ランク最大・スキルレベル10の時の数値を入れています",
-            "◆イベント交換所チェッカー<br>- ポイントが全イベントで共通になっていた不具合を修正<br>----------"
+            "素質シミュレーター<br>- 素質説明文を追加（日本語版のみ）<br>  ※巡遊者の昇格ランク最大・スキルレベル10の時の数値を入れています",
+            "イベント交換所チェッカー<br>- ポイントが全イベントで共通になっていた不具合を修正<br>----------"
           ],
           "en": [
-            ""
+            "Potential Simulator<br>- Added potential descriptions (JP version only)<br>- ※Values reflect max rank and skill level 10 for the Trekker.",
+            "Exchange Checker<br>- Fixed an issue where points were shared across all events<br>----------"
           ]
         }
       },
@@ -172,11 +190,12 @@
         "date": "2025.11.30",
         "items": {
           "ja": [
-            "◆素質シミュレーター<br>- 「取得しない素質を非表示」中、レベル1～6に設定中のサブ素質が「取得しない」にならないように変更（うっかり非表示になる事故への対策）<br>- プリセットに保存時、上書き確認を出すように修正<br>- 削除ボタンの追加（依頼シミュの流用）",
-            "◆全体<br>- 英語版対応の仕込み<br>- スマホ・タブレット対応（暫定）<br>- その他全体的なデザイン改修（暫定）<br>----------"
+            "素質シミュレーター<br>- 「取得しない素質を非表示」中、レベル1～6に設定中のサブ素質が「取得しない」にならないように変更（うっかり非表示になる事故への対策）<br>- プリセットに保存時、上書き確認を出すように修正<br>- 削除ボタンの追加（依頼シミュの流用）",
+            "全体<br>- 英語版対応の仕込み<br>- スマホ・タブレット対応（暫定）<br>- その他全体的なデザイン改修（暫定）<br>----------"
           ],
           "en": [
-            ""
+            "Potential Simulator<br>- Modified so that Sub Potentials set to Levels 1-6 do not become “Don't Get” while “Hide Unobtained” is enabled (prevents accidental hiding)<br>- Fixed to prompt for confirmation when overwriting presets<br>- Added a delete button (reused from the Commission Simulator)",
+            "Overall<br>- Implemented switching functionality between JP and EN versions<br>- Mobile/tablet compatibility (tentative)<br>- Other overall design improvements (tentative)<br>----------"
           ]
         }
       },
@@ -188,7 +207,7 @@
             "依頼シミュレーターを公開<br>----------"
           ],
           "en": [
-            ""
+            "Commission Simulator Released!<br>----------"
           ]
         }
       },
@@ -197,10 +216,10 @@
         "date": "2025.11.21",
         "items": {
           "ja": [
-            "◆イベント交換所チェッカー<br>- 一括購入・在庫リセットボタンの追加<br>- 所持ポイントと在庫が同期するように変更<br>----------"
+            "イベント交換所チェッカー<br>- 一括購入・在庫リセットボタンの追加<br>- 所持ポイントと在庫が同期するように変更<br>----------"
           ],
           "en": [
-            ""
+            "Exchange Checker<br>- Added bulk purchase and inventory reset buttons<br>- Modified to synchronize held points with inventory<br>----------"
           ]
         }
       },
@@ -212,7 +231,7 @@
             "イベント交換所チェッカーを公開<br>----------"
           ],
           "en": [
-            ""
+            "Exchange Checker Released!<br>----------"
           ]
         }
       },
@@ -221,10 +240,10 @@
         "date": "2025.11.18",
         "items": {
           "ja": [
-            "◆素質シミュレーター<br>- フユカに対応。キャラクター選択画面を修正<br>----------"
+            "素質シミュレーター<br>- フユカに対応。キャラクター選択画面を修正<br>----------"
           ],
           "en": [
-            "Added support for Fuyuka. Changed character selection to modal format"
+            "Added New Trekker Fuyuka. Changed character selection to modal format"
           ]
         }
       },
@@ -236,7 +255,7 @@
             "素質シミュレーターを公開"
           ],
           "en": [
-            "Initial release!"
+            "Potential Simulator Released!"
           ]
         }
       }

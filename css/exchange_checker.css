@@ -217,6 +217,18 @@
     flex-shrink: 0;
 }
 
+/* 進捗リセット */
+#resetProgress {
+    background: #20b2aa;
+    border-color: #20b2aa;
+    color: white;
+}
+
+#resetProgress:hover {
+    background: #1a958f;
+    border-color: #1a958f;
+}
+
 /* サマリーセクション */
 .summary-section {
     display: flex;

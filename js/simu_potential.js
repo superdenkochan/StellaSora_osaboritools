@@ -1816,28 +1816,43 @@ function loadCurrentState() {
     }
 }
 
-// スクリーンショット機能
+// スクリーンショット機能（dom-to-image-more版）
 async function handleScreenshot() {
+    // dom-to-image-moreが読み込まれているか確認
+    if (typeof domtoimage === 'undefined') {
+        console.error('dom-to-image-more が読み込まれていません');
+        showError(i18n.getText('messages.screenshotError', 'potential'));
+        return;
+    }
+    
+    // 状態保存用の変数
+    let footer, presetNameContainer, originalPresetDisplay;
+    let wasHideUnobtainedActive = false;
+    let grayedOutClasses = [];
+    let obtainedElements = [];
+    let originalStyles = new Map();
+    
     try {
-        // スクリーンショット用フッターを一時的に表示
-        const footer = document.getElementById('screenshot-footer');
-        footer.style.display = 'block';
+        // === 1. UI要素の準備 ===
         
-        // プリセット名エリアを一時的に非表示
-        const presetNameContainer = document.getElementById('preset-name-container');
-        const originalPresetDisplay = presetNameContainer.style.display;
+        // スクリーンショット用フッターは非表示のまま（Canvas上で描画）
+        footer = document.getElementById('screenshot-footer');
+        // footer.style.display = 'block'; // Canvas上で描画するため不要
+        
+        // プリセット名エリアを非表示
+        presetNameContainer = document.getElementById('preset-name-container');
+        originalPresetDisplay = presetNameContainer.style.display;
         presetNameContainer.style.display = 'none';
         
-        // hideUnobtainedを一時的に解除（真っ黒になる問題の対策）
+        // === 2. hideUnobtainedを一時解除 ===
         const hideUnobtainedBtn = document.getElementById('hideUnobtained');
-        const wasHideUnobtainedActive = hideUnobtainedBtn?.classList.contains('active') || false;
+        wasHideUnobtainedActive = hideUnobtainedBtn?.classList.contains('active') || false;
         if (wasHideUnobtainedActive) {
             document.body.classList.remove('hide-unobtained-active');
         }
         
-        // グレーアウトを一時的に解除
+        // === 3. グレーアウトを一時解除 ===
         const grayedOutElements = document.querySelectorAll('.grayed-out, .grayed-out-unobtained');
-        const grayedOutClasses = [];
         grayedOutElements.forEach((el, index) => {
             grayedOutClasses[index] = {
                 element: el,
@@ -1847,150 +1862,218 @@ async function handleScreenshot() {
             el.classList.remove('grayed-out', 'grayed-out-unobtained');
         });
         
-        // コア素質の取得済みマーク（チェックマーク）を一時的に解除
-        const obtainedElements = document.querySelectorAll('.potential-image-wrapper.obtained');
+        // === 4. 取得済みマーク（チェックマーク）を一時解除 ===
+        obtainedElements = Array.from(document.querySelectorAll('.potential-image-wrapper.obtained'));
         obtainedElements.forEach(el => {
             el.classList.remove('obtained');
         });
         
-        // レンダリングが完了するのを待つ（一律で長めに待機）
-        await new Promise(resolve => setTimeout(resolve, 300));
-        
-        // 背景色を一時的に強制設定（より広範囲に）
+        // === 5. 背景色を強制設定 ===
         const targetElement = document.querySelector('.characters-area');
-        
-        // characters-areaの背景
-        const originalCharactersAreaBg = targetElement.style.background;
-        targetElement.style.background = 'white';
-        
-        // main-contentの背景
         const mainContent = document.querySelector('.main-content');
-        const originalMainContentBg = mainContent ? mainContent.style.background : '';
+        const characterSections = document.querySelectorAll('.character-section');
+        const potentialsContainers = document.querySelectorAll('.potentials-container');
+        
+        // 元のスタイルを保存
+        originalStyles.set(targetElement, targetElement.style.cssText);
+        if (mainContent) {
+            originalStyles.set(mainContent, mainContent.style.cssText);
+        }
+        characterSections.forEach(section => {
+            originalStyles.set(section, section.style.cssText);
+        });
+        potentialsContainers.forEach(container => {
+            originalStyles.set(container, container.style.cssText);
+        });
+        
+        // 背景色を設定
+        targetElement.style.background = 'white';
+        // characters-areaの幅を内容に合わせて広げる
+        targetElement.style.width = 'max-content';
+        targetElement.style.minWidth = '100%';
+        
         if (mainContent) {
             mainContent.style.background = 'white';
         }
-        
-        // 各character-sectionの背景を強制設定
-        const characterSections = document.querySelectorAll('.character-section');
-        const originalBackgrounds = [];
-        characterSections.forEach((section, index) => {
-            originalBackgrounds[index] = section.style.background;
-            // !importantの効果を得るため、cssTextで直接設定
-            section.style.cssText += '; background: rgb(66, 77, 113) !important;';
+        characterSections.forEach(section => {
+            section.style.background = 'rgb(66, 77, 113)';
+            // 折り返し防止: セクションの幅を広げる
+            section.style.width = 'max-content';
+            section.style.minWidth = '100%';
         });
         
-        // requestAnimationFrameを2回呼び出して確実にレンダリング完了を待つ
+        // === 6. 折り返しを無効化 ===
+        potentialsContainers.forEach(container => {
+            container.style.flexWrap = 'nowrap';
+        });
+        
+        // === 6.5. フッターは非表示のままにする（Canvas上で描画するため） ===
+        const screenshotFooter = document.getElementById('screenshot-footer');
+        if (screenshotFooter) {
+            originalStyles.set(screenshotFooter, screenshotFooter.style.cssText);
+            // フッターは非表示のまま（後でCanvas上に描画）
+            screenshotFooter.style.display = 'none';
+        }
+        
+        // === 7. レンダリング完了を待つ ===
         await new Promise(resolve => {
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
-                    // さらに少し待つ
-                    setTimeout(resolve, 100);
+                    setTimeout(resolve, 200);
                 });
             });
         });
         
-        // キャラクターエリアをまずフルサイズでキャプチャ
-        const originalCanvas = await html2canvas(targetElement, {
-            backgroundColor: '#ffffff',
-            logging: true,
-            useCORS: true,
-            scrollY: -window.scrollY,
-            scrollX: -window.scrollX,
-            scale: 1, // scale: 2から1に変更（処理を軽くする）
-            windowWidth: targetElement.scrollWidth,
-            windowHeight: targetElement.scrollHeight
-        });
-        
-        console.log('元のキャンバスサイズ:', originalCanvas.width, 'x', originalCanvas.height);
-        
-        // コンテンツの実際の幅を計算してトリミング
-        let trimmedCanvas = originalCanvas;
-        
-        // 各character-section内の最も右にある素質カードを見つける
-        let maxRightPosition = 0;
-        // characterSectionsは既に上で定義済み
+        // === 8. コンテンツ幅を計算（折り返し解除後） ===
         const targetRect = targetElement.getBoundingClientRect();
+        let maxRightPosition = 0;
         
-        characterSections.forEach(section => {
-            const cards = section.querySelectorAll('.potential-card');
-            cards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const rightPosition = rect.right - targetRect.left;
-                if (rightPosition > maxRightPosition) {
-                    maxRightPosition = rightPosition;
-                }
-            });
+        // 各素質カードの右端を確認
+        const cards = targetElement.querySelectorAll('.potential-card');
+        cards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            const rightPosition = rect.right - targetRect.left;
+            if (rightPosition > maxRightPosition) {
+                maxRightPosition = rightPosition;
+            }
         });
         
-        // フッターの幅も考慮
-        const footerElement = document.getElementById('screenshot-footer');
-        if (footerElement && footerElement.style.display !== 'none') {
-            const footerRect = footerElement.getBoundingClientRect();
-            // フッターのテキスト幅を取得
-            const footerText = footerElement.querySelector('p');
-            if (footerText) {
-                const footerTextRect = footerText.getBoundingClientRect();
-                const footerWidth = footerTextRect.width;
-                // フッターが中央揃えなので、フッター幅の半分 + 左側の位置を計算
-                const footerCenterOffset = footerRect.left - targetRect.left + (footerRect.width / 2);
-                const footerRightPosition = footerCenterOffset + (footerWidth / 2);
-                if (footerRightPosition > maxRightPosition) {
-                    maxRightPosition = footerRightPosition;
-                }
+        // キャラクター画像の幅も確認
+        const charImgs = targetElement.querySelectorAll('.character-img');
+        charImgs.forEach(img => {
+            const rect = img.getBoundingClientRect();
+            const rightPosition = rect.right - targetRect.left;
+            if (rightPosition > maxRightPosition) {
+                maxRightPosition = rightPosition;
             }
-        }
+        });
         
-        // padding（右側の余白）を追加
         const rightPadding = 20;
         const contentWidth = Math.ceil(maxRightPosition + rightPadding);
+        console.log('コンテンツ幅:', contentWidth, 'px (最右端:', maxRightPosition, 'px)');
         
-        console.log('コンテンツ幅:', contentWidth, 'px (最右端:', maxRightPosition, 'px + padding:', rightPadding, 'px)');
+        // === 9. dom-to-image-moreでキャプチャ ===
+        // 実際のコンテンツサイズを再取得（幅調整後）
+        const actualWidth = targetElement.scrollWidth;
+        const actualHeight = targetElement.scrollHeight;
         
-        // scale: 1 でキャプチャしているので、そのままの幅
-        const trimWidth = Math.min(contentWidth, originalCanvas.width);
+        const scale = 2; // 高解像度
+        const options = {
+            width: actualWidth * scale,
+            height: actualHeight * scale,
+            style: {
+                transform: `scale(${scale})`,
+                transformOrigin: 'top left'
+            },
+            quality: 1.0,
+            bgcolor: '#ffffff'
+        };
         
-        if (trimWidth < originalCanvas.width) {
-            console.log('横幅をトリミング:', originalCanvas.width, '→', trimWidth);
-            
-            // 新しいキャンバスを作成してトリミング
-            trimmedCanvas = document.createElement('canvas');
-            trimmedCanvas.width = trimWidth;
-            trimmedCanvas.height = originalCanvas.height;
-            
-            const ctx = trimmedCanvas.getContext('2d');
-            ctx.drawImage(originalCanvas, 0, 0);
-        }
+        console.log('キャプチャ開始... サイズ:', options.width, 'x', options.height);
         
-        // 最大サイズ（1920x1080）
+        const dataUrl = await domtoimage.toPng(targetElement, options);
+        console.log('キャプチャ完了');
+        
+        // === 10. 画像をCanvasに変換 ===
+        const img = new Image();
+        img.src = dataUrl;
+        await new Promise((resolve, reject) => {
+            img.onload = resolve;
+            img.onerror = reject;
+        });
+        
+        console.log('元のキャンバスサイズ:', img.width, 'x', img.height);
+        
+        // === 11. トリミング ===
+        const trimWidth = Math.min(Math.ceil(contentWidth * scale), img.width);
+        
+        // フッターの高さを計算（scale考慮）
+        const footerHeight = 28 * scale; // 元のpaddingとフォントサイズから概算
+        
+        let trimmedCanvas = document.createElement('canvas');
+        trimmedCanvas.width = trimWidth;
+        trimmedCanvas.height = img.height + footerHeight; // フッター分を追加
+        
+        let ctx = trimmedCanvas.getContext('2d');
+        
+        // 元画像を描画（フッター分下にスペースを空ける形ではなく、上に描画）
+        // まず背景を白で塗りつぶす
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, trimmedCanvas.width, trimmedCanvas.height);
+        
+        // === 11.5. フッターをCanvas上部に描画 ===
+        // フッター背景
+        ctx.fillStyle = 'rgba(37, 42, 66, 1)';
+        ctx.fillRect(0, 0, trimWidth, footerHeight);
+        
+        // フッターの下線
+        ctx.fillStyle = '#252a42';
+        ctx.fillRect(0, footerHeight - 2 * scale, trimWidth, 2 * scale);
+        
+        // フッターテキスト
+        const footerText = 'ステラソラ おサボりツール - 素質シミュレーター';
+        ctx.fillStyle = '#ffffff';
+        ctx.font = `${14 * scale}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(footerText, trimWidth / 2, footerHeight / 2);
+        
+        // 元画像をフッターの下に描画
+        ctx.drawImage(img, 0, 0, trimWidth, img.height, 0, footerHeight, trimWidth, img.height);
+        
+        // Canvasの高さを調整（元画像 + フッター）
+        trimmedCanvas.height = img.height + footerHeight;
+        
+        // 再描画（高さ変更後）
+        ctx = trimmedCanvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, trimmedCanvas.width, trimmedCanvas.height);
+        
+        // フッター背景
+        ctx.fillStyle = 'rgba(37, 42, 66, 1)';
+        ctx.fillRect(0, 0, trimWidth, footerHeight);
+        
+        // フッターテキスト
+        ctx.fillStyle = '#ffffff';
+        ctx.font = `${14 * scale}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(footerText, trimWidth / 2, footerHeight / 2);
+        
+        // 元画像をフッターの下に描画
+        ctx.drawImage(img, 0, 0, trimWidth, img.height, 0, footerHeight, trimWidth, img.height);
+        
+        console.log('トリミング後（フッター追加）:', trimmedCanvas.width, 'x', trimmedCanvas.height);
+        
+        // === 12. 最大サイズ（1920x1080）に縮小 ===
         const maxWidth = 1920;
         const maxHeight = 1080;
-        
         let finalCanvas = trimmedCanvas;
         
-        // サイズが1920x1080を超える場合は縮小
         if (trimmedCanvas.width > maxWidth || trimmedCanvas.height > maxHeight) {
-            // 縮小比率を計算
             const widthScale = maxWidth / trimmedCanvas.width;
             const heightScale = maxHeight / trimmedCanvas.height;
-            const scale = Math.min(widthScale, heightScale);
+            const shrinkScale = Math.min(widthScale, heightScale);
             
-            const newWidth = Math.floor(trimmedCanvas.width * scale);
-            const newHeight = Math.floor(trimmedCanvas.height * scale);
+            const newWidth = Math.floor(trimmedCanvas.width * shrinkScale);
+            const newHeight = Math.floor(trimmedCanvas.height * shrinkScale);
             
-            console.log('縮小比率:', scale, '新しいサイズ:', newWidth, 'x', newHeight);
+            console.log('縮小比率:', shrinkScale, '新しいサイズ:', newWidth, 'x', newHeight);
             
-            // 新しいキャンバスを作成して縮小描画
             finalCanvas = document.createElement('canvas');
             finalCanvas.width = newWidth;
             finalCanvas.height = newHeight;
             
-            const ctx = finalCanvas.getContext('2d');
+            ctx = finalCanvas.getContext('2d');
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
             ctx.drawImage(trimmedCanvas, 0, 0, newWidth, newHeight);
         }
         
         console.log('最終キャンバスサイズ:', finalCanvas.width, 'x', finalCanvas.height);
         
-        // スクショ用にグレーアウトしたのを元に戻す
+        // === 13. 状態を復元 ===
+        // グレーアウトを復元
         grayedOutClasses.forEach(item => {
             if (item.hasGrayedOut) {
                 item.element.classList.add('grayed-out');
@@ -2000,75 +2083,81 @@ async function handleScreenshot() {
             }
         });
         
-        // コア素質の取得済みマークを元に戻す
+        // 取得済みマークを復元
         obtainedElements.forEach(el => {
             el.classList.add('obtained');
         });
         
-        // character-sectionの背景色を元に戻す
-        characterSections.forEach((section, index) => {
-            section.style.cssText = section.style.cssText.replace(/;\s*background:\s*rgb\(66,\s*77,\s*113\)\s*!important;?/gi, '');
-            section.style.background = originalBackgrounds[index];
+        // スタイルを復元（折り返し設定も含む）
+        originalStyles.forEach((cssText, element) => {
+            element.style.cssText = cssText;
         });
         
-        // characters-areaの背景を元に戻す
-        targetElement.style.background = originalCharactersAreaBg;
-        
-        // main-contentの背景を元に戻す
-        if (mainContent) {
-            mainContent.style.background = originalMainContentBg;
-        }
-        
-        // hideUnobtainedを元に戻す
+        // hideUnobtainedを復元
         if (wasHideUnobtainedActive) {
             document.body.classList.add('hide-unobtained-active');
         }
         
-        // プリセット名エリアを元に戻す
+        // プリセット名エリアを復元
         presetNameContainer.style.display = originalPresetDisplay;
         
-        // フッターを非表示に戻す
+        // フッターを非表示
         footer.style.display = 'none';
         
-        // Canvasを画像に変換してダウンロード
+        // === 14. ダウンロード ===
         finalCanvas.toBlob((blob) => {
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `osaboritools_potential_${new Date().getTime()}.png`;
+            a.download = `osaboritools_potential_${Date.now()}.png`;
             a.click();
             URL.revokeObjectURL(url);
-        });
+        }, 'image/png');
+        
     } catch (error) {
         console.error('スクリーンショットエラー:', error);
         showError(i18n.getText('messages.screenshotError', 'potential'));
         
-        // エラー時も要素を元に戻す
-        const footer = document.getElementById('screenshot-footer');
-        const presetNameContainer = document.getElementById('preset-name-container');
-        if (footer) footer.style.display = 'none';
-        if (presetNameContainer) presetNameContainer.style.display = '';
-        
-        // hideUnobtainedも元に戻す
-        const hideUnobtainedBtn = document.getElementById('hideUnobtained');
-        if (hideUnobtainedBtn?.classList.contains('active')) {
-            document.body.classList.add('hide-unobtained-active');
+        // エラー時の復元処理
+        try {
+            // グレーアウトを復元
+            grayedOutClasses.forEach(item => {
+                if (item.hasGrayedOut) {
+                    item.element.classList.add('grayed-out');
+                }
+                if (item.hasGrayedOutUnobtained) {
+                    item.element.classList.add('grayed-out-unobtained');
+                }
+            });
+            
+            // 取得済みマークを復元
+            obtainedElements.forEach(el => {
+                el.classList.add('obtained');
+            });
+            
+            // スタイルを復元
+            originalStyles.forEach((cssText, element) => {
+                element.style.cssText = cssText;
+            });
+            
+            // hideUnobtainedを復元
+            if (wasHideUnobtainedActive) {
+                document.body.classList.add('hide-unobtained-active');
+            }
+            
+            // UI要素を復元
+            if (presetNameContainer) {
+                presetNameContainer.style.display = originalPresetDisplay || '';
+            }
+            if (footer) {
+                footer.style.display = 'none';
+            }
+        } catch (restoreError) {
+            console.error('復元処理でエラー:', restoreError);
         }
-        
-        // character-sectionの背景色もリセット
-        const characterSections = document.querySelectorAll('.character-section');
-        characterSections.forEach(section => {
-            section.style.cssText = section.style.cssText.replace(/;\s*background:\s*rgb\(66,\s*77,\s*113\)\s*!important;?/gi, '');
-            section.style.background = '';
-        });
-        
-        // characters-areaとmain-contentもリセット
-        const targetElement = document.querySelector('.characters-area');
-        const mainContent = document.querySelector('.main-content');
-        if (targetElement) targetElement.style.background = '';
-        if (mainContent) mainContent.style.background = '';
     }
 }
+
 
 // エラーメッセージ表示
 function showError(message) {
