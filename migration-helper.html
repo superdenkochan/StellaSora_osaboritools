@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Migration Helper</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .message {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <p>このページはデータ移行用のヘルパーページです。</p>
+        <p>直接アクセスする必要はありません。</p>
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+        
+        // 許可する新ドメインのリスト
+        const ALLOWED_ORIGINS = [
+            'https://osabori-tools.com',           // 新ドメイン
+            'https://osabori-tools.pages.dev',   // Cloudflare Pages（↑へのリダイレクト設定済）
+            'http://192.168.11.12:5500/StellaSora_osaboritools/',            // ローカルテスト用
+            'http://192.168.11.12:5501/StellaSora_osaboritools/',            // ローカルテスト用
+            'http://127.0.0.1:5500',            // ローカルテスト用
+            'http://127.0.0.1:5501'             // ローカルテスト用
+        ];
+        
+        // デバッグモード（本番ではfalseにする）
+        const DEBUG = false;
+        
+        function log(...args) {
+            if (DEBUG) {
+                console.log('[Migration Helper]', ...args);
+            }
+        }
+        
+        // LocalStorageの全データを取得
+        function getAllLocalStorageData() {
+            const data = {};
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                data[key] = value;
+            }
+            
+            log('Collected data keys:', Object.keys(data));
+            return data;
+        }
+        
+        // postMessageリスナー
+        window.addEventListener('message', function(event) {
+            log('Received message from:', event.origin);
+            log('Message data:', event.data);
+            
+            // オリジン検証（セキュリティ）
+            // DEBUGモードでは検証をスキップ
+            if (!DEBUG && !ALLOWED_ORIGINS.includes(event.origin)) {
+                log('Origin not allowed:', event.origin);
+                return;
+            }
+            
+            // リクエストの検証
+            if (!event.data || event.data.type !== 'REQUEST_LOCALSTORAGE') {
+                log('Invalid request type');
+                return;
+            }
+            
+            log('Valid request, sending data...');
+            
+            // LocalStorageデータを収集
+            const storageData = getAllLocalStorageData();
+            
+            // データを返送
+            event.source.postMessage({
+                type: 'LOCALSTORAGE_DATA',
+                data: storageData,
+                success: true,
+                timestamp: Date.now()
+            }, event.origin);
+            
+            log('Data sent successfully');
+        });
+        
+        log('Migration helper initialized');
+        log('Allowed origins:', ALLOWED_ORIGINS);
+    })();
+    </script>
+</body>
+</html>
