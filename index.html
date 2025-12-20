@@ -14,6 +14,10 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/tabs.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <!-- グローバルヘッダー -->
@@ -267,19 +271,39 @@
             }
         });
     </script>
+    
+    <!-- フッター -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <!-- Ko-fi -->
+            <div class="footer-button">
+                <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+                <script type='text/javascript'>kofiwidget2.init('Ko-fi', '#72a4f2', 'E1E61QLW8Q');kofiwidget2.draw();</script>
+            </div>
             
-    <footer style="margin-top: 0px; padding-top: 8px; border-top: 2px solid #ffffff; text-align: center; color: #666;">
-        <div style="margin-bottom: 0px;">
+            <!-- X (Twitter) -->
+            <a href="https://x.com/denko_gaminggal" target="_blank" style="font-size: 14px; color: #ffffff;" rel="noopener noreferrer" class="footer-button footer-button-x" title="X (Twitter)">
+                <i class="fa-brands fa-x-twitter"></i>
+                <span> @denko_gaminggal</span>
+            </a>
+            
+            <!-- note -->
+            <a href="https://note.com/denko_gaminggal" target="_blank" rel="noopener noreferrer" class="footer-button footer-button-note" title="note">
+                <img src="images/others/logo_note.png" alt="note" class="note-logo">
+                <span data-i18n="footer.note">note</span>
+            </a>
+            
+            <!-- プライバシーポリシー -->
+            <a href="privacy.html" target="_blank" style="font-size: 14px; color: #000000;"  rel="noopener noreferrer" class="footer-button footer-button-privacy" data-i18n="footer.privacy">
+                プライバシーポリシー
+            </a>
         </div>
         
-        <p style="color: white; margin-bottom: 10px;">
-            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Ko-fi', '#72a4f2', 'E1E61QLW8Q');kofiwidget2.draw();</script>
-            <a href="https://x.com/denko_gaminggal" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">@denko_gaminggal</a> |
-            <a href="https://marshmallow-qa.com/2vagoau6ezqonbq?t=zH1owd&utm_medium=url_text&utm_source=promotion" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;" data-i18n="footer.marshmallow">マシュマロ（感想・要望など）</a> |
-            <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;" data-i18n="footer.privacy">プライバシーポリシー</a>
-        </p>
-        <p style="color: white;"><span data-i18n="footer.copyright">©Yostar</span><br>
-        <span data-i18n="footer.disclaimer">※本サイトはステラソラの非公式ファンサイトです！</span></p>
+        <div class="footer-copyright">
+            <p><span data-i18n="footer.copyright">©Yostar</span></p>
+            <p><span data-i18n="footer.disclaimer">本サイトはステラソラの非公式ファンサイトであり、Yostarとは一切関係ありません。使用されているゲーム画像、情報の所有権および著作権はそれぞれの権利者に帰属します。</span></p>
+        </div>
     </footer>
+
 </body>
 </html>

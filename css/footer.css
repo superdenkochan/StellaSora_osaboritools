@@ -1,0 +1,163 @@
+/* フッター全体のスタイル */
+.site-footer {
+    margin-top: 0px;
+    padding: 0px 0px 0px;
+    border-top: 2px solid #ffffff;
+    text-align: center;
+    color: #ffffff;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
+}
+
+/* フッターリンク群のコンテナ */
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0px;
+    margin-bottom: 0px;
+}
+
+/* フッターボタンの共通スタイル */
+.footer-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    white-space: nowrap;
+}
+
+/* Ko-fiボタン */
+.footer-button:has(#kofiShortcode) {
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+/* X (Twitter) ボタン */
+.footer-button-x {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.footer-button-x:hover {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.footer-button-x i {
+    font-size: 16px;
+    color: #ffffff;
+}
+
+/* noteボタン */
+.footer-button-note {
+    padding: 0;
+    background: none;
+    border: none;
+    gap: 0;
+}
+
+
+.footer-button-note:hover {
+    background: none;
+    color: #ffffff;
+}
+
+/* noteロゴ画像のスタイル */
+.note-logo {
+    height: 40px;
+    width: auto;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+/* noteボタンホバー時のロゴアニメーション */
+.footer-button-note:hover .note-logo {
+    transform: scale(1.0);
+}
+
+/* プライバシーポリシーボタン */
+.footer-button-privacy {
+    background-color: rgba(255, 255, 255, 1);
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.footer-button-privacy:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/* 著作権表記 */
+.footer-copyright {
+    margin-top: 0px;
+    padding-top: 0px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 14px;
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+.footer-copyright p {
+    margin: 5px 0;
+}
+
+/* モバイル対応 */
+@media screen and (max-width: 768px) {
+    .footer-links {
+        gap: 10px;
+    }
+    
+    .footer-button {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    .footer-button i {
+        font-size: 14px !important;
+    }
+    
+    .footer-button span {
+        font-size: 12px;
+    }
+    
+    .footer-copyright {
+        font-size: 11px;
+    }
+}
+
+/* 小さい画面での調整 */
+@media screen and (max-width: 480px) {
+    .site-footer {
+        padding: 20px 10px 15px;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+    }
+    
+    .footer-button {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+    .footer-button-note {
+        width: auto;
+        max-width: none;
+    }
+    .note-logo {
+        height: 18px;
+    }
+}
