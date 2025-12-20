@@ -852,6 +852,7 @@
     }
     
     .column-left,
+    .column-center,
     .column-right {
         flex: 1;
         width: 100%;
@@ -871,14 +872,6 @@
     .event-select {
         flex: 1 1 100%;
         max-width: 100%;
-    }
-}
-
-/* タブレット専用（うまくいかないしPC版にも干渉してしまうので保留） */
-@media (min-width: 601px) and (max-width: 1024px) {
-    .rewards-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
     }
 }
 
