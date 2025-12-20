@@ -33,14 +33,14 @@
         const ALLOWED_ORIGINS = [
             'https://osabori-tools.com',           // 新ドメイン
             'https://osabori-tools.pages.dev',   // Cloudflare Pages（↑へのリダイレクト設定済）
-            'http://192.168.11.12:5500/StellaSora_osaboritools/',            // ローカルテスト用
-            'http://192.168.11.12:5501/StellaSora_osaboritools/',            // ローカルテスト用
+            'http://192.168.11.12:5500/',            // ローカルテスト用
+            'http://192.168.11.12:5501/',            // ローカルテスト用
             'http://127.0.0.1:5500',            // ローカルテスト用
             'http://127.0.0.1:5501'             // ローカルテスト用
         ];
         
         // デバッグモード（本番ではfalseにする）
-        const DEBUG = false;
+        const DEBUG = true;
         
         function log(...args) {
             if (DEBUG) {

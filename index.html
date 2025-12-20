@@ -51,6 +51,7 @@
                 </a></li>
             </ul>
             <div class="header-extra-btns" id="headerExtraBtns">
+                <div id="kofi-widget-container" style="display: inline-block; margin-right: 8px;"></div>
                 <button id="showChangelog" class="btn btn-info header-extra-btn" data-i18n="buttons.changelog" data-i18n-source="common">更新履歴</button>
             </div>
             <div class="header-lang">
@@ -121,6 +122,22 @@
 
     <!-- メインコンテンツ -->
     <main class="main-content" style="padding: 40px;">
+            <!-- 広告エリア（ページ上部） -->
+            <div style="text-align: center; margin-bottom: 30px;">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2384775227983330"
+                     crossorigin="anonymous"></script>
+                <!-- トップページ上部広告 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-2384775227983330"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
             <p style="font-size: 18px; margin-bottom: 30px;" data-i18n="page.intro" data-i18n-source="index">ステラソラの色々だる～い管理を楽にするツールを作る予定！</p>
             
             <h2 style="font-size: 24px; color: #252a42; margin-bottom: 20px; border-bottom: 2px solid #252a42; padding-bottom: 10px;" data-i18n="section.toolList" data-i18n-source="index">ツール一覧</h2>
@@ -185,16 +202,21 @@
             </ul>
             -->
             
-            <footer style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #e0e0e0; text-align: center; color: #252a42;">
-                <p style="margin-bottom: 10px;">
-                    <span data-i18n="footer.creatorX">制作者のX</span><a href="https://x.com/denko_gaminggal" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">@denko_gaminggal</a> |
-                    <a href="https://marshmallow-qa.com/2vagoau6ezqonbq?t=zH1owd&utm_medium=url_text&utm_source=promotion" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;" data-i18n="footer.marshmallow">マシュマロ（感想・要望など）</a> |
-                    <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;" data-i18n="footer.privacy">プライバシーポリシー</a>
-                </p>
-                <p><span data-i18n="footer.copyright">©Yostar</span><br>
-                <span data-i18n="footer.disclaimer">※本サイトはステラソラの非公式ファンサイトです！</span></p>
-            </footer>
-        </main>
+            <!-- 広告エリア（フッター上） -->
+            <div style="text-align: center; margin: 40px 0;">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2384775227983330"
+                     crossorigin="anonymous"></script>
+                <!-- トップページ下部広告 -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-2384775227983330"
+                     data-ad-slot="9876543210"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
 
     <!-- 更新履歴モーダル -->
     <div id="changelogModal" class="modal">
@@ -245,5 +267,19 @@
             }
         });
     </script>
+            
+    <footer style="margin-top: 0px; padding-top: 8px; border-top: 2px solid #ffffff; text-align: center; color: #666;">
+        <div style="margin-bottom: 0px;">
+        </div>
+        
+        <p style="color: white; margin-bottom: 10px;">
+            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Ko-fi', '#72a4f2', 'E1E61QLW8Q');kofiwidget2.draw();</script>
+            <a href="https://x.com/denko_gaminggal" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;">@denko_gaminggal</a> |
+            <a href="https://marshmallow-qa.com/2vagoau6ezqonbq?t=zH1owd&utm_medium=url_text&utm_source=promotion" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;" data-i18n="footer.marshmallow">マシュマロ（感想・要望など）</a> |
+            <a href="privacy.html" target="_blank" rel="noopener noreferrer" style="color: #0000ee; text-decoration: none; margin: 0 10px;" data-i18n="footer.privacy">プライバシーポリシー</a>
+        </p>
+        <p style="color: white;"><span data-i18n="footer.copyright">©Yostar</span><br>
+        <span data-i18n="footer.disclaimer">※本サイトはステラソラの非公式ファンサイトです！</span></p>
+    </footer>
 </body>
 </html>
