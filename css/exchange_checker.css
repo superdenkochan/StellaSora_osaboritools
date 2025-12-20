@@ -2,7 +2,6 @@
 
 /* 背景画像設定 */
 .main-content {
-    min-height: 100vh;
     position: relative;
     --bg-image: none;
 }
