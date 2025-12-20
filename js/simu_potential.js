@@ -9,7 +9,7 @@ let pendingPresetNumber = null;
 let currentPresetNumber = null; // 現在読み込み中のプリセット番号
 let isProgrammaticUpdate = false; // プログラム的な更新フラグ
 let isReorderMode = false; // 並べ替えモード
-let draggedCard = null; // ドラッグ中のカード
+let sortableInstances = {}; // SortableJSインスタンスを保持
 
 // デフォルトの素質順序を取得
 function getDefaultPotentialOrder(slot) {
@@ -1108,152 +1108,94 @@ function handleReorderMode() {
     }
 }
 
-// ドラッグ&ドロップを有効化
+// 並べ替えモードのドラッグ＆ドロップ
 function enableDragAndDrop() {
-    document.querySelectorAll('.potential-card').forEach(card => {
-        card.draggable = true;
-        card.addEventListener('dragstart', handleDragStart);
-        card.addEventListener('dragover', handleDragOver);
-        card.addEventListener('drop', handleDrop);
-        card.addEventListener('dragend', handleDragEnd);
-        card.addEventListener('dragenter', handleDragEnter);
-        card.addEventListener('dragleave', handleDragLeave);
-    });
-}
-
-// ドラッグ&ドロップを無効化
-function disableDragAndDrop() {
-    document.querySelectorAll('.potential-card').forEach(card => {
-        card.draggable = false;
-        card.removeEventListener('dragstart', handleDragStart);
-        card.removeEventListener('dragover', handleDragOver);
-        card.removeEventListener('drop', handleDrop);
-        card.removeEventListener('dragend', handleDragEnd);
-        card.removeEventListener('dragenter', handleDragEnter);
-        card.removeEventListener('dragleave', handleDragLeave);
-        card.classList.remove('dragging', 'drop-target-before', 'drop-target-after');
-    });
-}
-
-// ドラッグ開始
-function handleDragStart(e) {
-    draggedCard = this;
-    this.classList.add('dragging');
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', this.innerHTML);
-    
-    // カードの中心をマウスカーソルに合わせる
-    // より確実な方法：透明なキャンバスを作成して中央にオフセット
-    const rect = this.getBoundingClientRect();
-    const offsetX = rect.width / 2;
-    const offsetY = rect.height / 2;
-    
-    // ブラウザによってsetDragImageの挙動が異なる場合があるため、
-    // 空の透明画像を使用して確実に中央配置を実現
-    try {
-        // まずカード自体を使用
-        e.dataTransfer.setDragImage(this, offsetX, offsetY);
+    // 各スロットのコンテナ内の.potentials-gridにSortableを適用
+    ['main', 'support1', 'support2'].forEach(slot => {
+        const container = document.getElementById(`${slot}-potentials`);
+        if (!container) return;
         
-        // カード要素を一時的に複製してドラッグイメージとして使用
-        // これにより、より正確な中央配置が可能
-        setTimeout(() => {
-            this.style.transformOrigin = 'center';
-        }, 0);
-    } catch (err) {
-        // setDragImageに失敗した場合はデフォルトの挙動
-        console.warn('setDragImage failed:', err);
-    }
-}
-
-// ドラッグオーバー
-function handleDragOver(e) {
-    if (e.preventDefault) {
-        e.preventDefault();
-    }
-    e.dataTransfer.dropEffect = 'move';
-    return false;
-}
-
-// ドラッグ進入
-function handleDragEnter(e) {
-    if (!draggedCard || this === draggedCard) return;
-    
-    // 同じスロット内かチェック
-    const draggedSlot = draggedCard.dataset.slot;
-    const targetSlot = this.dataset.slot;
-    
-    if (draggedSlot !== targetSlot) return;
-    
-    // カード内での相対位置を計算
-    const rect = this.getBoundingClientRect();
-    const mouseX = e.clientX;
-    const cardCenterX = rect.left + rect.width / 2;
-    
-    // マウスがカードの中心より左なら左側に、右なら右側に挿入
-    if (mouseX < cardCenterX) {
-        this.classList.add('drop-target-before');
-        this.classList.remove('drop-target-after');
-    } else {
-        this.classList.add('drop-target-after');
-        this.classList.remove('drop-target-before');
-    }
-}
-
-// ドラッグ離脱
-function handleDragLeave(e) {
-    // relatedTargetをチェック：カード内の要素に移動する場合は何もしない
-    const relatedTarget = e.relatedTarget;
-    
-    // カード外に出た場合のみクラスを削除
-    if (!this.contains(relatedTarget)) {
-        this.classList.remove('drop-target-before', 'drop-target-after');
-    }
-}
-
-// ドロップ
-function handleDrop(e) {
-    if (e.stopPropagation) {
-        e.stopPropagation();
-    }
-    
-    if (!draggedCard || this === draggedCard) return;
-    
-    // 同じスロット内かチェック
-    const draggedSlot = draggedCard.dataset.slot;
-    const targetSlot = this.dataset.slot;
-    
-    if (draggedSlot !== targetSlot) return;
-    
-    // カード内での相対位置を計算
-    const rect = this.getBoundingClientRect();
-    const mouseX = e.clientX;
-    const cardCenterX = rect.left + rect.width / 2;
-    
-    // DOM要素を移動
-    if (mouseX < cardCenterX) {
-        // 左側に挿入
-        this.parentNode.insertBefore(draggedCard, this);
-    } else {
-        // 右側に挿入
-        this.parentNode.insertBefore(draggedCard, this.nextSibling);
-    }
-    
-    // 新しい順序を保存
-    updatePotentialOrder(draggedSlot);
-    
-    return false;
-}
-
-// ドラッグ終了
-function handleDragEnd(e) {
-    this.classList.remove('dragging');
-    
-    // すべてのドロップターゲット表示をクリア
-    document.querySelectorAll('.potential-card').forEach(card => {
-        card.classList.remove('drop-target-before', 'drop-target-after');
+        // .potentials-gridを取得
+        const grid = container.querySelector('.potentials-grid');
+        if (!grid) return;
+        
+        // 既存のインスタンスがあれば破棄する
+        if (sortableInstances[slot]) {
+            sortableInstances[slot].destroy();
+            sortableInstances[slot] = null;
+        }
+        
+        // SortableJSインスタンスを作成
+        sortableInstances[slot] = new Sortable(grid, {
+            // ドラッグ対象を明示的に指定
+            draggable: '.potential-card',
+            
+            // アニメーション
+            animation: 150,
+            
+            // スタイルクラス
+            ghostClass: 'sortable-ghost',
+            chosenClass: 'sortable-chosen',
+            dragClass: 'sortable-drag',
+            
+            // タッチデバイス対応設定（強化）
+            forceFallback: true,  // 常にフォールバックモードを使用（iPad対策）
+            fallbackOnBody: true,  // ドラッグ中の要素をbodyに追加
+            fallbackTolerance: 5,  // ドラッグ開始の閾値
+            delay: 10,  // 長押しでドラッグ開始（誤操作防止）
+            delayOnTouchOnly: true,  // タッチデバイスのみ遅延適用
+            touchStartThreshold: 5,  // タッチ開始の閾値
+            
+            // 自動スクロール設定
+            scroll: true,
+            scrollSensitivity: 80,  // 画面端からの感度（px）
+            scrollSpeed: 0,  // スクロール速度
+            bubbleScroll: true,  // 親要素もスクロール
+            
+            // ドラッグ開始時
+            onStart: function(evt) {
+                console.log(`[SortableJS] ドラッグ開始: ${evt.item.dataset.potentialId}`);
+            },
+            
+            // ドラッグ終了時のコールバック
+            onEnd: function(evt) {
+                updatePotentialOrder(slot);
+                console.log(`[SortableJS] ${slot}の並び替え完了`);
+            },
+            
+            // ドラッグがキャンセルされた場合
+            onUnchoose: function(evt) {
+                console.log(`[SortableJS] 選択解除: ${evt.item.dataset.potentialId}`);
+            }
+        });
     });
     
-    draggedCard = null;
+    console.log('[SortableJS] ドラッグ&ドロップ有効化');
+}
+
+// ドラッグ&ドロップを無効化（SortableJS版）
+function disableDragAndDrop() {
+    // 全てのSortableインスタンスを破棄
+    Object.keys(sortableInstances).forEach(slot => {
+        if (sortableInstances[slot]) {
+            try {
+                sortableInstances[slot].destroy();
+            } catch (e) {
+                console.warn(`[SortableJS] ${slot}の破棄でエラー:`, e);
+            }
+            sortableInstances[slot] = null;
+        }
+    });
+    
+    // クラスをクリア
+    document.querySelectorAll('.potential-card').forEach(card => {
+        card.classList.remove('sortable-ghost', 'sortable-chosen', 'sortable-drag');
+    });
+    
+    // フォールバック要素が残っていたら削除
+    document.querySelectorAll('.sortable-fallback').forEach(el => el.remove());
+    
+    console.log('[SortableJS] ドラッグ&ドロップ無効化');
 }
 
 // 素質の順序を更新してLocalStorageに保存

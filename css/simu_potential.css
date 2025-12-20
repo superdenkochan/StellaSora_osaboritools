@@ -1287,37 +1287,6 @@ body.reorder-mode-active .potential-image-wrapper:active {
     transform: none;
 }
 
-/* ドラッグ中のカード（元の位置側） */
-.potential-card.dragging {
-    opacity: 0.2;
-    transform: rotate(7deg);
-}
-
-/* 挿入位置の破線デザイン */
-.potential-card.drop-target-before::before {
-    content: '';
-    position: absolute;
-    left: -7px;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    border-left: 3px dashed #ffffff;
-    border-radius: 0px;
-    z-index: 100;
-}
-
-.potential-card.drop-target-after::after {
-    content: '';
-    position: absolute;
-    left: -7px;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    border-right: 3px dashed #ffffff;
-    border-radius: 0px;
-    z-index: 100;
-}
-
 /* 普段のクリックアクションを無効化 */
 body.reorder-mode-active .potential-image-wrapper {
     pointer-events: none;
@@ -1334,4 +1303,31 @@ body.reorder-mode-active .sub-status-btn {
     #screenshot {
         display: none !important;
     }
+}
+
+/* 並べ替えモードのドラッグ */
+
+/* ドラッグ中カードの予測地点（半透明） */
+.sortable-ghost {
+    opacity: 0.3;
+}
+
+/* 選択されたカード（長押し中） */
+.sortable-chosen {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0);
+}
+
+/* ドラッグ中の元カード（透明） */
+.sortable-fallback {
+    opacity: 0 !important;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+    z-index: 99999;
+    pointer-events: none;
+}
+
+/* タッチデバイス用：選択防止 */
+body.reorder-mode-active .potential-card {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
