@@ -14,7 +14,7 @@
         TIMEOUT: 10000,
         
         // デバッグモード（本番ではfalseにする）
-        DEBUG: true,
+        DEBUG: false,
         
         // 移行完了フラグのキー
         MIGRATION_FLAG: 'migration_completed_v1',

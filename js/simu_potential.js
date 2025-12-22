@@ -1004,22 +1004,25 @@ function handleHideUnobtained(e) {
 
 // カウントリセット
 function handleResetCount() {
+    // スロット名の配列を使用（presetNameを除外）
+    const slots = ['main', 'support1', 'support2'];
+    
     // コア素質を全てfalseに
-    Object.values(currentState).forEach(slotState => {
-        Object.values(slotState.corePotentials).forEach(state => {
+    slots.forEach(slot => {
+        Object.values(currentState[slot].corePotentials).forEach(state => {
             state.acquired = false;
         });
     });
     
     // サブ素質のカウントをゼロに
-    Object.values(currentState).forEach(slotState => {
-        Object.values(slotState.subPotentials).forEach(state => {
+    slots.forEach(slot => {
+        Object.values(currentState[slot].subPotentials).forEach(state => {
             state.count = 0;
         });
     });
     
     // 表示を更新
-    ['main', 'support1', 'support2'].forEach(slot => {
+    slots.forEach(slot => {
         refreshPotentialDisplay(slot);
     });
     

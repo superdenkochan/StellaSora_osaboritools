@@ -115,8 +115,8 @@
   },
   "labels": {
     "requirementTitle": {
-      "ja": "条件達成に必要な性格",
-      "en": "Required Trekker Style"
+      "ja": "",
+      "en": ""
     },
     "placeholder": {
       "ja": "?",
@@ -190,8 +190,8 @@
         "en": "Click '?' to assign Trekkers!<br>When Style requirements are met, the badge color changes.<br>If 2 Trekkers satisfy both requirements, the 3rd slot shows 'Free'!"
       },
       "step4Title": {
-        "ja": "4. おまかせ機能（試験中）",
-        "en": "4. Quick Select (Beta)"
+        "ja": "4. おまかせ機能",
+        "en": "4. Quick Select"
       },
       "step4Text": {
         "ja": "「おまかせ」ボタンを押すと、自動で組み合わせを提案してくれるよ！（最大20パターン）<br>出てきた候補をクリックするとそれが設定されるよ<br>全部の条件を満たせなかった時は足りないキャラが出てくるから、<br>設定をいじってもう1回おまかせを実行してみてね<br>6人以上必要な時は多すぎてエラーになるよ",

@@ -827,12 +827,12 @@
 }
 
 .modal-content::-webkit-scrollbar-thumb {
-    background: #667eea;
+    background: #999999;
     border-radius: 10px;
 }
 
 .modal-content::-webkit-scrollbar-thumb:hover {
-    color: #252a42;
+    color: #666666;
 }
 
 /* レスポンシブ対応 */
