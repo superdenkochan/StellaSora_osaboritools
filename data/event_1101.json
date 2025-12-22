@@ -18,8 +18,7 @@
       "ja": "深緑のガラス玉",
       "en": "Glass Marble"
     },
-    "icon": "images/events/item_1101.png",
-    "eventId": 1101
+    "icon": "images/events/item_1101.png"
   },
   "exchangeRewards": [
     {
@@ -30,12 +29,7 @@
       },
       "stock": 1,
       "price": 8000,
-      "icon": "images/exchange/exchange_1101_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "限定",
-        "en": "限定"
-      }
+      "icon": "images/exchange/exchange_1101_s.jpg"
     },
     {
       "id": 1102,
@@ -45,12 +39,7 @@
       },
       "stock": 5,
       "price": 8000,
-      "icon": "images/exchange/exchange_1102_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "限定",
-        "en": "限定"
-      }
+      "icon": "images/exchange/exchange_1102_s.jpg"
     },
     {
       "id": 1103,
@@ -60,12 +49,7 @@
       },
       "stock": 1,
       "price": 5000,
-      "icon": "images/exchange/exchange_1103_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "限定",
-        "en": "限定"
-      }
+      "icon": "images/exchange/exchange_1103_s.jpg"
     },
     {
       "id": 1104,
@@ -75,12 +59,7 @@
       },
       "stock": 12,
       "price": 1600,
-      "icon": "images/exchange/exchange_1104_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "素材",
-        "en": "素材"
-      }
+      "icon": "images/exchange/exchange_1104_s.jpg"
     },
     {
       "id": 1105,
@@ -90,12 +69,7 @@
       },
       "stock": 5,
       "price": 500,
-      "icon": "images/exchange/exchange_1105_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "限定",
-        "en": "限定"
-      }
+      "icon": "images/exchange/exchange_1105_s.jpg"
     },
     {
       "id": 1106,
@@ -105,12 +79,7 @@
       },
       "stock": 5,
       "price": 500,
-      "icon": "images/exchange/exchange_1106_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "限定",
-        "en": "限定"
-      }
+      "icon": "images/exchange/exchange_1106_s.jpg"
     },
     {
       "id": 1107,
@@ -120,12 +89,7 @@
       },
       "stock": 10,
       "price": 400,
-      "icon": "images/exchange/exchange_1107_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "素材",
-        "en": "素材"
-      }
+      "icon": "images/exchange/exchange_1107_s.jpg"
     },
     {
       "id": 1108,
@@ -135,12 +99,7 @@
       },
       "stock": 2,
       "price": 250,
-      "icon": "images/exchange/exchange_1108_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "素材",
-        "en": "素材"
-      }
+      "icon": "images/exchange/exchange_1108_s.jpg"
     },
     {
       "id": 1109,
@@ -150,12 +109,7 @@
       },
       "stock": 2,
       "price": 250,
-      "icon": "images/exchange/exchange_1109_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1109_s.jpg"
     },
     {
       "id": 1110,
@@ -165,12 +119,7 @@
       },
       "stock": 2,
       "price": 250,
-      "icon": "images/exchange/exchange_1110_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1110_s.jpg"
     },
     {
       "id": 1111,
@@ -180,12 +129,7 @@
       },
       "stock": 6,
       "price": 250,
-      "icon": "images/exchange/exchange_1111_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1111_s.jpg"
     },
     {
       "id": 1112,
@@ -195,12 +139,7 @@
       },
       "stock": 10,
       "price": 250,
-      "icon": "images/exchange/exchange_1112_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1112_s.jpg"
     },
     {
       "id": 1113,
@@ -210,12 +149,7 @@
       },
       "stock": 10,
       "price": 250,
-      "icon": "images/exchange/exchange_1113_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1113_s.jpg"
     },
     {
       "id": 1114,
@@ -225,12 +159,7 @@
       },
       "stock": 10,
       "price": 200,
-      "icon": "images/exchange/exchange_1114_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1114_s.jpg"
     },
     {
       "id": 1115,
@@ -240,12 +169,7 @@
       },
       "stock": 30,
       "price": 150,
-      "icon": "images/exchange/exchange_1115_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1115_s.jpg"
     },
     {
       "id": 1116,
@@ -255,12 +179,7 @@
       },
       "stock": 40,
       "price": 150,
-      "icon": "images/exchange/exchange_1116_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1116_s.jpg"
     },
     {
       "id": 1117,
@@ -270,12 +189,7 @@
       },
       "stock": 40,
       "price": 80,
-      "icon": "images/exchange/exchange_1117_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1117_s.jpg"
     },
     {
       "id": 1118,
@@ -285,12 +199,7 @@
       },
       "stock": 90,
       "price": 80,
-      "icon": "images/exchange/exchange_1118_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1118_s.jpg"
     },
     {
       "id": 1119,
@@ -300,12 +209,7 @@
       },
       "stock": 90,
       "price": 80,
-      "icon": "images/exchange/exchange_1119_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1119_s.jpg"
     },
     {
       "id": 1120,
@@ -315,12 +219,7 @@
       },
       "stock": 20,
       "price": 25,
-      "icon": "images/exchange/exchange_1120_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1120_s.jpg"
     },
     {
       "id": 1121,
@@ -330,12 +229,7 @@
       },
       "stock": 45,
       "price": 25,
-      "icon": "images/exchange/exchange_1121_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1121_s.jpg"
     },
     {
       "id": 1122,
@@ -345,12 +239,7 @@
       },
       "stock": 20,
       "price": 25,
-      "icon": "images/exchange/exchange_1122_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1122_s.jpg"
     },
     {
       "id": 1123,
@@ -360,12 +249,7 @@
       },
       "stock": 1000,
       "price": 10,
-      "icon": "images/exchange/exchange_1123_s.jpg",
-      "eventId": 1101,
-      "category": {
-        "ja": "その他",
-        "en": "その他"
-      }
+      "icon": "images/exchange/exchange_1123_s.jpg"
     }
   ],
   "missionRewards": [
@@ -375,8 +259,7 @@
         "ja": "ノーマル1",
         "en": "Normal 1"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11002,
@@ -384,8 +267,7 @@
         "ja": "ノーマル2",
         "en": "Normal 2"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11003,
@@ -393,8 +275,7 @@
         "ja": "ノーマル3",
         "en": "Normal 3"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11004,
@@ -402,8 +283,7 @@
         "ja": "ノーマル4",
         "en": "Normal 4"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11005,
@@ -411,8 +291,7 @@
         "ja": "ノーマル5",
         "en": "Normal 5"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11006,
@@ -420,8 +299,7 @@
         "ja": "ノーマル6",
         "en": "Normal 6"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11007,
@@ -429,8 +307,7 @@
         "ja": "ノーマル7",
         "en": "Normal 7"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11008,
@@ -438,8 +315,7 @@
         "ja": "ノーマル8",
         "en": "Normal 8"
       },
-      "points": 800,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11011,
@@ -447,8 +323,7 @@
         "ja": "ハード1",
         "en": "Hard 1"
       },
-      "points": 800,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11012,
@@ -456,8 +331,7 @@
         "ja": "ハード2",
         "en": "Hard 2"
       },
-      "points": 800,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11013,
@@ -465,8 +339,7 @@
         "ja": "ハード3",
         "en": "Hard 3"
       },
-      "points": 800,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11014,
@@ -474,8 +347,7 @@
         "ja": "ハード4",
         "en": "Hard 4"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11101,
@@ -483,8 +355,7 @@
         "ja": "通常任務1",
         "en": "Common Quest 1"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11102,
@@ -492,8 +363,7 @@
         "ja": "通常任務2",
         "en": "Common Quest 2"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11103,
@@ -501,8 +371,7 @@
         "ja": "通常任務3",
         "en": "Common Quest 3"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11104,
@@ -510,8 +379,7 @@
         "ja": "通常任務4",
         "en": "Common Quest 4"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11105,
@@ -519,8 +387,7 @@
         "ja": "通常任務5",
         "en": "Common Quest 5"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11106,
@@ -528,8 +395,7 @@
         "ja": "通常任務6",
         "en": "Common Quest 6"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11107,
@@ -537,8 +403,7 @@
         "ja": "通常任務7",
         "en": "Common Quest 7"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11108,
@@ -546,8 +411,7 @@
         "ja": "通常任務8",
         "en": "Common Quest 8"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11109,
@@ -555,8 +419,7 @@
         "ja": "通常任務9",
         "en": "Common Quest 9"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11110,
@@ -564,8 +427,7 @@
         "ja": "通常任務10",
         "en": "Common Quest 10"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11111,
@@ -573,8 +435,7 @@
         "ja": "通常任務11",
         "en": "Common Quest 11"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11112,
@@ -582,8 +443,7 @@
         "ja": "通常任務12",
         "en": "Common Quest 12"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11201,
@@ -591,8 +451,7 @@
         "ja": "挑戦任務1",
         "en": "Challenge Quest 1"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11202,
@@ -600,8 +459,7 @@
         "ja": "挑戦任務2",
         "en": "Challenge Quest 2"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11203,
@@ -609,8 +467,7 @@
         "ja": "挑戦任務3",
         "en": "Challenge Quest 3"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11204,
@@ -618,8 +475,7 @@
         "ja": "挑戦任務4",
         "en": "Challenge Quest 4"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11205,
@@ -627,8 +483,7 @@
         "ja": "挑戦任務5",
         "en": "Challenge Quest 5"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11206,
@@ -636,8 +491,7 @@
         "ja": "挑戦任務6",
         "en": "Challenge Quest 6"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11207,
@@ -645,8 +499,7 @@
         "ja": "挑戦任務7",
         "en": "Challenge Quest 7"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11208,
@@ -654,8 +507,7 @@
         "ja": "挑戦任務8",
         "en": "Challenge Quest 8"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11209,
@@ -663,8 +515,7 @@
         "ja": "挑戦任務9",
         "en": "Challenge Quest 9"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11210,
@@ -672,8 +523,7 @@
         "ja": "挑戦任務10",
         "en": "Challenge Quest 10"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11211,
@@ -681,8 +531,7 @@
         "ja": "挑戦任務11",
         "en": "Challenge Quest 11"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11212,
@@ -690,8 +539,7 @@
         "ja": "挑戦任務12",
         "en": "Challenge Quest 12"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11301,
@@ -699,8 +547,7 @@
         "ja": "冒険任務1",
         "en": "Adventure Quest 1"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11302,
@@ -708,8 +555,7 @@
         "ja": "冒険任務2",
         "en": "Adventure Quest 2"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11303,
@@ -717,8 +563,7 @@
         "ja": "冒険任務3",
         "en": "Adventure Quest 3"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11304,
@@ -726,8 +571,7 @@
         "ja": "冒険任務4",
         "en": "Adventure Quest 4"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11305,
@@ -735,8 +579,7 @@
         "ja": "冒険任務5",
         "en": "Adventure Quest 5"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11306,
@@ -744,8 +587,7 @@
         "ja": "冒険任務6",
         "en": "Adventure Quest 6"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11307,
@@ -753,8 +595,7 @@
         "ja": "冒険任務7",
         "en": "Adventure Quest 7"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11308,
@@ -762,8 +603,7 @@
         "ja": "冒険任務8",
         "en": "Adventure Quest 8"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11309,
@@ -771,8 +611,7 @@
         "ja": "冒険任務9",
         "en": "Adventure Quest 9"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11310,
@@ -780,8 +619,7 @@
         "ja": "冒険任務10",
         "en": "Adventure Quest 10"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11311,
@@ -789,8 +627,7 @@
         "ja": "冒険任務11",
         "en": "Adventure Quest 11"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11312,
@@ -798,8 +635,7 @@
         "ja": "冒険任務12",
         "en": "Adventure Quest 12"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11401,
@@ -807,8 +643,7 @@
         "ja": "ミニゲーム1",
         "en": "Special Quest 1"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11402,
@@ -816,8 +651,7 @@
         "ja": "ミニゲーム2",
         "en": "Special Quest 2"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11403,
@@ -825,8 +659,7 @@
         "ja": "ミニゲーム3",
         "en": "Special Quest 3"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11404,
@@ -834,8 +667,7 @@
         "ja": "ミニゲーム4",
         "en": "Special Quest 4"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11405,
@@ -843,8 +675,7 @@
         "ja": "ミニゲーム5",
         "en": "Special Quest 5"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11406,
@@ -852,8 +683,7 @@
         "ja": "ミニゲーム6",
         "en": "Special Quest 6"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11407,
@@ -861,8 +691,7 @@
         "ja": "ミニゲーム7",
         "en": "Special Quest 7"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11408,
@@ -870,8 +699,7 @@
         "ja": "ミニゲーム8",
         "en": "Special Quest 8"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11409,
@@ -879,8 +707,7 @@
         "ja": "ミニゲーム9",
         "en": "Special Quest 9"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11410,
@@ -888,8 +715,7 @@
         "ja": "ミニゲーム10",
         "en": "Special Quest 10"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11411,
@@ -897,8 +723,7 @@
         "ja": "ミニゲーム11",
         "en": "Special Quest 11"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11412,
@@ -906,8 +731,7 @@
         "ja": "ミニゲーム12",
         "en": "Special Quest 12"
       },
-      "points": 500,
-      "eventId": 1101
+      "points": 500
     },
     {
       "id": 11501,
@@ -915,8 +739,7 @@
         "ja": "クッキーラボ1",
         "en": "Cookie Workshop 1"
       },
-      "points": 300,
-      "eventId": 1101
+      "points": 300
     },
     {
       "id": 11502,
@@ -924,8 +747,7 @@
         "ja": "クッキーラボ2",
         "en": "Cookie Workshop 2"
       },
-      "points": 400,
-      "eventId": 1101
+      "points": 400
     },
     {
       "id": 11503,
@@ -933,8 +755,7 @@
         "ja": "クッキーラボ3",
         "en": "Cookie Workshop 3"
       },
-      "points": 600,
-      "eventId": 1101
+      "points": 600
     },
     {
       "id": 11504,
@@ -942,8 +763,7 @@
         "ja": "クッキーラボ4",
         "en": "Cookie Workshop 4"
       },
-      "points": 800,
-      "eventId": 1101
+      "points": 800
     },
     {
       "id": 11505,
@@ -951,8 +771,7 @@
         "ja": "クッキーラボ5",
         "en": "Cookie Workshop 5"
       },
-      "points": 1000,
-      "eventId": 1101
+      "points": 1000
     },
     {
       "id": 11506,
@@ -960,8 +779,7 @@
         "ja": "クッキーラボ6",
         "en": "Cookie Workshop 6"
       },
-      "points": 2000,
-      "eventId": 1101
+      "points": 2000
     },
     {
       "id": 11507,
@@ -969,8 +787,7 @@
         "ja": "クッキーラボ7",
         "en": "Cookie Workshop 7"
       },
-      "points": 3000,
-      "eventId": 1101
+      "points": 3000
     }
   ],
   "missionCompRewards": []

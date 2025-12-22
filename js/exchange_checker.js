@@ -63,13 +63,34 @@ async function loadEventData(eventId) {
         
         console.log(`イベント${eventId}のデータ:`, eventData);
         
-        // gameDataに統合
+        // gameDataに統合（eventIdを動的に付与）
         gameData.events.push(eventData.event);
-        gameData.eventPoints.push(eventData.eventPoint);
-        gameData.exchangeRewards.push(...eventData.exchangeRewards);
-        gameData.missionRewards.push(...eventData.missionRewards);
+        
+        // eventPointにeventIdを付与
+        const eventPointWithId = { ...eventData.eventPoint, eventId: eventId };
+        gameData.eventPoints.push(eventPointWithId);
+        
+        // exchangeRewardsの各アイテムにeventIdを付与
+        const rewardsWithId = eventData.exchangeRewards.map(reward => ({
+            ...reward,
+            eventId: eventId
+        }));
+        gameData.exchangeRewards.push(...rewardsWithId);
+        
+        // missionRewardsの各アイテムにeventIdを付与
+        const missionsWithId = eventData.missionRewards.map(mission => ({
+            ...mission,
+            eventId: eventId
+        }));
+        gameData.missionRewards.push(...missionsWithId);
+        
+        // missionCompRewardsの各アイテムにeventIdを付与
         if (eventData.missionCompRewards && eventData.missionCompRewards.length > 0) {
-            gameData.missionCompRewards.push(...eventData.missionCompRewards);
+            const compMissionsWithId = eventData.missionCompRewards.map(mission => ({
+                ...mission,
+                eventId: eventId
+            }));
+            gameData.missionCompRewards.push(...compMissionsWithId);
         }
         
         // 読み込み済みとしてマーク
