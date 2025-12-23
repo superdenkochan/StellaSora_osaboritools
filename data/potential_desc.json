@@ -699,132 +699,132 @@
       "icon": "images/characters/char_10006.png",
       "descriptions": {
         "mc1": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "ラール（聖夜）のおもちゃたちを強化する。\nクルミ大佐の連携作戦は、範囲内に攻撃力の<span style='color: #0abec5;'>686%</span>の火属性の従者ダメージを与える。\n巻き毛将軍の連携作戦は、範囲内に攻撃力の<span style='color: #0abec5;'>278%x6</span>の火属性の従者ダメージを与える。\nゼンマイ女王の射撃は、範囲内に攻撃力の<span style='color: #0abec5;'>251%</span>の火属性の従者ダメージを与える。",
+          "en": "Empowers the toys following Snowish Laru.\nColonel Walnut's Synergy Skill deals <span style='color: #0abec5;'>686%</span> of ATK as AoE Ignis Minion DMG.\nGeneral Curly's Synergy Skill deals <span style='color: #0abec5;'>278% x6</span> of ATK as AoE Ignis Minion DMG.\nClockwork Queen's shots deal an additional <span style='color: #0abec5;'>251%</span> of ATK as AoE Ignis Minion DMG."
         },
         "mc2": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "主力スキル「ウィップコマンド」または「キャンディ乱射」発動時、<span style='color: #0abec5;'>12</span>秒間、おもちゃ：ゼンマイ女王を召喚すると同時に、クルミ大佐または巻き毛将軍は士気を<span style='color: #0abec5;'>2</span>獲得する。\nゼンマイ女王は敵を射撃し、攻撃力の<span style='color: #0abec5;'>236%</span>の火属性の従者ダメージを与える。\nゼンマイ女王の射撃が命中するたびに、クルミ大佐と巻き毛将軍の連携作戦を発動させることができる。\n18秒ごとに、ゼンマイ女王を1回召喚できる。",
+          "en": "Casting Whip Assault or Candy Barrage (Main Skill) summons Clockwork Queen for <span style='color: #0abec5;'>12</span>s and grants Colonel Walnut or General Curly <span style='color: #0abec5;'>2</span> stacks of Morale.\nClockwork Queen attacks the target, dealing <span style='color: #0abec5;'>236%</span> of ATK as Ignis Minion DMG.\nEach of Clockwork Queen's attacks can trigger the Synergy Skills of Colonel Walnut and General Curly.\nClockwork Queen can be summoned once every 18s."
         },
         "mc3": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "主力スキル「ウィップコマンド」が多段攻撃となり、範囲内に攻撃力の<span style='color: #0abec5;'>257%x5</span>の火属性のスキルダメージを与える。",
+          "en": "Whip Assault (Main Skill) becomes a multi-hit attack, dealing <span style='color: #0abec5;'>257% x5</span> of ATK as AoE Ignis Skill DMG."
         },
         "mc4": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "クルミ大佐または巻き毛将軍がダメージを与えた時、<span style='color: #0abec5;'>10</span>秒間、敵にギフトマークを付与する。\n主力スキル「ウィップコマンド」または「キャンディ乱射」がギフトマークが付与された敵にダメージを与えた時、範囲内に攻撃力の<span style='color: #0abec5;'>551%</span>の火属性のスキルダメージを与える。",
+          "en": "When Colonel Walnut and General Curly deal DMG, they inflict a Gift Box mark, lasting <span style='color: #0abec5;'>10</span>s.\nWhip Assault and Candy Barrage (Main Skill) deals <span style='color: #0abec5;'>551%</span> of ATK as AoE Ignis Skill DMG against marked targets."
         },
         "ms1": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "巻き毛将軍は1秒ごとに、自身の周囲の敵に攻撃力の<span style='color: #ec6d21;'>90～361%</span>の火属性の従者ダメージを与えるようになる。",
+          "en": "General Curly deals <span style='color: #ec6d21;'>90～361%</span> of ATK as AoE Ignis Minion DMG to nearby targets every second."
         },
         "ms2": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "クルミ大佐と巻き毛将軍が<span style='color: #6a90e7;'>火属性の印</span>🔥が付与された敵にダメージを与えた時、30%の確率で士気を1獲得し、8秒間、自身の従者ダメージが<span style='color: #ec6d21;'>14～57%</span>増加する。",
+          "en": "When Colonel Walnut and General Curly deal damage to targets with <span style='color: #6a90e7;'>Ignis Mark</span>🔥, they have a 30% chance to gain 1 stack of Morale and increase their Minion DMG by <span style='color: #ec6d21;'>14～57%</span> for 8s."
         },
         "ms3": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "フィールド上に存在するおもちゃ1体につき、ラール（聖夜）のすべての従者の火属性ダメージが<span style='color: #ec6d21;'>13～51%</span>増加する。この効果は3回まで重複できる。",
+          "en": "Each toy present increases the Ignis DMG of all Snowish Laru's minions by <span style='color: #ec6d21;'>13～51%</span>, up to 3 stacks."
         },
         "ms4": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "主力スキル「ウィップコマンド」の攻撃範囲が20%拡大する。\n「ウィップコマンド」と「キャンディ乱射」が与える火属性ダメージが<span style='color: #ec6d21;'>33～130%</span>増加する。",
+          "en": "Increases the Attack Range of Whip Assault (Main Skill) by 20%.\nIncreases the Ignis DMG of Whip Assault and Candy Barrage by <span style='color: #ec6d21;'>33～130%</span>."
         },
         "ms5": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "主力スキル「ウィップコマンド」または「キャンディ乱射」が会心発生時、3秒間、ラール（聖夜）の攻撃力が<span style='color: #ec6d21;'>1.9～7.4%</span>上昇する。この効果は9回まで重複できる。",
+          "en": "When Whip Assault or Candy Barrage (Main Skill) lands a Crit Hit, increases Snowish Laru's ATK by <span style='color: #ec6d21;'>1.9～7.4%</span> for 3s, up to 9 stacks."
         },
         "ms6": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "ラール（聖夜）の通常攻撃で会心発生時、8秒間、自身の攻撃力が<span style='color: #ec6d21;'>4～15%</span>上昇する。この効果は4回まで重複できる。",
+          "en": "When Snowish Laru's Auto Attack lands a Crit Hit, increases her ATK by <span style='color: #ec6d21;'>4～15%</span> for 8s, up to 4 stacks."
         },
         "ms7": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "8秒ごとにラール（聖夜）がダメージを与えた時、敵に射撃を行うソリ砲台を1つ召喚し、攻撃力の<span style='color: #ec6d21;'>129～515%</span>の火属性の従者ダメージを与える。その後の爆発で、範囲内に攻撃力の<span style='color: #ec6d21;'>91～365%</span>の火属性の従者ダメージを与える。\nソリ砲台のダメージが会心発生時、8秒間、ラール（聖夜）とフィールド上に存在するすべてのおもちゃの火属性ダメージが<span style='color: #ec6d21;'>13～50%</span>増加する。",
+          "en": "Every 8s, Snowish Laru summons a Sled Turret to attack the target when she deals DMG. The Sled Turret deals <span style='color: #ec6d21;'>129～515%</span> of ATK as Ignis Minion DMG and explodes to deal <span style='color: #ec6d21;'>91～365%</span> of ATK as AoE Ignis Minion DMG.\nWhen the Sled Turret lands a Crit Hit, increases the Ignis DMG of Snowish Laru and all toys on the battlefield by <span style='color: #ec6d21;'>13～50%</span> for 8s."
         },
         "ms8": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "ラール（聖夜）がラール人形に変身している間、射撃と「キャンディ乱射」は<span style='color: #6a90e7;'>火属性の印</span>🔥を発動させることができる。\nラール（聖夜）の攻撃力が<span style='color: #ec6d21;'>20～80%</span>上昇する。",
+          "en": "While transformed into Dame Laru, Snowish Laru's shots and Candy Barrage can trigger <span style='color: #6a90e7;'>Ignis Mark</span>🔥.\nIncreases Snowish Laru's ATK by <span style='color: #ec6d21;'>20～80%</span>."
         },
         "ms9": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "ラール（聖夜）の回避の発動可能回数が1回増加し、防御力が<span style='color: #ec6d21;'>39～105</span>上昇する。\nラール（聖夜）が直接ダメージを受けた時、そのダメージを無効化する。この効果は<span style='color: #ec6d21;'>30</span>秒ごとに1回発動する。",
+          "en": "Snowish Laru can dodge one more time. Also, increases her DEF by <span style='color: #ec6d21;'>39～105</span>.\nPeriodically, Snowish Laru becomes immune to direct DMG taken once. This effect can only be triggered once every <span style='color: #ec6d21;'>30</span>s."
         },
         "ms10": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "ラール（聖夜）がラール人形に変身している間、「キャンディ乱射」を発動した時、10秒間、自身の必殺技ダメージが<span style='color: #ec6d21;'>61～244%</span>増加する。",
+          "en": "While transformed into Dame Laru, casting Candy Barrage increases her Ultimate DMG by <span style='color: #ec6d21;'>61～244%</span> for 10s."
         },
         "ms11": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "ラール（聖夜）がラール人形に変身している間、「キャンディ乱射」でダメージを与えた時、10秒間、自身の必殺技ダメージが<span style='color: #ec6d21;'>10～27%</span>増加する。\nこの効果は10回まで重複でき、次の「キャンディ乱射」発動時にリセットされる。",
+          "en": "While transformed into Dame Laru, increases her Ultimate DMG by <span style='color: #ec6d21;'>10～27%</span> for 10s each time Candy Barrage deals DMG, up to 10 stacks.\nThis effect is removed if Candy Barrage is cast."
         },
         "ms12": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "ラール（聖夜）がラール人形に変身している間、1秒ごとに、チーム内の火属性巡遊者の攻撃力が<span style='color: #ec6d21;'>9～35%</span>上昇する。この効果は10回まで重複でき、変身終了時にリセットされる。",
+          "en": "While transformed into Dame Laru, increases the ATK of Ignis Trekkers in the squad by <span style='color: #ec6d21;'>9～35%</span> for 1s, up to 10 stacks.\nThis effect is removed when the transformation expires."
         },
         "sc1": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "プレゼント砲弾が爆発した後、2秒間、0.3秒ごとに範囲内の敵に攻撃力の<span style='color: #0abec5;'>103%</span>の火属性のスキルダメージを与える。",
+          "en": "After a Gift Box Shell explodes, it deals <span style='color: #0abec5;'>103%</span> of ATK as Ignis Skill DMG to targets within range every 0.3s for 2s."
         },
         "sc2": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "プレゼント砲弾の攻撃範囲が<span style='color: #0abec5;'>50%</span>拡大し、与えるスキルダメージが<span style='color: #0abec5;'>13%</span>増加する。\nチーム内の全ての巡遊者が火属性の場合、プレゼント砲弾がダメージを与えた時、7秒間、その敵が受けるスキルダメージが<span style='color: #0abec5;'>1.3%</span>増加する。この効果は<span style='color: #0abec5;'>20</span>回まで重複できる。",
+          "en": "Increases the Attack Range of Gift Box Shells by <span style='color: #0abec5;'>50%</span> and Skill DMG by <span style='color: #0abec5;'>13%</span>.\nIf the squad is Ignis-Trekker only, when Gift Box Shells deal DMG to the target, increases the target's Skill DMG Taken by <span style='color: #0abec5;'>1.3%</span> for <span style='color: #0abec5;'>7</span>s, up to <span style='color: #0abec5;'>20</span> stacks."
         },
         "sc3": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "フィールド上にクルミ大佐が4体存在する時、1体の巻き毛将軍に合体し、敵に攻撃力の<span style='color: #0abec5;'>147%</span>の火属性の従者ダメージを与える。\n巻き毛将軍は<span style='color: #0abec5;'>10</span>秒間持続し、同時に1体までしか存在できない。\nチーム内の全ての巡遊者が火属性の場合、1秒ごとに巻き毛将軍の従者ダメージが<span style='color: #0abec5;'>4.5%</span>増加し、この効果は<span style='color: #0abec5;'>15</span>回まで重複できる。",
+          "en": "When 4 Colonel Walnuts are on the battlefield, combines them into 1 General Curly, dealing <span style='color: #0abec5;'>147%</span> of ATK as Ignis Minion DMG to the target.\nGeneral Curly fights for <span style='color: #0abec5;'>10</span>s, and only 1 can exist.\nIf the squad is Ignis-Trekker only, increases General Curly's Minion DMG by <span style='color: #0abec5;'>4.5%</span> every second, up to <span style='color: #0abec5;'>15</span> stacks."
         },
         "sc4": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "クルミ大佐と巻き毛将軍は特殊攻撃を習得し、<span style='color: #0abec5;'>4</span>秒ごとに自動で発動する。\nクルミ大佐：地面を強く叩き、範囲内に攻撃力の<span style='color: #0abec5;'>54.8%</span>の火属性の従者ダメージを与える。\n巻き毛将軍：両手の刀を振るい、範囲内に攻撃力の<span style='color: #0abec5;'>119%x6</span>の火属性の従者ダメージを与え、<span style='color: #0abec5;'>6</span>秒間、自身の従者会心率が<span style='color: #0abec5;'>50%</span>上昇する。",
+          "en": "Colonel Walnut and General Curly learn skills, which they automatically cast after a <span style='color: #0abec5;'>4</span>s cooldown.\nColonel Walnut smashes the ground, dealing <span style='color: #0abec5;'>54.8%</span> of ATK as AoE Ignis Minion DMG.\nGeneral Curly swings dual blades, dealing <span style='color: #0abec5;'>119% x6</span> of ATK as AoE Ignis Minion DMG and increasing its Minion Crit Rate by <span style='color: #0abec5;'>50%</span> for <span style='color: #0abec5;'>6</span>s."
         },
         "ss1": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "ラール（聖夜）の支援スキル「プレゼントキャノン」の与えるスキルダメージが<span style='color: #ec6d21;'>29～117%</span>増加し、追加でプレゼント砲弾を2回発射する。",
+          "en": "Increases the Skill DMG of Courtesy Before Aggression (Support Skill) by <span style='color: #ec6d21;'>29～117%</span>. Fires 2 additional Gift Box Shells."
         },
         "ss2": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "プレゼント砲弾がダメージを与えた時、5秒間、ラール（聖夜）の攻撃力が<span style='color: #ec6d21;'>9～37%</span>増加する。この効果は6回まで重複できる。",
+          "en": "When a Gift Box Shell deals DMG, increases the ATK of Snowish Laru by <span style='color: #ec6d21;'>9～37%</span> for 5s, up to 6 stacks."
         },
         "ss3": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "<span style='color: #6a90e7;'>火属性の印</span>🔥が付与された敵に対して、プレゼント砲弾が与える火属性ダメージが<span style='color: #ec6d21;'>6～17%</span>増加する。",
+          "en": "Increases the Ignis DMG dealt by Gift Box Shells to targets with <span style='color: #6a90e7;'>Ignis Mark</span>🔥 by <span style='color: #ec6d21;'>6～17%</span>."
         },
         "ss4": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "クルミ大佐と巻き毛将軍の持続時間が<span style='color: #ec6d21;'>50%</span>延長され、会心ダメージが<span style='color: #ec6d21;'>32～129%</span>増加する。",
+          "en": "Increases the combat duration of Colonel Walnut and General Curly by 50% and their Crit DMG by <span style='color: #ec6d21;'>32～129%</span>."
         },
         "ss5": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "クルミ大佐は1秒ごとに、周囲の敵に攻撃力の<span style='color: #ec6d21;'>2.1～8.3%</span>の火属性の従者ダメージを与える。\n巻き毛将軍は0.5秒ごとに、周囲の敵に攻撃力の<span style='color: #ec6d21;'>10.6～42.5%</span>の火属性の従者ダメージを与える。",
+          "en": "Colonel Walnut deals <span style='color: #ec6d21;'>2.1～8.3%</span> of ATK as AoE Ignis Minion DMG to nearby targets every second.\nGeneral Curly deals <span style='color: #ec6d21;'>10.6～42.5%</span> of ATK as AoE Ignis Minion DMG every 0.5s."
         },
         "ss6": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "クルミ大佐と巻き毛将軍の攻撃速度が35%上昇する。\nそれぞれがダメージを与えた時、10秒間、自身の従者ダメージが<span style='color: #ec6d21;'>6～24%</span>増加する。この効果は10回まで重複できる。\n会心発生時、10秒間、チーム内の火属性巡遊者の攻撃力が<span style='color: #ec6d21;'>1～4%</span>上昇する。この効果は10回まで重複できる。",
+          "en": "Increases the ATK SPD of Colonel Walnut and General Curly by 35%.\nEach time they deal DMG, increases their Minion DMG by <span style='color: #ec6d21;'>6～24%</span> for 10s, up to 10 stacks.\nEach time they land a Crit Hit, increases the ATK of Ignis Trekkers in the squad by <span style='color: #ec6d21;'>1～4%</span> for 10s, up to 10 stacks."
         },
         "ss7": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "チーム内の全ての巡遊者が火属性の場合、プレゼント砲弾がダメージを与えた時、12秒間、敵の火属性被ダメージが<span style='color: #ec6d21;'>15～60%</span>増加する。",
+          "en": "When the squad contains only Ignis characters, Gift Box Shell increases the target's Ignis DMG Taken by <span style='color: #ec6d21;'>15～60%</span> for 12s upon dealing DMG to the target."
         },
         "ss8": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "ラール（聖夜）が出場するたびに、10秒間、火属性の主力巡遊者の攻撃力が<span style='color: #ec6d21;'>45～179%</span>上昇する。",
+          "en": "Each time Snowish Laru enters combat, increases the main Ignis Trekker's ATK by <span style='color: #ec6d21;'>45～179%</span> for 10s."
         },
         "ss9": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "ラール（聖夜）がラール人形に変身している間、自身の攻撃力が<span style='color: #ec6d21;'>67～267%</span>上昇し、射撃と「キャンディ乱射」で<span style='color: #6a90e7;'>火属性の印：聖炎</span>🔥を付与できるようになる。",
+          "en": "While Snowish Laru transforms into Dame Laru, increases her ATK by <span style='color: #ec6d21;'>67～267%</span>. Her shots and Candy Barrage can inflict <span style='color: #6a90e7;'>Ignis Mark: Sacred Flame</span>🔥."
         },
         "ss10": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "ラール（聖夜）がラール人形に変身している間、「キャンディ乱射」を発動した時、10秒間、自身の必殺技ダメージが<span style='color: #ec6d21;'>61～244%</span>増加する。",
+          "en": "While transformed into Dame Laru, casting Candy Barrage increases her Ultimate DMG by <span style='color: #ec6d21;'>61～244%</span> for 10s."
         },
         "ss11": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "ラール（聖夜）がラール人形に変身している間、「キャンディ乱射」でダメージを与えた時、10秒間、自身の必殺技ダメージが<span style='color: #ec6d21;'>10～27%</span>増加する。\nこの効果は10回まで重複でき、次の「キャンディ乱射」発動時にリセットされる。",
+          "en": "While transformed into Dame Laru, increases her Ultimate DMG by <span style='color: #ec6d21;'>10～27%</span> for 10s each time Candy Barrage deals DMG, up to 10 stacks.\nThis effect is removed if Candy Barrage is cast."
         },
         "ss12": {
-          "ja": "仮文言",
-          "en": "placeholder"
+          "ja": "ラール（聖夜）がラール人形に変身している間、1秒ごとに、チーム内の火属性巡遊者の攻撃力が<span style='color: #ec6d21;'>9～35%</span>上昇する。この効果は10回まで重複でき、変身終了時にリセットされる。",
+          "en": "While transformed into Dame Laru, increases the ATK of Ignis Trekkers in the squad by <span style='color: #ec6d21;'>9～35%</span> for 1s, up to 10 stacks.\nThis effect is removed when the transformation expires."
         }
       }
     },
@@ -3511,8 +3511,8 @@
           "en": "Coronis can dodge one more time.\nWhen dodging, increases her DEF by <span style='color: #ec6d21;'>45～121</span> for 10s."
         },
         "ms10": {
-          "ja": "クルニスの必殺技の横斬りが命中した敵1体につき、そのダメージが<span style='color: #ec6d21;'>46～183%</span>増加する。この効果は<span style='color: #ec6d21;'>3</span>回重複できる。\n必殺技のブレイク値貫通効率が<span style='color: #ec6d21;'>30%</span>上昇する。",
-          "en": "For each target the horizontal slash hits during Void Reaper (Ultimate), increases the DMG of this hit by <span style='color: #ec6d21;'>46～183%</span>, up to <span style='color: #ec6d21;'>3</span> stacks. \nIncreases Void Reaper's Resilience Break Efficiency by <span style='color: #ec6d21;'>30%</span>."
+          "ja": "クルニスの必殺技の横斬りが命中した敵1体につき、そのダメージが<span style='color: #ec6d21;'>46～183%</span>増加する。この効果は3回重複できる。\n必殺技のブレイク値貫通効率が30%上昇する。",
+          "en": "For each target the horizontal slash hits during Void Reaper (Ultimate), increases the DMG of this hit by <span style='color: #ec6d21;'>46～183%</span>, up to 3 stacks. \nIncreases Void Reaper's Resilience Break Efficiency by 30%."
         },
         "ms11": {
           "ja": "クルニスの必殺技発動時から10秒間、主力巡遊者の印ダメージが<span style='color: #ec6d21;'>63～251%</span>増加する。",
@@ -3575,8 +3575,8 @@
           "en": "When Coronis deals DMG with Bone Chain (Support Skill), reduces the target's Resilience by <span style='color: #ec6d21;'>5%</span>. This effect can only be triggered once every 12s.\nIncreases Coronis' ATK by <span style='color: #ec6d21;'>9～36%</span>."
         },
         "ss10": {
-          "ja": "クルニスの必殺技の横斬りが命中した敵1体につき、そのダメージが<span style='color: #ec6d21;'>46～183%</span>増加する。この効果は<span style='color: #ec6d21;'>3</span>回重複できる。\n必殺技のブレイク値貫通効率が<span style='color: #ec6d21;'>30%</span>上昇する。",
-          "en": "For each target the horizontal slash hits during Void Reaper (Ultimate), increases the DMG of this hit by <span style='color: #ec6d21;'>46～183%</span>, up to <span style='color: #ec6d21;'>3</span> stacks. \nIncreases Void Reaper's Resilience Break Efficiency by <span style='color: #ec6d21;'>30%</span>."
+          "ja": "クルニスの必殺技の横斬りが命中した敵1体につき、そのダメージが<span style='color: #ec6d21;'>46～183%</span>増加する。この効果は3回重複できる。\n必殺技のブレイク値貫通効率が30%上昇する。",
+          "en": "For each target the horizontal slash hits during Void Reaper (Ultimate), increases the DMG of this hit by <span style='color: #ec6d21;'>46～183%</span>, up to 3 stacks. \nIncreases Void Reaper's Resilience Break Efficiency by 30%."
         },
         "ss11": {
           "ja": "クルニスの必殺技発動時から10秒間、主力巡遊者の印ダメージが<span style='color: #ec6d21;'>63～251%</span>増加する。",
