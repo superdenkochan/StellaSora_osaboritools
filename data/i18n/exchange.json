@@ -95,6 +95,10 @@
         "ja": "ハード",
         "en": "Hard"
       },
+      "cookie": {
+        "ja": "クッキーラボ",
+        "en": "Cookie Workshop"
+      },
       "regularMission": {
         "ja": "通常任務",
         "en": "Regular Missions"

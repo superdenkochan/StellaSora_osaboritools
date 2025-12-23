@@ -691,6 +691,144 @@
       }
     },
     {
+      "id": "10006",
+      "name": {
+        "ja": "ラール(聖夜)",
+        "en": "Snowish Laru"
+      },
+      "icon": "images/characters/char_10006.png",
+      "descriptions": {
+        "mc1": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "mc2": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "mc3": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "mc4": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ms1": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ms2": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ms3": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ms4": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ms5": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ms6": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ms7": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ms8": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ms9": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ms10": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ms11": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ms12": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "sc1": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "sc2": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "sc3": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "sc4": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ss1": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ss2": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ss3": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ss4": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ss5": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ss6": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ss7": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ss8": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ss9": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ss10": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ss11": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        },
+        "ss12": {
+          "ja": "仮文言",
+          "en": "placeholder"
+        }
+      }
+    },
+    {
       "id": "20001",
       "name": {
         "ja": "フリージア",

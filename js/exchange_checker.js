@@ -624,6 +624,10 @@ function initializeMissions() {
             missionIds: missions.filter(m => m.name.ja.includes('ハード')).map(m => m.id)
         },
         {
+            titleKey: 'accordion.groups.cookie',
+            missionIds: missions.filter(m => m.name.ja.includes('クッキーラボ')).map(m => m.id)
+        },
+        {
             titleKey: 'accordion.groups.regularMission',
             missionIds: missions.filter(m => m.name.ja.includes('通常任務')).map(m => m.id)
         },
@@ -641,7 +645,7 @@ function initializeMissions() {
         },
         {
             titleKey: 'accordion.groups.other',
-            missionIds: missions.filter(m => !m.name.ja.includes('ノーマル') && !m.name.ja.includes('ハード') && !m.name.ja.includes('通常任務') && !m.name.ja.includes('挑戦任務') && !m.name.ja.includes('冒険任務') && !m.name.ja.includes('ミニゲーム')).map(m => m.id)
+            missionIds: missions.filter(m => !m.name.ja.includes('ノーマル') && !m.name.ja.includes('ハード') && !m.name.ja.includes('クッキーラボ') && !m.name.ja.includes('通常任務') && !m.name.ja.includes('挑戦任務') && !m.name.ja.includes('冒険任務') && !m.name.ja.includes('ミニゲーム')).map(m => m.id)
         }
     ];
     

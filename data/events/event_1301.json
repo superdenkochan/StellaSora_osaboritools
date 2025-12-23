@@ -305,7 +305,7 @@
         "ja": "ノーマル8",
         "en": "Normal 8"
       },
-      "points": 500
+      "points": 800
     },
     {
       "id": 13011,
@@ -313,7 +313,7 @@
         "ja": "ハード1",
         "en": "Hard 1"
       },
-      "points": 1000
+      "points": 800
     },
     {
       "id": 13012,
@@ -321,7 +321,7 @@
         "ja": "ハード2",
         "en": "Hard 2"
       },
-      "points": 1000
+      "points": 800
     },
     {
       "id": 13013,
@@ -329,7 +329,7 @@
         "ja": "ハード3",
         "en": "Hard 3"
       },
-      "points": 1000
+      "points": 800
     },
     {
       "id": 13014,
@@ -345,7 +345,7 @@
         "ja": "ベリーハード1",
         "en": "Very Hard 1"
       },
-      "points": 1000
+      "points": 500
     },
     {
       "id": 13022,
@@ -353,7 +353,7 @@
         "ja": "ベリーハード2",
         "en": "Very Hard 2"
       },
-      "points": 1000
+      "points": 500
     },
     {
       "id": 13023,
@@ -361,7 +361,7 @@
         "ja": "ベリーハード3",
         "en": "Very Hard 3"
       },
-      "points": 1000
+      "points": 500
     },
     {
       "id": 13024,
@@ -369,7 +369,63 @@
         "ja": "ベリーハード4",
         "en": "Very Hard 4"
       },
+      "points": 500
+    },
+    {
+      "id": 13051,
+      "name": {
+        "ja": "クッキーラボ1",
+        "en": "Cookie Workshop1"
+      },
+      "points": 300
+    },
+    {
+      "id": 13052,
+      "name": {
+        "ja": "クッキーラボ2",
+        "en": "Cookie Workshop2"
+      },
+      "points": 400
+    },
+    {
+      "id": 13053,
+      "name": {
+        "ja": "クッキーラボ3",
+        "en": "Cookie Workshop3"
+      },
+      "points": 600
+    },
+    {
+      "id": 13054,
+      "name": {
+        "ja": "クッキーラボ4",
+        "en": "Cookie Workshop4"
+      },
+      "points": 800
+    },
+    {
+      "id": 13055,
+      "name": {
+        "ja": "クッキーラボ5",
+        "en": "Cookie Workshop5"
+      },
       "points": 1000
+    },
+    {
+      "id": 13056,
+      "name": {
+        "ja": "クッキーラボ6",
+        "en": "Cookie Workshop6"
+      },
+      "points": 2000
+    },
+    {
+      "id": 13057,
+      "name": {
+        "ja": "クッキーラボ7",
+        "en": "Cookie Workshop7"
+      },
+      "points": 3000
     },
     {
       "id": 13101,
@@ -665,7 +721,7 @@
         "ja": "ミニゲーム1",
         "en": "Special Quest 1"
       },
-      "points": 1000
+      "points": 500
     },
     {
       "id": 13402,
@@ -673,7 +729,7 @@
         "ja": "ミニゲーム2",
         "en": "Special Quest 2"
       },
-      "points": 1000
+      "points": 500
     },
     {
       "id": 13403,
@@ -681,7 +737,7 @@
         "ja": "ミニゲーム3",
         "en": "Special Quest 3"
       },
-      "points": 1000
+      "points": 500
     },
     {
       "id": 13404,
@@ -689,7 +745,7 @@
         "ja": "ミニゲーム4",
         "en": "Special Quest 4"
       },
-      "points": 1200
+      "points": 500
     },
     {
       "id": 13405,
@@ -697,7 +753,7 @@
         "ja": "ミニゲーム5",
         "en": "Special Quest 5"
       },
-      "points": 1200
+      "points": 500
     },
     {
       "id": 13406,
@@ -705,7 +761,7 @@
         "ja": "ミニゲーム6",
         "en": "Special Quest 6"
       },
-      "points": 1200
+      "points": 500
     },
     {
       "id": 13407,
@@ -713,7 +769,7 @@
         "ja": "ミニゲーム7",
         "en": "Special Quest 7"
       },
-      "points": 1200
+      "points": 500
     },
     {
       "id": 13408,
@@ -721,7 +777,7 @@
         "ja": "ミニゲーム8",
         "en": "Special Quest 8"
       },
-      "points": 1200
+      "points": 500
     },
     {
       "id": 13409,
@@ -729,7 +785,7 @@
         "ja": "ミニゲーム9",
         "en": "Special Quest 9"
       },
-      "points": 1200
+      "points": 500
     },
     {
       "id": 13410,
@@ -737,7 +793,7 @@
         "ja": "ミニゲーム10",
         "en": "Special Quest 10"
       },
-      "points": 1200
+      "points": 500
     },
     {
       "id": 13411,
@@ -745,7 +801,7 @@
         "ja": "ミニゲーム11",
         "en": "Special Quest 11"
       },
-      "points": 1200
+      "points": 500
     },
     {
       "id": 13412,
@@ -753,7 +809,7 @@
         "ja": "ミニゲーム12",
         "en": "Special Quest 12"
       },
-      "points": 1500
+      "points": 500
     }
   ],
   "missionCompRewards": []
