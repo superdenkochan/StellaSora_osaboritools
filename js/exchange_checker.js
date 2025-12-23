@@ -58,7 +58,7 @@ async function loadEventData(eventId) {
     }
     
     try {
-        const response = await fetch(`data/event_${eventId}.json`);
+        const response = await fetch(`data/events/event_${eventId}.json`);
         const eventData = await response.json();
         
         console.log(`イベント${eventId}のデータ:`, eventData);

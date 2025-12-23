@@ -135,13 +135,25 @@
     "versions": [
       {
         "version": "既知の不具合 / Known issues",
-        "date": "（2025.12.22）",
+        "date": "（2025.12.23）",
         "items": {
           "ja": [
             "素質シミュレーター<br>- スマホで見た時のレイアウトが微妙（すいません）<br>----------"
           ],
           "en": [
             "Potential Simulator<br>- The layout looks a bit off on smartphones (sorry)<br>----------"
+          ]
+        }
+      },
+      {
+        "version": "v1.2.1",
+        "date": "2025.12.23",
+        "items": {
+          "ja": [
+            "新イベと新巡遊者「ラール(聖夜)」対応<br>----------"
+          ],
+          "en": [
+            "New Event and New Trekker “Snowish Laru” Added<br>----------"
           ]
         }
       },

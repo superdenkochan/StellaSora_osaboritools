@@ -51,6 +51,16 @@
       "style": "chiteki"
     },
     {
+      "id": "10006",
+      "name": {
+        "ja": "ラール(聖夜)",
+        "en": "Snowish Laru"
+      },
+      "icon": "images/characters/char_10006.png",
+      "role": "versatile",
+      "style": "boukenka"
+    },
+    {
       "id": "20001",
       "name": {
         "ja": "フリージア",
