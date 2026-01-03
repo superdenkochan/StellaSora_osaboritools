@@ -89,8 +89,8 @@
           "en": "The first minion summoned by Awakening: Crimson Dragon (Support Skill) is inflicted with Blazing Barrier, dealing <span style='color: #0abec5;'>105.1% of ATK</span> as AoE Ignis Minion DMG to nearby targets every <span style='color: #0abec5;'>0.5</span>s."
         },
         "ss1": {
-          "ja": "自身以外の巡遊者が主力スキル発動時、赤龍が敵に追加で<span style='color: #ec6d21;'>119～477%</span>の火属性の従者ダメージを与えるようになる。猛虎は範囲内に追加で<span style='color: #ec6d21;'>71～284%x5</span>の火属性の従者ダメージを与えるようになる。",
-          "en": "When a squadmate casts a Main Skill, Crimson Dragon deals an additional <span style='color: #ec6d21;'>119～477% of ATK</span> as Ignis Minion DMG to the target, while Tiger of the East deals an additional <span style='color: #ec6d21;'>71～284% of ATK x5</span> as AoE Ignis Minion DMG to the target."
+          "ja": "自身以外の巡遊者が主力スキル発動時、赤龍が敵に追加で攻撃力の<span style='color: #ec6d21;'>119～477%</span>の火属性の従者ダメージを与えるようになる。猛虎は範囲内に追加で攻撃力の<span style='color: #ec6d21;'>71～284%x5</span>の火属性の従者ダメージを与えるようになる。",
+          "en": "When a squadmate casts the Main Skill, Crimson Dragon deals an additional <span style='color: #ec6d21;'>119～477% of ATK</span> as Ignis Minion DMG to the target, while Tiger of the East deals an additional <span style='color: #ec6d21;'>71～284%x5</span> of ATK as AoE Ignis Minion DMG to the target."
         },
         "ss2": {
           "ja": "チーシアの従者が1体存在するごとに、味方の攻撃力が<span style='color: #ec6d21;'>7～27%</span>上昇する。",
@@ -159,7 +159,7 @@
           "en": "Within <span style='color: #0abec5;'>2s</span> after casting Fireworks Jam (Main Skill), can immediately cast again. \nWhen Fireworks Jam triggers an <span style='color: #6a90e7;'>Ignis Mark: Sacred Flame</span>🔥, casting the Skill again increases its DMG by <span style='color: #0abec5;'>65%</span>."
         },
         "mc4": {
-          "ja": "主力スキル命中時、範囲内に追加で、攻撃力の<span style='color: #0abec5;'>62%</span>の火属性ダメージを与える。\nこの効果は1秒ごとに<span style='color: #0abec5;'>5</span>回まで発動する。",
+          "ja": "主力スキル命中時、範囲内に追加で、攻撃力の<span style='color: #0abec5;'>62%</span>の火属性のスキルダメージを与える。\nこの効果は1秒ごとに<span style='color: #0abec5;'>5</span>回まで発動する。",
           "en": "When Fireworks Jam (Main Skill) hits a target, deals an additional <span style='color: #0abec5;'>62% of ATK</span> as AoE Ignis Skill DMG. \nThis effect can only be triggered <span style='color: #0abec5;'>5</span> times/s."
         },
         "ms1": {
@@ -285,7 +285,7 @@
       "icon": "images/characters/char_10003.png",
       "descriptions": {
         "mc1": {
-          "ja": "1回の主力スキルで装填できる火炎散弾が<span style='color: #0abec5;'>1発</span>になる。装填後、次の射撃で発射する火炎散弾の数が増加し、追加で範囲内に、攻撃力の<span style='color: #0abec5;'>136%</span>の火属性ダメージを与えるようになる。この効果は火炎散弾を発射するとリセットされる。",
+          "ja": "1回の主力スキルで装填できる火炎散弾が<span style='color: #0abec5;'>1発</span>になる。装填後、次の射撃で発射する火炎散弾の数が増加し、追加で範囲内に、攻撃力の<span style='color: #0abec5;'>136%</span>の火属性のスキルダメージを与えるようになる。この効果は火炎散弾を発射するとリセットされる。",
           "en": "Banishing Barrage (Main Skill) requires a <span style='color: #0abec5;'>single</span> reload. After casting, the next shot fires more pellets and deals an additional <span style='color: #0abec5;'>136% of ATK</span> as AoE Ignis Skill DMG."
         },
         "mc2": {
@@ -609,12 +609,12 @@
           "en": "When Fuyuka squads up with Ignis Trekkers only, increases her ATK by <span style='color: #ec6d21;'>12～48%</span>."
         },
         "ms9": {
-          "ja": "フユカがエリート以上の敵に会心発生時から8秒間、攻撃力が<span style='color: #ec6d21;'>3～11%</span>増加する。この効果は5回重複できる。",
+          "ja": "フユカがエリート以上の敵に会心発生時から8秒間、攻撃力が<span style='color: #ec6d21;'>3～11%</span>上昇する。この効果は5回重複できる。",
           "en": "When Fuyuka lands a Crit Hit on an elite or higher-tier target, increases ATK by <span style='color: #ec6d21;'>3～11%</span> for 8s, up to 5 stacks."
         },
         "ms10": {
-          "ja": "フユカの必殺技で<span style='color: #6a90e7;'>火属性の印</span>🔥を発動させた時、その必殺技のダメージが<span style='color: #ec6d21;'>5～19%</span>増加する。この効果は5回重複できる。",
-          "en": "When Blaze Unsealed triggers an <span style='color: #6a90e7;'>Ignis Mark</span>🔥, increases this Ultimate DMG by <span style='color: #ec6d21;'>5～19%</span>, up to 5 stacks."
+          "ja": "フユカの必殺技で<span style='color: #6a90e7;'>火属性の印</span>🔥を発動させた時、必殺技使用中攻撃力が<span style='color: #ec6d21;'>5～19%</span>増加する。この効果は5回重複できる。",
+          "en": "When Blaze Unsealed (Ultimate) triggers an <span style='color: #6a90e7;'>Ignis Mark</span>🔥, increases Fuyuka's ATK by <span style='color: #ec6d21;'>5～19%</span> during this Ultimate, up to 5 stacks."
         },
         "ms11": {
           "ja": "フユカの必殺技の打撃回数が4回増加し、フユカの必殺技ダメージが<span style='color: #ec6d21;'>70～279%</span>増加する。",
@@ -677,8 +677,8 @@
           "en": "When Eruption Punch (Support Skill) kills a target, increases Fuyuka's ATK by <span style='color: #ec6d21;'>3～12%</span> for 10s, up to 4 stacks."
         },
         "ss10": {
-          "ja": "フユカの必殺技で<span style='color: #6a90e7;'>火属性の印</span>🔥を発動させた時、その必殺技のダメージが<span style='color: #ec6d21;'>5～19%</span>増加する。この効果は5回重複できる。",
-          "en": "When Blaze Unsealed triggers an <span style='color: #6a90e7;'>Ignis Mark</span>🔥, increases this Ultimate DMG by <span style='color: #ec6d21;'>5～19%</span>, up to 5 stacks."
+          "ja": "フユカの必殺技で<span style='color: #6a90e7;'>火属性の印</span>🔥を発動させた時、必殺技使用中攻撃力が<span style='color: #ec6d21;'>5～19%</span>増加する。この効果は5回重複できる。",
+          "en": "When Blaze Unsealed (Ultimate) triggers an <span style='color: #6a90e7;'>Ignis Mark</span>🔥, increases Fuyuka's ATK by <span style='color: #ec6d21;'>5～19%</span> during this Ultimate, up to 5 stacks."
         },
         "ss11": {
           "ja": "フユカの必殺技の打撃回数が4回増加し、フユカの必殺技ダメージが<span style='color: #ec6d21;'>70～279%</span>増加する。",
@@ -975,11 +975,11 @@
       "icon": "images/characters/char_20002.png",
       "descriptions": {
         "mc1": {
-          "ja": "主力スキル発動後、通常攻撃は騰蛇を生成し、範囲内に攻撃力の<span style='color: #0abec5;'>42.3%</span>の水属性の通常攻撃ダメージを与えるようになる。生成した騰蛇は<span style='color: #6a90e7;'>水属性の印</span>❄️を発動させることができる。発動させると、12秒間、中断耐性が上昇する。",
+          "ja": "主力スキル発動後、12秒間、通常攻撃は騰蛇を生成し、範囲内に攻撃力の<span style='color: #0abec5;'>42.3%</span>の水属性の通常攻撃ダメージを与えるようになると同時に、中断耐性が上昇する。生成した騰蛇は<span style='color: #6a90e7;'>水属性の印</span>❄️を発動させることができる。",
           "en": "After Chitose casts Torrent Flash (Main Skill), her Auto Attack will summon a Coiling Serpent, dealing <span style='color: #0abec5;'>42.3% of ATK</span> as AoE Aqua Auto Attack DMG. Can trigger <span style='color: #6a90e7;'>Aqua Mark</span>❄️. Also, Chitose's resistance to interruption is increased for 12s."
         },
         "mc2": {
-          "ja": "主力スキル発動後、通常攻撃はチトセの攻撃力の<span style='color: #0abec5;'>60%</span>を持つ鏡影を生成するようになる。この鏡影は通常攻撃を発動する。さらに、12秒間、中断耐性が上昇する。",
+          "ja": "主力スキル発動後、12秒間、通常攻撃時にチトセの攻撃力の<span style='color: #0abec5;'>60%</span>を持つ鏡影を生成し、鏡影が通常攻撃を行うようになる。この間、中断耐性が上昇する。",
           "en": "After Chitose casts Torrent Flash (Main Skill), her Auto Attack will summon a Mirror Image that has <span style='color: #0abec5;'>60%</span> of Chitose's ATK and performs Auto Attacks. Also, Chitose's resistance to interruption is increased for 12s."
         },
         "mc3": {
@@ -1113,11 +1113,11 @@
       "icon": "images/characters/char_20003.png",
       "descriptions": {
         "mc1": {
-          "ja": "アヤメの通常攻撃命中時、次に発動する主力スキルのダメージが<span style='color: #0abec5;'>1%</span>増加する。この効果は20回重複でき、主力スキルを発動するとリセットされる。\n20回重複後、次に発動する主力スキルは霜幕の壁に変化し、範囲内に攻撃力の<span style='color: #0abec5;'>323%</span>の水属性ダメージを与える。",
+          "ja": "アヤメの通常攻撃命中時、次に発動する主力スキルのダメージが<span style='color: #0abec5;'>1%</span>増加する。この効果は20回重複でき、主力スキルを発動するとリセットされる。\n20回重複後、次に発動する主力スキルは霜幕の壁に変化し、範囲内に攻撃力の<span style='color: #0abec5;'>323%</span>の水属性のスキルダメージを与える。",
           "en": "When Iris hits a target with an Auto Attack, increases the DMG of the next Main Skill by <span style='color: #0abec5;'>1%</span>, stacking up to 20 times.\nAt 20 stacks, Iris will cast Wall of Frost (Main Skill), dealing <span style='color: #0abec5;'>323% of ATK</span> as AoE Aqua Skill DMG."
         },
         "mc2": {
-          "ja": "主力スキル命中時、追加で範囲内に、攻撃力の<span style='color: #0abec5;'>269%</span>の水属性ダメージを与えるようになる。\n霜幕の壁命中時、追加で攻撃力の<span style='color: #0abec5;'>381%</span>の水属性のスキルダメージを与え、3秒間の<span style='color: #6a90e7;'>凍結</span>を付与する。\nこの効果は12秒ごとに1回まで発動する。",
+          "ja": "主力スキル命中時、追加で範囲内に、攻撃力の<span style='color: #0abec5;'>269%</span>の水属性のスキルダメージを与えるようになる。\n霜幕の壁命中時、追加で攻撃力の<span style='color: #0abec5;'>381%</span>の水属性のスキルダメージを与え、3秒間の<span style='color: #6a90e7;'>凍結</span>を付与する。\nこの効果は12秒ごとに1回まで発動する。",
           "en": "When Frozen Path (Main Skill) hits a target, deals an additional <span style='color: #0abec5;'>269% of ATK</span> as AoE Aqua Skill DMG. \nWhen Wall of Frost hits a target, deals an additional <span style='color: #0abec5;'>381% of ATK</span> as AoE Aqua Skill DMG and inflicts <span style='color: #6a90e7;'>Freeze</span> to the target for 3s. \nThis effect can only be triggered once every 12s."
         },
         "mc3": {
@@ -1145,7 +1145,7 @@
           "en": "While Iris's Main Skill is active, grants Super Armor and increases her ATK by <span style='color: #ec6d21;'>17～69%</span>."
         },
         "ms5": {
-          "ja": "アヤメの主力スキルで会心発生時、追加で攻撃力の<span style='color: #ec6d21;'>4.7～12.6%</span>の水属性ダメージを与えるようになる。",
+          "ja": "アヤメの主力スキルで会心発生時、追加で攻撃力の<span style='color: #ec6d21;'>4.7～12.6%</span>の水属性のスキルダメージを与えるようになる。",
           "en": "When Iris's Main Skill lands a Crit Hit, deals an additional <span style='color: #ec6d21;'>4.7～12.6% of ATK</span> as Aqua Skill DMG."
         },
         "ms6": {
@@ -1153,7 +1153,7 @@
           "en": "When Iris changes a target's status from <span style='color: #6a90e7;'>Chill</span> to <span style='color: #6a90e7;'>Freeze</span>, reduces Frozen Path (Main Skill)'s Cooldown by 1s. Also increases Skill Crit Rate by <span style='color: #ec6d21;'>11～28%</span> for 6s. This effect can only be triggered once every 12s."
         },
         "ms7": {
-          "ja": "アヤメが近接攻撃を受けた時、周囲に攻撃力の<span style='color: #ec6d21;'>92～246%</span>の水属性ダメージを与え、3秒間の<span style='color: #6a90e7;'>凍結</span>を付与するようになる。この効果は12秒ごとに1回まで発動する。",
+          "ja": "アヤメが近接攻撃を受けた時、周囲に攻撃力の<span style='color: #ec6d21;'>92～246%</span>の水属性のスキルダメージを与え、3秒間の<span style='color: #6a90e7;'>凍結</span>を付与するようになる。この効果は12秒ごとに1回まで発動する。",
           "en": "When Iris is hit by a melee strike, deals <span style='color: #ec6d21;'>92～246% of ATK</span> as AoE Aqua Skill DMG and inflicts <span style='color: #6a90e7;'>Freeze</span> on nearby targets for 3s. This effect can only be triggered once every 12s."
         },
         "ms8": {
@@ -1189,7 +1189,7 @@
           "en": "When Glacier Array is created, deals an additional <span style='color: #0abec5;'>405 of ATK</span> as AoE Aqua Skill DMG and stuns the target for 2s."
         },
         "sc4": {
-          "ja": "氷柱陣列終了時、追加で範囲内の敵に攻撃力の<span style='color: #0abec5;'>416%</span>の水属性ダメージを与え、敵をノックバックさせるようになる。",
+          "ja": "氷柱陣列終了時、追加で範囲内の敵に攻撃力の<span style='color: #0abec5;'>416%</span>の水属性のスキルダメージを与え、敵をノックバックさせるようになる。",
           "en": "When Glacier Array vanishes, deals an additional <span style='color: #0abec5;'>416% of ATK</span> as AoE Aqua Skill DMG and sends the targets back flying."
         },
         "ss1": {
@@ -1531,20 +1531,20 @@
           "en": "After Nanoha deals DMG with Auto Attacks <span style='color: #0abec5;'>3</span> times, deals an additional <span style='color: #0abec5;'>26.2% of ATK</span> as AoE Ventus DMG."
         },
         "mc2": {
-          "ja": "主力スキル発動後の10秒間、通常攻撃は、敵を貫通する向日葵手裏剣を追加で<span style='color: #0abec5;'>3</span>枚投げ、それぞれ攻撃力の<span style='color: #0abec5;'>9.8%</span>の風属性の通常攻撃ダメージを与えるようになる。",
+          "ja": "主力スキル発動後の10秒間、通常攻撃は、敵を貫通する手裏剣を追加で<span style='color: #0abec5;'>3</span>枚投げ、それぞれ攻撃力の<span style='color: #0abec5;'>9.8%</span>の風属性の通常攻撃ダメージを与えるようになる。",
           "en": "Within 10s after casting Flowers Dance (Main Skill), Nanoha fires <span style='color: #0abec5;'>3</span> additional shurikens with her Auto Attacks that can pierce through the target, each dealing <span style='color: #0abec5;'>9.8% of ATK</span> as Ventus Auto Attack DMG."
         },
         "mc3": {
-          "ja": "向日葵手裏剣は複数回ダメージを与えるようになり、<span style='color: #0abec5;'>0.15</span>秒ごとに1回ダメージを与える。",
-          "en": "The sunflower shuriken deals DMG multiple times, hitting targets once every <span style='color: #0abec5;'>0.15</span>s."
+          "ja": "主力スキルで投げた向日葵手裏剣は複数回ダメージを与えるようになり、<span style='color: #0abec5;'>0.15</span>秒ごとに1回ダメージを与える。",
+          "en": "The sunflower shuriken of Flowers Dance (Main Skill) deals DMG multiple times, hitting targets once every <span style='color: #0abec5;'>0.15</span>s."
         },
         "mc4": {
-          "ja": "向日葵手裏剣のダメージ範囲が<span style='color: #0abec5;'>50%</span>拡大し、スキルダメージが<span style='color: #0abec5;'>66.7%</span>増加する。",
-          "en": "Increases sunflower shuriken's Attack Range by <span style='color: #0abec5;'>50%</span> and its Skill DMG by <span style='color: #0abec5;'>66.7%</span>."
+          "ja": "主力スキルで投げた向日葵手裏剣のダメージ範囲が<span style='color: #0abec5;'>50%</span>拡大し、スキルダメージが<span style='color: #0abec5;'>66.7%</span>増加する。",
+          "en": "Increases the Attack Range of Flowers Dance (Main Skill)'s sunflower shuriken by <span style='color: #0abec5;'>50%</span> and its Skill DMG by <span style='color: #0abec5;'>66.7%</span>."
         },
         "ms1": {
-          "ja": "向日葵手裏剣を投げるたびに、5秒間、攻撃速度が<span style='color: #ec6d21;'>2.7～7.2%</span>上昇し、通常攻撃ダメージが<span style='color: #ec6d21;'>6～24%</span>増加する。この効果は3回重複できる。",
-          "en": "Each time Nanoha throws the sunflower shuriken, increases ATK SPD by <span style='color: #ec6d21;'>2.7～7.2%</span>, and Auto Attack Damage by <span style='color: #ec6d21;'>6～24%</span> for 5s, stacking up to 3 times."
+          "ja": "主力スキルで向日葵手裏剣を投げるたびに、5秒間、攻撃速度が<span style='color: #ec6d21;'>2.7～7.2%</span>上昇し、通常攻撃ダメージが<span style='color: #ec6d21;'>6～24%</span>増加する。この効果は3回重複できる。",
+          "en": "Each time Nanoha throws the sunflower shuriken during Flowers Dance (Main Skill), increases ATK SPD by <span style='color: #ec6d21;'>2.7～7.2%</span>, and Auto Attack Damage by <span style='color: #ec6d21;'>6～24%</span> for 5s, stacking up to 3 times."
         },
         "ms2": {
           "ja": "分身1体ごとに、ナノハの通常攻撃ダメージが<span style='color: #ec6d21;'>12～46%</span>増加する。",
@@ -1556,11 +1556,11 @@
         },
         "ms4": {
           "ja": "主力スキル発動時、分身が、戻ってこない向日葵手裏剣を投げるようになる。それぞれナノハの攻撃力の<span style='color: #ec6d21;'>316～1264%</span>の風属性のスキルダメージを与える。",
-          "en": "When casting Flowers Dance (Main Skill), the clones fire non-returning sunflower shurikens, each dealing <span style='color: #ec6d21;'>316～1264%</span> of Nanoha's ATK as Ventus Ultimate DMG."
+          "en": "When casting Flowers Dance (Main Skill), the clones fire non-returning sunflower shurikens, each dealing <span style='color: #ec6d21;'>316～1264%</span> of Nanoha's ATK as Ventus Skill DMG."
         },
         "ms5": {
-          "ja": "向日葵手裏剣はナノハから離れるほどダメージが増加する。最小で<span style='color: #ec6d21;'>16～65%</span>増加する。",
-          "en": "The farther the sunflower shuriken is from Nanoha, the more DMG it deals, with a minimum increase of <span style='color: #ec6d21;'>16～65%</span>."
+          "ja": "主力スキルで投げた向日葵手裏剣はナノハから離れるほどダメージが増加する。最小で<span style='color: #ec6d21;'>16～65%</span>増加する。",
+          "en": "When Flowers Dance (Main Skill) is cast, the farther the sunflower shuriken is from Nanoha, the more DMG it deals, with a minimum increase of <span style='color: #ec6d21;'>16～65%</span>."
         },
         "ms6": {
           "ja": "主力スキルで<span style='color: #6a90e7;'>風属性の印</span>🍃を発動させた時から3秒間、スキルダメージが<span style='color: #ec6d21;'>33～130%</span>増加する。この効果は3回重複できる。",
@@ -1607,7 +1607,7 @@
           "en": "Shurikens from Flowers Bloom (Support Skill) inflict Marks additionally, stacking up to <span style='color: #0abec5;'>12</span> times.\nWhen the exploding sunflower disappears, it detonates all Marks, dealing <span style='color: #0abec5;'>156.7% of ATK</span> as Ventus Skill DMG. Each stack increases the DMG by <span style='color: #0abec5;'>15%</span>."
         },
         "ss1": {
-          "ja": "爆散向日葵生成時、分身が周囲に多数の手裏剣を投げるようになる。それぞれナノハの攻撃力の<span style='color: #ec6d21;'>21.1～84.5%</span>の風属性のスキルダメージを与える。",
+          "ja": "爆散向日葵生成時、分身が周囲に手裏剣を12枚投げるようになる。それぞれナノハの攻撃力の<span style='color: #ec6d21;'>21.1～84.5%</span>の風属性のスキルダメージを与える。",
           "en": "When an exploding sunflower is conjured, the clones fire 12 shurikens at nearby targets, each dealing <span style='color: #ec6d21;'>21.1～84.5%</span> of Nanoha's ATK as Ventus Minion DMG."
         },
         "ss2": {
@@ -1619,7 +1619,7 @@
           "en": "When Flowers Bloom (Support Skill) deals DMG for the first time, increases Nanoha's Skill DMG by <span style='color: #ec6d21;'>3.7～14.7%</span> for 5s, stacking up to 5 times."
         },
         "ss4": {
-          "ja": "爆散向日葵消滅時、分身が前方に手裏剣を投げ、それぞれ攻撃力の<span style='color: #ec6d21;'>22.2～88.7%</span>の風属性のスキルダメージを与えるようになる。",
+          "ja": "爆散向日葵消滅時、分身が前方に手裏剣を5枚投げ、それぞれ攻撃力の<span style='color: #ec6d21;'>22.2～88.7%</span>の風属性のスキルダメージを与えるようになる。",
           "en": "When an exploding sunflower disappears, the clones fire 5 shurikens forward, each dealing <span style='color: #ec6d21;'>22.2～88.7% of  ATK</span> as Ventus Skill DMG."
         },
         "ss5": {
@@ -1945,7 +1945,7 @@
           "en": "When Bubble is on the battlefield, if Ann deals DMG, there is a <span style='color: #0abec5;'>25%</span> chance to create a Wind Burst. \nWhen a Wind Burst is created, increases the squad's Mark DMG by <span style='color: #0abec5;'>51.6%</span> for 6s."
         },
         "mc2": {
-          "ja": "爆風が弱い敵をノックバックさせるようになる。ノックバックさせると、2秒間、その敵の風属性被ダメージを<span style='color: #0abec5;'>13.5%</span>増加させる。",
+          "ja": "爆風が弱い敵をノックバックさせるようになる。2秒間、その敵の風属性被ダメージを<span style='color: #0abec5;'>13.5%</span>増加させる。",
           "en": "The Wind Burst can blow away weak targets, and their Ventus DMG Taken is increased by <span style='color: #0abec5;'>13.5%</span> for 2s."
         },
         "mc3": {
@@ -2037,7 +2037,7 @@
           "en": "For targets near the wall of wind summoned by Wind Barrier (Support Skill), increases their Ventus DMG Taken by <span style='color: #ec6d21;'>15～61%</span>."
         },
         "ss5": {
-          "ja": "アンズの支援スキルのダメージを与えた時から<span style='color: #ec6d21;'>8</span>秒間、その敵の風属性被ダメージを<span style='color: #ec6d21;'>5～21%</span>増加させる。この効果は2回重複できる。",
+          "ja": "アンズの支援スキルのダメージを与えた時から8秒間、その敵の風属性被ダメージを<span style='color: #ec6d21;'>5～21%</span>増加させる。この効果は2回重複できる。",
           "en": "When Wind Barrier (Support Skill) deals DMG, increases targets' Ventus DMG Taken by <span style='color: #ec6d21;'>5～21%</span> for 8s, stacking up to 2 times."
         },
         "ss6": {
@@ -2144,7 +2144,7 @@
         },
         "sc1": {
           "ja": "ナツカの支援スキル発動時、風属性の主力巡遊者のいる場所に18枚の花びらを生成し、それぞれナツカの攻撃力の<span style='color: #0dbdc3;'>30.8%</span>の風属性のスキルダメージを与え、<span style='color: #6a90e7;'>風属性の印：風息</span>🍃を付与するようになる。",
-          "en": "When casting Bouquet Blast (Support Skill), continuously creates 18 Flower Petals at the Ventus Main Trekker's location, with each petal dealing <span style='color: #0dbdc3;'>30.8%</span> of Nazuka's ATK as Ventus Skill DMG and inflicting <span style='color: #6a90e7;'>Ventus Mark: Breeze</span>🍃."
+          "en": "When casting Bouquet Blast (Support Skill), continuously creates 18 Flower Petals at the main Ventus Trekker's location, with each petal dealing <span style='color: #0dbdc3;'>30.8%</span> of Nazuka's ATK as Ventus Skill DMG and inflicting <span style='color: #6a90e7;'>Ventus Mark: Breeze</span>🍃."
         },
         "sc2": {
           "ja": "花びらの与える風属性ダメージが<span style='color: #0dbdc3;'>10%</span>増加し、敵を追尾するようになる。",
@@ -3089,8 +3089,8 @@
           "en": "When Jinglin triggers <span style='color: #6a90e7;'>Lux Mark: Radiance</span>⚡️, increases her Mark DMG by <span style='color: #ec6d21;'>34～136%</span> for 8s, stacking up to 3 times."
         },
         "ms8": {
-          "ja": "ジンリンの必殺技は<span style='color: #6a90e7;'>光属性の印：光明</span>⚡️を発動させることができるようになる。発動させると、攻撃力の<span style='color: #ec6d21;'>191%</span>の光属性の印ダメージを与える。\n発動させた時から10秒間、攻撃力が<span style='color: #ec6d21;'>3.4～13.4%</span>上昇する。この効果は5回重複できる。",
-          "en": "Roar of the Qilin (Ultimate) can trigger <span style='color: #6a90e7;'>Lux Mark: Radiance</span>⚡️, dealing <span style='color: #ec6d21;'>191% of ATK</span> as Lux Mark DMG. \nWhen the mark is triggered, increases ATK by <span style='color: #ec6d21;'>3.4～13.4%</span> for 10s, up to 5 stacks."
+          "ja": "必殺技は<span style='color: #6a90e7;'>光属性の印：光明</span>⚡️を発動させることができるようになる。発動させると、攻撃力の191%の光属性の印ダメージを与える。\n発動させた時から10秒間、攻撃力が<span style='color: #ec6d21;'>3.4～13.4%</span>上昇する。この効果は5回まで重複できる。",
+          "en": "Roar of the Qilin (Ultimate) can trigger <span style='color: #6a90e7;'>Lux Mark: Radiance</span>⚡️, dealing 191% of ATK as Lux Mark DMG. \nWhen the mark is triggered, increases ATK by <span style='color: #ec6d21;'>3.4～13.4%</span> for 10s, up to 5 stacks."
         },
         "ms9": {
           "ja": "ジンリンが近接ダメージを受けた時、その敵をノックバックさせ、攻撃力の<span style='color: #ec6d21;'>54～144%</span>の光属性のスキルダメージを与える。この効果は6秒ごとに1回まで発動する。",
@@ -3621,7 +3621,7 @@
           "en": "When Nocturn Hooks (Main Skill) kills a target, increases all friendly units' ATK by <span style='color: #ec6d21;'>12～46%</span> for 8s."
         },
         "ms3": {
-          "ja": "主力スキル発動時から8秒間、味方の攻撃力が<span style='color: #ec6d21;'>9～35%</span>上昇する。",
+          "ja": "主力スキル発動時、8秒間、味方の攻撃力が<span style='color: #ec6d21;'>9～35%</span>上昇する。",
           "en": "When casting Nocturn Hooks (Main Skill), increases all friendly units' ATK by <span style='color: #ec6d21;'>9～35%</span> for 8s."
         },
         "ms4": {
@@ -3689,7 +3689,7 @@
           "en": "Each claw strike from Abyssal Hunter (Support Skill) increases the main Trekker's DEF by <span style='color: #ec6d21;'>15～40</span> for 5s, up to 8 stacks."
         },
         "ss4": {
-          "ja": "コゼットの支援スキルのダメージを与えた時、30%の確率で3秒間、その敵をスタンさせるようになる。さらに、5秒間、味方の攻撃力が<span style='color: #ec6d21;'>13～51%</span>上昇する。この効果は0.5秒ごとに1回まで発動する。",
+          "ja": "コゼットの支援スキルのダメージを与えた時、30%の確率でその敵を3秒間スタンさせ、さらに5秒間、味方の攻撃力が<span style='color: #ec6d21;'>13～51%</span>上昇する。この効果は0.5秒ごとに1回まで発動する。",
           "en": "When Abyssal Hunter (Support Skill) deals DMG, there is a 30% chance to stun the target for 3s. Also increases all friendly units' ATK by <span style='color: #ec6d21;'>13～51%</span> for 5s. This effect can only be triggered once every 0.5s."
         },
         "ss5": {
