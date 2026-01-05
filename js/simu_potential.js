@@ -209,14 +209,14 @@ async function loadCharacterData() {
         const masterData = await charactersResponse.json();
         const descriptionsData = await descriptionsResponse.json();
         
-        // キャラクターデータに素質説明をマージ
+        // キャラIDと素質説明を紐づける
         charactersData = {
             characters: masterData.characters
                 .map(char => ({
                     ...char,
                     descriptions: descriptionsData[char.id] || {}
                 }))
-                .sort((a, b) => a.sort_id - b.sort_id) // sort_id順にソート
+                .sort((a, b) => a.sort_id - b.sort_id)
         };
         
         console.log('キャラクターデータ読み込み完了:', charactersData);

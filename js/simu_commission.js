@@ -71,7 +71,7 @@ async function loadData() {
         categoriesData = await categoriesResponse.json();
         const masterData = await charactersResponse.json();
         
-        // sort_id順にソートしてcharactersDataに格納
+        // sort_id順にソート
         charactersData = {
             characters: masterData.characters.sort((a, b) => a.sort_id - b.sort_id)
         };
