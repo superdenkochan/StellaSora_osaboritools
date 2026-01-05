@@ -61,7 +61,7 @@ async function loadData() {
     try {
         const [categoriesResponse, charactersResponse] = await Promise.all([
             fetch('data/simu_commission_category.json'),
-            fetch('data/simu_commission_char.json')
+            fetch('data/characters.json')
         ]);
         
         if (!categoriesResponse.ok || !charactersResponse.ok) {
@@ -69,7 +69,12 @@ async function loadData() {
         }
         
         categoriesData = await categoriesResponse.json();
-        charactersData = await charactersResponse.json();
+        const masterData = await charactersResponse.json();
+        
+        // sort_id順にソートしてcharactersDataに格納
+        charactersData = {
+            characters: masterData.characters.sort((a, b) => a.sort_id - b.sort_id)
+        };
         
         console.log('データ読み込み完了');
         

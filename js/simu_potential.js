@@ -196,11 +196,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 // データ読み込み
 async function loadCharacterData() {
     try {
-        const response = await fetch('data/potential_desc.json');
-        if (!response.ok) {
+        // キャラクターマスターと素質説明を並列読み込み
+        const [charactersResponse, descriptionsResponse] = await Promise.all([
+            fetch('data/characters.json'),
+            fetch('data/potential_desc.json')
+        ]);
+        
+        if (!charactersResponse.ok || !descriptionsResponse.ok) {
             throw new Error('データの読み込みに失敗しました');
         }
-        charactersData = await response.json();
+        
+        const masterData = await charactersResponse.json();
+        const descriptionsData = await descriptionsResponse.json();
+        
+        // キャラクターデータに素質説明をマージ
+        charactersData = {
+            characters: masterData.characters
+                .map(char => ({
+                    ...char,
+                    descriptions: descriptionsData[char.id] || {}
+                }))
+                .sort((a, b) => a.sort_id - b.sort_id) // sort_id順にソート
+        };
+        
         console.log('キャラクターデータ読み込み完了:', charactersData);
     } catch (error) {
         console.error('データ読み込みエラー:', error);
